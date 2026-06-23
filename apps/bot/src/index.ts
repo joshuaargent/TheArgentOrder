@@ -6,9 +6,11 @@ import { createSupabaseClient } from "./lib/supabase";
 
 dotenv.config();
 
+// Create Supabase client as a module-level export for commands
+export const supabase = createSupabaseClient();
+
 export interface BotClient extends Client {
   commands: Collection<string, unknown>;
-  supabase?: ReturnType<typeof createSupabaseClient>;
 }
 
 const client = new Client({
@@ -22,9 +24,6 @@ const client = new Client({
 
 async function main() {
   console.log("Starting The Argent Order Bot...");
-
-  // Initialize Supabase
-  client.supabase = createSupabaseClient();
 
   // Load commands and events
   client.commands = new Collection();
