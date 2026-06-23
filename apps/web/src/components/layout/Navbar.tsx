@@ -36,6 +36,7 @@ const navigation = [
   { name: "Achievements", href: "/achievements", icon: Trophy },
   { name: "Leaderboard", href: "/leaderboard", icon: BarChart3 },
   { name: "Notifications", href: "/notifications", icon: Bell },
+  { name: "Admin", href: "/admin", icon: Shield },
 ];
 
 export function Navbar() {
