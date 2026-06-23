@@ -971,3 +971,11 @@ Changed men become brothers.
 Brothers become leaders.
 
 Leaders build the future.
+
+---
+
+# Related Documents
+
+For content acquisition funnel strategy, see: **34_CONTENT_AQUISITION_SYSTEM.md**
+
+For growth engine overview, see: **25_GROWTH_ENGINE.md**

@@ -97,7 +97,7 @@ Visitor
 
 ---
 
-**Note on "Founder":** The "Founder" is not a formation rank. The Founder is the originator of the Order who operates outside the formation hierarchy. The Founder's role is described in the Founder Playbook (see 35_FOUNDER_PLAYBOOK.md). The Founder's evolution follows the path: Builder → Operator → Architect → Steward. At the Steward level, the Founder becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
+**Note on "Founder":** The "Founder" is not a formation rank. The Founder is the originator of the Order who operates outside the formation hierarchy. The Founder's role is described in the Founder Playbook (see 29_FOUNDER_PLAYBOOK.md). The Founder's evolution follows the path: Builder → Operator → Architect → Steward. At the Steward level, the Founder becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
 
 ---
 

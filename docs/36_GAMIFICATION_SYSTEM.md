@@ -24,6 +24,30 @@ The system exists to make correct behaviour the easiest behaviour to continue.
 
 # Core Principle
 
+The purpose of gamification is reinforcement.
+
+Not addiction.
+
+Not entertainment.
+
+Not vanity.
+
+Most gamification systems reward activity.
+
+The Argent Order rewards formation.
+
+The objective is not to make men chase points.
+
+The objective is to make virtuous actions visible, measurable, and repeatable.
+
+The game serves formation.
+
+Formation never serves the game.
+
+---
+
+# Core Principle
+
 Gamification must reward virtue, not attention.
 
 If a system rewards noise, it produces noise.

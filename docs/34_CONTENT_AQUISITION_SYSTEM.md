@@ -417,3 +417,11 @@ Content is not the product.
 Content is the **doorway into formation**.
 
 If content does not produce disciplined men entering the system, it has failed regardless of reach.
+
+---
+
+# Related Documents
+
+For full content creation and strategy, see: **22_CONTENT_ENGINE.md**
+
+For growth engine overview, see: **25_GROWTH_ENGINE.md**

@@ -107,6 +107,21 @@ create table ranks (
   description text
 );
 
+----------------------------------------------------
+-- SEED DATA: CANONICAL RANKS
+----------------------------------------------------
+
+-- Formation Ranks (ordered from entry to highest)
+INSERT INTO ranks (name, order_index, description) VALUES
+('Visitor', 1, 'Exploring the Order. No commitments. No responsibilities. Limited access to welcome and mission content.'),
+('Initiate', 2, 'Learning the culture. Beginning formation. Has basic access to Chapel, Barracks, and Introductions.'),
+('Brother', 3, 'Active member. Committed participant. Full member access with consistent participation and positive contribution.'),
+('Veteran', 4, 'Proven member. Trusted brother. Can assist Captains, help onboarding, and support moderation. Leadership potential emerging.'),
+('Captain', 5, 'Pod Leader. First level of leadership. Leads pod meetings, monitors pod health, supports accountability, and escalates concerns.'),
+('Officer', 6, 'Guardian of culture. Operations leader. Has moderation authority, conflict resolution capability, and campaign management responsibility.'),
+('Mentor', 7, 'Leadership developer. Formation guide. Develops Brothers, Veterans, Captains, and Officers through guidance, formation, and coaching.'),
+('Steward', 8, 'Custodian of the Order. Protects vision, doctrine, culture, and direction. Has full operational authority and approves major initiatives.');
+
 create table user_ranks (
   id uuid primary key default uuid_generate_v4(),
   user_id uuid not null references profiles(user_id),
@@ -127,6 +142,17 @@ create table user_formation_levels (
   formation_level_id uuid references formation_levels(id),
   assigned_at timestamp default now()
 );
+
+----------------------------------------------------
+-- SEED DATA: FORMATION LEVELS (for gamification)
+----------------------------------------------------
+
+INSERT INTO formation_levels (name, order_index, description) VALUES
+('Novice', 1, 'Beginning formation. Learning fundamentals.'),
+('Builder', 2, 'Active in all pillars. Consistent execution.'),
+('Established', 3, 'Proven discipline. Leadership emerging.'),
+('Mature', 4, 'Stable formation. Active in leadership.'),
+('Exemplar', 5, 'Leadership example. Mentoring others.');
 
 ----------------------------------------------------
 -- FORMATION EVENT ENGINE (SOURCE OF TRUTH)
