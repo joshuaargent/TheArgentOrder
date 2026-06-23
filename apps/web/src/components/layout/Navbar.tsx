@@ -12,15 +12,25 @@ import {
   Users,
   Settings,
   LogOut,
+  BookOpen,
+  CheckSquare,
+  Briefcase,
+  BarChart3,
+  CalendarDays,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Formation", href: "/formation", icon: Flame },
+  { name: "Rule of Life", href: "/rule-of-life", icon: CheckSquare },
   { name: "Campaigns", href: "/campaigns", icon: Target },
   { name: "Brotherhood", href: "/brotherhood", icon: Users },
+  { name: "Journal", href: "/journal", icon: BookOpen },
+  { name: "Reviews", href: "/reviews", icon: CalendarDays },
+  { name: "Projects", href: "/projects", icon: Briefcase },
   { name: "Achievements", href: "/achievements", icon: Trophy },
+  { name: "Leaderboard", href: "/leaderboard", icon: BarChart3 },
 ];
 
 export function Navbar() {

@@ -400,15 +400,9 @@ ON CONFLICT (slug) DO NOTHING;
 -- RULE CATEGORY TEMPLATES
 ----------------------------------------------------
 
--- Add rule categories (if not exists)
-INSERT INTO rule_categories (name, slug, description, sort_order) VALUES
-  ('Prayer', 'prayer', 'Spiritual practices and prayer life', 1),
-  ('Health', 'health', 'Physical fitness and body stewardship', 2),
-  ('Work', 'work', 'Professional and deep work habits', 3),
-  ('Learning', 'learning', 'Education and skill development', 4),
-  ('Brotherhood', 'brotherhood', 'Community and relationship habits', 5),
-  ('Rest', 'rest', 'Sleep and recovery practices', 6)
-ON CONFLICT (slug) DO NOTHING;
+-- Note: rule_categories table already exists from migration 001
+-- This inserts additional categories if they don't exist (slug-based conflict)
+-- Columns: name, slug, icon, "order"
 
 ----------------------------------------------------
 -- FORMATION MILESTONE TEMPLATES
@@ -434,10 +428,102 @@ INSERT INTO formation_milestones (slug, name, description, pillar, requirement_t
 ON CONFLICT (slug) DO NOTHING;
 
 ----------------------------------------------------
--- NOTIFICATION TEMPLATES
+-- CAMPAIGN TASKS FOR NEW CAMPAIGNS
 ----------------------------------------------------
 
--- Add notification types
-INSERT INTO notifications (user_id, title, message, type, created_at) VALUES
-  (NULL, 'Welcome', 'Welcome to The Argent Order', 'system', now())
+-- Add tasks for Foundation 21 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Morning Prayer', 'Spend at least 10 minutes in prayer', 'daily', 10, true, 1),
+  ('Scripture Reading', 'Read at least one chapter of scripture', 'daily', 10, true, 2),
+  ('Rule of Life', 'Complete your daily rule items', 'daily', 10, true, 3),
+  ('Deep Work', 'At least 1 hour of focused work', 'daily', 15, true, 4),
+  ('Daily Reflection', 'Write a brief reflection', 'daily', 5, false, 5),
+  ('Weekly Mass', 'Attend Sunday Mass', 'weekly', 25, true, 6),
+  ('Weekly Review', 'Complete your weekly formation review', 'weekly', 20, true, 7),
+  ('Pod Meeting', 'Attend your weekly pod meeting', 'weekly', 30, true, 8)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'foundation_21'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Prayer 30 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Mental Prayer', '20 minutes of mental prayer', 'daily', 15, true, 1),
+  ('Scripture', 'Read scripture', 'daily', 10, true, 2),
+  ('Rosary', 'Pray a decade of the rosary', 'daily', 10, false, 3),
+  ('Sunday Mass', 'Attend Mass', 'weekly', 30, true, 4),
+  ('Monthly Confession', 'Go to confession', 'monthly', 50, false, 5)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'prayer_30'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Discipline 30 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Fixed Wake Time', 'Wake at the same time every day', 'daily', 10, true, 1),
+  ('Exercise', 'Complete your workout', 'daily', 15, true, 2),
+  ('Cold Shower', 'Take a cold shower', 'daily', 5, true, 3),
+  ('No Social Media Before 9am', 'Stay off social media until 9am', 'daily', 10, true, 4),
+  ('Deep Work Block', '2-4 hours of focused work', 'daily', 20, true, 5),
+  ('Weekly Review', 'Complete your weekly review', 'weekly', 25, true, 6)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'discipline_30'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Truth 14 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Daily Examen', 'Complete your evening examen', 'daily', 15, true, 1),
+  ('Reflection Entry', 'Write in your journal', 'daily', 10, true, 2),
+  ('Identify Avoidance', 'Note what you are avoiding', 'daily', 10, true, 3),
+  ('Honest Audit', 'Complete an honest self-audit', 'weekly', 30, true, 4)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'truth_14'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Brotherhood 28 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Pod Check-In', 'Send a check-in message to your pod', 'daily', 5, true, 1),
+  ('Weekly Meeting', 'Attend your weekly pod meeting', 'weekly', 30, true, 2),
+  ('Accountability Message', 'Send an accountability message to a brother', 'weekly', 10, true, 3),
+  ('Meaningful Conversation', 'Have a meaningful conversation with a brother', 'weekly', 15, true, 4)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'brotherhood_28'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Building 30 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Deep Work', '3 hours of focused building', 'daily', 30, true, 1),
+  ('Project Update', 'Update your project progress', 'daily', 10, true, 2),
+  ('Ship Something', 'Ship code, content, or product', 'weekly', 50, true, 3),
+  ('Weekly Review', 'Review your project progress', 'weekly', 20, true, 4)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'building_30'
+ON CONFLICT DO NOTHING;
+
+-- Add tasks for Chastity 21 campaign
+INSERT INTO campaign_tasks (campaign_id, title, description, task_type, points, required, "order")
+SELECT c.id, t.title, t.description, t.task_type, t.points, t.required, t.order_num
+FROM campaigns c,
+(VALUES
+  ('Digital Discipline', 'Follow your digital rules', 'daily', 10, true, 1),
+  ('Replacement Habit', 'Exercise or pray when tempted', 'daily', 10, true, 2),
+  ('Accountability Report', 'Report to your accountability partner', 'weekly', 20, true, 3)
+) AS t(title, description, task_type, points, required, order_num)
+WHERE c.slug = 'chastity_21'
 ON CONFLICT DO NOTHING;
