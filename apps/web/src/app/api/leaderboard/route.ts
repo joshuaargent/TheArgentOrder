@@ -40,7 +40,7 @@ export async function GET(request: Request) {
       display_name: (profile as ProfileData | null)?.display_name || "Unknown",
       avatar_url: (profile as ProfileData | null)?.avatar_url,
       ...(pillar
-        ? { [pillar]: score[`${pillar}_score`] }
+        ? { [pillar]: (score as Record<string, unknown>)[`${pillar}_score`] }
         : {
             faith: score.faith_score,
             discipline: score.discipline_score,
