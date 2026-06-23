@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Flame, Clock, BookOpen, Users, Hammer, GraduationCap } from "lucide-react";
+import { Flame, Clock, BookOpen, Users, Hammer } from "lucide-react";
 
 interface FormationScores {
   faith_score: number;

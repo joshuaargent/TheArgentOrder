@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 
-import { CheckCircle, Flame } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 export default function ExamenPage() {
   const [todayEntry, setTodayEntry] = useState<any>(null);
