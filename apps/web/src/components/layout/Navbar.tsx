@@ -17,6 +17,7 @@ import {
   Briefcase,
   BarChart3,
   CalendarDays,
+  Bell,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -31,6 +32,7 @@ const navigation = [
   { name: "Projects", href: "/projects", icon: Briefcase },
   { name: "Achievements", href: "/achievements", icon: Trophy },
   { name: "Leaderboard", href: "/leaderboard", icon: BarChart3 },
+  { name: "Notifications", href: "/notifications", icon: Bell },
 ];
 
 export function Navbar() {
