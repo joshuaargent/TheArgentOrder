@@ -78,7 +78,7 @@ export async function POST(_request: Request) {
   // Check if user already has an active rule
   const { data: existingRule } = await supabase
     .from("rules_of_life")
-    .select("id")
+    .select("id, version")
     .eq("user_id", user.id)
     .eq("active", true)
     .single();
@@ -98,7 +98,7 @@ export async function POST(_request: Request) {
       user_id: user.id,
       name: name || "My Rule of Life",
       description: description,
-      version: (existingRule?.version || 0) + 1,
+      version: ((existingRule as { id: string; version: number } | null)?.version || 0) + 1,
       active: true,
     })
     .select()
