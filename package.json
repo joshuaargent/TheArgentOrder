@@ -3,21 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "The Argent Order - Catholic Formation Operating System for Builders",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "npm run dev --workspace=@argent-order/web",
-    "dev:web": "npm run dev --workspace=@argent-order/web",
-    "dev:bot": "npm run dev --workspace=@argent-order/bot",
-    "build": "npm run build --workspace=@argent-order/web",
-    "build:web": "npm run build --workspace=@argent-order/web",
-    "build:bot": "npm run build --workspace=@argent-order/bot",
-    "lint": "npm run lint --workspaces --if-present",
-    "type-check": "npm run type-check --workspaces --if-present",
-    "format": "npm run format --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "dev": "cd apps/web && npm run dev",
+    "build": "cd apps/web && npm run build",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:bot": "cd apps/bot && npm run dev"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.59.2",

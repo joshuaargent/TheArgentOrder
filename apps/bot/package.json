@@ -13,8 +13,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@argent-order/shared": "*",
-    "@argent-order/types": "*",
     "@supabase/supabase-js": "^2.48.0",
     "discord.js": "^14.16.0",
     "dotenv": "^16.4.5",

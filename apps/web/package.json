@@ -16,8 +16,6 @@
     "db:generate": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > ../packages/types/src/database.types.ts"
   },
   "dependencies": {
-    "@argent-order/shared": "*",
-    "@argent-order/types": "*",
     "@hookform/resolvers": "^5.0.1",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.48.0",
