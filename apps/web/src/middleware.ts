@@ -29,13 +29,22 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // Protected routes
-  const protectedPaths = ["/dashboard", "/formation", "/campaigns", "/profile"];
+  // Refresh session if expired
+  await supabase.auth.getUser();
+
+  // Protected routes - must be authenticated
+  const protectedPaths = ["/dashboard", "/formation", "/campaigns", "/profile", "/achievements", "/brotherhood"];
   const isProtected = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );
 
-  if (isProtected) {
+  // Auth callback and auth routes should bypass protection
+  const isAuthRoute = 
+    request.nextUrl.pathname.startsWith("/auth/callback") ||
+    request.nextUrl.pathname.startsWith("/login") ||
+    request.nextUrl.pathname.startsWith("/signup");
+
+  if (isProtected && !isAuthRoute) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -45,6 +54,18 @@ export async function middleware(request: NextRequest) {
       url.pathname = "/login";
       url.searchParams.set("redirectTo", request.nextUrl.pathname);
       return NextResponse.redirect(url);
+    }
+  }
+
+  // Redirect logged-in users away from auth pages
+  if (isAuthRoute && request.nextUrl.pathname !== "/auth/callback") {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const redirectTo = request.nextUrl.searchParams.get("redirectTo") || "/dashboard";
+      return NextResponse.redirect(new URL(redirectTo, request.url));
     }
   }
 

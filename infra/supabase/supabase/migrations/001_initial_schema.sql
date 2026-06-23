@@ -882,14 +882,15 @@ INSERT INTO ranks (name, order_index, description) VALUES
 
 ----------------------------------------------------
 -- SEED DATA: FORMATION LEVELS
+-- Per docs 08_FORMATION_SYSTEM.md
 ----------------------------------------------------
 
 INSERT INTO formation_levels (name, order_index, description) VALUES
-('Novice', 1, 'Beginning formation. Learning fundamentals.'),
-('Builder', 2, 'Active in all pillars. Consistent execution.'),
-('Established', 3, 'Proven discipline. Leadership emerging.'),
-('Mature', 4, 'Stable formation. Active in leadership.'),
-('Exemplar', 5, 'Leadership example. Mentoring others.');
+('Foundation', 1, 'Awaken responsibility. Establish prayer, structure, and accountability. Move from chaos to structure.'),
+('Discipline', 2, 'Create consistency. Build habits, reduce excuses, increase execution. Become reliable.'),
+('Brotherhood', 3, 'Move beyond self-improvement. Serve others, develop relationships, become accountable. Become connected.'),
+('Leadership', 4, 'Guide others. Lead, serve, protect culture. Develop influence.'),
+('Stewardship', 5, 'Build institutions. Long-term responsibility, legacy, mission protection.');
 
 ----------------------------------------------------
 -- SEED DATA: RULE CATEGORIES

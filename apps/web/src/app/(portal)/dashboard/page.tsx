@@ -3,47 +3,178 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword } from "lucide-react";
 
-interface DashboardData {
-  formationScore: number;
-  currentStreak: number;
-  activeCampaigns: number;
-  rank: string;
+interface FormationScores {
+  faith_score: number;
+  discipline_score: number;
+  brotherhood_score: number;
+  building_score: number;
+  truth_score: number;
+  overall_score: number;
 }
 
+interface DashboardData {
+  formationScores: FormationScores;
+  rank: string;
+  currentStreak: number;
+  activeCampaigns: number;
+  achievementsCount: number;
+  nextPodMeeting: string | null;
+  loading: boolean;
+}
+
+const PILLAR_CONFIG = [
+  { key: "faith_score", name: "Faith", icon: "✝️" },
+  { key: "discipline_score", name: "Discipline", icon: "⚔️" },
+  { key: "brotherhood_score", name: "Brotherhood", icon: "🤝" },
+  { key: "building_score", name: "Building", icon: "🏗️" },
+  { key: "truth_score", name: "Truth", icon: "📖" },
+];
+
 export default function DashboardPage() {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<{ email?: string } | null>(null);
   const [data, setData] = useState<DashboardData>({
-    formationScore: 0,
+    formationScores: {
+      faith_score: 0,
+      discipline_score: 0,
+      brotherhood_score: 0,
+      building_score: 0,
+      truth_score: 0,
+      overall_score: 0,
+    },
+    rank: "Initiate",
     currentStreak: 0,
     activeCampaigns: 0,
-    rank: "Initiate",
+    achievementsCount: 0,
+    nextPodMeeting: null,
+    loading: true,
   });
 
   useEffect(() => {
-    const supabase = createClient();
-
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-      setLoading(false);
-      // TODO: Fetch actual formation data from database
-    });
+    fetchDashboardData();
   }, []);
 
-  if (loading) {
+  const fetchDashboardData = async () => {
+    const supabase = createClient();
+
+    try {
+      // Fetch user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setData((prev) => ({ ...prev, loading: false }));
+        return;
+      }
+
+      // Fetch formation scores
+      const { data: scores } = await supabase
+        .from("formation_scores")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+
+      // Fetch user's rank
+      const { data: userRank } = await supabase
+        .from("user_ranks")
+        .select("rank_id, ranks(name)")
+        .eq("user_id", user.id)
+        .order("assigned_at", { ascending: false })
+        .limit(1)
+        .single();
+
+      // Fetch active campaigns count
+      const { count: campaignsCount } = await supabase
+        .from("campaign_enrollments")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id)
+        .eq("status", "active");
+
+      // Fetch achievements count
+      const { count: achievementsCount } = await supabase
+        .from("user_achievements")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id);
+
+      // Calculate streak from rule logs
+      const { data: ruleLogs } = await supabase
+        .from("rule_logs")
+        .select("logged_at")
+        .eq("user_id", user.id)
+        .gte("logged_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+        .order("logged_at", { ascending: false });
+
+      // Calculate streak
+      let streak = 0;
+      if (ruleLogs && ruleLogs.length > 0) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let checkDate = new Date(today);
+
+        for (const log of ruleLogs) {
+          const logDate = new Date(log.logged_at);
+          logDate.setHours(0, 0, 0, 0);
+
+          if (logDate.getTime() === checkDate.getTime()) {
+            streak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+          } else if (logDate.getTime() < checkDate.getTime()) {
+            break;
+          }
+        }
+      }
+
+      // Fetch next pod meeting
+      const { data: podMembership } = await supabase
+        .from("pod_members")
+        .select("pod_id, pods(name)")
+        .eq("user_id", user.id)
+        .limit(1)
+        .single();
+
+      let nextMeeting = null;
+      if (podMembership) {
+        const { data: nextPodMeeting } = await supabase
+          .from("pod_meetings")
+          .select("scheduled_at")
+          .eq("pod_id", podMembership.pod_id)
+          .gte("scheduled_at", new Date().toISOString())
+          .order("scheduled_at", { ascending: true })
+          .limit(1)
+          .single();
+
+        if (nextPodMeeting) {
+          nextMeeting = new Date(nextPodMeeting.scheduled_at).toLocaleDateString();
+        }
+      }
+
+      setData({
+        formationScores: scores || {
+          faith_score: 0,
+          discipline_score: 0,
+          brotherhood_score: 0,
+          building_score: 0,
+          truth_score: 0,
+          overall_score: 0,
+        },
+        rank: userRank?.ranks?.name || "Initiate",
+        currentStreak: streak,
+        activeCampaigns: campaignsCount || 0,
+        achievementsCount: achievementsCount || 0,
+        nextPodMeeting: nextMeeting,
+        loading: false,
+      });
+    } catch (error) {
+      console.error("Failed to fetch dashboard data:", error);
+      setData((prev) => ({ ...prev, loading: false }));
+    }
+  };
+
+  if (data.loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p>Please sign in to access the dashboard.</p>
       </div>
     );
   }
@@ -55,13 +186,16 @@ export default function DashboardPage() {
         <div className="mx-auto max-w-7xl px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Dashboard</h1>
+              <h1 className="text-2xl font-bold flex items-center gap-2">
+                <Sword className="h-6 w-6 text-primary" />
+                Formation Dashboard
+              </h1>
               <p className="text-sm text-muted-foreground">
-                Welcome back, {user.email}
+                Track your progress across all five pillars
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+              <span className="rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary border border-primary/20">
                 {data.rank}
               </span>
             </div>
@@ -72,22 +206,27 @@ export default function DashboardPage() {
       {/* Main Content */}
       <main className="mx-auto max-w-7xl px-4 py-8">
         {/* Formation Score Card */}
-        <div className="mb-8 rounded-lg bg-gradient-to-r from-primary/20 to-primary/5 p-6">
-          <div className="flex items-center justify-between">
+        <div className="mb-8 rounded-lg bg-gradient-to-r from-primary/20 to-primary/5 p-6 border border-primary/10">
+          <div className="flex items-center justify-between mb-4">
             <div>
-              <p className="text-sm text-muted-foreground">Formation Score</p>
-              <p className="text-4xl font-bold">{data.formationScore}</p>
+              <p className="text-sm text-muted-foreground">Overall Formation Score</p>
+              <p className="text-5xl font-bold">{data.formationScores.overall_score || 0}</p>
             </div>
-            <div className="flex gap-8">
-              {["Faith", "Discipline", "Brotherhood", "Building", "Truth"].map(
-                (pillar) => (
-                  <div key={pillar} className="text-center">
-                    <p className="text-xs text-muted-foreground">{pillar}</p>
-                    <p className="font-semibold">0</p>
-                  </div>
-                )
-              )}
+            <div className="flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded-full">
+              <Flame className="h-6 w-6 text-orange-500" />
+              <span className="text-xl font-semibold">{data.currentStreak} day streak</span>
             </div>
+          </div>
+          
+          {/* Pillar Breakdown */}
+          <div className="flex gap-6">
+            {PILLAR_CONFIG.map((pillar) => (
+              <div key={pillar.key} className="text-center flex-1">
+                <span className="text-2xl">{pillar.icon}</span>
+                <p className="text-xs text-muted-foreground mt-1">{pillar.name}</p>
+                <p className="font-semibold">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -95,11 +234,11 @@ export default function DashboardPage() {
         <div className="mb-8 grid gap-6 md:grid-cols-4">
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="rounded-full bg-primary/10 p-3">
-                <Flame className="h-6 w-6 text-primary" />
+              <div className="rounded-full bg-orange-500/10 p-3">
+                <Flame className="h-6 w-6 text-orange-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Current Streak</p>
+                <p className="text-sm text-muted-foreground">Formation Streak</p>
                 <p className="text-2xl font-bold">{data.currentStreak} days</p>
               </div>
             </div>
@@ -107,8 +246,8 @@ export default function DashboardPage() {
 
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="rounded-full bg-primary/10 p-3">
-                <Target className="h-6 w-6 text-primary" />
+              <div className="rounded-full bg-blue-500/10 p-3">
+                <Target className="h-6 w-6 text-blue-500" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
@@ -121,55 +260,61 @@ export default function DashboardPage() {
 
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="rounded-full bg-primary/10 p-3">
-                <Trophy className="h-6 w-6 text-primary" />
+              <div className="rounded-full bg-yellow-500/10 p-3">
+                <Trophy className="h-6 w-6 text-yellow-500" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
                   Achievements
                 </p>
-                <p className="text-2xl font-bold">0</p>
+                <p className="text-2xl font-bold">{data.achievementsCount}</p>
               </div>
             </div>
           </div>
 
           <div className="rounded-lg border bg-card p-6">
             <div className="flex items-center gap-4">
-              <div className="rounded-full bg-primary/10 p-3">
-                <Calendar className="h-6 w-6 text-primary" />
+              <div className="rounded-full bg-purple-500/10 p-3">
+                <Calendar className="h-6 w-6 text-purple-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Pod Meeting</p>
-                <p className="text-2xl font-bold">None</p>
+                <p className="text-sm text-muted-foreground">Next Pod Meeting</p>
+                <p className="text-2xl font-bold">{data.nextPodMeeting || "None"}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions & Active Campaigns */}
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-lg border bg-card p-6">
             <h2 className="mb-4 text-lg font-semibold">Today's Formation</h2>
             <div className="space-y-3">
               <Link
-                href="/formation/prayer"
+                href="/formation"
                 className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
               >
-                <span>Log Prayer</span>
+                <span className="flex items-center gap-2">
+                  <span>✝️</span> Log Prayer
+                </span>
                 <span className="text-sm text-muted-foreground">+10 pts</span>
               </Link>
               <Link
-                href="/formation/scripture"
+                href="/formation"
                 className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
               >
-                <span>Read Scripture</span>
+                <span className="flex items-center gap-2">
+                  <span>📖</span> Read Scripture
+                </span>
                 <span className="text-sm text-muted-foreground">+5 pts</span>
               </Link>
               <Link
-                href="/formation/examen"
+                href="/formation"
                 className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
               >
-                <span>Complete Examen</span>
+                <span className="flex items-center gap-2">
+                  <span>💭</span> Complete Examen
+                </span>
                 <span className="text-sm text-muted-foreground">+15 pts</span>
               </Link>
             </div>
@@ -177,20 +322,37 @@ export default function DashboardPage() {
 
           <div className="rounded-lg border bg-card p-6">
             <h2 className="mb-4 text-lg font-semibold">Active Campaigns</h2>
-            <div className="space-y-3">
-              <div className="rounded-md border p-3">
-                <p className="font-medium">No active campaigns</p>
-                <p className="text-sm text-muted-foreground">
-                  Join a campaign to start your journey
-                </p>
+            {data.activeCampaigns > 0 ? (
+              <div className="space-y-3">
+                <div className="rounded-md border p-3">
+                  <p className="font-medium">Campaign Progress</p>
+                  <p className="text-sm text-muted-foreground">
+                    {data.activeCampaigns} active campaign{data.activeCampaigns > 1 ? "s" : ""}
+                  </p>
+                </div>
+                <Link
+                  href="/campaigns"
+                  className="block text-center text-sm text-primary hover:underline"
+                >
+                  View Campaign Details
+                </Link>
               </div>
-              <Link
-                href="/campaigns"
-                className="block text-center text-sm text-primary hover:underline"
-              >
-                Browse Campaigns
-              </Link>
-            </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="rounded-md border p-3">
+                  <p className="font-medium">No active campaigns</p>
+                  <p className="text-sm text-muted-foreground">
+                    Join a campaign to start your journey
+                  </p>
+                </div>
+                <Link
+                  href="/campaigns"
+                  className="block text-center text-sm text-primary hover:underline"
+                >
+                  Browse Campaigns
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </main>
