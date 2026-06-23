@@ -76,13 +76,15 @@ export default function DashboardPage() {
         .single();
 
       // Fetch user's rank
-      const { data: userRank } = await supabase
+      const { data: userRankData } = await supabase
         .from("user_ranks")
         .select("rank_id, ranks(name)")
         .eq("user_id", user.id)
         .order("assigned_at", { ascending: false })
         .limit(1)
         .single();
+
+      const userRank = userRankData as { rank_id: string; ranks: { name: string } } | null;
 
       // Fetch active campaigns count
       const { count: campaignsCount } = await supabase
