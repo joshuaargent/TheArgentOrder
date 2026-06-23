@@ -1,0 +1,31 @@
+{
+  "name": "@argent-order/bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Argent Order Discord Bot",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@argent-order/shared": "workspace:*",
+    "@argent-order/types": "workspace:*",
+    "@supabase/supabase-js": "^2.48.0",
+    "discord.js": "^14.16.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^10.2.1",
+    "tsx": "^4.19.0",
+    "typescript": "^6.0.3"
+  }
+}
