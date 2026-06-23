@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 // GET /api/reviews/quarterly - Get quarterly reviews
-export async function GET(request: Request) {
+export async function GET(_request: Request) {
   const supabase = await createClient();
 
   const {
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 }
 
 // POST /api/reviews/quarterly - Create quarterly review
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   const supabase = await createClient();
 
   const {
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  const body = await _request.json();
   const { 
     quarter, year, wins, failures, lessons, goals,
     identity_reflection, mission_reflection, direction_reflection, purpose_reflection
