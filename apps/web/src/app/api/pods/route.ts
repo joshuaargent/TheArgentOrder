@@ -66,7 +66,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { action, pod_id, name, description, captain_id } = body;
+  const { action, pod_id, name, description } = body;
 
   if (action === "create") {
     // Create new pod
