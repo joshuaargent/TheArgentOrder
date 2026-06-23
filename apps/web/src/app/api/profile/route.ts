@@ -85,7 +85,7 @@ export async function GET() {
     },
     level: level?.level || 1,
     xp: level?.total_xp || 0,
-    rank: userRank?.ranks?.name || "Visitor",
+    rank: Array.isArray(userRank?.ranks) ? userRank?.ranks[0]?.name : userRank?.ranks?.name || "Visitor",
     stats: {
       achievements: achievementCount || 0,
       certifications: certificationCount || 0,
