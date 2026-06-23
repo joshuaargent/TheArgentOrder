@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "description": "The Argent Order - Catholic Formation Operating System for Builders",
-  "packageManager": "pnpm@9.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "pnpm --parallel dev",
-    "dev:web": "pnpm --filter @argent-order/web dev",
-    "dev:bot": "pnpm --filter @argent-order/bot dev",
-    "build": "pnpm --filter @argent-order/web build && pnpm --filter @argent-order/bot build",
-    "build:web": "pnpm --filter @argent-order/web build",
-    "build:bot": "pnpm --filter @argent-order/bot build",
-    "lint": "pnpm -r lint",
-    "lint:fix": "pnpm -r lint:fix",
-    "type-check": "pnpm -r type-check",
-    "format": "pnpm -r format",
-    "test": "pnpm -r test",
-    "db:migrate": "pnpm --filter @argent-order/infra exec supabase db push",
-    "db:generate": "pnpm --filter @argent-order/web exec supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > packages/types/src/database.types.ts"
+    "dev": "npm run dev --workspace=@argent-order/web",
+    "dev:web": "npm run dev --workspace=@argent-order/web",
+    "dev:bot": "npm run dev --workspace=@argent-order/bot",
+    "build": "npm run build --workspace=@argent-order/web",
+    "build:web": "npm run build --workspace=@argent-order/web",
+    "build:bot": "npm run build --workspace=@argent-order/bot",
+    "lint": "npm run lint --workspaces --if-present",
+    "type-check": "npm run type-check --workspaces --if-present",
+    "format": "npm run format --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.59.2",

@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "buildCommand": "pnpm install && pnpm build:web",
-  "installCommand": "pnpm install",
-  "devCommand": "pnpm dev:web"
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "devCommand": "npm run dev"
 }
