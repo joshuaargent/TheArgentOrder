@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { createClient } from "@/lib/supabase/client";
 import { Check, Circle, Flame, Clock, Plus } from "lucide-react";
 
 const CATEGORY_ICONS: Record<string, string> = {

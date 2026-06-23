@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { createClient } from "@/lib/supabase/client";
+
 import { CheckCircle, Flame } from "lucide-react";
 
 export default function ExamenPage() {
