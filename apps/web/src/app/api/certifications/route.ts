@@ -16,7 +16,7 @@ export async function GET() {
     .eq("active", true)
     .order("sort_order");
 
-  let userCertifications: { id: string; earned_at: string }[] = [];
+  let userCertifications: { certification_id: string; earned_at: string }[] = [];
 
   if (user) {
     // Get user's earned certifications
