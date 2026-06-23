@@ -78,10 +78,6 @@ Brother
 
 ↓
 
-Pod Member
-
-↓
-
 Veteran
 
 ↓
@@ -95,6 +91,10 @@ Mentor
 ↓
 
 Steward
+
+---
+
+**Note on "Pod Member":** "Pod Member" is a step within the Pod Leadership Track, not a separate formation rank. It is a preparatory stage for members who have demonstrated leadership potential and are being evaluated for Pod Leader responsibilities.
 
 ---
 

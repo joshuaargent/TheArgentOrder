@@ -63,9 +63,7 @@ No leader is above the Constitution.
 
 # Authority Structure
 
-Founder
-
-↓
+The formation ranks within The Argent Order proceed as follows:
 
 Steward
 
@@ -96,6 +94,10 @@ Initiate
 ↓
 
 Visitor
+
+---
+
+**Note on "Founder":** The "Founder" is not a formation rank. The Founder is the originator of the Order who operates outside the formation hierarchy. The Founder's role is described in the Founder Playbook (see 35_FOUNDER_PLAYBOOK.md). The Founder's evolution follows the path: Builder → Operator → Architect → Steward. At the Steward level, the Founder becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
 
 ---
 
@@ -433,6 +435,8 @@ Full operational authority.
 
 # FOUNDER
 
+**Note:** The "Founder" is not a formation rank within The Argent Order. The Founder exists outside the formation hierarchy as described in 35_FOUNDER_PLAYBOOK.md.
+
 ## Purpose
 
 Guardian of the mission.
@@ -448,6 +452,8 @@ The Founder remains accountable to:
 - Catholic teaching
 - The Constitution
 - The Mission
+
+**Founder Evolution:** The Founder's role follows the path: Builder → Operator → Architect → Steward. Upon reaching Steward level, the Founder's role becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
 
 ---
 

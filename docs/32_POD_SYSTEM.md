@@ -306,16 +306,24 @@ Accountability includes:
 
 # POD LEADERSHIP PIPELINE
 
+**Note:** This is the Pod Leadership Track, NOT the main formation rank progression.
+
+The main formation ranks are: Visitor → Initiate → Brother → Veteran → Captain → Officer → Mentor → Steward
+
+This pipeline describes the steps for members preparing for Pod Leadership responsibilities.
+
+---
+
 ```text id="pipeline"
-Brother
-
-↓
-
 Veteran
 
 ↓
 
-Pod Member (Active)
+Pod Member Candidate
+
+↓
+
+Pod Member
 
 ↓
 
@@ -329,6 +337,21 @@ Pod Leader
 
 Captain
 ```
+
+---
+
+### Pod Member (Pod Leadership Track Step)
+
+Active member being evaluated for Pod Leader responsibilities.
+
+This is a preparatory stage within the leadership track, not a main formation rank.
+
+Requirements:
+
+* Demonstrated consistent discipline
+* Active pod participation
+* Leadership potential shown
+* Accountability reliability
 
 ---
 

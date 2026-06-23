@@ -441,6 +441,186 @@ Not when it entertains them.
 
 ---
 
+# EXPANSION STRATEGIES
+
+---
+
+## Parish Strategy
+
+Long-Term.
+
+---
+
+Approach
+
+Serve first.
+
+Promote second.
+
+---
+
+Methods
+
+Workshops
+
+Men's Events
+
+Formation Talks
+
+Builder Workshops
+
+Faith & Work Discussions
+
+---
+
+## University Strategy
+
+High Potential.
+
+---
+
+Target
+
+Catholic students
+
+Young men
+
+Builders
+
+Leaders
+
+---
+
+Methods
+
+Campus ambassadors
+
+Student pods
+
+Formation groups
+
+Builder groups
+
+---
+
+## Creator Strategy
+
+Partner with:
+
+Catholic creators
+
+Catholic developers
+
+Catholic entrepreneurs
+
+Catholic educators
+
+Catholic podcasters
+
+---
+
+Criteria
+
+Character first.
+
+Audience second.
+
+---
+
+## Partnership Strategy
+
+Potential Partners
+
+Catholic Organizations
+
+Catholic Businesses
+
+Catholic Podcasts
+
+Catholic Authors
+
+Catholic Ministries
+
+Catholic Schools
+
+---
+
+Partnership Goal
+
+Shared mission.
+
+Not audience extraction.
+
+---
+
+# GROWTH MILESTONES
+
+---
+
+## Stage 1
+
+0-100 Members
+
+Founder-Led
+
+---
+
+## Stage 2
+
+100-500 Members
+
+Captain-Led
+
+---
+
+## Stage 3
+
+500-2,000 Members
+
+Mentor-Led
+
+---
+
+## Stage 4
+
+2,000-10,000 Members
+
+Steward-Led
+
+---
+
+## Stage 5
+
+10,000+
+
+Institution-Led
+
+---
+
+## The 10,000 Member Principle
+
+At 10,000 members:
+
+Most men should never interact directly with the Founder.
+
+They should interact with:
+
+Pods
+
+Captains
+
+Mentors
+
+Formation Systems
+
+The Institution
+
+The system must scale.
+
+Not the Founder.
+
+---
+
 # GROWTH PRINCIPLES
 
 ---

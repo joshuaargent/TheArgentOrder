@@ -118,7 +118,7 @@ Direct Discord links are forbidden.
 
 ---
 
-# The Four Content Pillars
+# The Five Content Pillars
 
 Everything falls under:
 
@@ -143,6 +143,116 @@ Men need men.
 ## Building
 
 Work, business, creation.
+
+---
+
+## Truth
+
+The foundation of reality.
+
+Catholic truth.
+
+Clear thinking.
+
+---
+
+# Content Pillar Examples
+
+## Faith
+
+Examples:
+
+```text
+Why Catholicism Is True
+
+The Problem With Moral Relativism
+
+What Prayer Actually Does
+
+The Logic Of The Resurrection
+
+Why Men Need Confession
+
+Lessons From The Saints
+
+Catholic Leadership
+```
+
+---
+
+## Discipline
+
+Examples:
+
+```text
+Why Motivation Is Useless
+
+Build Discipline Not Feelings
+
+The Problem With Comfort
+
+How To Stop Wasting Time
+
+Digital Discipline
+
+The Power Of Consistency
+```
+
+---
+
+## Brotherhood
+
+Examples:
+
+```text
+Why Men Are Lonely
+
+The Importance Of Accountability
+
+How Brotherhood Changes Men
+
+Why Isolation Is Dangerous
+
+The Power Of Small Groups
+```
+
+---
+
+## Building
+
+Examples:
+
+```text
+How To Build Useful Skills
+
+Why Men Should Create
+
+The Builder Mindset
+
+Developers Need Brotherhood Too
+
+Starting A Business Responsibly
+
+Building As Service
+```
+
+---
+
+## Truth
+
+Examples:
+
+```text
+The Death Of Objective Truth
+
+How To Think Clearly
+
+Common Logical Fallacies
+
+Why Reality Matters
+
+The Problem With Modern Relativism
+```
 
 ---
 

@@ -3,6 +3,8 @@
 
 Version: 1.0
 
+Status: Canonical Community Architecture
+
 ---
 
 # Purpose
@@ -28,6 +30,22 @@ Discord does not exist to:
 The Portal is where men improve.
 
 Discord is where brothers gather.
+
+Discord is not the product.
+
+Discord is the battlefield.
+
+It handles:
+
+* Brotherhood
+* Accountability
+* Communication
+* Enforcement
+* Culture formation
+
+The Portal handles structure.
+
+Discord handles behaviour.
 
 ---
 
@@ -722,6 +740,345 @@ Platform development.
 Features.
 
 Roadmap.
+
+---
+
+# ADDITIONAL CATEGORIES
+
+---
+
+## CATEGORY — DASHBOARD
+
+### #dashboard
+
+Bot-updated summary:
+
+* Campaign status
+* Formation score
+* Pod status
+
+---
+
+### #daily-directive
+
+One message per day:
+
+* Mission of the day
+* Discipline challenge
+* Scripture focus
+
+---
+
+## CATEGORY — FORMATION
+
+### #prayer-log
+
+* Prayer completion posts
+* Rosary tracking
+* Mass attendance confirmations
+
+---
+
+### #discipline-log
+
+* Exercise
+* Wake time
+* Cold shower
+* Deep work
+
+---
+
+### #truth-log
+
+Honesty channel:
+
+* Failures
+* Reflection
+* Confessions (non-sacramental)
+
+---
+
+### #formation-checkins
+
+Weekly structured check-in form.
+
+---
+
+## CATEGORY — BUILDER HALL
+
+### #builder-hub
+
+Central builder identity.
+
+---
+
+### #project-showcase
+
+Members post:
+
+* Apps
+* Businesses
+* Projects
+
+---
+
+### #ship-log
+
+Mandatory shipping updates:
+
+* Weekly output
+
+---
+
+### #build-help
+
+Technical assistance.
+
+No noise.
+
+---
+
+## CATEGORY — LEADERSHIP
+
+### #leadership-hub
+
+Access: Captain+
+
+System oversight.
+
+---
+
+### #pod-reports
+
+Pod health reports.
+
+---
+
+### #community-health
+
+Community metrics.
+
+---
+
+## CATEGORY — BOT COMMANDS
+
+```text
+!pray
+!checkin
+!rule
+!campaign
+!ship
+```
+
+---
+
+# ROLE SYSTEM
+
+---
+
+## Core Roles
+
+```text
+Initiate
+
+Brother
+
+Veteran
+
+Captain
+
+Officer
+
+Mentor
+
+Steward
+```
+
+---
+
+## Functional Roles
+
+```text
+Pod Leader
+
+Builder
+
+Accountability Lead
+
+Moderator
+
+Admin
+```
+
+---
+
+## Special Roles
+
+```text
+Verified Builder
+
+Top Contributor
+
+Streak Holder
+
+Certified Mentor
+```
+
+---
+
+# ONBOARDING FLOW
+
+---
+
+## Step 1
+
+Join server
+
+---
+
+## Step 2
+
+Bot DM:
+
+* Welcome message
+* Link portal
+* Assign Initiate role
+
+---
+
+## Step 3
+
+User completes:
+
+```text
+#roll-call
+```
+
+---
+
+## Step 4
+
+Bot assigns:
+
+* Pod
+* First campaign
+* Rule of Life template
+
+---
+
+## Step 5
+
+User enters system loop:
+
+```text
+Daily logs
+Campaign tasks
+Pod accountability
+Formation tracking
+```
+
+---
+
+# AUTOMATION SYSTEM
+
+---
+
+## Role Sync
+
+Portal → Discord
+
+* Formation score updates roles
+* Certification unlocks roles
+* Rank changes update permissions
+
+---
+
+## Event Sync
+
+Discord → API
+
+* Prayer logs
+* Discipline logs
+* Check-ins
+
+---
+
+## Reminder System
+
+* Daily directive
+* Campaign alerts
+* Pod reminders
+
+---
+
+# MODERATION SYSTEM
+
+---
+
+## Zero Tolerance Rules
+
+* Heresy
+* Harassment
+* Pornographic content
+* Chronic disengagement without accountability
+* Disruption of formation channels
+
+---
+
+## Enforcement Ladder
+
+```text
+Warning
+
+DM Correction
+
+Temporary Restriction
+
+Ban
+```
+
+---
+
+## Philosophy
+
+Correction is private.
+
+Standards are public.
+
+---
+
+# CULTURE DESIGN
+
+---
+
+## Allowed
+
+* Discipline discussion
+* Faith discussion (Catholic orthodoxy only)
+* Builder discussion
+* Accountability
+* Truth confrontation
+
+---
+
+## Not Allowed
+
+* Passive scrolling
+* Meme spam
+* Political rage cycles
+* Victim mentality
+
+---
+
+# SUCCESS CRITERIA
+
+Discord is successful when:
+
+* Members are logging actions daily
+* Pods are active weekly
+* Builders are shipping weekly
+* Prayer is consistent
+* Leadership pipeline is functioning
 
 ---
 
