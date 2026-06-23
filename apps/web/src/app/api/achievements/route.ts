@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 // GET /api/achievements - List all achievements and user's progress
-export async function GET(request: Request) {
+export async function GET(_request: Request) {
   const supabase = await createClient();
 
   const {
