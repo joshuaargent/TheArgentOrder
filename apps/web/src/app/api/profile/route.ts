@@ -107,7 +107,7 @@ export async function PATCH(_request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  const body = await _request.json();
   const { display_name, bio, avatar_url, timezone, country, vocation } = body;
 
   const { data: profile, error } = await supabase
