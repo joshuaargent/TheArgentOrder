@@ -72,7 +72,7 @@ export async function POST(_request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  const body = await _request.json();
   const { name, description } = body;
 
   // Check if user already has an active rule

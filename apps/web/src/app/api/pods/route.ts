@@ -54,7 +54,7 @@ export async function GET(_request: Request) {
 }
 
 // POST /api/pods - Create pod (captains only) or request to join
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   const supabase = await createClient();
 
   const {
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  const body = await _request.json();
   const { action, pod_id, name, description } = body;
 
   if (action === "create") {
