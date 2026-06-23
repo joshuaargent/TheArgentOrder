@@ -13,12 +13,13 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+
+    const supabase = createClient();
 
     // Validate display name
     if (!displayName.trim()) {

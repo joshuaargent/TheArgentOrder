@@ -13,7 +13,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const supabase = createClient();
 
   // Check for auth error in URL
   useEffect(() => {
@@ -29,6 +28,8 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
+
+    const supabase = createClient();
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
