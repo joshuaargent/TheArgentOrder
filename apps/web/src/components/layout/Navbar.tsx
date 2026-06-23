@@ -18,6 +18,8 @@ import {
   BarChart3,
   CalendarDays,
   Bell,
+  Award,
+  Shield,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -30,6 +32,7 @@ const navigation = [
   { name: "Journal", href: "/journal", icon: BookOpen },
   { name: "Reviews", href: "/reviews", icon: CalendarDays },
   { name: "Projects", href: "/projects", icon: Briefcase },
+  { name: "Certifications", href: "/certifications", icon: Award },
   { name: "Achievements", href: "/achievements", icon: Trophy },
   { name: "Leaderboard", href: "/leaderboard", icon: BarChart3 },
   { name: "Notifications", href: "/notifications", icon: Bell },
