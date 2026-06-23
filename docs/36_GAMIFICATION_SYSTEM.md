@@ -46,7 +46,7 @@ Formation never serves the game.
 
 ---
 
-# Core Principle
+# Virtue Principle
 
 Gamification must reward virtue, not attention.
 
