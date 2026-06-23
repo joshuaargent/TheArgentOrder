@@ -261,7 +261,7 @@ export default function RuleBuilderPage() {
   const updateCustomItem = (pillar: string, index: number, field: "title" | "description", value: string) => {
     setCustomItems((prev) => ({
       ...prev,
-      [pillar]: prev[pillar].map((item, i) =>
+      [pillar]: (prev[pillar] || []).map((item, i) =>
         i === index ? { ...item, [field]: value } : item
       ),
     }));
