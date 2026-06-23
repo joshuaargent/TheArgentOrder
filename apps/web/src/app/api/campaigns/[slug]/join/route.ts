@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // POST /api/campaigns/[slug]/join - Join a campaign
 export async function POST(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const supabase = await createClient();
