@@ -13,14 +13,8 @@ export async function GET() {
     .from("profiles")
     .select("*", { count: "exact", head: true });
 
-  // Get active members (activity in last 30 days)
+  // Get active members (unique users with activity in last 30 days)
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-  const { count: activeMembers } = await supabase
-    .from("formation_events")
-    .select("*", { count: "exact", head: true })
-    .gte("created_at", thirtyDaysAgo);
-
-  // Get unique users with recent activity
   const { data: activeUserData } = await supabase
     .from("formation_events")
     .select("user_id")
