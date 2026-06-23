@@ -270,7 +270,7 @@ export default function RuleBuilderPage() {
   const removeCustomItem = (pillar: string, index: number) => {
     setCustomItems((prev) => ({
       ...prev,
-      [pillar]: prev[pillar].filter((_, i) => i !== index),
+      [pillar]: (prev[pillar] || []).filter((_, i) => i !== index),
     }));
   };
 
