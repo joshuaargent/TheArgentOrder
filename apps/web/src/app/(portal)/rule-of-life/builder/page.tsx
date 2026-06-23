@@ -431,7 +431,7 @@ export default function RuleBuilderPage() {
                   <div>
                     <p className="text-sm font-medium mb-2">Suggested Items</p>
                     <div className="flex flex-wrap gap-2">
-                      {SAMPLE_ITEMS[pillar.slug].map((item) => (
+                      {(SAMPLE_ITEMS[pillar.slug] || []).map((item) => (
                         <button
                           key={item.title}
                           onClick={() => toggleItem(pillar.slug, item.title)}
