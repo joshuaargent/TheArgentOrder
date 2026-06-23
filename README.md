@@ -26,83 +26,247 @@ argent-order/
 │   └── shared/           # Shared utilities
 ├── infra/
 │   └── supabase/         # Supabase migrations
-├── docs/                 # System documentation
-└── docs/                 # System documentation
+├── docs/                 # System documentation (37 files)
 ```
 
-## Getting Started
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 9+
-- Supabase CLI
-- Discord Developer Account
+- **Node.js 20+** - [Install](https://nodejs.org/)
+- **pnpm 9+** - `npm install -g pnpm`
+- **Supabase CLI** - `npm install -g supabase`
+- **Git**
+- Discord Developer Account (for bot)
 
-### Installation
+### Step 1: Clone & Install
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+```bash
+git clone https://github.com/joshuaargent/TheArgentOrder.git
+cd TheArgentOrder
+pnpm install
+```
 
-3. Set up environment variables:
-   ```bash
-   cp .env.example .env.local
-   # Fill in your Supabase and Discord credentials
-   ```
+### Step 2: Create Supabase Project
 
-4. Set up Supabase:
-   ```bash
-   # Link your Supabase project
-   supabase link --project-ref your-project-ref
-   
-   # Push migrations
-   supabase db push
-   ```
+1. Go to [supabase.com](https://supabase.com) and create a new project
+2. Wait for the database to be provisioned
+3. Copy your **Project URL** and both **API keys** from Settings > API
 
-5. Start development:
-   ```bash
-   pnpm dev
-   ```
+### Step 3: Configure Environment
 
-## Documentation
+```bash
+cp .env.example .env.local
+```
 
-Full documentation is available in the `/docs` directory:
+Edit `.env.local` with your credentials:
 
-- [00_VISION.md](docs/00_VISION.md) - Mission and vision
-- [01_CONSTITUTION.md](docs/01_CONSTITUTION.md) - Core principles
-- [05_ROLES_AND_PERMISSIONS.md](docs/05_ROLES_AND_PERMISSIONS.md) - Role definitions
-- [08_FORMATION_SYSTEM.md](docs/08_FORMATION_SYSTEM.md) - Formation pillars
-- [17_IMPLEMENTATION_ROADMAP.md](docs/17_IMPLEMENTATION_ROADMAP.md) - Build order
+```env
+# Supabase (from Settings > API)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-## Features
+# Discord Bot (create at discord.com/developers)
+DISCORD_TOKEN=your-bot-token
+DISCORD_CLIENT_ID=your-client-id
+```
 
-### Formation System
-- 5 Pillars: Faith, Discipline, Brotherhood, Building, Truth
-- Event-driven progress tracking
-- Formation scores and levels
+### Step 4: Push Database Schema
 
-### Brotherhood
-- Pod-based community structure
-- Mentorship programs
-- Brotherhood events
+```bash
+# Login to Supabase
+supabase login
 
-### Campaigns
-- Seasonal campaigns (Lent, Advent)
-- Sprint challenges
-- Progress tracking
+# Link your project
+supabase link --project-ref your-project-ref
 
-### Gamification
-- Achievements and certifications
-- XP and levels
-- Streak tracking
+# Push migrations
+pnpm db:migrate
+```
 
-### Discord Integration
-- Role sync
-- Formation commands (/pray, /grind, /checkin)
-- Pod management
+This creates:
+- 50+ tables with optimized indexes
+- Row Level Security policies
+- Seed data (ranks, achievements, campaigns)
+
+### Step 5: Configure Supabase Auth
+
+1. In Supabase Dashboard, go to **Authentication > URL Configuration**
+2. Add your site URL (e.g., `http://localhost:3000`)
+3. Add redirect URLs: `http://localhost:3000/**`
+
+### Step 6: Run Development Server
+
+```bash
+pnpm dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🎮 Discord Bot Setup
+
+### Step 1: Create Discord Application
+
+1. Go to [discord.com/developers](https://discord.com/developers)
+2. Click **New Application**
+3. Name it "The Argent Order"
+4. Go to **Bot** section
+5. Click **Reset Token** and copy the token
+6. Enable **Message Content Intent** under Privileged Gateway Intents
+
+### Step 2: Add Bot to Server
+
+1. In Discord Developer Portal, go to **OAuth2 > URL Generator**
+2. Check scopes: `bot`, `applications.commands`
+3. Copy the generated URL
+4. Visit the URL and add bot to your server
+
+### Step 3: Start Bot
+
+```bash
+cd apps/bot
+pnpm dev
+```
+
+Available commands:
+- `/profile` - View your formation profile
+- `/pray` - Log a prayer session
+- `/checkin` - Daily check-in
+- `/grind` - Log deep work session
+- `/streak` - Check your streaks
+
+---
+
+## 📁 Project Overview
+
+### Apps
+
+| App | Location | Description |
+|-----|----------|-------------|
+| Web | `apps/web/` | Next.js portal with authentication |
+| Bot | `apps/bot/` | Discord bot with slash commands |
+
+### Packages
+
+| Package | Location | Description |
+|---------|----------|-------------|
+| Types | `packages/types/` | Shared TypeScript definitions |
+| Shared | `packages/shared/` | Shared utilities |
+
+### Infrastructure
+
+| Component | Location | Description |
+|-----------|----------|-------------|
+| Migrations | `infra/supabase/` | Database schema & seed data |
+
+---
+
+## 📊 Database Schema
+
+### Core Tables
+
+| Domain | Tables | Purpose |
+|--------|--------|---------|
+| Identity | `profiles`, `ranks`, `user_ranks` | User accounts & progression |
+| Formation | `formation_events`, `formation_scores` | Event tracking & scoring |
+| Campaigns | `campaigns`, `campaign_tasks`, `campaign_enrollments` | Seasonal challenges |
+| Brotherhood | `pods`, `pod_members`, `mentorships` | Community structure |
+| Journal | `journal_entries`, `examens` | Personal reflection |
+| Achievements | `achievements`, `user_achievements` | Gamification |
+| Projects | `projects`, `project_milestones` | Builder Hall |
+| Analytics | `analytics_events`, `formation_snapshots` | Tracking |
+
+### Seed Data Included
+
+- **8 Ranks**: Visitor → Initiate → Brother → Veteran → Captain → Officer → Mentor → Steward
+- **50+ Achievements**: Across all 5 pillars
+- **8 Campaigns**: Lent, Advent, Sprints
+- **8 Certifications**: For advanced milestones
+
+---
+
+## 🔧 Available Scripts
+
+```bash
+# Development
+pnpm dev              # Run all apps in parallel
+pnpm dev:web          # Run only web app
+pnpm dev:bot          # Run only Discord bot
+
+# Building
+pnpm build            # Build all apps
+pnpm build:web        # Build web app
+
+# Database
+pnpm db:migrate       # Push migrations to Supabase
+pnpm db:generate      # Generate Supabase types
+
+# Quality
+pnpm lint             # Run ESLint
+pnpm type-check       # Run TypeScript checks
+```
+
+---
+
+## 🌐 Deployment
+
+### Deploy Web to Vercel
+
+1. Push to GitHub
+2. Connect repo to Vercel
+3. Add environment variables from `.env.local`
+4. Deploy
+
+### Deploy Bot to Railway/Render
+
+1. Push to GitHub
+2. Connect to Railway/Render
+3. Add environment variables
+4. Set start command: `pnpm start:bot`
+
+---
+
+## 📚 Documentation
+
+Full documentation in `/docs`:
+
+| Doc | Topic |
+|-----|-------|
+| 00_VISION.md | Mission and vision |
+| 01_CONSTITUTION.md | Core principles |
+| 02_PHILOSOPHY.md | Formation philosophy |
+| 03_MEMBER_JOURNEY.md | User lifecycle |
+| 05_ROLES_AND_PERMISSIONS.md | Rank system |
+| 08_FORMATION_SYSTEM.md | 5 pillars |
+| 17_IMPLEMENTATION_ROADMAP.md | Build order |
+
+---
+
+## ⚠️ Common Issues
+
+### "RLS policy denied"
+
+Make sure you're authenticated. Check the browser console for auth errors.
+
+### Bot not responding
+
+1. Verify DISCORD_TOKEN is correct
+2. Make sure bot has proper intents enabled
+3. Check bot is in the server with correct permissions
+
+### Database connection failed
+
+1. Verify SUPABASE_URL and keys are correct
+2. Check if Supabase project is running
+3. Ensure IP allowlist includes your IP (if applicable)
+
+---
 
 ## License
 
