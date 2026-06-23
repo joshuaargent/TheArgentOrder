@@ -31,22 +31,26 @@ export async function GET(request: Request) {
   }
 
   // Add rank
-  const leaderboard = scores?.map((score, index) => ({
-    rank: index + 1,
-    user_id: score.user_id,
-    display_name: score.profiles?.display_name || "Unknown",
-    avatar_url: score.profiles?.avatar_url,
-    ...(pillar
-      ? { [pillar]: score[`${pillar}_score`] }
-      : {
-          faith: score.faith_score,
-          discipline: score.discipline_score,
-          brotherhood: score.brotherhood_score,
-          building: score.building_score,
-          truth: score.truth_score,
-          overall: score.overall_score,
-        }),
-  }));
+  type ProfileData = { display_name: string | null; avatar_url: string | null };
+  const leaderboard = scores?.map((score, index) => {
+    const profile = Array.isArray(score.profiles) ? score.profiles[0] : score.profiles;
+    return {
+      rank: index + 1,
+      user_id: score.user_id,
+      display_name: (profile as ProfileData | null)?.display_name || "Unknown",
+      avatar_url: (profile as ProfileData | null)?.avatar_url,
+      ...(pillar
+        ? { [pillar]: score[`${pillar}_score`] }
+        : {
+            faith: score.faith_score,
+            discipline: score.discipline_score,
+            brotherhood: score.brotherhood_score,
+            building: score.building_score,
+            truth: score.truth_score,
+            overall: score.overall_score,
+          }),
+    };
+  });
 
   return NextResponse.json({
     leaderboard: leaderboard || [],
