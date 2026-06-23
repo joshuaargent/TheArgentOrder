@@ -96,7 +96,7 @@ export async function GET() {
 }
 
 // PATCH /api/profile - Update profile
-export async function PATCH(request: Request) {
+export async function PATCH(_request: Request) {
   const supabase = await createClient();
 
   const {

@@ -61,7 +61,7 @@ export async function GET() {
 }
 
 // POST /api/rule-of-life - Create or update rule of life
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   const supabase = await createClient();
 
   const {
