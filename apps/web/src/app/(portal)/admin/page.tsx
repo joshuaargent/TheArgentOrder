@@ -23,13 +23,6 @@ interface Stats {
   formationsThisWeek: number;
 }
 
-interface RecentActivity {
-  id: string;
-  type: string;
-  description: string;
-  created_at: string;
-}
-
 export default function AdminPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
