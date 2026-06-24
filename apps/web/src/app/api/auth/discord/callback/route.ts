@@ -112,7 +112,7 @@ export async function GET(request: Request) {
     // Check if user already exists by email
     const { data: existingUser } = await supabase
       .from("profiles")
-      .select("id")
+      .select("user_id")
       .eq("email", discordUser.email)
       .single();
 
