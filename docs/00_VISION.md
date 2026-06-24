@@ -7,7 +7,7 @@ Version: 1.0
 
 # Executive Summary
 
-The Argent Order exists to form Catholic men into saints, leaders, builders, husbands, fathers, professionals, and servants of God through structured formation, brotherhood, accountability, and disciplined action.
+The Argent Order exists to help form Catholic men into who God created them to be—leaders, builders, husbands, fathers, professionals, and servants of God through structured formation, brotherhood, accountability, and disciplined action.
 
 The Order is not a Discord server.
 

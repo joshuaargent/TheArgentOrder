@@ -173,7 +173,7 @@ The Logic Of The Resurrection
 
 Why Men Need Confession
 
-Lessons From The Saints
+Lessons From The Virtuous
 
 Catholic Leadership
 ```
@@ -497,7 +497,7 @@ Example:
 ```text
 Confession Is Underrated
 
-Why Saints Were Builders
+Why The Virtuous Were Builders
 
 The Meaning Of Sacrifice
 ```

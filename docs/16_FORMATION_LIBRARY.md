@@ -530,7 +530,7 @@ Fathers
 
 Primary Mission
 
-Raise Saints
+Raise Men of Virtue
 
 ---
 
@@ -959,7 +959,7 @@ Reward: Builder Certification eligibility
 ## ADVANCED CAMPAIGNS
 
 * Vocation Discernment Campaign - Align life with calling
-* Saintly Discipline Campaign - Extreme formation intensity
+* Virtue Discipline Campaign - Extreme formation intensity
 * Steward Track - Leadership of leaders
 
 ---
@@ -1289,6 +1289,6 @@ Every major campaign concludes with reflection on:
 
 Campaigns are the engine of transformation.
 
-Every campaign must ultimately help men become: More Faithful, More Disciplined, More Competent, More Responsible, More Brotherly, More Holy.
+Every campaign must ultimately help men become: More Faithful, More Disciplined, More Competent, More Responsible, More Brotherly, More Who God Created Them To Be.
 
 If a campaign does not contribute to one of these outcomes, it should not exist.

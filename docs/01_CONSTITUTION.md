@@ -494,6 +494,6 @@ The purpose of The Argent Order is not influence.
 
 The purpose of The Argent Order is not wealth.
 
-The purpose of The Argent Order is to help men become saints.
+The purpose of The Argent Order is to help men become who God created them to be.
 
 All decisions must ultimately serve this objective.

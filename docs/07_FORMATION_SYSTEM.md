@@ -853,7 +853,7 @@ Every review.
 
 Every system.
 
-Must ultimately help a man become a saint.
+Must ultimately help a man become who God created him to be.
 
 ---
 

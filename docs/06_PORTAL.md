@@ -901,7 +901,7 @@ Vanity Metrics
 
 Every feature must answer:
 
-"Will this help a man become more faithful, disciplined, responsible, competent, and holy?"
+"Will this help a man become more faithful, disciplined, responsible, competent, and who God created him to be?"
 
 If the answer is no, the feature should not exist.
 

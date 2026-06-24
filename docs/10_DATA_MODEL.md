@@ -987,6 +987,6 @@ Never duplicate the source of truth.
 
 Every entity in the system exists to answer one question:
 
-"Is this helping a man become more faithful, disciplined, brotherly, capable, truthful, and holy?"
+"Is this helping a man become more faithful, disciplined, brotherly, capable, truthful, and who God created him to be?"
 
 If the answer is no, the entity should not exist.
