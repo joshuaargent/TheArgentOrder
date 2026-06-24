@@ -267,14 +267,19 @@ Once the bot is running, use these slash commands in Discord:
 
 | Command | Description |
 |---------|-------------|
-| `/setup` | Set up server structure (Admin only) |
+| `/setup` | Set up server structure (Admin only - idempotent) |
 | `/sync` | Sync your Discord role with portal rank |
 | `/link` | Connect Discord to portal account |
 | `/profile` | View your formation profile |
 | `/pray` | Log prayer session |
-| `/checkin` | Daily check-in |
+| `/scripture` | Log scripture reading |
+| `/mass` | Log Mass attendance |
+| `/checkin` | Daily formation check-in |
 | `/grind` | Log deep work session |
 | `/streak` | View your formation streaks |
+| `/project` | Builder Hall project commands |
+| `/pod` | Pod accountability commands |
+| `/campaign` | Campaign management |
 
 ---
 

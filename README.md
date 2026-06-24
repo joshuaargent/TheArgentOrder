@@ -135,11 +135,19 @@ npm run dev
 ```
 
 Available commands:
+- `/setup` - Set up server structure (Admin only - idempotent)
+- `/sync` - Sync your Discord role with portal rank
+- `/link` - Connect Discord to portal account
 - `/profile` - View your formation profile
-- `/pray` - Log a prayer session
-- `/checkin` - Daily check-in
+- `/pray` - Log prayer session
+- `/scripture` - Log scripture reading
+- `/mass` - Log Mass attendance
+- `/checkin` - Daily formation check-in
 - `/grind` - Log deep work session
-- `/streak` - Check your streaks
+- `/streak` - View your formation streaks
+- `/project` - Builder Hall project commands
+- `/pod` - Pod accountability commands
+- `/campaign` - Campaign management
 
 ---
 
