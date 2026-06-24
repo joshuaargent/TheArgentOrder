@@ -7,9 +7,14 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen mesh-gradient flex flex-col relative">
+      {/* Ambient Orbs for Portal Pages */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="ambient-orb w-[400px] h-[400px] bg-primary/3 -top-20 -right-20" />
+        <div className="ambient-orb w-[300px] h-[300px] bg-primary/2 bottom-40 -left-20" style={{ animationDelay: '-8s' }} />
+      </div>
       <Navbar />
-      <main className="flex-1 container py-8">{children}</main>
+      <main className="flex-1 container-premium py-8 relative z-10">{children}</main>
       <Footer />
     </div>
   );
