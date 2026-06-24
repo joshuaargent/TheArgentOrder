@@ -10,7 +10,7 @@ import {
 import { supabase } from "../index";
 
 // Argent Order brand colors
-const ARGENT_GOLD = 0xc0c0c0; // Silver/Argent
+const ARGENT_SILVER = 0xa1a1aa; // Silver/Argent
 const ARGENT_DARK = 0x1a1a2e;
 
 // Full server structure based on documentation
@@ -384,7 +384,7 @@ async function setupServer(guild: any) {
           const welcomeEmbed = new EmbedBuilder()
             .setTitle(welcomeInfo.title)
             .setDescription(welcomeInfo.content)
-            .setColor(ARGENT_GOLD)
+            .setColor(ARGENT_SILVER)
             .setTimestamp();
 
           // Pin the message for read-only channels

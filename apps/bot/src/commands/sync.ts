@@ -97,7 +97,7 @@ async function syncMember(interaction: ChatInputCommandInteraction) {
     const embed = new EmbedBuilder()
       .setTitle("⚔️ Role Synced")
       .setDescription(`Your Discord role has been updated to **${rankName}**`)
-      .setColor(0xc0c0c0)
+      .setColor(0xa1a1aa)
       .setTimestamp();
 
     await interaction.editReply({ embeds: [embed] });
@@ -188,7 +188,7 @@ async function syncAllMembers(interaction: ChatInputCommandInteraction) {
       { name: "⚠️ Failed", value: failed.toString(), inline: true },
       { name: "👤 Not in Server", value: notInServer.toString(), inline: true }
     )
-    .setColor(synced > 0 ? 0xc0c0c0 : 0xef4444)
+    .setColor(synced > 0 ? 0xa1a1aa : 0xef4444)
     .setTimestamp();
 
   await interaction.editReply({ embeds: [embed] });

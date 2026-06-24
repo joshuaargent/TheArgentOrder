@@ -6,7 +6,7 @@ import {
 import { supabase } from "../index";
 
 // Argent Order brand colors
-const ARGENT_GOLD = 0xc0c0c0;
+const ARGENT_SILVER = 0xa1a1aa;
 
 const PRAYER_TYPES: Record<string, { name: string; multiplier: number; icon: string }> = {
   morning: { name: "Morning Prayer", multiplier: 1.2, icon: "🛐" },
@@ -107,7 +107,7 @@ export default {
         { name: "Points Earned", value: `**+${points}**`, inline: true },
         { name: "Faith Score", value: String(scores?.faith_score || 0), inline: true }
       )
-      .setColor(ARGENT_GOLD)
+      .setColor(ARGENT_SILVER)
       .setTimestamp()
       .setFooter({ text: "Pray without ceasing." });
 
