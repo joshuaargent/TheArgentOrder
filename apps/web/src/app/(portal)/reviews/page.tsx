@@ -103,7 +103,12 @@ export default function ReviewsPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading reviews...</div>
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <CheckCircle className="h-5 w-5 text-blue-500" />
+          </div>
+          <p className="text-muted-foreground">Loading your reviews...</p>
+        </div>
       </div>
     );
   }

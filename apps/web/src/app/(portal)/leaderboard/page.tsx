@@ -30,7 +30,16 @@ export default function LeaderboardPage() {
   };
 
   if (loading) {
-    return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading leaderboard...</div></div>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <Trophy className="h-5 w-5 text-yellow-500" />
+          </div>
+          <p className="text-muted-foreground">Loading leaderboard...</p>
+        </div>
+      </div>
+    );
   }
 
   const getRankIcon = (rank: number) => {

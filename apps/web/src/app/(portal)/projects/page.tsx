@@ -8,7 +8,16 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true);
   useEffect(() => { fetchProjects(); }, []);
   const fetchProjects = async () => { try { const res = await fetch("/api/projects"); const data = await res.json(); setProjects(data.projects || []); } catch (error) { console.error("Failed:", error); } finally { setLoading(false); } };
-  if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
+  if (loading) return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="text-center">
+        <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <Briefcase className="h-5 w-5 text-orange-500" />
+        </div>
+        <p className="text-muted-foreground">Loading your projects...</p>
+      </div>
+    </div>
+  );
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between"><div><h1 className="text-3xl font-bold flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center"><Briefcase className="h-5 w-5 text-orange-500" /></div>Projects</h1><p className="text-muted-foreground mt-1">Build things that outlast you</p></div><Button className="btn-elegant"><Plus className="h-4 w-4 mr-2" />New Project</Button></div>

@@ -57,7 +57,16 @@ export default function JournalPage() {
   const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
 
   if (loading) {
-    return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading journal...</div></div>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <BookOpen className="h-5 w-5 text-purple-500" />
+          </div>
+          <p className="text-muted-foreground">Loading your journal...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
