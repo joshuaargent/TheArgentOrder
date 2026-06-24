@@ -26,7 +26,7 @@ argent-order/
 │   └── shared/           # Shared utilities
 ├── infra/
 │   └── supabase/         # Supabase migrations
-├── docs/                 # System documentation (37 files)
+├── docs/                 # System documentation (25 markdown + 2 SQL)
 ```
 
 ---
@@ -261,11 +261,29 @@ Full documentation in `/docs`:
 | 01_CONSTITUTION.md | Core principles |
 | 02_PHILOSOPHY.md | Formation philosophy |
 | 03_MEMBER_JOURNEY.md | User lifecycle |
+| 04_DISCORD.md | Discord architecture |
 | 05_ROLES_AND_PERMISSIONS.md | Rank system |
-| 08_FORMATION_SYSTEM.md | 5 pillars |
-| 25_GROWTH_ENGINE.md | Funnel and growth |
-| 27_PORTAL_PRODUCT_SPEC.md | Portal specification |
-| 38_DATABASE_REFERENCE.md | Database schema reference |
+| 06_PORTAL.md | Portal specification |
+| 07_FORMATION_SYSTEM.md | 5 pillars, gamification |
+| 08_BROTHERHOOD_SYSTEM.md | Pod system, accountability |
+| 09_TECHNICAL_ARCHITECTURE.md | System design |
+| 10_DATA_MODEL.md | Database entities |
+| 11_DATABASE_SCHEMA.sql | Full schema |
+| 12_RLS_POLICIES.sql | Security policies |
+| 13_API_SPECIFICATION.md | API endpoints |
+| 14_FRONTEND_ARCHITECTURE.md | Web app structure |
+| 15_IMPLEMENTATION_ROADMAP.md | Deployment guide |
+| 16_FORMATION_LIBRARY.md | Rule of Life, campaigns |
+| 17_CONTENT_ENGINE.md | Content system |
+| 18_MODERATION_HANDBOOK.md | Moderation guidelines |
+| 19_LEADERSHIP_HANDBOOK.md | Leadership development |
+| 20_OPERATING_SYSTEM.md | Operations manual |
+| 21_FOUNDER_PLAYBOOK.md | Founder guidance |
+| 22_ANALYTICS_SYSTEM.md | Metrics framework |
+| 23_YEARLY_OPERATING_PLAN.md | Annual calendar |
+| 24_ONBOARDING_SYSTEM.md | Member activation |
+| 25_SUSTAINABILITY_MODEL.md | Financial model |
+| 27_DATABASE_REFERENCE.md | Schema reference |
 
 ---
 
