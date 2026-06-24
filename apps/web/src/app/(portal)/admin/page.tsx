@@ -84,7 +84,12 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading dashboard...</div>
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <Shield className="h-5 w-5 text-primary" />
+          </div>
+          <p className="text-muted-foreground">Loading admin dashboard...</p>
+        </div>
       </div>
     );
   }

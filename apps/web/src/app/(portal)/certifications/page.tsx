@@ -7,7 +7,16 @@ export default function CertificationsPage() {
   const [loading, setLoading] = useState(true);
   useEffect(() => { fetchCerts(); }, []);
   const fetchCerts = async () => { try { const res = await fetch("/api/certifications"); const data = await res.json(); setCerts(data.certifications || []); } catch (error) { console.error("Failed:", error); } finally { setLoading(false); } };
-  if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
+  if (loading) return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="text-center">
+        <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <Award className="h-5 w-5 text-yellow-500" />
+        </div>
+        <p className="text-muted-foreground">Loading certifications...</p>
+      </div>
+    </div>
+  );
   return (
     <div className="space-y-8">
       <div><h1 className="text-3xl font-bold flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><Award className="h-5 w-5 text-yellow-500" /></div>Certifications</h1><p className="text-muted-foreground mt-1">Earn credentials for advanced milestones</p></div>
