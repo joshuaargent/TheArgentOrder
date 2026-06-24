@@ -163,15 +163,15 @@ The pod is where:
 
 Ideal:
 
-6 Men
+5–8 Members
 
-Acceptable:
+Minimum:
 
-4–8 Men
+5 Members
 
 Maximum:
 
-10 Men
+10 Members
 
 ---
 

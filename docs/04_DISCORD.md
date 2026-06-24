@@ -862,12 +862,14 @@ Community metrics.
 
 ## CATEGORY — BOT COMMANDS
 
+Slash commands (use `/` prefix):
+
 ```text
-!pray
-!checkin
-!rule
-!campaign
-!ship
+/pray
+/checkin
+/rule
+/campaign
+/ship
 ```
 
 ---
