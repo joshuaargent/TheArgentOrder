@@ -16,7 +16,7 @@ export function Footer() {
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Catholic Formation Operating System for Builders
+              Execute. Build. Lead. Catholic brotherhood for men who build.
             </p>
           </div>
 
@@ -73,9 +73,14 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </p>
+          <div className="text-center md:text-left">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground/70 mt-1">
+              Forged in Faith, Discipline, and Brotherhood.
+            </p>
+          </div>
           <div className="flex gap-6">
             {footerNav.legal.map((item) => (
               <Link 

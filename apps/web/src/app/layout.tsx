@@ -8,8 +8,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "The Argent Order",
-  description: "Catholic Formation Operating System for Builders",
+  title: "The Argent Order | Catholic Formation System for Men",
+  description: "Execute. Build. Lead. The Catholic brotherhood for men who build. Five pillars of formation: Faith, Discipline, Brotherhood, Building, Truth.",
 };
 
 export default function RootLayout({

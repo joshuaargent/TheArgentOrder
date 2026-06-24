@@ -81,7 +81,10 @@ export default function FormationPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="text-muted-foreground">Loading formation data...</div>
+        <div className="text-center">
+          <Flame className="h-10 w-10 text-primary mx-auto mb-4 animate-pulse" />
+          <p className="text-muted-foreground">Loading your formation...</p>
+        </div>
       </div>
     );
   }

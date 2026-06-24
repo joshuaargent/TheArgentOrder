@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import { Button } from "@/components/ui/Button";
+import { AlertTriangle } from "lucide-react";
 
 export default function Error({
   error,
@@ -15,18 +17,23 @@ export default function Error({
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-destructive">Error</h1>
-        <h2 className="mt-4 text-2xl font-semibold">Something went wrong</h2>
-        <p className="mt-2 text-muted-foreground">
-          {error.message || "An unexpected error occurred."}
+      <div className="text-center max-w-md mx-auto px-4">
+        <div className="w-20 h-20 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-6">
+          <AlertTriangle className="h-10 w-10 text-red-500" />
+        </div>
+        <h1 className="text-4xl font-bold mb-2">Something Failed</h1>
+        <p className="text-muted-foreground mb-6">
+          The operation could not be completed. Try again or contact support if this persists.
         </p>
-        <button
+        <Button
           onClick={reset}
-          className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground hover:bg-primary/90"
+          className="btn-elegant"
         >
-          Try Again
-        </button>
+          Execute Again
+        </Button>
+        <p className="text-xs text-muted-foreground mt-6">
+          Execute. Build. Lead.
+        </p>
       </div>
     </div>
   );
