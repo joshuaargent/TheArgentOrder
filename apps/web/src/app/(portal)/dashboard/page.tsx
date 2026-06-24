@@ -182,182 +182,173 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
-        <div className="mx-auto max-w-7xl px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold flex items-center gap-2">
-                <Sword className="h-6 w-6 text-primary" />
-                Formation Dashboard
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Track your progress across all five pillars
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary border border-primary/20">
-                {data.rank}
-              </span>
-            </div>
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <Sword className="h-6 w-6 text-primary" />
+            Formation Dashboard
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Track your progress across all five pillars
+          </p>
+        </div>
+        <span className="rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary border border-primary/20">
+          {data.rank}
+        </span>
+      </div>
+
+      {/* Formation Score Card */}
+      <div className="mb-8 rounded-xl bg-gradient-to-r from-primary/20 to-primary/5 p-6 border border-primary/10">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-sm text-muted-foreground">Overall Formation Score</p>
+            <p className="text-5xl font-bold">{data.formationScores.overall_score || 0}</p>
+          </div>
+          <div className="flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded-full">
+            <Flame className="h-6 w-6 text-orange-500" />
+            <span className="text-xl font-semibold">{data.currentStreak} day streak</span>
           </div>
         </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-4 py-8">
-        {/* Formation Score Card */}
-        <div className="mb-8 rounded-lg bg-gradient-to-r from-primary/20 to-primary/5 p-6 border border-primary/10">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="text-sm text-muted-foreground">Overall Formation Score</p>
-              <p className="text-5xl font-bold">{data.formationScores.overall_score || 0}</p>
+        
+        {/* Pillar Breakdown */}
+        <div className="grid grid-cols-5 gap-4">
+          {PILLAR_CONFIG.map((pillar) => (
+            <div key={pillar.key} className="text-center">
+              <span className="text-3xl">{pillar.icon}</span>
+              <p className="text-xs text-muted-foreground mt-2">{pillar.name}</p>
+              <p className="font-semibold text-lg">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
             </div>
-            <div className="flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded-full">
+          ))}
+        </div>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="mb-8 grid gap-6 md:grid-cols-4">
+        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+          <div className="flex items-center gap-4">
+            <div className="rounded-full bg-orange-500/10 p-3">
               <Flame className="h-6 w-6 text-orange-500" />
-              <span className="text-xl font-semibold">{data.currentStreak} day streak</span>
             </div>
-          </div>
-          
-          {/* Pillar Breakdown */}
-          <div className="flex gap-6">
-            {PILLAR_CONFIG.map((pillar) => (
-              <div key={pillar.key} className="text-center flex-1">
-                <span className="text-2xl">{pillar.icon}</span>
-                <p className="text-xs text-muted-foreground mt-1">{pillar.name}</p>
-                <p className="font-semibold">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats Grid */}
-        <div className="mb-8 grid gap-6 md:grid-cols-4">
-          <div className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-orange-500/10 p-3">
-                <Flame className="h-6 w-6 text-orange-500" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Formation Streak</p>
-                <p className="text-2xl font-bold">{data.currentStreak} days</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-blue-500/10 p-3">
-                <Target className="h-6 w-6 text-blue-500" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Active Campaigns
-                </p>
-                <p className="text-2xl font-bold">{data.activeCampaigns}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-yellow-500/10 p-3">
-                <Trophy className="h-6 w-6 text-yellow-500" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Achievements
-                </p>
-                <p className="text-2xl font-bold">{data.achievementsCount}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-purple-500/10 p-3">
-                <Calendar className="h-6 w-6 text-purple-500" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Next Pod Meeting</p>
-                <p className="text-2xl font-bold">{data.nextPodMeeting || "None"}</p>
-              </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Formation Streak</p>
+              <p className="text-2xl font-bold">{data.currentStreak} days</p>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions & Active Campaigns */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-lg border bg-card p-6">
-            <h2 className="mb-4 text-lg font-semibold">Today's Formation</h2>
+        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+          <div className="flex items-center gap-4">
+            <div className="rounded-full bg-blue-500/10 p-3">
+              <Target className="h-6 w-6 text-blue-500" />
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">
+                Active Campaigns
+              </p>
+              <p className="text-2xl font-bold">{data.activeCampaigns}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+          <div className="flex items-center gap-4">
+            <div className="rounded-full bg-yellow-500/10 p-3">
+              <Trophy className="h-6 w-6 text-yellow-500" />
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">
+                Achievements
+              </p>
+              <p className="text-2xl font-bold">{data.achievementsCount}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+          <div className="flex items-center gap-4">
+            <div className="rounded-full bg-purple-500/10 p-3">
+              <Calendar className="h-6 w-6 text-purple-500" />
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Next Pod Meeting</p>
+              <p className="text-2xl font-bold">{data.nextPodMeeting || "None"}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions & Active Campaigns */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-xl border bg-card p-6">
+          <h2 className="mb-4 text-lg font-semibold">Today's Formation</h2>
+          <div className="space-y-3">
+            <Link
+              href="/formation"
+              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+            >
+              <span className="flex items-center gap-3">
+                <span className="text-xl">✝️</span> Log Prayer
+              </span>
+              <span className="text-sm text-muted-foreground">+10 pts</span>
+            </Link>
+            <Link
+              href="/formation"
+              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+            >
+              <span className="flex items-center gap-3">
+                <span className="text-xl">📖</span> Read Scripture
+              </span>
+              <span className="text-sm text-muted-foreground">+5 pts</span>
+            </Link>
+            <Link
+              href="/examen"
+              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+            >
+              <span className="flex items-center gap-3">
+                <span className="text-xl">💭</span> Complete Examen
+              </span>
+              <span className="text-sm text-muted-foreground">+15 pts</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-xl border bg-card p-6">
+          <h2 className="mb-4 text-lg font-semibold">Active Campaigns</h2>
+          {data.activeCampaigns > 0 ? (
             <div className="space-y-3">
+              <div className="rounded-lg border p-4">
+                <p className="font-medium">Campaign Progress</p>
+                <p className="text-sm text-muted-foreground">
+                  {data.activeCampaigns} active campaign{data.activeCampaigns > 1 ? "s" : ""}
+                </p>
+              </div>
               <Link
-                href="/formation"
-                className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
+                href="/campaigns"
+                className="block text-center text-sm text-primary hover:underline"
               >
-                <span className="flex items-center gap-2">
-                  <span>✝️</span> Log Prayer
-                </span>
-                <span className="text-sm text-muted-foreground">+10 pts</span>
-              </Link>
-              <Link
-                href="/formation"
-                className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
-              >
-                <span className="flex items-center gap-2">
-                  <span>📖</span> Read Scripture
-                </span>
-                <span className="text-sm text-muted-foreground">+5 pts</span>
-              </Link>
-              <Link
-                href="/formation"
-                className="flex items-center justify-between rounded-md border p-3 transition-colors hover:bg-accent"
-              >
-                <span className="flex items-center gap-2">
-                  <span>💭</span> Complete Examen
-                </span>
-                <span className="text-sm text-muted-foreground">+15 pts</span>
+                View Campaign Details
               </Link>
             </div>
-          </div>
-
-          <div className="rounded-lg border bg-card p-6">
-            <h2 className="mb-4 text-lg font-semibold">Active Campaigns</h2>
-            {data.activeCampaigns > 0 ? (
-              <div className="space-y-3">
-                <div className="rounded-md border p-3">
-                  <p className="font-medium">Campaign Progress</p>
-                  <p className="text-sm text-muted-foreground">
-                    {data.activeCampaigns} active campaign{data.activeCampaigns > 1 ? "s" : ""}
-                  </p>
-                </div>
-                <Link
-                  href="/campaigns"
-                  className="block text-center text-sm text-primary hover:underline"
-                >
-                  View Campaign Details
-                </Link>
+          ) : (
+            <div className="space-y-3">
+              <div className="rounded-lg border p-4">
+                <p className="font-medium">No active campaigns</p>
+                <p className="text-sm text-muted-foreground">
+                  Join a campaign to start your journey
+                </p>
               </div>
-            ) : (
-              <div className="space-y-3">
-                <div className="rounded-md border p-3">
-                  <p className="font-medium">No active campaigns</p>
-                  <p className="text-sm text-muted-foreground">
-                    Join a campaign to start your journey
-                  </p>
-                </div>
-                <Link
-                  href="/campaigns"
-                  className="block text-center text-sm text-primary hover:underline"
-                >
-                  Browse Campaigns
-                </Link>
-              </div>
-            )}
-          </div>
+              <Link
+                href="/campaigns"
+                className="block text-center text-sm text-primary hover:underline"
+              >
+                Browse Campaigns
+              </Link>
+            </div>
+          )}
         </div>
-      </main>
+      </div>
     </div>
   );
 }

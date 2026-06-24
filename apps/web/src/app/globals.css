@@ -1,36 +1,120 @@
+/* ============================================
+   Global Styles for The Argent Order
+   Catholic Formation Operating System for Builders
+   ============================================ */
+
 @import "tailwindcss";
 
+/* ------------------------------------------
+   CSS Custom Properties (Design Tokens)
+   ------------------------------------------ */
+
 @theme {
-  --color-border: #d4d4d8;
-  --color-background: #fafafa;
-  --color-foreground: #18181b;
+  /* Colors - Light Mode (Default) */
+  --color-border: #e7e5e4;
+  --color-background: #fafaf9;
+  --color-foreground: #1c1917;
   --color-primary: #6366f1;
-  --color-primary-foreground: #fafafa;
-  --color-secondary: #f4f4f5;
-  --color-secondary-foreground: #18181b;
-  --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
-  --color-accent: #f4f4f5;
-  --color-accent-foreground: #18181b;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
-  --color-success: #22c55e;
-  --color-success-foreground: #fafafa;
+  --color-primary-foreground: #fafaf9;
+  --color-secondary: #f5f5f4;
+  --color-secondary-foreground: #1c1917;
+  --color-muted: #f5f5f4;
+  --color-muted-foreground: #78716c;
+  --color-accent: #f5f5f4;
+  --color-accent-foreground: #1c1917;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #fafaf9;
+  --color-success: #16a34a;
+  --color-success-foreground: #fafaf9;
   --color-warning: #eab308;
-  --color-warning-foreground: #18181b;
+  --color-warning-foreground: #1c1917;
   --color-ring: #6366f1;
   --color-card: #ffffff;
-  --color-card-foreground: #18181b;
+  --color-card-foreground: #1c1917;
   --color-popover: #ffffff;
-  --color-popover-foreground: #18181b;
-  --color-input: #d4d4d8;
+  --color-popover-foreground: #1c1917;
+  --color-input: #e7e5e4;
 
+  /* Custom Argent Order Colors */
+  --color-faith: #6366f1;
+  --color-discipline: #f97316;
+  --color-brotherhood: #22c55e;
+  --color-building: #eab308;
+  --color-truth: #8b5cf6;
+
+  /* Argent Order Specific */
+  --color-bg-primary: #fafaf9;
+  --color-bg-secondary: #f5f5f4;
+  --color-bg-card: #ffffff;
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-muted: #a8a29e;
+
+  /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
   --radius: 0.5rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
 }
+
+/* ------------------------------------------
+   Dark Mode Colors (CSS Custom Properties)
+   ------------------------------------------ */
+
+html.dark {
+  --color-border: #44403c;
+  --color-background: #0c0a09;
+  --color-foreground: #fafaf9;
+  --color-primary: #818cf8;
+  --color-primary-foreground: #0c0a09;
+  --color-secondary: #1c1917;
+  --color-secondary-foreground: #fafaf9;
+  --color-muted: #1c1917;
+  --color-muted-foreground: #a8a29e;
+  --color-accent: #1c1917;
+  --color-accent-foreground: #fafaf9;
+  --color-destructive: #f87171;
+  --color-destructive-foreground: #0c0a09;
+  --color-success: #4ade80;
+  --color-success-foreground: #0c0a09;
+  --color-warning: #facc15;
+  --color-warning-foreground: #0c0a09;
+  --color-ring: #818cf8;
+  --color-card: #1c1917;
+  --color-card-foreground: #fafaf9;
+  --color-popover: #1c1917;
+  --color-popover-foreground: #fafaf9;
+  --color-input: #44403c;
+
+  /* Argent Order Dark Mode */
+  --color-bg-primary: #0c0a09;
+  --color-bg-secondary: #1c1917;
+  --color-bg-card: #292524;
+  --color-text-primary: #fafaf9;
+  --color-text-secondary: #a8a29e;
+  --color-text-muted: #78716c;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+/* ------------------------------------------
+   Base Styles
+   ------------------------------------------ */
 
 html {
   scroll-behavior: smooth;
@@ -39,6 +123,7 @@ html {
 }
 
 body {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   background-color: var(--color-background);
   color: var(--color-foreground);
   line-height: 1.6;
@@ -47,6 +132,78 @@ body {
 * {
   border-color: var(--color-border);
 }
+
+/* ------------------------------------------
+   Typography
+   ------------------------------------------ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+p {
+  max-width: 72ch;
+}
+
+/* ------------------------------------------
+   Links
+   ------------------------------------------ */
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+/* ------------------------------------------
+   Selection
+   ------------------------------------------ */
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+/* ------------------------------------------
+   Focus Styles
+   ------------------------------------------ */
+
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------
+   Scrollbar
+   ------------------------------------------ */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -59,5 +216,146 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-muted-foreground);
-  border-radius: var(--radius-full);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ------------------------------------------
+   Utilities
+   ------------------------------------------ */
+
+.container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ------------------------------------------
+   Animations
+   ------------------------------------------ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+/* ------------------------------------------
+   Stagger Animation Delays
+   ------------------------------------------ */
+
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* ------------------------------------------
+   Skeleton Loading
+   ------------------------------------------ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-border) 50%,
+    var(--color-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
