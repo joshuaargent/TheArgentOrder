@@ -1,155 +1,112 @@
 /* ============================================
-   The Argent Order - Design System
-   Silver-Based Professional Theme
+   The Argent Order - Premium Design System
+   Argent = Silver | Bold, Dark, Premium
    ============================================ */
 
 @import "tailwindcss";
 
-/* ------------------------------------------
-   CSS Custom Properties (Design Tokens)
-   ------------------------------------------ */
-
 @theme {
-  /* Silver-based Color System - Light Mode */
-  --color-border: #d1d5db;
-  --color-background: #f9fafb;
-  --color-foreground: #111827;
-  --color-primary: #6b7280;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #e5e7eb;
-  --color-secondary-foreground: #374151;
-  --color-muted: #f3f4f6;
-  --color-muted-foreground: #6b7280;
-  --color-accent: #e5e7eb;
-  --color-accent-foreground: #111827;
-  --color-destructive: #dc2626;
-  --color-destructive-foreground: #ffffff;
-  --color-success: #059669;
-  --color-success-foreground: #ffffff;
-  --color-warning: #d97706;
-  --color-warning-foreground: #ffffff;
-  --color-ring: #6b7280;
-  --color-card: #ffffff;
-  --color-card-foreground: #111827;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #111827;
-  --color-input: #d1d5db;
+  /* Dark Theme - Premium Base */
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+  
+  /* Primary: Silver - Argent Order Identity */
+  --color-primary: #a1a1aa;
+  --color-primary-foreground: #09090b;
+  
+  /* Secondary: Steel/Charcoal */
+  --color-secondary: #27272a;
+  --color-secondary-foreground: #fafafa;
+  
+  /* Accent: Silver Light */
+  --color-accent: #27272a;
+  --color-accent-foreground: #a1a1aa;
+  
+  /* Muted: Deep dark */
+  --color-muted: #18181b;
+  --color-muted-foreground: #71717a;
+  
+  /* Borders: Subtle steel */
+  --color-border: #27272a;
+  --color-input: #27272a;
+  --color-ring: #a1a1aa;
+  
+  /* Card: Elevated dark */
+  --color-card: #0f0f10;
+  --color-card-foreground: #fafafa;
+  
+  /* Popover */
+  --color-popover: #18181b;
+  --color-popover-foreground: #fafafa;
+  
+  /* Semantic Colors */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+  --color-success: #22c55e;
+  --color-success-foreground: #09090b;
+  --color-warning: #eab308;
+  --color-warning-foreground: #09090b;
 
-  /* Five Pillars - Muted Metallic Tones */
-  --color-faith: #7c3aed;
-  --color-discipline: #ea580c;
-  --color-brotherhood: #059669;
-  --color-building: #ca8a04;
-  --color-truth: #0891b2;
+  /* Five Pillars - Bold, Saturated */
+  --color-faith: #a855f7;
+  --color-discipline: #ef4444;
+  --color-brotherhood: #22c55e;
+  --color-building: #eab308;
+  --color-truth: #06b6d4;
 
-  /* Argent Order Silver Palette */
-  --color-silver-50: #f9fafb;
-  --color-silver-100: #f3f4f6;
-  --color-silver-200: #e5e7eb;
-  --color-silver-300: #d1d5db;
-  --color-silver-400: #9ca3af;
-  --color-silver-500: #6b7280;
-  --color-silver-600: #4b5563;
-  --color-silver-700: #374151;
-  --color-silver-800: #1f2937;
-  --color-silver-900: #111827;
-  --color-silver-950: #030712;
+  /* Argent Order Premium Palette */
+  --color-silver: #a1a1aa;
+  --color-silver-light: #d4d4d8;
+  --color-silver-lighter: #e4e4e7;
+  --color-steel: #52525b;
+  --color-charcoal: #27272a;
+  --color-obsidian: #18181b;
+  --color-void: #09090b;
+  --color-surface: #0f0f10;
+  --color-elevated: #18181b;
 
-  /* Backgrounds */
-  --color-bg-primary: #f9fafb;
-  --color-bg-secondary: #f3f4f6;
-  --color-bg-card: #ffffff;
-  --color-bg-elevated: #ffffff;
-
-  /* Text */
-  --color-text-primary: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
-
-  /* Border Radius */
+  /* Border Radius - Sharp, Masculine */
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
   --radius: 0.375rem;
 
-  /* Shadows - Subtle and Professional */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.02);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.06);
+  /* Premium Shadows */
+  --shadow-glow: 0 0 20px rgba(161, 161, 170, 0.15);
+  --shadow-glow-sm: 0 0 10px rgba(161, 161, 170, 0.1);
 
-  /* Transitions */
+  /* Bold Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
   --transition-slow: 300ms ease;
 }
 
-/* ------------------------------------------
-   Dark Mode - Refined Silver
-   ------------------------------------------ */
-
-html.dark {
-  --color-border: #374151;
-  --color-background: #030712;
-  --color-foreground: #f9fafb;
-  --color-primary: #9ca3af;
-  --color-primary-foreground: #030712;
-  --color-secondary: #1f2937;
-  --color-secondary-foreground: #f9fafb;
-  --color-muted: #111827;
-  --color-muted-foreground: #9ca3af;
-  --color-accent: #1f2937;
-  --color-accent-foreground: #f9fafb;
-  --color-destructive: #f87171;
-  --color-destructive-foreground: #030712;
-  --color-success: #34d399;
-  --color-success-foreground: #030712;
-  --color-warning: #fbbf24;
-  --color-warning-foreground: #030712;
-  --color-ring: #9ca3af;
-  --color-card: #0f172a;
-  --color-card-foreground: #f9fafb;
-  --color-popover: #0f172a;
-  --color-popover-foreground: #f9fafb;
-  --color-input: #374151;
-
-  /* Dark Mode Silver Palette */
-  --color-silver-50: #f9fafb;
-  --color-silver-100: #f3f4f6;
-  --color-silver-200: #e5e7eb;
-  --color-silver-300: #d1d5db;
-  --color-silver-400: #9ca3af;
-  --color-silver-500: #6b7280;
-  --color-silver-600: #4b5563;
-  --color-silver-700: #374151;
-  --color-silver-800: #1f2937;
-  --color-silver-900: #111827;
-  --color-silver-950: #030712;
-
-  /* Dark Mode Backgrounds */
-  --color-bg-primary: #030712;
-  --color-bg-secondary: #0f172a;
-  --color-bg-card: #0f172a;
-  --color-bg-elevated: #1e293b;
-
-  /* Dark Mode Text */
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #9ca3af;
-  --color-text-muted: #6b7280;
-
-  /* Dark Mode Shadows */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+/* Light Mode - Clean Silver */
+html:not(.dark) {
+  --color-background: #fafafa;
+  --color-foreground: #18181b;
+  --color-primary: #52525b;
+  --color-primary-foreground: #fafafa;
+  --color-secondary: #e4e4e7;
+  --color-secondary-foreground: #18181b;
+  --color-accent: #f4f4f5;
+  --color-accent-foreground: #18181b;
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #52525b;
+  --color-card: #ffffff;
+  --color-card-foreground: #18181b;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #18181b;
+  --color-destructive: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #ca8a04;
 }
 
-/* ------------------------------------------
-   Base Styles
-   ------------------------------------------ */
-
+/* Base Styles */
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -157,124 +114,101 @@ html {
 }
 
 body {
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--color-background);
   color: var(--color-foreground);
-  line-height: 1.6;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 * {
   border-color: var(--color-border);
 }
 
-/* ------------------------------------------
-   Typography
-   ------------------------------------------ */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+/* Typography - Bold, Premium */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 h1 {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
 }
 
 h2 {
-  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
 }
 
 h4 {
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
 }
 
 p {
-  max-width: 72ch;
+  max-width: 65ch;
+  line-height: 1.7;
 }
 
-/* ------------------------------------------
-   Links
-   ------------------------------------------ */
-
+/* Links */
 a {
-  color: var(--color-primary);
+  color: var(--color-silver-light);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary);
-  opacity: 0.8;
+  color: var(--color-silver-lighter);
+  opacity: 1;
 }
 
-/* ------------------------------------------
-   Selection
-   ------------------------------------------ */
-
+/* Selection */
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-primary-foreground);
+  background-color: rgba(161, 161, 170, 0.2);
+  color: var(--color-silver-light);
 }
 
-/* ------------------------------------------
-   Focus Styles
-   ------------------------------------------ */
-
+/* Focus */
 :focus-visible {
   outline: 2px solid var(--color-ring);
   outline-offset: 2px;
 }
 
-/* ------------------------------------------
-   Scrollbar
-   ------------------------------------------ */
-
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-secondary);
+  background: var(--color-obsidian);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-muted-foreground);
-  border-radius: 9999px;
+  background: var(--color-steel);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
+  background: var(--color-silver);
 }
 
-/* ------------------------------------------
-   Utilities
-   ------------------------------------------ */
-
+/* Container */
 .container {
   width: 100%;
-  max-width: 80rem;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 @media (min-width: 1024px) {
@@ -284,101 +218,66 @@ a:hover {
   }
 }
 
-/* ------------------------------------------
-   Animations
-   ------------------------------------------ */
-
+/* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(161, 161, 170, 0.15); }
+  50% { box-shadow: 0 0 30px rgba(161, 161, 170, 0.25); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.4s ease forwards;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-down {
-  animation: slideDown 0.4s ease forwards;
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.3s ease forwards;
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ------------------------------------------
-   Stagger Animation Delays
-   ------------------------------------------ */
-
-.stagger-1 {
-  animation-delay: 0.1s;
-}
-.stagger-2 {
-  animation-delay: 0.2s;
-}
-.stagger-3 {
-  animation-delay: 0.3s;
-}
-.stagger-4 {
-  animation-delay: 0.4s;
-}
-.stagger-5 {
-  animation-delay: 0.5s;
-}
-.stagger-6 {
-  animation-delay: 0.6s;
+.animate-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
-/* ------------------------------------------
-   Skeleton Loading
-   ------------------------------------------ */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
 
+/* Skeleton Loading */
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-bg-secondary) 25%,
-    var(--color-border) 50%,
-    var(--color-bg-secondary) 75%
+    var(--color-elevated) 25%,
+    var(--color-surface) 50%,
+    var(--color-elevated) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
@@ -386,10 +285,73 @@ a:hover {
 }
 
 @keyframes skeleton-loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Premium Utility Classes */
+.text-gradient-silver {
+  background: linear-gradient(135deg, #e4e4e7, #a1a1aa, #71717a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(161, 161, 170, 0.4);
+}
+
+.card-premium {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-base);
+}
+
+.card-premium:hover {
+  border-color: var(--color-silver);
+  box-shadow: var(--shadow-glow-sm);
+  transform: translateY(-2px);
+}
+
+.border-silver {
+  border-color: var(--color-silver) !important;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #71717a, #52525b);
+  color: #fafafa;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-outline-premium {
+  background: transparent;
+  border: 2px solid var(--color-silver);
+  color: var(--color-silver);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline-premium:hover {
+  background: rgba(161, 161, 170, 0.1);
+  transform: translateY(-2px);
+}
+
+.surface-dark {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.surface-elevated {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
 }

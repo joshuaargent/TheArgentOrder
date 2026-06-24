@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen } from "lucide-react";
 
 interface FormationScores {
   faith_score: number;
