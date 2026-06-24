@@ -1260,3 +1260,371 @@ Discord is not the product.
 Brotherhood is the product.
 
 Discord is merely the tool that facilitates it.
+
+---
+
+# DISCORD BOT ARCHITECTURE
+
+Version: 1.0
+
+Status: Canonical Discord Architecture
+
+---
+
+## Purpose
+
+The Discord Bot is not a moderation bot.
+
+The Discord Bot is not a utility bot.
+
+The Discord Bot is not a fun bot.
+
+The Discord Bot is the operational layer of The Argent Order.
+
+Its purpose is to connect:
+
+Portal
+
+↓
+
+Formation
+
+↓
+
+Brotherhood
+
+↓
+
+Discord
+
+↓
+
+Leadership
+
+Every major member action should eventually flow through either:
+
+The Portal
+
+or
+
+The Bot
+
+---
+
+## Core Principles
+
+### Principle 1
+
+Discord is the Brotherhood Layer.
+
+Portal is the Formation Layer.
+
+---
+
+Discord handles:
+
+Conversation
+
+Brotherhood
+
+Accountability
+
+Discussion
+
+Events
+
+Prayer Requests
+
+Community
+
+---
+
+Portal handles:
+
+Campaigns
+
+Rule Of Life
+
+Formation
+
+Reviews
+
+Progress
+
+Projects
+
+Analytics
+
+---
+
+The bot synchronizes both worlds.
+
+---
+
+### Principle 2
+
+Discord is not the source of truth.
+
+The database is.
+
+The bot reads and writes to the platform.
+
+---
+
+Portal Database
+
+↓
+
+API
+
+↓
+
+Discord Bot
+
+↓
+
+Discord
+
+---
+
+Never allow Discord state to become the primary source.
+
+---
+
+### Principle 3
+
+The bot exists to create action.
+
+Not engagement.
+
+Not activity.
+
+Action.
+
+---
+
+## Technical Stack
+
+Language: TypeScript
+
+Framework: Discord.js
+
+Database: Supabase
+
+Hosting: Railway (Preferred) / Fly.io / VPS
+
+Logging: Sentry
+
+Monitoring: PostHog
+
+---
+
+## Architecture
+
+Discord
+
+↓
+
+Discord Bot
+
+↓
+
+Internal API
+
+↓
+
+Supabase
+
+↓
+
+Portal
+
+---
+
+## Bot Modules
+
+The bot consists of 10 major modules:
+
+1. Authentication
+2. Role Sync
+3. Formation
+4. Campaigns
+5. Pods
+6. Projects
+7. Events
+8. Prayer
+9. Leadership
+10. Administration
+
+---
+
+### Authentication Module
+
+Purpose: Link Discord account to Portal account.
+
+Flow:
+
+Member joins Discord → Runs /link → Receives secure code → Portal verifies code → Discord account linked → Roles synchronized
+
+Commands:
+
+/link /unlink /profile
+
+---
+
+### Role Sync Module
+
+Purpose: Keep Discord roles synchronized with portal state.
+
+Portal Rank → Discord Role
+
+Commands: /sync
+
+Automations: Role updates, nickname updates, welcome assignment
+
+---
+
+### Formation Module
+
+Purpose: Track formation actions directly from Discord.
+
+Commands:
+
+/pray /scripture /mass /rosary /checkin /examen
+
+Example:
+
+/pray Duration: 20 Type: Mental Prayer
+
+Creates: formation_event, analytics_event, xp_event
+
+---
+
+### Campaigns Module
+
+Purpose: Campaign participation through Discord.
+
+Commands:
+
+/campaign list /campaign join /campaign leave /campaign progress /campaign complete
+
+---
+
+### Pods Module
+
+Purpose: Run accountability pods.
+
+Commands:
+
+/pod /pod goals /pod wins /pod meeting /pod attendance /pod prayer
+
+Features: Weekly reminders, attendance tracking, meeting scheduling, goal tracking
+
+---
+
+### Projects Module
+
+Purpose: Builder Hall integration.
+
+Commands:
+
+/project create /project update /project milestone /project launch /project showcase
+
+---
+
+### Events Module
+
+Purpose: Manage community events.
+
+Commands:
+
+/event create /event join /event leave /event attendance
+
+Event Types: Rosary, Bible Study, Pod Meeting, Workshop, Builder Session, Q&A, Guest Speaker
+
+---
+
+### Prayer Module
+
+Purpose: Support spiritual life.
+
+Commands:
+
+/prayer request /prayer answered /prayer list
+
+Features: Prayer Wall, Prayer Tracking, Answered Prayer Archive, Pod Prayer Requests
+
+---
+
+### Leadership Module
+
+Purpose: Leadership operations.
+
+Commands:
+
+/leaderboard /member review /recommend promotion /pod health /community health
+
+Officer/Mentor/Steward Only permissions enforced.
+
+---
+
+### Administration Module
+
+Purpose: Moderation and operational control.
+
+Commands:
+
+/warn /mute /kick /ban /lockdown /announcement
+
+Audit logs required. Every action recorded.
+
+---
+
+## Required Channels
+
+Public:
+
+#welcome #rules #announcements #roll-call #general #faith-and-truth #prayer-requests #formation #campaigns #builder-hall #project-showcase #wins #resources #pod-lobbies #events #leadership #officer-hq
+
+Private Categories:
+
+Officer HQ, Mentor HQ, Steward HQ, Pod Voice Channels
+
+---
+
+## AI Assistants
+
+The bot includes AI assistants for:
+
+* AI Review Assistant
+* AI Formation Coach
+* AI Accountability Assistant
+* AI Project Coach
+* AI Rule Of Life Builder
+* AI Mentor Assistant
+
+AI assists. Leaders lead. Brothers support brothers. The Order remains fundamentally human.
+
+---
+
+## Final Principle
+
+The Discord Bot is not a chatbot.
+
+It is the operational nervous system of The Argent Order.
+
+Its job is to create:
+
+Prayer
+
+Discipline
+
+Brotherhood
+
+Building
+
+Leadership
+
+Action
+
+at scale.
