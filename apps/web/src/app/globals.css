@@ -1,6 +1,6 @@
 /* ============================================
-   Global Styles for The Argent Order
-   Catholic Formation Operating System for Builders
+   The Argent Order - Design System
+   Silver-Based Professional Theme
    ============================================ */
 
 @import "tailwindcss";
@@ -10,58 +10,75 @@
    ------------------------------------------ */
 
 @theme {
-  /* Colors - Light Mode (Default) */
-  --color-border: #e7e5e4;
-  --color-background: #fafaf9;
-  --color-foreground: #1c1917;
-  --color-primary: #6366f1;
-  --color-primary-foreground: #fafaf9;
-  --color-secondary: #f5f5f4;
-  --color-secondary-foreground: #1c1917;
-  --color-muted: #f5f5f4;
-  --color-muted-foreground: #78716c;
-  --color-accent: #f5f5f4;
-  --color-accent-foreground: #1c1917;
+  /* Silver-based Color System - Light Mode */
+  --color-border: #d1d5db;
+  --color-background: #f9fafb;
+  --color-foreground: #111827;
+  --color-primary: #6b7280;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e5e7eb;
+  --color-secondary-foreground: #374151;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #e5e7eb;
+  --color-accent-foreground: #111827;
   --color-destructive: #dc2626;
-  --color-destructive-foreground: #fafaf9;
-  --color-success: #16a34a;
-  --color-success-foreground: #fafaf9;
-  --color-warning: #eab308;
-  --color-warning-foreground: #1c1917;
-  --color-ring: #6366f1;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #059669;
+  --color-success-foreground: #ffffff;
+  --color-warning: #d97706;
+  --color-warning-foreground: #ffffff;
+  --color-ring: #6b7280;
   --color-card: #ffffff;
-  --color-card-foreground: #1c1917;
+  --color-card-foreground: #111827;
   --color-popover: #ffffff;
-  --color-popover-foreground: #1c1917;
-  --color-input: #e7e5e4;
+  --color-popover-foreground: #111827;
+  --color-input: #d1d5db;
 
-  /* Custom Argent Order Colors */
-  --color-faith: #6366f1;
-  --color-discipline: #f97316;
-  --color-brotherhood: #22c55e;
-  --color-building: #eab308;
-  --color-truth: #8b5cf6;
+  /* Five Pillars - Muted Metallic Tones */
+  --color-faith: #7c3aed;
+  --color-discipline: #ea580c;
+  --color-brotherhood: #059669;
+  --color-building: #ca8a04;
+  --color-truth: #0891b2;
 
-  /* Argent Order Specific */
-  --color-bg-primary: #fafaf9;
-  --color-bg-secondary: #f5f5f4;
+  /* Argent Order Silver Palette */
+  --color-silver-50: #f9fafb;
+  --color-silver-100: #f3f4f6;
+  --color-silver-200: #e5e7eb;
+  --color-silver-300: #d1d5db;
+  --color-silver-400: #9ca3af;
+  --color-silver-500: #6b7280;
+  --color-silver-600: #4b5563;
+  --color-silver-700: #374151;
+  --color-silver-800: #1f2937;
+  --color-silver-900: #111827;
+  --color-silver-950: #030712;
+
+  /* Backgrounds */
+  --color-bg-primary: #f9fafb;
+  --color-bg-secondary: #f3f4f6;
   --color-bg-card: #ffffff;
-  --color-text-primary: #1c1917;
-  --color-text-secondary: #57534e;
-  --color-text-muted: #a8a29e;
+  --color-bg-elevated: #ffffff;
+
+  /* Text */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
 
   /* Border Radius */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius: 0.375rem;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  /* Shadows - Subtle and Professional */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.02);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.06);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -70,46 +87,63 @@
 }
 
 /* ------------------------------------------
-   Dark Mode Colors (CSS Custom Properties)
+   Dark Mode - Refined Silver
    ------------------------------------------ */
 
 html.dark {
-  --color-border: #44403c;
-  --color-background: #0c0a09;
-  --color-foreground: #fafaf9;
-  --color-primary: #818cf8;
-  --color-primary-foreground: #0c0a09;
-  --color-secondary: #1c1917;
-  --color-secondary-foreground: #fafaf9;
-  --color-muted: #1c1917;
-  --color-muted-foreground: #a8a29e;
-  --color-accent: #1c1917;
-  --color-accent-foreground: #fafaf9;
+  --color-border: #374151;
+  --color-background: #030712;
+  --color-foreground: #f9fafb;
+  --color-primary: #9ca3af;
+  --color-primary-foreground: #030712;
+  --color-secondary: #1f2937;
+  --color-secondary-foreground: #f9fafb;
+  --color-muted: #111827;
+  --color-muted-foreground: #9ca3af;
+  --color-accent: #1f2937;
+  --color-accent-foreground: #f9fafb;
   --color-destructive: #f87171;
-  --color-destructive-foreground: #0c0a09;
-  --color-success: #4ade80;
-  --color-success-foreground: #0c0a09;
-  --color-warning: #facc15;
-  --color-warning-foreground: #0c0a09;
-  --color-ring: #818cf8;
-  --color-card: #1c1917;
-  --color-card-foreground: #fafaf9;
-  --color-popover: #1c1917;
-  --color-popover-foreground: #fafaf9;
-  --color-input: #44403c;
+  --color-destructive-foreground: #030712;
+  --color-success: #34d399;
+  --color-success-foreground: #030712;
+  --color-warning: #fbbf24;
+  --color-warning-foreground: #030712;
+  --color-ring: #9ca3af;
+  --color-card: #0f172a;
+  --color-card-foreground: #f9fafb;
+  --color-popover: #0f172a;
+  --color-popover-foreground: #f9fafb;
+  --color-input: #374151;
 
-  /* Argent Order Dark Mode */
-  --color-bg-primary: #0c0a09;
-  --color-bg-secondary: #1c1917;
-  --color-bg-card: #292524;
-  --color-text-primary: #fafaf9;
-  --color-text-secondary: #a8a29e;
-  --color-text-muted: #78716c;
+  /* Dark Mode Silver Palette */
+  --color-silver-50: #f9fafb;
+  --color-silver-100: #f3f4f6;
+  --color-silver-200: #e5e7eb;
+  --color-silver-300: #d1d5db;
+  --color-silver-400: #9ca3af;
+  --color-silver-500: #6b7280;
+  --color-silver-600: #4b5563;
+  --color-silver-700: #374151;
+  --color-silver-800: #1f2937;
+  --color-silver-900: #111827;
+  --color-silver-950: #030712;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  /* Dark Mode Backgrounds */
+  --color-bg-primary: #030712;
+  --color-bg-secondary: #0f172a;
+  --color-bg-card: #0f172a;
+  --color-bg-elevated: #1e293b;
+
+  /* Dark Mode Text */
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+
+  /* Dark Mode Shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.4);
 }
 
 /* ------------------------------------------

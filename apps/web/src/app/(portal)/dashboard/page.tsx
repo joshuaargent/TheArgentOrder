@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar, Sword } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap } from "lucide-react";
 
 interface FormationScores {
   faith_score: number;
@@ -25,11 +25,11 @@ interface DashboardData {
 }
 
 const PILLAR_CONFIG = [
-  { key: "faith_score", name: "Faith", icon: "✝️" },
-  { key: "discipline_score", name: "Discipline", icon: "⚔️" },
-  { key: "brotherhood_score", name: "Brotherhood", icon: "🤝" },
-  { key: "building_score", name: "Building", icon: "🏗️" },
-  { key: "truth_score", name: "Truth", icon: "📖" },
+  { key: "faith_score", name: "Faith", icon: Cross, color: "#7c3aed" },
+  { key: "discipline_score", name: "Discipline", icon: Dumbbell, color: "#ea580c" },
+  { key: "brotherhood_score", name: "Brotherhood", icon: Handshake, color: "#059669" },
+  { key: "building_score", name: "Building", icon: Hammer, color: "#ca8a04" },
+  { key: "truth_score", name: "Truth", icon: GraduationCap, color: "#0891b2" },
 ];
 
 export default function DashboardPage() {
@@ -216,9 +216,11 @@ export default function DashboardPage() {
         <div className="grid grid-cols-5 gap-4">
           {PILLAR_CONFIG.map((pillar) => (
             <div key={pillar.key} className="text-center">
-              <span className="text-3xl">{pillar.icon}</span>
-              <p className="text-xs text-muted-foreground mt-2">{pillar.name}</p>
-              <p className="font-semibold text-lg">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-silver-100 dark:bg-silver-800">
+                <pillar.icon className="h-5 w-5" style={{ color: pillar.color }} />
+              </div>
+              <p className="text-xs text-muted-foreground">{pillar.name}</p>
+              <p className="font-semibold text-lg text-foreground">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
             </div>
           ))}
         </div>
@@ -226,54 +228,54 @@ export default function DashboardPage() {
 
       {/* Stats Grid */}
       <div className="mb-8 grid gap-6 md:grid-cols-4">
-        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
           <div className="flex items-center gap-4">
             <div className="rounded-full bg-orange-500/10 p-3">
-              <Flame className="h-6 w-6 text-orange-500" />
+              <Flame className="h-5 w-5 text-orange-500" />
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Formation Streak</p>
-              <p className="text-2xl font-bold">{data.currentStreak} days</p>
+              <p className="text-2xl font-bold text-foreground">{data.currentStreak} days</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
           <div className="flex items-center gap-4">
             <div className="rounded-full bg-blue-500/10 p-3">
-              <Target className="h-6 w-6 text-blue-500" />
+              <Target className="h-5 w-5 text-blue-500" />
             </div>
             <div>
               <p className="text-sm text-muted-foreground">
                 Active Campaigns
               </p>
-              <p className="text-2xl font-bold">{data.activeCampaigns}</p>
+              <p className="text-2xl font-bold text-foreground">{data.activeCampaigns}</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
           <div className="flex items-center gap-4">
             <div className="rounded-full bg-yellow-500/10 p-3">
-              <Trophy className="h-6 w-6 text-yellow-500" />
+              <Trophy className="h-5 w-5 text-yellow-600" />
             </div>
             <div>
               <p className="text-sm text-muted-foreground">
                 Achievements
               </p>
-              <p className="text-2xl font-bold">{data.achievementsCount}</p>
+              <p className="text-2xl font-bold text-foreground">{data.achievementsCount}</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl border bg-card p-6 transition-all hover:shadow-md">
+        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
           <div className="flex items-center gap-4">
             <div className="rounded-full bg-purple-500/10 p-3">
-              <Calendar className="h-6 w-6 text-purple-500" />
+              <Calendar className="h-5 w-5 text-purple-500" />
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Next Pod Meeting</p>
-              <p className="text-2xl font-bold">{data.nextPodMeeting || "None"}</p>
+              <p className="text-2xl font-bold text-foreground">{data.nextPodMeeting || "None"}</p>
             </div>
           </div>
         </div>
@@ -281,67 +283,67 @@ export default function DashboardPage() {
 
       {/* Quick Actions & Active Campaigns */}
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-xl border bg-card p-6">
-          <h2 className="mb-4 text-lg font-semibold">Today's Formation</h2>
+        <div className="rounded-lg border border-silver-200 bg-card p-6 dark:border-silver-700">
+          <h2 className="mb-4 text-lg font-semibold text-foreground">Today's Formation</h2>
           <div className="space-y-3">
             <Link
               href="/formation"
-              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
             >
-              <span className="flex items-center gap-3">
-                <span className="text-xl">✝️</span> Log Prayer
+              <span className="flex items-center gap-3 text-foreground">
+                <Cross className="h-5 w-5 text-[#7c3aed]" /> Log Prayer
               </span>
               <span className="text-sm text-muted-foreground">+10 pts</span>
             </Link>
             <Link
               href="/formation"
-              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
             >
-              <span className="flex items-center gap-3">
-                <span className="text-xl">📖</span> Read Scripture
+              <span className="flex items-center gap-3 text-foreground">
+                <BookOpen className="h-5 w-5 text-[#0891b2]" /> Read Scripture
               </span>
               <span className="text-sm text-muted-foreground">+5 pts</span>
             </Link>
             <Link
               href="/examen"
-              className="flex items-center justify-between rounded-lg border p-4 transition-all hover:bg-accent hover:border-primary/20"
+              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
             >
-              <span className="flex items-center gap-3">
-                <span className="text-xl">💭</span> Complete Examen
+              <span className="flex items-center gap-3 text-foreground">
+                <Flame className="h-5 w-5 text-orange-500" /> Complete Examen
               </span>
               <span className="text-sm text-muted-foreground">+15 pts</span>
             </Link>
           </div>
         </div>
 
-        <div className="rounded-xl border bg-card p-6">
-          <h2 className="mb-4 text-lg font-semibold">Active Campaigns</h2>
+        <div className="rounded-lg border border-silver-200 bg-card p-6 dark:border-silver-700">
+          <h2 className="mb-4 text-lg font-semibold text-foreground">Active Campaigns</h2>
           {data.activeCampaigns > 0 ? (
             <div className="space-y-3">
-              <div className="rounded-lg border p-4">
-                <p className="font-medium">Campaign Progress</p>
+              <div className="rounded-lg border border-silver-200 p-4">
+                <p className="font-medium text-foreground">Campaign Progress</p>
                 <p className="text-sm text-muted-foreground">
                   {data.activeCampaigns} active campaign{data.activeCampaigns > 1 ? "s" : ""}
                 </p>
               </div>
               <Link
                 href="/campaigns"
-                className="block text-center text-sm text-primary hover:underline"
+                className="block text-center text-sm text-silver-600 hover:text-silver-800 dark:text-silver-400 dark:hover:text-silver-300"
               >
                 View Campaign Details
               </Link>
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="rounded-lg border p-4">
-                <p className="font-medium">No active campaigns</p>
+              <div className="rounded-lg border border-silver-200 p-4">
+                <p className="font-medium text-foreground">No active campaigns</p>
                 <p className="text-sm text-muted-foreground">
                   Join a campaign to start your journey
                 </p>
               </div>
               <Link
                 href="/campaigns"
-                className="block text-center text-sm text-primary hover:underline"
+                className="block text-center text-sm text-silver-600 hover:text-silver-800 dark:text-silver-400 dark:hover:text-silver-300"
               >
                 Browse Campaigns
               </Link>
