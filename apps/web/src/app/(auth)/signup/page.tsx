@@ -4,12 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
-import { Loader2, Sword, Mail, Lock, User, CheckCircle } from "lucide-react";
+import { Loader2, Sword, Mail, Lock, CheckCircle, Shield } from "lucide-react";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -20,16 +19,9 @@ export default function SignupPage() {
     setLoading(true);
     const supabase = createClient();
 
-    if (!displayName.trim()) {
-      setError("Display name is required");
-      setLoading(false);
-      return;
-    }
-
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { display_name: displayName } },
     });
 
     if (error) {
@@ -52,10 +44,13 @@ export default function SignupPage() {
             <div className="w-20 h-20 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-6 animate-float">
               <CheckCircle className="h-10 w-10 text-green-500" />
             </div>
-            <h1 className="text-2xl font-bold mb-4">Check Your Email</h1>
+            <h1 className="text-2xl font-bold mb-4">You're In</h1>
             <p className="text-muted-foreground mb-6">
-              We sent a confirmation link to <strong className="text-foreground">{email}</strong>.
-              Click the link to activate your account and begin your formation journey.
+              Check your email at <strong className="text-foreground">{email}</strong>.
+              Click the link to activate your account.
+            </p>
+            <p className="text-sm text-muted-foreground/70 mb-6">
+              After activation, you'll receive onboarding instructions to begin your formation journey.
             </p>
             <Link href="/login" className="text-primary hover:underline font-medium">
               Back to Login
@@ -80,9 +75,9 @@ export default function SignupPage() {
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 animate-float">
               <Sword className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold mb-2">Join The Argent Order</h1>
+            <h1 className="text-2xl font-bold mb-2">Create Your Account</h1>
             <p className="text-sm text-muted-foreground">
-              Begin your journey of Catholic formation
+              Join the brotherhood and begin your formation
             </p>
           </div>
 
@@ -92,24 +87,6 @@ export default function SignupPage() {
                 {error}
               </div>
             )}
-
-            <div className="space-y-2">
-              <label htmlFor="displayName" className="block text-sm font-medium text-foreground">
-                Display Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  id="displayName"
-                  type="text"
-                  value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-background/50 pl-12 pr-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="Brother Michael"
-                  required
-                />
-              </div>
-            </div>
 
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm font-medium text-foreground">
@@ -147,6 +124,13 @@ export default function SignupPage() {
                 />
               </div>
               <p className="text-xs text-muted-foreground">Minimum 8 characters</p>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+              <Shield className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-muted-foreground">
+                After signup, you'll receive onboarding instructions to begin your 72-hour formation activation.
+              </p>
             </div>
 
             <Button type="submit" className="w-full btn-elegant h-12" disabled={loading}>

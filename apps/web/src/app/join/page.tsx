@@ -17,7 +17,8 @@ import {
   Zap,
   Star,
   Lock,
-  ChevronDown
+  ChevronDown,
+  Mail
 } from "lucide-react";
 
 export default function JoinPage() {
@@ -165,44 +166,40 @@ export default function JoinPage() {
           <div className="w-24 h-24 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-float">
             <CheckCircle className="h-12 w-12 text-green-500" />
           </div>
-          <h1 className="text-4xl font-bold mb-4">Request Received</h1>
+          <h1 className="text-4xl font-bold mb-4">You're In</h1>
           <p className="text-muted-foreground text-lg mb-4">
-            Check your email for next steps. We'll guide you through the process.
+            Check your email. You'll receive next steps to continue.
           </p>
           <p className="text-sm text-muted-foreground mb-8">
-            If this is for you, you'll receive an invitation within 48 hours.
+            If this is for you, we'll guide you through the process.
           </p>
           
-          <button 
-            onClick={() => setShowSuccessDetails(!showSuccessDetails)}
-            className="text-sm text-primary hover:underline flex items-center gap-2 mx-auto mb-6"
-          >
-            What happens next?
-            <ChevronDown className={`h-4 w-4 transition-transform ${showSuccessDetails ? 'rotate-180' : ''}`} />
-          </button>
-          
-          {showSuccessDetails && (
-            <div className="text-left glass-card p-6 space-y-4 text-sm animate-slide-up">
+          <div className="glass-card p-6 text-left text-sm animate-slide-up">
+            <h3 className="font-bold mb-4 flex items-center gap-2">
+              <Mail className="h-4 w-4" />
+              What Happens Next
+            </h3>
+            <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold">1</span>
                 </div>
-                <p><strong>Review:</strong> We review your application (24-48 hours)</p>
+                <p><strong>Check your email</strong> for formation resources and guidance</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold">2</span>
                 </div>
-                <p><strong>Invite:</strong> If accepted, you'll receive a Discord invite and onboarding instructions</p>
+                <p><strong>Email sequence</strong> with truth exposure and identity shift content</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold">3</span>
                 </div>
-                <p><strong>Onboarding:</strong> Complete 72-hour activation process to become a full member</p>
+                <p><strong>Invitation</strong> to join our brotherhood and complete 72-hour activation</p>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </main>
     );
@@ -435,27 +432,18 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* CTA - Application Form */}
+      {/* CTA - Email Capture (Funnel Step per Documentation) */}
       <section id="get-started" className="py-24 px-4 relative">
         <div className="max-w-lg mx-auto relative z-10">
           <div className="glass-card p-8 md:p-10 text-center overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-primary/10 blur-3xl" />
             <div className="relative">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Apply for Membership</h2>
-              <p className="text-muted-foreground text-sm mb-8">If you're serious, tell us a bit about yourself.</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Get Started</h2>
+              <p className="text-muted-foreground text-sm mb-6">
+                Enter your email to receive next steps. We'll guide you through the process.
+              </p>
               
               <form onSubmit={handleSubmit} className="space-y-4 text-left">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Your Name</label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="First name is fine"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Your Email</label>
                   <input
@@ -474,14 +462,14 @@ export default function JoinPage() {
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Submit Application <ArrowRight className="h-4 w-4" />
+                      Get Next Steps <ArrowRight className="h-4 w-4" />
                     </span>
                   )}
                 </Button>
               </form>
               
               <p className="text-xs text-muted-foreground/60 mt-6">
-                We'll review your application and respond within 48 hours if you're a fit.
+                No spam. Just formation guidance. Unsubscribe anytime.
               </p>
             </div>
           </div>

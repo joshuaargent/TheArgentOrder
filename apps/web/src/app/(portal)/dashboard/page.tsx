@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen, ArrowRight, Plus } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen, ArrowRight, Plus, Shield, Crown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface FormationScores {
@@ -32,6 +32,8 @@ const PILLAR_CONFIG = [
   { key: "building_score", name: "Building", icon: Hammer, color: "#eab308", glowClass: "glow-building" },
   { key: "truth_score", name: "Truth", icon: GraduationCap, color: "#06b6d4", glowClass: "glow-truth" },
 ];
+
+const RANK_PROGRESSION = ["Initiate", "Brother", "Veteran", "Captain", "Officer", "Mentor", "Steward"];
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData>({
@@ -186,14 +188,15 @@ export default function DashboardPage() {
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Sword className="h-5 w-5 text-primary" />
             </div>
-            Formation Dashboard
+            Command Center
           </h1>
           <p className="text-muted-foreground mt-1">
-            Track your progress across all five pillars
+            Execute your formation. Every day counts.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20">
+          <span className="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20 flex items-center gap-2">
+            <Crown className="h-4 w-4" />
             {data.rank}
           </span>
         </div>
@@ -207,11 +210,12 @@ export default function DashboardPage() {
         <div className="relative">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Overall Formation Score</p>
+              <p className="text-sm text-muted-foreground mb-1">Formation Score</p>
               <div className="flex items-baseline gap-3">
                 <p className="text-6xl font-bold text-foreground">{data.formationScores.overall_score || 0}</p>
                 <span className="text-muted-foreground">points</span>
               </div>
+              <p className="text-xs text-muted-foreground/70 mt-2">Earn points through daily execution. Unlock leadership progression.</p>
             </div>
             
             <div className="flex items-center gap-4">

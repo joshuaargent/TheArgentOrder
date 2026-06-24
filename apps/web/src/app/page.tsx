@@ -16,7 +16,10 @@ import {
   Swords,
   CheckCircle,
   Star,
-  Zap
+  Zap,
+  AlertTriangle,
+  Lock,
+  Crown
 } from "lucide-react";
 
 export default function HomePage() {
@@ -29,9 +32,15 @@ export default function HomePage() {
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 bottom-0 left-1/3" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section - Hook & Identity */}
       <section className="relative mx-auto max-w-5xl px-4 pt-32 pb-24 text-center">
         <div className="hero-glow" />
+        
+        {/* Filter Notice */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm text-muted-foreground mb-8">
+          <Lock className="h-4 w-4" />
+          <span>Selective Brotherhood. Not everyone who applies is accepted.</span>
+        </div>
         
         {/* Logo - Premium Silver Cross */}
         <div className="mb-10 flex justify-center animate-float">
@@ -47,51 +56,74 @@ export default function HomePage() {
           </div>
         </div>
         
+        {/* Core Identity Statement */}
         <h1 className="mb-6 text-display text-foreground">
           The Argent Order
         </h1>
+        
+        {/* Specific Positioning */}
         <p className="mx-auto mb-6 max-w-2xl text-xl md:text-2xl text-muted-foreground font-medium">
-          Catholic Formation Operating System for Builders
+          The Catholic brotherhood for men who build.
         </p>
-        <p className="mx-auto mb-12 max-w-xl text-lg text-muted-foreground/80">
-          A brotherhood of men pursuing faith, discipline, and excellence through daily habits, accountability, and building things that matter.
+        
+        <p className="mx-auto mb-8 max-w-xl text-lg text-muted-foreground/80">
+          Not a community. Not a course. A formation system that transforms men who show up into men who lead.
         </p>
+        
         <div className="flex gap-4 justify-center flex-wrap">
-          <Link href="/signup">
+          <Link href="/join">
             <Button size="lg" className="btn-elegant gap-2 px-8 h-12 text-base">
-              Join The Order <ArrowRight className="h-5 w-5" />
+              Apply for Membership <ArrowRight className="h-5 w-5" />
             </Button>
           </Link>
-          <Link href="/mission">
+          <Link href="/join#how-it-works">
             <Button variant="outline" size="lg" className="border-border/50 text-foreground hover:bg-accent/50 h-12 px-8 text-base">
-              Learn More
+              See How It Works
             </Button>
           </Link>
         </div>
+      </section>
 
-        {/* Stats Row */}
-        <div className="mt-20 flex flex-wrap justify-center gap-8 md:gap-16">
-          {[
-            { value: '5', label: 'Pillars of Formation' },
-            { value: '100%', label: 'Action-Oriented' },
-            { value: '30+', label: 'Days to Habit' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center stagger-item">
-              <p className="text-3xl md:text-4xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
-            </div>
-          ))}
+      {/* Problem Statement - Confrontation */}
+      <section className="mx-auto max-w-4xl px-4 py-24 bg-card/30">
+        <div className="text-center mb-12">
+          <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Problem</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4">Most Men Are Exactly Where They Don't Want to Be</h2>
+        </div>
+        
+        <div className="space-y-6">
+          <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
+            <AlertTriangle className="h-6 w-6 text-red-500/70 flex-shrink-0 mt-1" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              You <span className="text-foreground font-semibold">know</span> you should be doing more. Prayer. Exercise. Building. Reading. Leading.
+            </p>
+          </div>
+          
+          <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
+            <AlertTriangle className="h-6 w-6 text-yellow-500/70 flex-shrink-0 mt-1" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              But <span className="text-foreground font-semibold">no one is holding you accountable</span>. Your friends don't challenge you. Your job doesn't require your best.
+            </p>
+          </div>
+          
+          <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
+            <AlertTriangle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+            <p className="text-lg text-foreground font-semibold leading-relaxed">
+              And in 10 years, you'll either be the man you were meant to be—or you'll have excuses.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Pillars Section */}
       <section className="mx-auto max-w-6xl px-4 py-24">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Five Pillars of Formation
+          <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The System</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
+            Five Pillars of Transformation
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Every member is formed in these five areas. Progress in each pillar builds a man who is faithful, disciplined, and useful.
+            Every member is formed in these five areas. Mastery in all five produces men who lead.
           </p>
         </div>
         
@@ -119,14 +151,68 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Who This Is For / Not For */}
+      <section className="mx-auto max-w-5xl px-4 py-24">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* This IS for */}
+          <div className="glass-card p-8 border-green-500/20">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+              </div>
+              <h3 className="text-xl font-bold">This Is For Men Who...</h3>
+            </div>
+            <ul className="space-y-3">
+              {[
+                "Want faith, discipline, and brotherhood—not just community",
+                "Are ready to be held accountable—really held accountable",
+                "Want to build something that outlasts them",
+                "Accept that discipline is not optional",
+                "Are ready to show up every single day"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                  <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* This is NOT for */}
+          <div className="glass-card p-8 border-red-500/20">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                <Crown className="h-5 w-5 text-red-500" />
+              </div>
+              <h3 className="text-xl font-bold">This Is NOT For Men Who...</h3>
+            </div>
+            <ul className="space-y-3">
+              {[
+                "Want to consume content without commitment",
+                "Believe they don't need accountability",
+                "Are looking for a social club or hobby community",
+                "Want instant results without consistent work",
+                "Are not serious about their Catholic faith"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                  <Crown className="h-5 w-5 text-red-500/70 flex-shrink-0 mt-0.5" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="mx-auto max-w-6xl px-4 py-24">
+      <section className="mx-auto max-w-6xl px-4 py-24 bg-card/30">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Built for Men Who Build
+          <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Tools</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
+            Built for Formation, Not Entertainment
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Every feature is designed to drive action, not consumption.
+            Every feature drives action. Nothing wastes your time.
           </p>
         </div>
         
@@ -134,38 +220,38 @@ export default function HomePage() {
           {[
             {
               icon: Flame,
-              title: "Formation Tracking",
-              description: "Daily habits, streaks, and progress across all five pillars. Know exactly where you stand.",
+              title: "Formation Dashboard",
+              description: "Track your growth across all five pillars. See what's working. See what's not.",
               color: '#a855f7'
             },
             {
               icon: Users,
-              title: "Brotherhood",
-              description: "Pods of 4-6 men who hold each other accountable. Weekly meetings. Real relationships.",
+              title: "Accountability Pods",
+              description: "Groups of 4-6 men who hold you accountable. Weekly meetings. Real consequences.",
               color: '#22c55e'
             },
             {
               icon: Target,
               title: "Campaigns",
-              description: "Structured 30-day journeys that transform knowledge into action and action into habits.",
+              description: "90-day structured challenges that transform knowledge into habits.",
               color: '#ef4444'
             },
             {
               icon: BookOpen,
               title: "Rule of Life",
-              description: "Build your personal rule of life. Daily execution system that drives consistent growth.",
+              description: "Build your personal operating system. Execute daily. Build permanently.",
               color: '#06b6d4'
             },
             {
               icon: Shield,
               title: "Leadership Pipeline",
-              description: "From Initiate to Steward. Clear path for those who prove themselves through action.",
+              description: "From Initiate to Steward. Earn leadership through proven action.",
               color: '#eab308'
             },
             {
               icon: Swords,
               title: "Builder Hall",
-              description: "Ship projects. Get accountability. Build things that outlast you. This is where builders are made.",
+              description: "Ship projects. Get accountability. Build things that outlast you.",
               color: '#f97316'
             },
           ].map((feature, index) => (
@@ -188,13 +274,14 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="mx-auto max-w-4xl px-4 py-24">
+      <section id="how-it-works" className="mx-auto max-w-4xl px-4 py-24">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            How It Works
+          <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Path</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
+            How Transformation Happens
           </h2>
           <p className="text-muted-foreground">
-            Getting started takes minutes. Transformation takes commitment.
+            Structure creates what motivation cannot.
           </p>
         </div>
 
@@ -204,9 +291,11 @@ export default function HomePage() {
           
           <div className="space-y-12 md:space-y-16">
             {[
-              { step: 1, title: "Join the Order", desc: "Create your account and join a brotherhood of men committed to growth.", icon: Star },
-              { step: 2, title: "Build Your Rule", desc: "Craft your personal rule of life with daily habits across all five pillars.", icon: CheckCircle },
-              { step: 3, title: "Execute Daily", desc: "Log your progress every day. Track streaks. Watch your formation grow.", icon: Zap },
+              { step: 1, title: "Apply & Get Accepted", desc: "Tell us who you are. If you're serious and aligned, you'll receive an invitation within 48 hours.", icon: Shield },
+              { step: 2, title: "Build Your Rule of Life", desc: "In the first 72 hours, create your personal operating system with daily habits across all five pillars.", icon: BookOpen },
+              { step: 3, title: "Join a Pod", desc: "Get assigned to a group of 5 men who will hold you accountable—men who won't let you quit.", icon: Users },
+              { step: 4, title: "Execute Daily", desc: "Log your progress. Track streaks. Pod meetings every week. Campaigns every 90 days.", icon: Zap },
+              { step: 5, title: "Lead Others", desc: "Prove yourself through action. Become a Captain. Mentor new members. Multiply impact.", icon: Crown },
             ].map((item, i) => (
               <div key={i} className="flex flex-col md:flex-row items-center gap-6 stagger-item" style={{ animationDelay: `${i * 0.15}s` }}>
                 <div className={`flex-shrink-0 w-16 h-16 rounded-2xl glass flex items-center justify-center ${i % 2 === 1 ? 'md:order-2' : ''}`}>
@@ -233,14 +322,17 @@ export default function HomePage() {
           
           <div className="relative">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Ready to Build?
+              Ready to Become the Man You Were Called to Be?
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg">
-              Join a brotherhood of men committed to faith, discipline, and building things that matter.
+            <p className="text-muted-foreground max-w-xl mx-auto mb-6 text-lg">
+              This is not for tourists. Apply only if you mean it.
             </p>
-            <Link href="/signup">
+            <p className="text-sm text-muted-foreground/70 mb-10">
+              If you're serious about faith, discipline, brotherhood, and building something that matters—apply below.
+            </p>
+            <Link href="/join">
               <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg">
-                Begin Your Journey <ArrowRight className="h-5 w-5" />
+                Apply for Membership <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
           </div>

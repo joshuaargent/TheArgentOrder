@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Sword, Mail, Lock } from "lucide-react";
+import { Loader2, Sword, Mail, Lock, Flame } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default function LoginPage() {
@@ -59,9 +59,9 @@ export default function LoginPage() {
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 animate-float">
               <Sword className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold mb-2">Welcome Back</h1>
+            <h1 className="text-2xl font-bold mb-2">Welcome Back, Brother</h1>
             <p className="text-sm text-muted-foreground">
-              Sign in to continue your formation journey
+              Sign in to continue your formation
             </p>
           </div>
 
@@ -117,7 +117,9 @@ export default function LoginPage() {
                   Signing in...
                 </>
               ) : (
-                "Sign In"
+                <>
+                  Sign In <Flame className="ml-2 h-4 w-4" />
+                </>
               )}
             </Button>
           </form>
@@ -130,9 +132,9 @@ export default function LoginPage() {
 
           <div className="mt-6 pt-6 border-t border-border/50 text-center">
             <p className="text-sm text-muted-foreground">
-              Don't have an account?{" "}
-              <Link href="/signup" className="text-primary hover:underline font-medium">
-                Sign up
+              Not yet a member?{" "}
+              <Link href="/join" className="text-primary hover:underline font-medium">
+                Join The Order
               </Link>
             </p>
           </div>
