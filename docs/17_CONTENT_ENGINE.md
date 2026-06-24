@@ -2,7 +2,7 @@
 
 ## Content Engine
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Growth System
 
@@ -978,7 +978,7 @@ Leaders build the future.
 
 # CONTENT ACQUISITION SYSTEM
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Growth Engine
 
@@ -1155,7 +1155,7 @@ Not measured by: views, likes, shares, impressions
 
 # GROWTH ENGINE
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Acquisition & Expansion System
 

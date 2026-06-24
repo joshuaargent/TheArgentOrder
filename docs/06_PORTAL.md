@@ -1,7 +1,7 @@
 # The Argent Order
 ## Portal Specification
 
-Version: 1.0
+Version: 2.0
 
 ---
 
@@ -69,7 +69,7 @@ Formation
 
 Brotherhood
 
-Builder Hall
+🛠️ WORKSHOP
 
 Journal
 
@@ -471,7 +471,7 @@ Only meaningful updates.
 
 ---
 
-# Builder Hall
+# WORKSHOP
 
 Purpose:
 
@@ -909,7 +909,7 @@ If the answer is no, the feature should not exist.
 
 # PORTAL PRODUCT SPECIFICATION
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Product Architecture
 

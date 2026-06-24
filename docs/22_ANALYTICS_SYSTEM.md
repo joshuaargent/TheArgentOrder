@@ -2,7 +2,7 @@
 
 ## Analytics System
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Measurement Framework
 

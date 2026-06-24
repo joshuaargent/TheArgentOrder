@@ -2,7 +2,7 @@
 
 ## Rule Of Life Library
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Formation System
 
@@ -800,7 +800,7 @@ A man who follows a sound Rule Of Life for years will become radically different
 
 # CAMPAIGN LIBRARY
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Formation Curriculum
 
@@ -882,7 +882,7 @@ Daily Tasks: 3 hours deep work, Project progress update, Ship something weekly
 
 Milestone: MVP or working project by end
 
-Reward: Builder Hall recognition
+Reward: 🛠️ WORKSHOP recognition
 
 ---
 
@@ -992,7 +992,7 @@ Campaigns are pressure systems that exist to force transformation through repeti
 
 # CERTIFICATION LIBRARY
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Certification & Progression Framework
 
@@ -1097,7 +1097,7 @@ Recognize productive creation (Developers, Entrepreneurs, Creators, Builders)
 
 Requirements: Active project, Public launch, Project documentation
 
-Unlocks: Builder Hall recognition
+Unlocks: 🛠️ WORKSHOP recognition
 
 ---
 

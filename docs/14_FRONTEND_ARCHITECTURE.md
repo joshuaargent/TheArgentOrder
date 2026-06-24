@@ -2,7 +2,7 @@
 
 ## Frontend Architecture
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Portal Architecture
 
@@ -178,7 +178,7 @@ Campaigns
 
 Brotherhood
 
-Builder Hall
+🛠️ WORKSHOP
 
 Journal
 
@@ -246,7 +246,7 @@ Campaigns
 
 Brotherhood
 
-Builder Hall
+🛠️ WORKSHOP
 
 Journal
 
@@ -611,7 +611,7 @@ Growth Areas
 
 ---
 
-# Builder Hall
+# 🛠️ WORKSHOP
 
 Purpose
 
@@ -888,7 +888,7 @@ Campaigns
 
 Brotherhood
 
-Builder Hall
+🛠️ WORKSHOP
 ```
 
 ---

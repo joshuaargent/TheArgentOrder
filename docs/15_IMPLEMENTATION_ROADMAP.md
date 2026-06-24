@@ -2,7 +2,7 @@
 
 ## Implementation Roadmap
 
-Version: 1.0
+Version: 2.0
 
 Status: Master Build Order
 
@@ -317,7 +317,7 @@ Must show:
 
 ---
 
-## 5.6 Builder Hall UI
+## 5.6 🛠️ WORKSHOP UI
 
 * Projects
 * Milestones
@@ -486,7 +486,7 @@ The goal is a formation engine that produces disciplined men who act.
 
 # DEPLOYMENT ARCHITECTURE
 
-Version: 1.0
+Version: 2.0
 
 Status: Production Infrastructure Blueprint
 
@@ -677,7 +677,7 @@ Large Scale (10,000+): Dedicated API, Dedicated Worker Cluster, Read Replicas, A
 
 Infrastructure: Domain, SSL, DNS, Database, Bot, Monitoring
 
-Application: Authentication, Dashboard, Formation, Campaigns, Builder Hall, Brotherhood
+Application: Authentication, Dashboard, Formation, Campaigns, 🛠️ WORKSHOP, Brotherhood
 
 Operations: Discord, Email, Analytics, Moderation
 

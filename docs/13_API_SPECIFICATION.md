@@ -2,7 +2,7 @@
 
 ## API Specification
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical API Architecture
 
@@ -528,7 +528,7 @@ POST /api/mentorship/review
 
 ---
 
-# Builder Hall Endpoints
+# 🛠️ WORKSHOP Endpoints
 
 ## Create Project
 

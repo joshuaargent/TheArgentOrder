@@ -2,7 +2,7 @@
 
 ## Yearly Operating Plan
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical System Deployment Timeline
 

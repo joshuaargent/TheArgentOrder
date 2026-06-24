@@ -1,7 +1,7 @@
 # The Argent Order
 ## Discord Specification
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Community Architecture
 
@@ -1377,7 +1377,7 @@ Discord is merely the tool that facilitates it.
 
 # DISCORD BOT ARCHITECTURE
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Discord Architecture
 
@@ -1636,7 +1636,7 @@ Features: Weekly reminders, attendance tracking, meeting scheduling, goal tracki
 
 ### Projects Module
 
-Purpose: Builder Hall integration.
+Purpose: 🛠️ WORKSHOP integration.
 
 Commands:
 

@@ -2,7 +2,7 @@
 
 ## Founder Playbook
 
-Version: 1.0
+Version: 2.0
 
 Status: Canonical Execution Manual for Founder
 

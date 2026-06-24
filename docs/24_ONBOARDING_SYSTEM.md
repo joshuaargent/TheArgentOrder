@@ -4,7 +4,8 @@
 
 Version: 2.0
 
-Status: **Optimized** - Simplified OAuth Flow
+Status: Optimized (v2.0)
+Last Updated: 2026-06-24 - Simplified OAuth Flow
 
 ---
 

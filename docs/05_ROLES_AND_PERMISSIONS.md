@@ -1,7 +1,7 @@
 # The Argent Order
 ## Roles & Permissions
 
-Version: 1.0
+Version: 2.0
 
 ---
 
@@ -97,7 +97,7 @@ Visitor
 
 ---
 
-**Note on "Founder":** The "Founder" is not a formation rank. The Founder is the originator of the Order who operates outside the formation hierarchy. The Founder's role is described in the Founder Playbook (see 29_FOUNDER_PLAYBOOK.md). The Founder's evolution follows the path: Builder → Operator → Architect → Steward. At the Steward level, the Founder becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
+**Note on "Founder":** The "Founder" is not a formation rank. The Founder is the originator of the Order who operates outside the formation hierarchy. The Founder's role is described in the Founder Playbook (see 21_FOUNDER_PLAYBOOK.md). The Founder's evolution follows the path: Builder → Operator → Architect → Steward. At the Steward level, the Founder becomes indistinguishable from other Stewards in terms of rank and authority within the formation system.
 
 ---
 
@@ -105,11 +105,17 @@ Visitor
 
 ## Purpose
 
-Exploring the Order.
+Edge case only.
 
-No commitments.
+Visitor role is for those who join Discord directly without going through the OAuth flow. In normal operations, everyone should enter via OAuth and receive the **Initiate** role automatically.
 
-No responsibilities.
+---
+
+## When Visitor Exists
+
+- Bot setup/testing
+- Direct Discord joins (without OAuth invite)
+- Edge cases where OAuth fails
 
 ---
 
@@ -117,10 +123,7 @@ No responsibilities.
 
 View:
 
-- Welcome
-- Mission
-- Constitution
-- FAQ
+- WELCOME category (welcome, mission, constitution, faq)
 
 Nothing else.
 
@@ -128,7 +131,7 @@ Nothing else.
 
 ## Goal
 
-Become an Initiate.
+Become an Initiate via OAuth flow.
 
 ---
 
@@ -136,18 +139,27 @@ Become an Initiate.
 
 ## Purpose
 
+**The default entry role.**
+
 Learning the culture.
 
 Beginning formation.
 
 ---
 
+## How You Become One
+
+OAuth flow (automatic) → Initiate role assigned → Dashboard access
+
+**No manual steps required.**
+
+---
+
 ## Requirements
 
-- Join Portal
-- Join Discord
-- Read Constitution
-- Complete Introduction
+- Complete OAuth authorization
+- Accept community standards
+- Introduce yourself in #introductions
 
 ---
 
@@ -155,11 +167,15 @@ Beginning formation.
 
 Access:
 
-- Chapel
-- Barracks
-- Introductions
+- WELCOME category
+- ⚡ FORGE (daily discipline)
+- 🙏 CHAPEL (faith)
+- 🔥 PODS (brotherhood)
+- 🛠️ WORKSHOP (building)
+- 📖 FORUM (truth)
+- 🎯 COMMAND (announcements)
 
-Limited posting rights.
+Limited posting rights initially.
 
 No leadership responsibilities.
 
@@ -167,9 +183,10 @@ No leadership responsibilities.
 
 ## Expectations
 
-- Daily check-ins
-- First campaign
-- Pod assignment
+- Daily #roll-call check-ins
+- First campaign within 7 days
+- Pod assignment (automatic)
+- First #ship-log entry within 7 days
 
 ---
 
@@ -601,7 +618,7 @@ Final authority
 VISITOR
 
 Read:
-- Gatehouse
+- WELCOME category only
 
 Write:
 - None
@@ -611,13 +628,18 @@ Write:
 INITIATE
 
 Read:
-- Gatehouse
-- Chapel
-- Barracks
+- WELCOME
+- ⚡ FORGE
+- 🙏 CHAPEL
+- 🔥 PODS
+- 🛠️ WORKSHOP
+- 📖 FORUM
+- 🎯 COMMAND
 
 Write:
-- Introductions
-- Roll Call
+- #introductions
+- #roll-call
+- Other member channels
 
 ---
 
@@ -648,6 +670,7 @@ Additional:
 
 - Pod Channel Management
 - Event Scheduling
+- 🔥 PODS leadership areas
 
 ---
 
@@ -658,6 +681,7 @@ Additional:
 - Timeout Members
 - Manage Messages
 - Moderate Channels
+- 🔒 OPS category access
 
 ---
 
