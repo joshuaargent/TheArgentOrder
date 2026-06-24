@@ -414,7 +414,7 @@ assigned_at
 RULE OF LIFE DOMAIN
 ====================================================
 
-# rule_of_life
+# rules_of_life
 
 id
 
@@ -425,6 +425,90 @@ version
 active
 
 created_at
+
+updated_at
+
+---
+
+# formation_pillars
+
+id
+
+name
+
+slug
+
+description
+
+icon
+
+color
+
+sort_order
+
+---
+
+# formation_milestones
+
+id
+
+name
+
+slug
+
+description
+
+pillar
+
+requirement_type
+
+requirement_value
+
+points
+
+icon
+
+---
+
+# user_formation_milestones
+
+id
+
+user_id
+
+milestone_id
+
+achieved_at
+
+---
+
+# examen_entries
+
+id
+
+user_id
+
+went_well
+
+failed
+
+saw_god
+
+improve_tomorrow
+
+created_at
+
+---
+
+# formation_snapshots
+
+id
+
+user_id
+
+snapshot_date
+
+data
 
 ---
 
@@ -648,6 +732,52 @@ ended_at
 
 ---
 
+# leadership_reviews
+
+id
+
+reviewer_id
+
+reviewee_id
+
+period_start
+
+period_end
+
+strengths
+
+areas_for_growth
+
+rating
+
+created_at
+
+---
+
+# promotion_recommendations
+
+id
+
+recommender_id
+
+candidate_id
+
+current_rank
+
+recommended_rank
+
+reason
+
+status
+
+reviewed_by
+
+reviewed_at
+
+created_at
+
+---
+
 ====================================================
 JOURNAL DOMAIN
 ====================================================
@@ -866,6 +996,26 @@ completed_at
 
 ---
 
+# project_showcases
+
+id
+
+user_id
+
+title
+
+description
+
+image_url
+
+demo_url
+
+repo_url
+
+created_at
+
+---
+
 ====================================================
 XP DOMAIN
 ====================================================
@@ -1031,6 +1181,22 @@ event_type
 payload
 
 processed
+
+created_at
+
+---
+
+# discord_link_codes
+
+id
+
+code
+
+user_id
+
+expires_at
+
+used
 
 created_at
 
