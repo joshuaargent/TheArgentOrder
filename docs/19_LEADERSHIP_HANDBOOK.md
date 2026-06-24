@@ -833,3 +833,156 @@ It is about responsibility.
 The best leader is not the most visible.
 
 The best leader is the man who quietly develops other men, protects the mission, and leaves the institution stronger than he found it.
+
+---
+
+# Leadership Evaluation Model
+
+Leadership is evaluated across 5 dimensions:
+
+---
+
+## 1. CONSISTENCY
+
+Do they show up without external pressure?
+
+---
+
+## 2. RESPONSIBILITY
+
+Do they take ownership of outcomes?
+
+---
+
+## 3. DISCIPLINE
+
+Do they live the system they enforce?
+
+---
+
+## 4. INFLUENCE
+
+Do others improve around them?
+
+---
+
+## 5. STABILITY
+
+Do they remain effective under stress?
+
+---
+
+# Leadership Failure Modes
+
+---
+
+## 1. AUTHORITY WITHOUT DISCIPLINE
+
+Leaders who enforce rules they do not follow.
+
+Fix:
+Immediate demotion or retraining.
+
+---
+
+## 2. SOFT LEADERSHIP
+
+Avoidance of correction.
+
+Fix:
+Structured accountability training.
+
+---
+
+## 3. CONTROL BEHAVIOUR
+
+Over-managing members.
+
+Fix:
+Shift to formation-based leadership.
+
+---
+
+## 4. INCONSISTENCY
+
+Unreliable leadership presence.
+
+Fix:
+Return to Veteran level.
+
+---
+
+# Training System
+
+Leadership is trained through:
+
+---
+
+## 1. OBSERVATION PHASE
+
+* shadowing higher leaders
+* attending leadership calls
+
+---
+
+## 2. CONTROLLED RESPONSIBILITY
+
+* managing small pods
+* limited scope authority
+
+---
+
+## 3. FULL RESPONSIBILITY
+
+* independent pod leadership
+* accountability enforcement
+
+---
+
+## 4. SYSTEM OVERSIGHT
+
+* multi-pod management
+* training others
+
+---
+
+# Leadership Culture
+
+Leadership is:
+
+* responsibility under pressure
+* service to formation
+* discipline example
+
+Not:
+
+* status
+* authority identity
+* ego position
+
+---
+
+# Leadership Output Goal
+
+Every leader must produce:
+
+* more disciplined men
+* more consistent pods
+* more leadership candidates
+
+---
+
+# Success Metrics
+
+Leadership system success is measured by:
+
+* number of stable pods
+* leadership retention rate
+* internal promotion rate
+* reduction in founder dependency
+
+Not:
+
+* hierarchy size
+* authority expansion
+* titles assigned
