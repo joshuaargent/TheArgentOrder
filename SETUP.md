@@ -135,10 +135,17 @@ Beehiiv automations handle the 7-day sequence from the docs.
 5. Check these scopes:
    - ✅ `bot`
    - ✅ `applications.commands`
+   - ✅ `identify` (for OAuth - to get user info)
+   - ✅ `email` (for OAuth - to get user email)
 6. In **Bot** section:
    - Click **"Reset Token"** to get `DISCORD_TOKEN`
    - Copy the token (you won't see it again!)
 7. Copy the **Application ID** as `DISCORD_CLIENT_ID`
+8. In **General Information** section:
+   - Copy the **Client Secret** as `DISCORD_CLIENT_SECRET`
+9. In **OAuth2 Settings**:
+   - Add redirect URL: `https://your-portal-url.com/api/auth/discord/callback`
+   - (Replace with your actual portal URL)
 
 ---
 
@@ -497,6 +504,28 @@ npm run dev
 ```
 
 Commands will register automatically. If you add new commands, restart the bot.
+
+### Auto-Welcome DM for New Members
+
+The bot automatically sends a welcome DM when someone joins your Discord server:
+
+1. **DM Content**: Welcome message with portal activation link
+2. **Setup Required**:
+   - Set `PORTAL_URL` environment variable to your portal URL
+   - (Optional) Create a "New Member" role in your Discord server
+3. **What it does**:
+   - Sends welcome DM with portal activation link
+   - Assigns "New Member" role automatically
+   - Portal URL button makes it easy to activate
+
+**DM Message**:
+> Welcome to The Argent Order, Brother.
+> 
+> You've taken the first step. Now finish it.
+> 
+> Activate your portal to begin your formation tracking.
+> 
+> It takes 60 seconds. You'll connect your Discord account and get access to your personal dashboard.
 
 ### Keeping the Bot Online (Free Options)
 

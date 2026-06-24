@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Sword, Mail, Lock, Flame } from "lucide-react";
+import { Loader2, Sword, Mail, Lock, Flame, CheckCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -21,6 +22,12 @@ export default function LoginPage() {
       setError("Authentication failed. Please try again.");
     } else if (errorParam === "no_code") {
       setError("Invalid authentication link. Please try again.");
+    } else if (errorParam === "email_required") {
+      setError("Discord account needs an email. Please add an email to your Discord account and try again.");
+    } else if (errorParam === "oauth_error") {
+      setError("Discord authentication failed. Please try again.");
+    } else if (searchParams.get("check_email") === "1") {
+      setSuccess("Check your email for a magic link to sign in!");
     }
   }, [searchParams]);
 
@@ -66,8 +73,16 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            {success && (
+              <div className="rounded-xl bg-green-500/10 border border-green-500/20 p-4 text-sm text-green-500 flex items-center gap-3">
+                <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                {success}
+              </div>
+            )}
+
             {error && (
-              <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-4 text-sm text-destructive">
+              <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-4 text-sm text-destructive flex items-center gap-3">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
                 {error}
               </div>
             )}

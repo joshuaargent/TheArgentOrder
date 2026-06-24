@@ -300,9 +300,6 @@ export function Navbar() {
                   <Link href="/login">
                     <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">Sign In</Button>
                   </Link>
-                  <Link href="/signup">
-                    <Button size="sm" className="btn-elegant">Join</Button>
-                  </Link>
                 </div>
               )}
             </div>
@@ -410,12 +407,9 @@ export function Navbar() {
                     </button>
                   </div>
                 ) : (
-                  <div className="space-y-3 px-4">
+                  <div className="px-4">
                     <Link href="/login">
                       <Button variant="outline" className="w-full h-12">Sign In</Button>
-                    </Link>
-                    <Link href="/signup">
-                      <Button className="w-full h-12 btn-elegant">Join The Order</Button>
                     </Link>
                   </div>
                 )}

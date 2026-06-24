@@ -587,6 +587,15 @@ export default function JoinPage() {
                   <span>Unsubscribe anytime</span>
                 </div>
               </div>
+
+              <div className="mt-6 pt-6 border-t border-border/50 text-center">
+                <p className="text-sm text-muted-foreground">
+                  Already subscribed?{" "}
+                  <Link href="/login" className="text-primary hover:underline font-medium">
+                    Sign in to your account
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
