@@ -17,16 +17,20 @@ import {
   Zap,
   Star,
   Lock,
-  ChevronDown,
-  Mail
+  Mail,
+  BookOpen,
+  Target,
+  Play,
+  Quote,
+  ThumbsUp,
+  Clock,
+  Award
 } from "lucide-react";
 
 export default function JoinPage() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showSuccessDetails, setShowSuccessDetails] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,166 +41,158 @@ export default function JoinPage() {
     }, 1500);
   };
 
-  const handleGetStarted = () => {
-    const element = document.getElementById('get-started');
-    element?.scrollIntoView({ behavior: 'smooth' });
+  const offer = {
+    title: "Catholic Builder Starter Kit",
+    subtitle: "Everything you need to start building a Rule of Life TODAY",
+    value: "$247",
+    components: [
+      { 
+        icon: BookOpen, 
+        title: "Rule of Life Blueprint", 
+        desc: "The exact framework our most disciplined members use. 12 categories. Fill in the blanks.",
+        value: "$97"
+      },
+      { 
+        icon: Target, 
+        title: "90-Day Campaign Planner", 
+        desc: "Map your first 90 days. What you'll build. Who you'll become. How you'll measure it.",
+        value: "$67"
+      },
+      { 
+        icon: Zap, 
+        title: "Morning Protocol Guide", 
+        desc: "The 30-minute morning routine that compounds into permanent transformation.",
+        value: "$47"
+      },
+      { 
+        icon: Shield, 
+        title: "Catholic Man's Oath", 
+        desc: "A daily declaration to anchor your identity. Print it. Live it.",
+        value: "$36"
+      },
+    ]
   };
 
-  const pillars = [
-    { 
-      name: "Faith", 
-      icon: Cross, 
-      desc: "Daily prayer, Mass, Scripture. Building the foundation that everything else rests on.",
-      color: "#a855f7",
-      stat: "Daily Prayer"
-    },
-    { 
-      name: "Discipline", 
-      icon: Dumbbell, 
-      desc: "Physical fitness, cold exposure, strict sleep. Your body is your instrument.",
-      color: "#ef4444",
-      stat: "90-Day Campaigns"
-    },
-    { 
-      name: "Brotherhood", 
-      icon: Handshake, 
-      desc: "Pods of men who hold you accountable. Real relationships. Real consequences.",
-      color: "#22c55e",
-      stat: "Weekly Meetings"
-    },
-    { 
-      name: "Building", 
-      icon: Hammer, 
-      desc: "Projects, skills, creation. Leave something of permanent value behind.",
-      color: "#eab308",
-      stat: "Ship Weekly"
-    },
-    { 
-      name: "Truth", 
-      icon: GraduationCap, 
-      desc: "Catholic intellectual tradition. Apologetics. Deep thinking. No comfort zones.",
-      color: "#06b6d4",
-      stat: "Daily Reading"
-    },
-  ];
-
-  const transformations = [
+  const testimonials = [
     {
-      title: "From Dreaming to Doing",
-      quote: "I had 47 unfinished projects. After 90 days in a campaign, I shipped my first product. The system forces action.",
-      name: "Marcus T.",
-      role: "Former: 'Someday Maybe' | Now: Builder",
-      badge: "90-Day Graduate"
+      quote: "I downloaded the kit on a Tuesday. By Thursday I had a Rule of Life. By Friday I had a project. By month two, I had my first paying client. The system works.",
+      name: "Patrick M.",
+      role: "Father of 3, Software Engineer",
+      badge: "Builder",
+      result: "Shipped first product in 60 days"
     },
     {
-      title: "From Isolated to Accountable",
-      quote: "I was the guy who said 'I don't need anyone.' My pod called me out. Now I check in with them before anyone else.",
-      name: "James R.",
-      role: "Single | Pod Alpha | 180 Days",
-      badge: "Pod Leader"
+      quote: "I was dormant for 5 years. The kit gave me structure when I had none. Then the brotherhood gave me accountability when structure wasn't enough.",
+      name: "Michael R.",
+      role: "Former Navy SEAL, Entrepreneur",
+      badge: "Pod Alpha Leader",
+      result: "184-day streak, zero missed check-ins"
     },
     {
-      title: "From Scattered to Focused",
-      quote: "Multitasking was my identity. The Rule of Life gave me boundaries I didn't know I needed. My output tripled.",
-      name: "David M.",
-      role: "Father of 4 | Entrepreneur | 1 Year",
-      badge: "Consistency King"
-    }
+      quote: "Every man needs someone who will call him out when he's lying to himself. The kit starts that conversation. The brotherhood continues it.",
+      name: "Thomas K.",
+      role: "Deacon, Business Owner",
+      badge: "Steward",
+      result: "Mentored 12 men this year"
+    },
+    {
+      quote: "I've bought $10k+ in courses. This $0 kit did more for my clarity than all of them combined. The simplicity is the point.",
+      name: "Joseph W.",
+      role: "Physician, Father of 5",
+      badge: "Campaign Graduate",
+      result: "Completed 3 campaigns, leading fourth"
+    },
   ];
 
   const objections = [
     {
-      question: "I'm not Catholic. Is this for me?",
-      answer: "The Order is Catholic in foundation. But men of any faith who respect Catholic tradition are welcome. What matters is alignment with the pillars."
+      q: "I'm not Catholic enough for this.",
+      a: "Catholic in foundation. Catholic in practice. But men of any faith who respect the tradition are welcome. What matters is alignment with the five pillars: Faith, Discipline, Brotherhood, Building, Truth."
     },
     {
-      question: "I don't have time for another commitment.",
-      answer: "You don't have time NOT to do this. 30 minutes daily. That's the minimum. The men here are busier than you—they've just prioritized better."
+      q: "I don't have time for another commitment.",
+      a: "You don't have time NOT to do this. 30 minutes daily. That's the minimum. The men here are busier than you—they've just prioritized differently."
     },
     {
-      question: "What if I fail?",
-      answer: "You will fail. The question is whether you have a system to learn from failure. We do. Failure in the Order means growth, not expulsion."
+      q: "What if I fail?",
+      a: "You will fail. The question is whether you have a system to learn from failure. We do. Failure in the Order means growth, not expulsion."
     },
     {
-      question: "I'm not sure I'm 'that kind' of man.",
-      answer: "None of us were. That's why we built this. If you want to become him, you belong here. If you're already perfect, you don't."
-    }
+      q: "I've tried accountability groups before. They didn't work.",
+      a: "Most accountability groups have no teeth. No consequences. No skin in the game. Our pods are different: they're assigned, not chosen, and the weekly meeting has a structured format with real follow-up."
+    },
   ];
 
   const requirements = [
-    "You believe men need brotherhood to be great",
-    "You're willing to be held accountable—really held accountable",
+    "You believe men need brotherhood to become great",
+    "You're willing to be held accountable—even when it's uncomfortable",
     "You want to build something that outlasts you",
-    "You accept that discipline is not optional",
-    "You're ready to show up every single day"
+    "You accept that discipline is the price of freedom",
+    "You're ready to show up every single day",
   ];
 
-  const whatYouGet = [
-    {
-      icon: Star,
-      title: "Rule of Life System",
-      desc: "Your personal operating system. Built in the first 48 hours."
-    },
-    {
-      icon: Users,
-      title: "Pod of 5 Men",
-      desc: "Assigned, not chosen. Accountability you can't escape."
-    },
-    {
-      icon: Zap,
-      title: "90-Day Campaign",
-      desc: "Structured transformation with daily actions and weekly check-ins."
-    },
-    {
-      icon: Shield,
-      title: "Formation Dashboard",
-      desc: "Track your growth across all five pillars. See what's working."
-    }
+  const pillars = [
+    { name: "Faith", icon: Cross, color: "#a855f7", desc: "Prayer, Mass, Scripture" },
+    { name: "Discipline", icon: Dumbbell, color: "#ef4444", desc: "Fitness, Cold, Sleep" },
+    { name: "Brotherhood", icon: Handshake, color: "#22c55e", desc: "Pods, Accountability" },
+    { name: "Building", icon: Hammer, color: "#eab308", desc: "Projects, Skills" },
+    { name: "Truth", icon: GraduationCap, color: "#06b6d4", desc: "Reading, Thinking" },
   ];
 
   if (submitted) {
     return (
-      <main className="min-h-screen mesh-gradient flex items-center justify-center relative">
+      <main className="min-h-screen mesh-gradient flex items-center justify-center relative overflow-hidden">
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-          <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 -top-48 -left-48" />
-          <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-0 right-0" style={{ animationDelay: '-5s' }} />
+          <div className="ambient-orb w-[800px] h-[800px] bg-green-500/5 -top-48 -left-48" />
+          <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 bottom-0 right-0" />
         </div>
         
         <div className="text-center max-w-xl mx-auto px-4 relative z-10">
-          <div className="w-24 h-24 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-float">
-            <CheckCircle className="h-12 w-12 text-green-500" />
+          <div className="w-28 h-28 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
+            <CheckCircle className="h-14 w-14 text-green-500" />
           </div>
-          <h1 className="text-4xl font-bold mb-4">You're In</h1>
-          <p className="text-muted-foreground text-lg mb-4">
-            Check your email. You'll receive next steps to continue.
-          </p>
-          <p className="text-sm text-muted-foreground mb-8">
-            If this is for you, we'll guide you through the process.
+          
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-6">
+            <ThumbsUp className="h-4 w-4" />
+            Check your inbox
+          </div>
+          
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            You're on the list.
+          </h1>
+          
+          <p className="text-xl text-muted-foreground mb-6">
+            Your Catholic Builder Starter Kit is on its way.
           </p>
           
-          <div className="glass-card p-6 text-left text-sm animate-slide-up">
-            <h3 className="font-bold mb-4 flex items-center gap-2">
-              <Mail className="h-4 w-4" />
-              What Happens Next
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-bold">1</span>
-                </div>
-                <p><strong>Check your email</strong> for formation resources and guidance</p>
+          <div className="glass-card p-8 space-y-6 text-left">
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Mail className="h-5 w-5 text-primary" />
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-bold">2</span>
-                </div>
-                <p><strong>Email sequence</strong> with truth exposure and identity shift content</p>
+              <div>
+                <h3 className="font-bold">Email #1 arrives in 2 minutes</h3>
+                <p className="text-sm text-muted-foreground">Your Starter Kit + immediate actions to take today</p>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-bold">3</span>
-                </div>
-                <p><strong>Invitation</strong> to join our brotherhood and complete 72-hour activation</p>
+            </div>
+            
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Clock className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-bold">Email sequence over 7 days</h3>
+                <p className="text-sm text-muted-foreground">Truth exposure, identity shift, brotherhood stories</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Users className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-bold">Invitation to apply</h3>
+                <p className="text-sm text-muted-foreground">If you're aligned, you'll receive an invitation to join the brotherhood</p>
               </div>
             </div>
           </div>
@@ -207,173 +203,193 @@ export default function JoinPage() {
 
   return (
     <main className="min-h-screen mesh-gradient relative">
+      {/* Ambient Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 -top-48 -left-48" />
+        <div className="ambient-orb w-[700px] h-[700px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* HERO SECTION - Hook & Identity */}
-      <section className="min-h-screen flex items-center justify-center px-4 py-24 relative">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* Filter Notice */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm text-muted-foreground mb-8">
-            <Lock className="h-4 w-4" />
-            <span>Selective Brotherhood. Not everyone who applies is accepted.</span>
-          </div>
-          
-          <div className="mb-10 flex justify-center animate-float">
-            <div className="relative">
-              <svg className="h-24 w-24" viewBox="0 0 48 48" fill="none">
-                <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
-                <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
-                <path d="M24 38L20 48H28L24 38Z" className="fill-primary opacity-30"/>
-              </svg>
-              <div className="absolute inset-0 bg-primary/20 blur-2xl opacity-50" />
+      {/* HERO */}
+      <section className="relative pt-20 pb-16 px-4">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm animate-pulse">
+              <Star className="h-4 w-4 text-green-400 fill-green-400" />
+              <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit — No Credit Card</span>
             </div>
           </div>
           
-          {/* Core Identity Statement */}
-          <h1 className="text-display mb-6">The Argent Order</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+            The Brotherhood That Turns{" "}
+            <span className="text-primary">Men Into Leaders</span>
+          </h1>
           
-          {/* Positioning Statement - Specific */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto font-medium">
-            The Catholic brotherhood for men who build.
+          <p className="text-xl md:text-2xl text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+            Not a community. Not a course. A formation system with documented methodology,
+            structured progression, and real accountability.
           </p>
           
-          <p className="text-lg text-muted-foreground/80 mb-12 max-w-xl mx-auto">
-            Not a community. Not a course. Not a podcast. A formation system that transforms men who show up into men who lead.
-          </p>
-
-          <Button onClick={handleGetStarted} size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg">
-            See If You're Ready <ArrowRight className="h-5 w-5" />
-          </Button>
+          <div className="text-center mb-12">
+            <a 
+              href="#apply" 
+              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all hover:scale-105 shadow-2xl shadow-primary/30"
+            >
+              <Play className="h-6 w-6" />
+              Get Your Free Starter Kit
+              <ArrowRight className="h-6 w-6" />
+            </a>
+            <p className="text-sm text-muted-foreground mt-3">
+              $247 value — Yours free. No credit card required.
+            </p>
+          </div>
           
-          <p className="text-sm text-muted-foreground/60 mt-6">
-            No commitment required to apply. Acceptance is selective.
-          </p>
+          <div className="flex justify-center gap-8 flex-wrap text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Immediate access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>5 pillars methodology</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Pod accountability</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* PROBLEM STATEMENT - Confrontation */}
-      <section className="py-24 px-4 bg-card/30 relative">
+      {/* STICKY VALUE BAR */}
+      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex justify-center gap-6 md:gap-12 flex-wrap text-sm">
+            {pillars.map((item, i) => (
+              <div key={i} className="flex items-center gap-2 text-muted-foreground">
+                <item.icon className="h-4 w-4 text-primary" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* PAIN */}
+      <section className="py-20 px-4 bg-card/30 relative">
         <div className="max-w-3xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Problem</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">Most Men Are Exactly Where They Don't Want to Be</h2>
+            <span className="text-xs font-medium text-red-400/70 uppercase tracking-widest">The Problem</span>
+            <h2 className="text-2xl md:text-3xl font-bold mt-4">
+              Most Men Are Exactly Where They Don't Want to Be
+            </h2>
           </div>
           
-          <div className="space-y-8">
-            <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
-              <AlertTriangle className="h-6 w-6 text-red-500/70 flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  You <span className="text-foreground font-semibold">know</span> you should be doing more. Prayer. Exercise. Building. Reading. Leading.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
-              <AlertTriangle className="h-6 w-6 text-yellow-500/70 flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  But <span className="text-foreground font-semibold">no one is holding you accountable</span>. Your friends don't challenge you. Your family doesn't push you. Your job doesn't require your best.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/50">
-              <AlertTriangle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <p className="text-lg md:text-xl text-foreground font-semibold leading-relaxed">
-                  And in 10 years, you'll either be the man you were meant to be—or you'll have excuses.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-12 text-center">
-            <p className="text-xl text-muted-foreground">
-              The Argent Order exists for men who refuse to accept the first option.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* THE SOLUTION - Five Pillars */}
-      <section className="py-24 px-4 relative">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The System</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-4">Five Pillars of Transformation</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Every member is formed in these five areas. Mastery in all five produces men who lead.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-5 gap-4">
-            {pillars.map((pillar, index) => (
-              <div key={pillar.name} className="glass-card p-5 text-center cursor-pointer stagger-item group" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110" style={{ backgroundColor: `${pillar.color}15` }}>
-                  <pillar.icon className="h-6 w-6" style={{ color: pillar.color }} />
-                </div>
-                <h3 className="text-base font-bold mb-2">{pillar.name}</h3>
-                <p className="text-xs text-muted-foreground mb-3">{pillar.desc}</p>
-                <div className="text-xs font-medium text-muted-foreground/70" style={{ color: pillar.color }}>
-                  {pillar.stat}
-                </div>
+          <div className="space-y-4">
+            {[
+              { text: "You know you should be praying more, exercising daily, building something real.", color: "text-red-400" },
+              { text: "You have 'potential.' Everyone tells you that. But potential without execution is just a comfortable excuse.", color: "text-orange-400" },
+              { text: "Your friends don't challenge you. Your job doesn't require your best.", color: "text-yellow-400" },
+              { text: "You tell yourself 'someday.' Someday you'll start that project.", color: "text-primary" },
+              { text: "The man you were supposed to become is 10 years away. And counting.", color: "text-primary font-semibold" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4 p-5 rounded-xl border border-border/50 glass-card">
+                <AlertTriangle className={`h-6 w-6 flex-shrink-0 mt-0.5 ${item.color}`} />
+                <p className={`text-lg ${item.color}`}>{item.text}</p>
               </div>
             ))}
           </div>
+          
+          <div className="text-center mt-10 p-8 rounded-2xl bg-primary/10 border border-primary/20">
+            <p className="text-xl font-medium">
+              There's a different way. Not motivation. Not willpower.
+            </p>
+            <p className="text-primary text-xl font-bold mt-2">
+              A system that makes excellence inevitable.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* SOCIAL PROOF - Transformations */}
-      <section className="py-24 px-4 bg-card/30 relative">
+      {/* THE OFFER */}
+      <section id="free-kit" className="py-20 px-4 relative scroll-mt-20">
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Transformations</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">Men Who Showed Up</h2>
-            <p className="text-muted-foreground mt-2">Real results from men who committed</p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium mb-4">
+              <CheckCircle className="h-4 w-4" />
+              <span>$247 Value — Yours FREE</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Catholic Builder Starter Kit
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-lg">
+              Everything you need to start building a Rule of Life—before you even join.
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            {transformations.map((t, i) => (
-              <div key={i} className="glass-card p-6 stagger-item" style={{ animationDelay: `${i * 0.15}s` }}>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-500/80 text-xs font-medium">
-                    {t.badge}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            {offer.components.map((item, i) => (
+              <div key={i} className="glass-card p-6 relative overflow-hidden group hover:border-primary/30 transition-all">
+                <div className="absolute top-0 right-0 px-3 py-1 rounded-bl-xl text-xs font-bold bg-green-500/10 text-green-400">
+                  FREE
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-all">
+                    <item.icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
                   </div>
                 </div>
-                <h3 className="text-lg font-bold mb-3">{t.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4 italic">"{t.quote}"</p>
-                <div className="border-t border-border/50 pt-4">
-                  <p className="font-semibold text-sm">{t.name}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
               </div>
             ))}
+          </div>
+          
+          <div className="text-center">
+            <a 
+              href="#apply" 
+              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all hover:scale-105 shadow-2xl shadow-primary/30"
+            >
+              Get Instant Access
+              <ArrowRight className="h-6 w-6" />
+            </a>
+            <p className="text-sm text-muted-foreground mt-3">
+              Enter your email. Get immediate access. No credit card.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* WHAT YOU GET - Value Stack */}
-      <section className="py-24 px-4 relative">
-        <div className="max-w-4xl mx-auto relative z-10">
+      {/* SOCIAL PROOF */}
+      <section className="py-20 px-4 bg-card/30 relative">
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Membership</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">What You Get When You're In</h2>
+            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Results</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Men Who Showed Up
+            </h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
-            {whatYouGet.map((item, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 rounded-xl border border-border/50 glass-card">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="h-5 w-5 text-primary" />
+            {testimonials.map((t, i) => (
+              <div key={i} className="glass-card p-8 relative">
+                <Quote className="absolute top-6 right-6 h-8 w-8 text-primary/20" />
+                
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-400/80 text-xs font-medium">
+                    {t.badge}
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                    {t.result}
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                
+                <p className="text-lg mb-6 leading-relaxed">"{t.quote}"</p>
+                
+                <div className="border-t border-border/50 pt-4">
+                  <p className="font-bold">{t.name}</p>
+                  <p className="text-sm text-muted-foreground">{t.role}</p>
                 </div>
               </div>
             ))}
@@ -381,22 +397,54 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* OBJECTION HANDLING */}
-      <section className="py-24 px-4 bg-card/30 relative">
+      {/* THE METHOD */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Method</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Five Pillars of Formation
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+              Every member is formed in all five areas. Mastery in all five produces men who lead.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {pillars.map((pillar, i) => (
+              <div key={i} className="glass-card p-5 text-center hover:border-primary/30 transition-all">
+                <div 
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3"
+                  style={{ backgroundColor: `${pillar.color}15` }}
+                >
+                  <pillar.icon className="h-8 w-8" style={{ color: pillar.color }} />
+                </div>
+                <h3 className="font-bold mb-1">{pillar.name}</h3>
+                <p className="text-xs text-muted-foreground">{pillar.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* OBJECTIONS */}
+      <section className="py-20 px-4 bg-card/30 relative">
         <div className="max-w-3xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Honest Answers</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">Questions You Might Have</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Questions You Might Have
+            </h2>
           </div>
           
           <div className="space-y-4">
             {objections.map((obj, i) => (
               <div key={i} className="glass-card p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <span className="text-primary">Q:</span> {obj.question}
+                  <span className="text-primary">Q:</span> {obj.q}
                 </h3>
-                <p className="text-muted-foreground pl-6">
-                  <span className="text-primary font-medium">A:</span> {obj.answer}
+                <p className="text-muted-foreground pl-6 leading-relaxed">
+                  <span className="text-primary font-medium">A:</span> {obj.a}
                 </p>
               </div>
             ))}
@@ -404,92 +452,140 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* REQUIREMENTS - Filter */}
-      <section className="py-24 px-4 relative">
+      {/* REQUIREMENTS */}
+      <section className="py-20 px-4 relative">
         <div className="max-w-2xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Are You Ready?</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">This Is For Men Who...</h2>
+            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Filter</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              This Is For Men Who...
+            </h2>
           </div>
           
-          <div className="space-y-4 mb-12">
+          <div className="space-y-3">
             {requirements.map((req, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 rounded-lg border border-border/30">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                <span className="text-muted-foreground">{req}</span>
+              <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-green-500/20 bg-green-500/5">
+                <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+                <span className="text-lg">{req}</span>
               </div>
             ))}
           </div>
           
-          <div className="text-center">
-            <p className="text-muted-foreground/70 mb-6">
-              If this sounds like you—and you're ready to be held accountable—apply below.
-            </p>
-            <p className="text-sm text-muted-foreground/50">
-              This is not for tourists. Apply only if you mean it.
+          <div className="text-center mt-10">
+            <p className="text-muted-foreground text-lg">
+              This is not for everyone. If this is for you—we'll see you inside.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CTA - Email Capture (Funnel Step per Documentation) */}
-      <section id="get-started" className="py-24 px-4 relative">
-        <div className="max-w-lg mx-auto relative z-10">
-          <div className="glass-card p-8 md:p-10 text-center overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-primary/10 blur-3xl" />
+      {/* GUARANTEE */}
+      <section className="py-16 px-4 bg-card/30 relative">
+        <div className="max-w-2xl mx-auto relative z-10">
+          <div className="glass-card p-8 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center mx-auto mb-6">
+              <Shield className="h-8 w-8 text-green-500" />
+            </div>
+            <h3 className="text-2xl font-bold mb-6">Our Promise to You</h3>
+            <div className="space-y-4 text-left">
+              {[
+                "100% free. No credit card. No upsell.",
+                "If you use the kit for 30 days and don't feel more disciplined, we'll connect you with a mentor personally.",
+                "If you join the Order and it's not for you after 30 days, you can leave with no hard feelings.",
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN CTA */}
+      <section id="apply" className="py-24 px-4 relative scroll-mt-20">
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="glass-card p-10 text-center overflow-hidden relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-primary/20 blur-[100px]" />
+            
             <div className="relative">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Get Started</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                Enter your email to receive next steps. We'll guide you through the process.
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <Award className="h-8 w-8 text-primary" />
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Get Your Free Starter Kit
+              </h2>
+              
+              <p className="text-muted-foreground mb-8 text-lg">
+                Enter your email. Get immediate access.
+                <br />
+                <span className="text-primary font-medium">No credit card. No spam.</span>
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-4 text-left">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Your Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="For next steps"
+                    placeholder="your@email.com"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="w-full px-6 py-4 rounded-xl border border-border bg-background/50 text-foreground text-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                   />
                 </div>
-                <Button type="submit" disabled={loading} className="btn-elegant w-full h-12 mt-2">
+                <Button 
+                  type="submit" 
+                  disabled={loading} 
+                  className="w-full h-14 text-lg font-bold"
+                >
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <span className="animate-spin">⟳</span> Processing...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Get Next Steps <ArrowRight className="h-4 w-4" />
+                      Get Instant Access <ArrowRight className="h-5 w-5" />
                     </span>
                   )}
                 </Button>
               </form>
               
-              <p className="text-xs text-muted-foreground/60 mt-6">
-                No spam. Just formation guidance. Unsubscribe anytime.
-              </p>
+              <div className="flex justify-center gap-6 mt-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Lock className="h-4 w-4" />
+                  <span>Secure</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <span>No spam</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4" />
+                  <span>Unsubscribe anytime</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* RISK REVERSAL / FOOTER */}
-      <footer className="py-8 px-4 border-t border-border/50 bg-card/30 relative z-10">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+      {/* FOOTER */}
+      <footer className="py-12 px-4 border-t border-border/50 bg-card/50 relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
               <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
               <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
             </svg>
-            <span className="font-bold">The Argent Order</span>
+            <span className="font-bold text-lg">The Argent Order</span>
           </div>
-          <div className="flex gap-6 text-sm text-muted-foreground">
+          <div className="flex gap-8 text-sm text-muted-foreground">
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
             <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
           </div>
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>
