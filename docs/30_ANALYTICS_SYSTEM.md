@@ -459,3 +459,189 @@ If analytics improve discipline, truth, and formation, they are essential.
 Measurement exists to ensure the system remains aligned with its mission:
 
 Form Catholic men who live with discipline, truth, brotherhood, and purpose.
+
+---
+
+# EVENT + CALL SYSTEM
+
+Version: 2.1
+
+Status: Canonical Hybrid Formation Infrastructure
+
+---
+
+## Purpose
+
+The Event System exists to make formation **real in human terms**, not just digital tracking.
+
+Men do not change through dashboards.
+
+Men change through: shared struggle, accountability under pressure, real-time conversation, embodied presence when possible.
+
+But the system must also function when physical presence is impossible.
+
+Therefore:
+
+```
+Formation must survive distance, time zones, and life constraints
+```
+
+---
+
+## Core Principle
+
+```
+Presence is ideal.
+Participation is required.
+Accountability is non-negotiable.
+```
+
+---
+
+## Three Layers of Formation
+
+The system is built on 3 parallel layers.
+
+---
+
+## 1. DIGITAL FORMATION LAYER (FOUNDATION)
+
+This is the always-on system. It is not optional.
+
+Includes: Portal (Rule of Life, Campaigns, Tracking), Discord (Pods, communication, updates), Gamification system (consistency tracking), Leadership pipeline system
+
+**Function:** Creates structure, identity, discipline baseline, measurable behaviour
+
+**Principle:** If this layer is not active, nothing else matters
+
+---
+
+## 2. SYNCHRONOUS FORMATION LAYER (CALL SYSTEM)
+
+Calls are the **primary human reinforcement system**.
+
+---
+
+### POD CALLS (CORE WEEKLY STRUCTURE)
+
+**Frequency:** Weekly (minimum)
+**Format:** Voice or video, Structured agenda, Mandatory where possible
+
+**Pod Call Structure:**
+1. Opening (5 min) — Reminder of mission, Alignment check
+2. Check-In Round (15–25 min) — Wins, Failures (no excuses), Current focus (next 7 days)
+3. Accountability Review (20–30 min) — Campaign progress, Rule of Life adherence, Discipline consistency, Brotherhood participation
+4. Direct Feedback Phase (10–20 min) — Peer correction, Leader correction, No avoidance, No vague statements
+5. Commitment Lock (5–10 min) — Exact actions to complete before next call
+
+No motivational language. Only commitments.
+
+---
+
+### 1:1 ACCOUNTABILITY CALLS
+
+**Purpose:** Intervention, support, discipline correction, personal alignment
+
+**Used when:** Member is struggling, inconsistent, at risk, or requests support
+
+**Structure:** Reality check, review of behaviour, correction plan, next commitment
+
+---
+
+### LEADERSHIP CALLS
+
+**Participants:** Captains, Officers, Mentors
+
+**Purpose:** Pod health review, system adjustments, leadership calibration, problem escalation
+
+---
+
+### STRATEGIC CALLS (STEWARD LEVEL)
+
+**Purpose:** Long-term direction, system evolution, doctrine protection, structural decisions
+
+---
+
+## 3. PHYSICAL FORMATION LAYER (OPTIONAL BUT POWERFUL)
+
+Physical events function as acceleration environments, identity compression experiences, deep bonding reinforcement.
+
+**Types:**
+- **Retreats:** Deep formation immersion, discipline reset, prayer + reflection + structure
+- **Local Meetups:** Small pod gatherings, informal accountability reinforcement
+- **Hybrid Events:** Mix of physical + remote participation
+
+---
+
+## Hybrid Participation Model
+
+```
+Distance does not reduce status or participation quality
+```
+
+If a member cannot attend physically, they participate via live call access, structured reflection input, accountability submission.
+
+No downgrade in: leadership status, formation score, participation value.
+
+---
+
+## Async Participation System
+
+If live attendance is impossible, member must submit:
+- Written check-in
+- Campaign update
+- Failures + corrections
+- Next commitments
+
+This ensures: No missed accountability cycles
+
+---
+
+## Pod Integration Rule
+
+Pods operate across all layers:
+
+**DIGITAL:** Discord updates, Portal tracking
+
+**SYNCHRONOUS:** Weekly pod calls, accountability sessions
+
+**PHYSICAL:** Meetups, retreats
+
+---
+
+## Leadership Responsibility
+
+- **CAPTAINS:** Run pod calls, enforce structure, maintain discipline
+- **OFFICERS:** Audit pods, resolve escalation issues, enforce standards
+- **MENTORS:** Deepen formation quality, improve reflection depth, correct thinking patterns
+- **STEWARDS:** Ensure system integrity, oversee long-term structure, protect mission alignment
+
+---
+
+## Failure Modes
+
+1. **Over-Physical Dependency** — Fix: Strengthen digital + call layers
+2. **Weak Call Structure** — Fix: Enforce strict agenda discipline
+3. **Passive Attendance** — Fix: No participation = no recognition
+4. **Async Abuse** — Fix: Require structured written accountability
+5. **Social Drift** — Fix: Eliminate unstructured calls as default behaviour
+
+---
+
+## Event Success Metrics
+
+Measured by: Campaign completion increase, discipline consistency improvement, retention improvement, leadership emergence rate, pod stability increase
+
+Not measured by: Attendance numbers, call duration, social engagement levels
+
+---
+
+## Final Principle
+
+The Argent Order is not a digital community. It is not a physical community. It is a **formation system that uses multiple layers of human interaction to produce disciplined Catholic men**.
+
+- Digital creates structure
+- Calls create accountability
+- Events create identity compression
+
+Together they form one system.
