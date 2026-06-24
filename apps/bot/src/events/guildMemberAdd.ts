@@ -28,51 +28,68 @@ export default {
 async function sendWelcomeDM(member: GuildMember) {
   const portalUrl = process.env.PORTAL_URL || "https://portal.theargentorder.com";
 
+  // Check if already linked via OAuth (they have Initiate role)
+  const hasInitiateRole = member.roles.cache.some(
+    (r) => r.name.toLowerCase() === "initiate"
+  );
+
   const welcomeMessage = {
     content: undefined,
     embeds: [
       {
-        title: "Welcome to The Argent Order, Brother.",
-        description: `You've taken the first step. Now finish it.
+        title: "⚔️ Welcome to The Argent Order, Brother.",
+        description: hasInitiateRole
+          ? `Your account is linked. You're now an **Initiate**.
 
-Activate your portal to begin your formation tracking.
+**Your first 72 hours:**
 
-**${portalUrl}**
+1. Read #welcome, #mission, #constitution
+2. Introduce yourself in #introductions
+3. Use /checkin to start your daily formation
+4. Pick a campaign: /campaign list
+5. Join a pod: ask in #accountability-pods
 
-It takes 60 seconds. You'll connect your Discord account and get access to your personal dashboard.
+**Your portal is ready:**
+${portalUrl}/dashboard
 
-This is where we'll track your:
-• Daily formation habits
-• Campaign progress  
-• Streak and accountability
+Track your formation, streaks, and progress there.`,
+          : `You've joined the Order. Now activate your account.
 
-Your brothers are waiting. Your formation starts now.`,
+**Activate your portal:**
+${portalUrl}
+
+Use the code from /link command to connect your Discord account.
+
+Once linked:
+• Complete your profile
+• Read the Constitution
+• Introduce yourself in #introductions
+• Start your first check-in`,
         color: EMBED_COLORS.PRIMARY,
-        thumbnail: {
-          url: "https://cdn.discordapp.com/attachments/1329430844195328000/1329430844771082250/argent_cross.png",
-        },
         footer: {
           text: "The Argent Order — Forged in Faith, Discipline, and Brotherhood",
         },
         timestamp: new Date().toISOString(),
       },
     ],
-    components: [
-      {
-        type: 1,
-        components: [
+    components: hasInitiateRole
+      ? undefined
+      : [
           {
-            type: 2,
-            style: 5,
-            label: "Activate Your Portal",
-            url: portalUrl,
-            emoji: {
-              name: "⚔️",
-            },
+            type: 1,
+            components: [
+              {
+                type: 2,
+                style: 5,
+                label: "Activate Your Portal",
+                url: portalUrl,
+                emoji: {
+                  name: "⚔️",
+                },
+              },
+            ],
           },
         ],
-      },
-    ],
   };
 
   try {
@@ -86,18 +103,27 @@ Your brothers are waiting. Your formation starts now.`,
 
 async function assignNewMemberRole(member: GuildMember) {
   try {
-    // Per docs: "Visitor" is the entry-level role
-    // After portal setup and linking, /sync upgrades to Initiate
-    const roleName = "Visitor";
-    const role = member.guild.roles.cache.find(
-      (r) => r.name.toLowerCase() === roleName.toLowerCase()
+    // Per docs: When joining via portal OAuth, they become Initiate
+    // Visitor is for those who join Discord directly without portal
+    // After linking with /link and portal setup, they become Initiate
+    
+    // First try to find Initiate role (they came via portal OAuth)
+    let role = member.guild.roles.cache.find(
+      (r) => r.name.toLowerCase() === "initiate"
     );
+    
+    // Fall back to Visitor if Initiate doesn't exist yet
+    if (!role) {
+      role = member.guild.roles.cache.find(
+        (r) => r.name.toLowerCase() === "visitor"
+      );
+    }
 
     if (role) {
       await member.roles.add(role);
-      console.log(`Assigned ${roleName} role to ${member.user.tag}`);
+      console.log(`Assigned ${role.name} role to ${member.user.tag}`);
     } else {
-      console.log(`Role "${roleName}" not found - run /setup to create roles`);
+      console.log(`No role found - run /setup to create roles`);
     }
   } catch (error) {
     console.error("Error assigning role:", error);

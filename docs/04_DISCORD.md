@@ -119,6 +119,116 @@ Discord consists of seven major sections.
 
 ---
 
+# OPTIMIZED STRUCTURE (Catholic + Andrew Tate + Alex Hormozi)
+
+**Principle:** Fewer categories. More action. No overwhelm.
+
+---
+
+## Simplified Categories (8 total)
+
+### 1. ⚡ FORGE (Discipline Pillar)
+The daily heart. Every brother reports here.
+- #roll-call — REQUIRED daily
+- #daily-wins — Victories
+- #daily-failures — Accountability
+- #fitness — Training
+
+### 2. 🙏 CHAPEL (Faith Pillar)
+Spiritual foundation. Most important category.
+- #gospel — Daily readings
+- #prayer-requests — Intentions
+- #mass-attendance — Weekly confirmation
+- #rosary — Intentions
+
+### 3. 🔥 PODS (Brotherhood Pillar)
+Accountability units.
+- #my-pod — Assigned automatically
+- #pod-wins — Group victories
+- #accountability — Call each other up
+
+### 4. 🛠️ WORKSHOP (Building Pillar)
+Ship or be shipped.
+- #ship-log — REQUIRED weekly
+- #projects — Show work
+- #build-help — Questions
+
+### 5. 📖 FORUM (Truth Pillar)
+Catholic intellectual tradition.
+- #books — Reading discussions
+- #debates — Structured discussion
+- #catechism — Catholic teaching
+
+### 6. 🎯 COMMAND
+Leadership coordination.
+- #announcements — Read these
+- #campaigns — Active campaigns
+- #events — Upcoming events
+
+### 7. 👋 WELCOME
+Entry point (static).
+- #welcome — Rules
+- #mission — Why we exist
+- #constitution — Expectations
+- #introductions — REQUIRED
+
+### 8. 🔒 OPS (Private)
+Leadership only.
+- #officer-room — Discussion
+- #mod-log — Moderation
+- #planning — Campaigns
+
+---
+
+## Voice Channels (3)
+- ☀️ Morning Prayer — Daily 6:30 AM
+- 🔥 Pod Meeting — Weekly accountability
+- 💪 Deep Work — Silent work, mics muted
+
+---
+
+## Removed Channels (Optional, Add Later)
+
+These are removed from default setup to reduce overwhelm:
+- #sleep, #nutrition, #discipline → merged into FORGE
+- #testimonies, #victories → #pod-wins
+- #builder-hub → redundant with WORKSHOP
+- #dashboard → portal handles
+- #formation-checkins → #roll-call
+- #prayer-log, #discipline-log → #roll-call
+- #truth-log → #daily-failures
+- #website-reviews → #build-help
+- #logic-lab → #debates
+- #current-events → noise
+- #saints, #apologetics → #catechism
+- #brother-support → #pods
+- #moderation-log, #content-planning, #portal-development → #officer-room
+
+---
+
+## Andrew Tate Principle
+
+> "Men don't need more information. They need more DISCIPLINE."
+
+Every channel removed = more people actually use the remaining ones.
+
+---
+
+## Alex Hormozi Principle
+
+> "The fastest path to value wins."
+
+Simplified flow:
+1. Join Discord
+2. OAuth → Account created → Initiate role
+3. Dashboard link in DM
+4. Start roll-call
+5. Ship first project
+
+---
+
+---
+
 # CATEGORY
 # GATEHOUSE
 

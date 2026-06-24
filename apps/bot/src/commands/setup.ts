@@ -4,241 +4,305 @@ import {
   EmbedBuilder,
   ChannelType,
   PermissionFlagsBits,
-  OverwriteType,
-  RolePosition,
 } from "discord.js";
 import { supabase } from "../index";
 
 // Argent Order brand colors
-const ARGENT_SILVER = 0xa1a1aa; // Silver/Argent
-const ARGENT_DARK = 0x1a1a2e;
+const ARGENT_SILVER = 0xa1a1aa;
 
-// Full server structure based on documentation
+// Optimized server structure - Catholic + Andrew Tate + Alex Hormozi
+// 6 categories matching the FIVE PILLARS + coordination
+// Reduced from 13 categories to eliminate overwhelm
 const CATEGORIES = [
-  { name: "👋 Welcome", emoji: "wave", channels: [
-    { name: "welcome", type: "text", description: "First impression and rules" },
-    { name: "mission", type: "text", description: "Why we exist", readOnly: true },
-    { name: "constitution", type: "text", description: "Community expectations", readOnly: true },
-    { name: "start-here", type: "text", description: "Onboarding guide", readOnly: true },
-    { name: "faq", type: "text", description: "Common questions", readOnly: true },
-    { name: "verification", type: "text", description: "Verify your account", readOnly: true },
-  ]},
-  { name: "🙏 Chapel", emoji: "pray", channels: [
-    { name: "daily-gospel", type: "text", description: "Daily Gospel readings" },
-    { name: "prayer-requests", type: "text", description: "Prayer intentions" },
-    { name: "prayer-victories", type: "text", description: "Answered prayers" },
-    { name: "rosary", type: "text", description: "Rosary discussions" },
-    { name: "saints", type: "text", description: "Saints and their lessons" },
-    { name: "catechism", type: "text", description: "Catholic teaching" },
-    { name: "apologetics", type: "text", description: "Defense of the faith" },
-  ]},
-  { name: "⚔️ Barracks", emoji: "sword", channels: [
-    { name: "roll-call", type: "text", description: "Daily check-in - REQUIRED" },
-    { name: "daily-wins", type: "text", description: "Daily victories" },
-    { name: "fitness", type: "text", description: "Training and health" },
-    { name: "nutrition", type: "text", description: "Diet and meal planning" },
-    { name: "sleep", type: "text", description: "Sleep optimization" },
-    { name: "discipline", type: "text", description: "Habits and execution" },
-  ]},
-  { name: "🏗️ Workshop", emoji: "hammer", channels: [
-    { name: "coding", type: "text", description: "Development and programming" },
-    { name: "startups", type: "text", description: "Business building" },
-    { name: "business", type: "text", description: "Sales and marketing" },
-    { name: "study", type: "text", description: "Learning and education" },
-    { name: "projects", type: "text", description: "Show what you're building" },
-    { name: "website-reviews", type: "text", description: "Feedback and improvement" },
-    { name: "tools-and-resources", type: "text", description: "Useful resources" },
-  ]},
-  { name: "📖 Forum", emoji: "book", channels: [
-    { name: "philosophy", type: "text", description: "Philosophical discussion" },
-    { name: "logic-lab", type: "text", description: "Reasoning and analysis" },
-    { name: "debates", type: "text", description: "Structured debate (rules enforced)" },
-    { name: "books", type: "text", description: "Reading discussions" },
-    { name: "current-events", type: "text", description: "News with Catholic perspective" },
-  ]},
-  { name: "🤝 Brotherhood", emoji: "handshake", channels: [
-    { name: "introductions", type: "text", description: "Introduce yourself - REQUIRED" },
-    { name: "accountability-pods", type: "text", description: "Pod coordination" },
-    { name: "testimonies", type: "text", description: "Transformation stories" },
-    { name: "victories", type: "text", description: "Major wins" },
-    { name: "brother-support", type: "text", description: "Advice and encouragement" },
-  ]},
-  { name: "🎯 Command Center", emoji: "crosshair", channels: [
-    { name: "announcements", type: "announcement", description: "Major updates", readOnly: true },
-    { name: "weekly-directive", type: "text", description: "Weekly mission", readOnly: true },
-    { name: "campaigns", type: "text", description: "Campaign updates" },
-    { name: "newsletter", type: "text", description: "Newsletter archive", readOnly: true },
-    { name: "events", type: "text", description: "Upcoming events" },
-  ]},
-  { name: "👥 Pods", emoji: "people", channels: [
-    { name: "pod-alpha", type: "text", description: "Pod Alpha channel" },
-    { name: "pod-beta", type: "text", description: "Pod Beta channel" },
-  ]},
-  { name: "🔒 Operations", emoji: "lock", channels: [
-    { name: "officer-room", type: "text", description: "Leadership discussion", private: true },
-    { name: "moderation-log", type: "text", description: "Moderation records" },
-    { name: "campaign-planning", type: "text", description: "Future campaigns" },
-    { name: "portal-development", type: "text", description: "Platform development" },
-  ], private: true},
+  // 1. FORGE - The daily heart (Discipline pillar)
+  // This is where habits are built. Every brother reports here daily.
+  { 
+    name: "⚡ FORGE", 
+    channels: [
+      { name: "roll-call", type: "text", description: "Daily check-in - REQUIRED. Report: Prayer ✅ Workout ✅ Work ✅", pinned: true },
+      { name: "daily-wins", type: "text", description: "Victories of the day. No matter how small." },
+      { name: "daily-failures", type: "text", description: "Honest accountability. What did you fail? Own it." },
+      { name: "fitness", type: "text", description: "Training, discipline, physical excellence" },
+    ]
+  },
+  // 2. CHAPEL - Faith foundation (Faith pillar)
+  // Spiritual formation. The most important category.
+  { 
+    name: "🙏 CHAPEL", 
+    channels: [
+      { name: "gospel", type: "text", description: "Daily Gospel readings. Bot-posted each morning.", pinned: true },
+      { name: "prayer-requests", type: "text", description: "Lift up intentions. Brothers pray." },
+      { name: "mass-attendance", type: "text", description: "Weekly Mass attendance confirmation" },
+      { name: "rosary", type: "text", description: "Rosary intentions and challenges" },
+    ]
+  },
+  // 3. PODS - Brotherhood & accountability (Brotherhood pillar)
+  // Where men hold each other accountable
+  { 
+    name: "🔥 PODS", 
+    channels: [
+      { name: "my-pod", type: "text", description: "Your pod channel - assigned automatically" },
+      { name: "pod-wins", type: "text", description: "Pod victories. Brothers building together." },
+      { name: "accountability", type: "text", description: "Call each other up. No excuses." },
+    ]
+  },
+  // 4. WORKSHOP - Building & shipping (Building pillar)
+  // What are you building? Ship or be shipped.
+  { 
+    name: "🛠️ WORKSHOP", 
+    channels: [
+      { name: "ship-log", type: "text", description: "Weekly output. What did you ship? REQUIRED.", pinned: true },
+      { name: "projects", type: "text", description: "Show your work. Apps, businesses, content." },
+      { name: "build-help", type: "text", description: "Technical questions. Get answers." },
+    ]
+  },
+  // 5. FORUM - Truth & intellectual formation (Truth pillar)
+  // Catholic intellectual tradition. Think clearly.
+  { 
+    name: "📖 FORUM", 
+    channels: [
+      { name: "books", type: "text", description: "What are you reading? Share insights." },
+      { name: "debates", type: "text", description: "Structured discussion. Attack ideas, not people." },
+      { name: "catechism", type: "text", description: "Catholic teaching. Questions and answers." },
+    ]
+  },
+  // 6. COMMAND - Leadership coordination
+  // Announcements and campaigns. Don't miss these.
+  { 
+    name: "🎯 COMMAND", 
+    channels: [
+      { name: "announcements", type: "announcement", description: "Major updates. Read these.", pinned: true },
+      { name: "campaigns", type: "text", description: "Active campaigns. Join one. Execute." },
+      { name: "events", type: "text", description: "Upcoming events. Pod meetings, workshops." },
+      { name: "newsletter", type: "text", description: "Archive of past newsletters", readOnly: true },
+    ]
+  },
+  // 7. Welcome - Entry point (static info)
+  { 
+    name: "👋 WELCOME", 
+    channels: [
+      { name: "welcome", type: "text", description: "Start here. Read the rules.", pinned: true },
+      { name: "mission", type: "text", description: "Why we exist", readOnly: true },
+      { name: "constitution", type: "text", description: "Community expectations", readOnly: true },
+      { name: "introductions", type: "text", description: "Introduce yourself - REQUIRED" },
+      { name: "faq", type: "text", description: "Common questions", readOnly: true },
+    ]
+  },
+  // 8. OPS - Private leadership channels (Officer+ only)
+  { 
+    name: "🔒 OPS", 
+    channels: [
+      { name: "officer-room", type: "text", description: "Leadership discussion", private: true },
+      { name: "mod-log", type: "text", description: "Moderation records", private: true },
+      { name: "planning", type: "text", description: "Campaign planning, content calendar", private: true },
+    ],
+    private: true
+  },
 ];
 
+// Voice channels - keep minimal, add more as needed
+const VOICE_CHANNELS = [
+  { name: "☀️ Morning Prayer", description: "Daily prayer - 6:30 AM" },
+  { name: "🔥 Pod Meeting", description: "Weekly pod accountability call" },
+  { name: "💪 Deep Work", description: "Silent work - mics muted" },
+];
+
+// Roles based on docs/05_ROLES_AND_PERMISSIONS.md
 const ROLES = [
-  // Rank roles (in order of progression)
-  { name: "Visitor", color: "Grey", hoist: false, position: 1 },
-  { name: "Initiate", color: "Blue", hoist: false, position: 2 },
-  { name: "Brother", color: "Green", hoist: true, position: 3 },
-  { name: "Veteran", color: "DarkGreen", hoist: true, position: 4 },
-  { name: "Captain", color: "Orange", hoist: true, position: 5 },
-  { name: "Officer", color: "Purple", hoist: true, position: 6 },
-  { name: "Mentor", color: "Gold", hoist: true, position: 7 },
-  { name: "Steward", color: "Red", hoist: true, position: 8 },
-  // Functional roles
-  { name: "Pod Leader", color: "Cyan", hoist: true },
-  { name: "Builder", color: "Yellow", hoist: false },
-  { name: "Moderator", color: "DarkRed", hoist: true },
+  // Core Rank Roles (formation progression)
+  { name: "Visitor", color: "Grey", hoist: false, position: 1, type: "rank" },
+  { name: "Initiate", color: "Blue", hoist: false, position: 2, type: "rank" },
+  { name: "Brother", color: "Green", hoist: true, position: 3, type: "rank" },
+  { name: "Veteran", color: "DarkGreen", hoist: true, position: 4, type: "rank" },
+  { name: "Captain", color: "Orange", hoist: true, position: 5, type: "rank" },
+  { name: "Officer", color: "Purple", hoist: true, position: 6, type: "rank" },
+  { name: "Mentor", color: "Gold", hoist: true, position: 7, type: "rank" },
+  { name: "Steward", color: "Red", hoist: true, position: 8, type: "rank" },
+  
+  // Functional Roles
+  { name: "Pod Leader", color: "Cyan", hoist: true, type: "functional" },
+  { name: "Builder", color: "Yellow", hoist: false, type: "functional" },
+  { name: "Moderator", color: "DarkRed", hoist: true, type: "functional" },
+  
+  // Special/Achievement Roles
+  { name: "Verified Builder", color: "LuminousVividPink", hoist: false, type: "special" },
+  { name: "Top Contributor", color: "LightOrange", hoist: false, type: "special" },
+  { name: "Streak Holder", color: "Fuchsia", hoist: false, type: "special" },
+  { name: "Certified Mentor", color: "DarkGold", hoist: false, type: "special" },
 ];
 
-// Welcome messages for key channels
+// Welcome messages for key channels - action-oriented, masculine
 const WELCOME_MESSAGES: Record<string, { title: string; content: string }> = {
   "welcome": {
-    title: "⚔️ Welcome to The Argent Order",
-    content: `**Catholic Formation for Builders**
+    title: "⚔️ THE ARGENT ORDER",
+    content: `**Catholic Men. Forged in Discipline. Building Legacy.**
 
-You have entered a brotherhood of men committed to faith, discipline, and building.
-
-**What We Are:**
-A Catholic men's formation community focused on becoming men of virtue who create lasting value.
+You're now part of a brotherhood of men who refuse to be average.
 
 **The Five Pillars:**
-• Faith - Prayer, Scripture, Mass
-• Discipline - Fitness, habits, execution
-• Brotherhood - Accountability, pods, relationships
-• Building - Projects, skills, creation
-• Truth - Catholic intellectual tradition
+• ⚡ Discipline - Daily execution
+• 🙏 Faith - Spiritual formation  
+• 🔥 Brotherhood - Accountability
+• 🛠️ Building - Create or be consumed
+• 📖 Truth - Think clearly
 
-**First Steps:**
+**What we do here:**
+Every day. No excuses. No spectators.
+
+**Start here:**
 1. Read #mission and #constitution
-2. Complete #start-here
-3. Introduce yourself in #introductions
-4. Use /link to connect your portal account
-5. Use /sync to get your rank role
+2. Introduce yourself in #introductions
+3. Complete #roll-call daily
+4. Ship something weekly in #ship-log
 
-**No spectators. Only brothers.**`
+**The standard is high. The brotherhood is real.**
+
+No mediocre men. Only brothers.`
+  },
+  "roll-call": {
+    title: "📋 DAILY ROLL CALL - REQUIRED",
+    content: `**Every day. Before noon.**
+
+Post your status:
+
+\`\`\`
+Prayer: ✅/❌
+Workout: ✅/❌  
+Work: What you did today
+\`\`\`
+
+**This is non-negotiable.**
+
+Miss 3 days without reason = flagged
+Miss 7 days = removal from the Order
+
+**Example:**
+> Prayer: ✅
+> Workout: ✅
+> Work: Shipped landing page v2
+
+No excuses. Own your day.`
   },
   "mission": {
-    title: "🎯 Our Mission",
-    content: `**The Argent Order exists to form men who:**
+    title: "🎯 OUR MISSION",
+    content: `**We form men who:**
 
-**1. Pursue Holiness**
-Through daily prayer, regular Sacraments, and deep Catholic faith.
+**1. Execute**
+Daily habits. No excuses. Ship or die.
 
-**2. Build with Purpose**
-Creating projects, businesses, and skills that outlive us.
+**2. Build**
+Projects. Businesses. Content. Skills.
+Leave something behind.
 
 **3. Hold Each Other Accountable**
-Through pods, weekly meetings, and honest brotherhood.
+Pods. Check-ins. No man left behind.
 
 **4. Think Clearly**
-Engaging the Catholic intellectual tradition with rigor.
+Catholic tradition. Intellectual rigor.
+Not snowflakes. Not lukewarm.
 
-**Our Goal:**
-Not mere community, but formation. Not entertainment, but execution. Not discussion, but transformation.
+**The Goal:**
+Not community. Transformation.
+Not discussion. Execution.
+Not comfort. Forging.
 
 *"In sterling we trust."*`
   },
   "constitution": {
-    title: "📜 The Argent Order Constitution",
+    title: "📜 THE CONSTITUTION",
     content: `**Core Principles**
 
-**I am my brother's keeper.**
-We hold each other accountable. We do not let brothers fade.
+**Execute or leave.**
+No spectators. No passengers.
 
-**Formation over comfort.**
-We choose growth over ease. Every day counts.
+**Accountability over comfort.**
+We push each other. We don't enable excuses.
 
-**Action over words.**
-We ship. We execute. We leave something behind.
+**Ship or be shipped.**
+Build something. Create value. Leave a legacy.
 
 **Truth over diplomacy.**
-We speak honestly, with charity. No snowflakes.
+Speak clearly. Challenge ideas. No snowflakes.
 
-**The Order protects:**
-• Catholic Orthodoxy
-• Brotherhood
-• Formation
-• Safety
-• Mission
+**Catholic. Orthodox. Uncompromising.**
+We hold to the faith. This is not negotiable.
 
 **The Order removes:**
-• Heresy
-• Harassment
-• Pornography
 • Chronic disengagement
+• Distraction culture
+• Heresy or false teaching
+• Pornography or degeneracy
 • Disruption of formation
 
-*Every brother agrees to these terms by joining.*`
+**This is not a social club.**
+This is a forge.`
   },
-  "start-here": {
-    title: "📋 Getting Started",
-    content: `**Your First 72 Hours**
+  "introductions": {
+    title: "📝 INTRODUCE YOURSELF - REQUIRED",
+    content: `**Tell us who you are.**
 
-**Day 1:**
-• Read #welcome, #mission, #constitution
-• Connect Discord to portal: /link
-• Sync your role: /sync
+Format:
+\`\`\`
+Name:
+Age:
+Vocation (single/married/priest):
+Location:
+What you're building:
+Why you joined:
+\`\`\`
 
-**Day 2:**
-• Introduce yourself in #introductions
-• Join a pod (ask in #accountability-pods)
-• Complete your first #roll-call
+**Example:**
+> Name: Mike
+> Age: 32
+> Married with 2 kids
+> Austin, TX
+> Building: SaaS startup
+> Joined: Need accountability to execute
 
-**Day 3:**
-• Pick a campaign: /campaign list
-• Set up your Rule of Life
-• Start your streak
+Be real. We're brothers here.`
+  },
+  "ship-log": {
+    title: "📦 WEEKLY SHIP LOG - REQUIRED",
+    content: `**Every Sunday. What did you ship?**
 
-**Required Commands:**
-• /link - Connect portal account
-• /sync - Get your rank role
-• /checkin - Daily formation check-in
-• /pray - Log prayer
+Format:
+\`\`\`
+Week of [date]:
+- [Project]: What you did
+- [Skill]: What you learned
+- [Content]: What you published
+\`\`\`
 
-*"The forge is hot. Begin hammering."*`
+**This is how we measure growth.**
+
+Ship something or explain why you didn't.
+No week passes without output.
+
+**Example:**
+> Week of Jan 15:
+> - Argent Portal: Set up auth system
+> - Marketing: Read "100M Offers"
+> - Newsletter: Published issue #3`
   },
   "faq": {
-    title: "❓ Frequently Asked Questions",
-    content: `**Q: I'm not very religious. Can I join?**
-A: This is a Catholic formation community. You don't need to be perfect, just willing to grow in faith.
+    title: "❓ QUESTIONS",
+    content: `**Q: I'm not very religious.**
+A: You will be. Faith is a pillar here.
 
-**Q: What if I don't have a project or business?**
-A: Building is a pillar, not a prerequisite. Start where you are.
+**Q: I don't have a project.**
+A: Start one. Building is non-negotiable.
 
-**Q: How much time does this require?**
-A: Formation is daily work. Plan 30-60 minutes minimum daily.
+**Q: Can I lurk?**
+A: No. Roll call is required. We track participation.
 
-**Q: What are pods?**
-A: Small groups of 4-8 men who hold each other accountable. You'll be assigned one.
+**Q: What if I fail?**
+A: Own it. We celebrate honesty over performance.
 
-**Q: Can I just lurk?**
-A: No. Brotherhood requires participation. We track engagement.
+**Q: Married with kids?**
+A: Good. Formation serves your vocation.
 
-**Q: I'm a married man/father. Is this for me?**
-A: Yes. Many brothers are married with families. Formation serves your vocation.
-
-**Q: Is this a trad Catholic thing?**
-A: We hold to Catholic orthodoxy. How you live that is between you and your priest.`
-  },
-  "verification": {
-    title: "🔐 Account Verification",
-    content: `**Verify your account to access The Argent Order.**
-
-1. Use **/link** to generate a connection code
-2. Enter the code on The Argent Order portal
-3. Use **/sync** to get your rank role
-
-This connects your Discord account to your formation profile.
-
-If you need help, ask in #brother-support.`
+**Q: How much time?**
+A: 30-60 min daily minimum. This is serious.`
   }
 };
 
@@ -327,6 +391,11 @@ async function setupServer(guild: any) {
   // Get the @everyone role
   const everyoneRole = guild.roles.everyone;
 
+  // Helper to check if a role can view private channels
+  const canViewPrivate = (roleName: string): boolean => {
+    return ["Officer", "Mentor", "Steward", "Captain"].includes(roleName);
+  };
+
   // Create categories and channels
   for (const catDef of CATEGORIES) {
     // Check if category already exists
@@ -340,6 +409,17 @@ async function setupServer(guild: any) {
         type: ChannelType.GuildCategory,
       });
       categoriesCreated++;
+    }
+
+    // Set category-level permissions for private categories
+    if (catDef.private) {
+      const overwrites: any[] = [{ id: everyoneRole.id, deny: [PermissionFlagsBits.ViewChannel] }];
+      for (const [name, role] of roleMap) {
+        if (canViewPrivate(name)) {
+          overwrites.push({ id: role.id, allow: [PermissionFlagsBits.ViewChannel] });
+        }
+      }
+      await category.edit({ permissionOverwrites: overwrites });
     }
 
     for (const chDef of catDef.channels) {
@@ -361,18 +441,14 @@ async function setupServer(guild: any) {
         };
 
         // Set permissions for private channels
-        if (chDef.private) {
-          const officerRole = roleMap.get("Officer");
-          const mentorRole = roleMap.get("Mentor");
-          
-          channelOptions.permissionOverwrites = [
-            {
-              id: everyoneRole.id,
-              deny: [PermissionFlagsBits.ViewChannel],
-            },
-            ...(officerRole ? [{ id: officerRole.id, allow: [PermissionFlagsBits.ViewChannel] }] : []),
-            ...(mentorRole ? [{ id: mentorRole.id, allow: [PermissionFlagsBits.ViewChannel] }] : []),
-          ];
+        if (chDef.private || catDef.private) {
+          const overwrites: any[] = [{ id: everyoneRole.id, deny: [PermissionFlagsBits.ViewChannel] }];
+          for (const [name, role] of roleMap) {
+            if (canViewPrivate(name)) {
+              overwrites.push({ id: role.id, allow: [PermissionFlagsBits.ViewChannel] });
+            }
+          }
+          channelOptions.permissionOverwrites = overwrites;
         }
 
         const channel = await guild.channels.create(channelOptions);
@@ -387,11 +463,7 @@ async function setupServer(guild: any) {
             .setColor(ARGENT_SILVER)
             .setTimestamp();
 
-          // Pin the message for read-only channels
-          const welcomeMsg = await channel.send({ embeds: [welcomeEmbed] });
-          if (chDef.readOnly) {
-            await channel.messages.fetch({ limit: 1 });
-          }
+          await channel.send({ embeds: [welcomeEmbed] });
         }
       }
     }
@@ -399,34 +471,25 @@ async function setupServer(guild: any) {
 
   // Create voice channels category
   let voiceCategory = existingChannels.find(
-    (c: any) => c.type === ChannelType.GuildCategory && c.name === "🔊 Voice Channels"
+    (c: any) => c.type === ChannelType.GuildCategory && c.name === "🔊 VOICE"
   );
 
   if (!voiceCategory) {
     voiceCategory = await guild.channels.create({
-      name: "🔊 Voice Channels",
+      name: "🔊 VOICE",
       type: ChannelType.GuildCategory,
     });
     categoriesCreated++;
   }
 
-  const voiceChannels = [
-    "Morning Prayer",
-    "Evening Prayer",
-    "Deep Work Hall",
-    "Study Hall",
-    "Builder Roundtable",
-    "Brotherhood Lounge",
-  ];
-
-  for (const vc of voiceChannels) {
+  for (const vc of VOICE_CHANNELS) {
     const existingVC = existingChannels.find(
-      (c: any) => c.name === vc && c.parentId === voiceCategory.id
+      (c: any) => c.name === vc.name && c.parentId === voiceCategory.id
     );
     
     if (!existingVC) {
       await guild.channels.create({
-        name: vc,
+        name: vc.name,
         type: ChannelType.GuildVoice,
         parent: voiceCategory.id,
       });
