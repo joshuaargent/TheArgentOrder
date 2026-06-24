@@ -1194,3 +1194,101 @@ Bot commands: /certifications, /certification-progress, /certification-status
 Ranks indicate trust. Certifications indicate competence. Neither exists for status. Both exist to support formation, service, responsibility, and mission.
 
 The highest achievement in The Argent Order is becoming a man who can be trusted with responsibility and who consistently serves God, family, community, and society.
+
+---
+
+## CAMPAIGN TIERS
+
+### Tier I: Quick Wins (7 Days)
+Build momentum through achievable quick victories.
+
+### Tier II: Habit Development (30 Days)
+Establish consistent patterns and behaviors.
+
+### Tier III: Identity Change (90 Days)
+Transform how men see themselves and their capabilities.
+
+### Tier IV: Major Transformation (Seasonal)
+Deep, lasting change in character and habits.
+
+---
+
+## CAMPAIGN TEMPLATE
+
+Every campaign should include:
+
+**Name:** Campaign title
+**Theme:** Core focus area
+**Duration:** Length of campaign
+**Objective:** What transformation is sought
+**Daily Requirements:** Tasks required each day
+**Weekly Requirements:** Weekly checkpoints
+**Pod Requirements:** Group accountability elements
+**Completion Criteria:** How success is measured
+**Reflection Questions:** Daily/weekly prompts
+**Graduation Requirements:** What earns completion
+
+---
+
+## ANNUAL CAMPAIGN CALENDAR
+
+**Quarter 1:** Foundation - Rule Of Life, Prayer, Discipline focus
+**Quarter 2:** Building - Work, Skills, Projects focus
+**Quarter 3:** Leadership - Brotherhood, Responsibility, Service focus
+**Quarter 4:** Reflection - Stewardship, Long-Term Planning focus
+
+---
+
+## CAMPAIGN REWARDS
+
+Rewards exist to reinforce growth. Never to replace virtue.
+
+**Examples:**
+- Certificates
+- Role Progression
+- Portal Achievements
+- Campaign Badges
+- Recognition
+- Leadership Eligibility
+
+---
+
+## CAMPAIGN ANALYTICS
+
+**Track:**
+- Join Rate
+- Completion Rate
+- Retention Rate
+- Pod Participation
+- Daily Adherence
+- Transformation Stories
+
+---
+
+## SUCCESS METRICS
+
+**Excellent Campaign:** 80%+ Completion
+**Good Campaign:** 60%+ Completion
+**Weak Campaign:** Below 50% (Requires redesign)
+
+---
+
+## TESTIMONY SYSTEM
+
+Every major campaign concludes with reflection on:
+
+- What changed?
+- What was difficult?
+- What did you learn?
+- How did God work through the process?
+- Would you recommend it?
+
+---
+
+## Final Principle
+
+Campaigns are the engine of transformation.
+
+Every campaign must ultimately help men become: More Faithful, More Disciplined, More Competent, More Responsible, More Brotherly, More Holy.
+
+If a campaign does not contribute to one of these outcomes, it should not exist.
