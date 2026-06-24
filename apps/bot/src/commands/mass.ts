@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("mass")
@@ -22,7 +25,7 @@ export default {
 
     if (!discordAccount) {
       await interaction.editReply({
-        content: "Please link your Discord account to The Argent Order portal first.",
+        content: "Use **/link** to connect your Discord account first.",
       });
       return;
     }
@@ -75,8 +78,9 @@ export default {
       .addFields(
         { name: "Points Earned", value: `**+${points}**`, inline: true }
       )
-      .setColor(0x3B82F6)
+      .setColor(ARGENT_SILVER)
       .setTimestamp();
+      .setFooter({ text: "The Eucharist strengthens your formation." })
 
     await interaction.editReply({ embeds: [embed] });
   },

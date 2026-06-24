@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("campaign")
@@ -68,7 +71,7 @@ async function listCampaigns(interaction: ChatInputCommandInteraction) {
   const embed = new EmbedBuilder()
     .setTitle("📜 Available Campaigns")
     .setDescription("Join a campaign to start your formation journey")
-    .setColor(0x0099ff);
+    .setColor(ARGENT_SILVER);
 
   for (const campaign of campaigns.slice(0, 10)) {
     embed.addFields({
@@ -160,7 +163,7 @@ async function joinCampaign(interaction: ChatInputCommandInteraction) {
       { name: "Duration", value: `${campaign.duration_days} days`, inline: true },
       { name: "Type", value: campaign.campaign_type, inline: true }
     )
-    .setColor(0x22c55e);
+    .setColor(ARGENT_SILVER);
 
   await interaction.editReply({ embeds: [embed] });
 }
@@ -194,7 +197,7 @@ async function showProgress(interaction: ChatInputCommandInteraction) {
 
   const embed = new EmbedBuilder()
     .setTitle("🎯 Your Campaigns")
-    .setColor(0x0099ff);
+    .setColor(ARGENT_SILVER);
 
   for (const enrollment of enrollments) {
     const campaign = enrollment.campaigns;

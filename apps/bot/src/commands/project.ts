@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("project")
@@ -57,7 +60,7 @@ async function listProjects(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Use **/link** to connect your Discord account first",
     });
     return;
   }
@@ -78,7 +81,7 @@ async function listProjects(interaction: ChatInputCommandInteraction) {
 
   const embed = new EmbedBuilder()
     .setTitle("🏗️ Your Projects")
-    .setColor(0x22c55e);
+    .setColor(ARGENT_SILVER);
 
   for (const project of projects) {
     embed.addFields({
@@ -103,7 +106,7 @@ async function updateProject(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Use **/link** to connect your Discord account first",
     });
     return;
   }
@@ -146,7 +149,7 @@ async function updateProject(interaction: ChatInputCommandInteraction) {
       { name: "Progress", value: progress, inline: false },
       { name: "Points Earned", value: `**+${points}**`, inline: true }
     )
-    .setColor(0x22c55e);
+    .setColor(ARGENT_SILVER);
 
   await interaction.editReply({ embeds: [embed] });
 }

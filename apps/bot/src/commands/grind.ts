@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("grind")
@@ -38,16 +41,19 @@ export default {
       .single();
 
     if (!discordAccount) {
-      await interaction.editReply({
-        content: "Please link your Discord account to The Argent Order portal first.",
-      });
+      const embed = new EmbedBuilder()
+        .setTitle("⚠️ Account Not Linked")
+        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setColor(0xf59e0b)
+        .setTimestamp();
+      await interaction.editReply({ embeds: [embed] });
       return;
     }
 
     // Calculate points: 20 points per hour, bonus for 4+ hours
     let points = hours * 20;
-    if (hours >= 4) points += 50; // Bonus for marathon sessions
-    if (hours >= 8) points += 100; // Double bonus for full day
+    if (hours >= 4) points += 50;
+    if (hours >= 8) points += 100;
 
     // Insert formation event
     const { error } = await supabase.from("formation_events").insert({
@@ -64,7 +70,7 @@ export default {
     if (error) {
       console.error("Failed to log grind:", error);
       await interaction.editReply({
-        content: "Failed to log grind session. Please try again.",
+        content: "⚠️ Failed to log grind session. Please try again.",
       });
       return;
     }
@@ -77,16 +83,16 @@ export default {
       .single();
 
     const embed = new EmbedBuilder()
-      .setTitle("🏋️ Grind Session Logged")
-      .setDescription(project ? `Project: **${project}**` : undefined)
+      .setTitle("🏗️ Grind Session Logged")
+      .setDescription(project ? `Project: **${project}**` : "Building session completed.")
       .addFields(
-        { name: "Duration", value: `${hours} hour${hours > 1 ? "s" : ""}`, inline: true },
+        { name: "Duration", value: `${hours}h`, inline: true },
         { name: "Points Earned", value: `**+${points}**`, inline: true },
         { name: "Building Score", value: String(scores?.building_score || 0), inline: true }
       )
-      .setColor(0x00_ff_88)
+      .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "Keep building! A builder ships." });
+      .setFooter({ text: "A builder ships. Execute." });
 
     await interaction.editReply({ embeds: [embed] });
   },

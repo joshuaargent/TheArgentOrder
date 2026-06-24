@@ -5,6 +5,17 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
+const PILLAR_ICONS: Record<string, string> = {
+  faith: "✝️",
+  discipline: "⚔️",
+  brotherhood: "🤝",
+  building: "🏗️",
+  truth: "📖",
+};
+
 export default {
   data: new SlashCommandBuilder()
     .setName("profile")
@@ -28,10 +39,10 @@ export default {
 
       if (!discordAccount) {
         const embed = new EmbedBuilder()
-          .setTitle(`${targetUser.username}'s Profile`)
+          .setTitle(`${targetUser.username}'s Formation Profile`)
           .setThumbnail(targetUser.displayAvatarURL())
-          .setDescription("This user hasn't linked their Discord account to The Argent Order.")
-          .setColor(0x0099ff);
+          .setDescription("This brother hasn't linked their account yet.\nUse **/link** to connect your Discord account.")
+          .setColor(0xf59e0b);
         
         await interaction.editReply({ embeds: [embed] });
         return;
@@ -61,29 +72,32 @@ export default {
         .single();
 
       const embed = new EmbedBuilder()
-        .setTitle(`${profile?.display_name || targetUser.username}'s Profile`)
+        .setTitle(`${profile?.display_name || targetUser.username}'s Formation Profile`)
         .setThumbnail(targetUser.displayAvatarURL())
         .addFields(
-          { name: "Rank", value: userRank?.ranks?.name || "Visitor", inline: true },
-          { name: "Formation Score", value: String(scores?.overall_score || 0), inline: true },
-          { name: "Faith", value: String(scores?.faith_score || 0), inline: true },
-          { name: "Discipline", value: String(scores?.discipline_score || 0), inline: true },
-          { name: "Brotherhood", value: String(scores?.brotherhood_score || 0), inline: true },
-          { name: "Building", value: String(scores?.building_score || 0), inline: true },
-          { name: "Truth", value: String(scores?.truth_score || 0), inline: true }
+          { name: "Rank", value: `**${userRank?.ranks?.name || "Initiate"}**`, inline: true },
+          { name: "Overall Score", value: `**${scores?.overall_score || 0}**`, inline: true }
         )
-        .setColor(0x0099ff)
-        .setTimestamp();
+        .addFields(
+          { name: `${PILLAR_ICONS.faith} Faith`, value: String(scores?.faith_score || 0), inline: true },
+          { name: `${PILLAR_ICONS.discipline} Discipline`, value: String(scores?.discipline_score || 0), inline: true },
+          { name: `${PILLAR_ICONS.brotherhood} Brotherhood`, value: String(scores?.brotherhood_score || 0), inline: true },
+          { name: `${PILLAR_ICONS.building} Building`, value: String(scores?.building_score || 0), inline: true },
+          { name: `${PILLAR_ICONS.truth} Truth`, value: String(scores?.truth_score || 0), inline: true }
+        )
+        .setColor(ARGENT_SILVER)
+        .setTimestamp()
+        .setFooter({ text: "Execute your formation. Every day counts." });
 
       await interaction.editReply({ embeds: [embed] });
     } catch (error) {
       console.error("Error fetching profile:", error);
       
       const embed = new EmbedBuilder()
-        .setTitle(`${targetUser.username}'s Profile`)
+        .setTitle(`${targetUser.username}'s Formation Profile`)
         .setThumbnail(targetUser.displayAvatarURL())
         .setDescription("Unable to fetch profile data. Please try again later.")
-        .setColor(0xff0000);
+        .setColor(0xef4444);
       
       await interaction.editReply({ embeds: [embed] });
     }

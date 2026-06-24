@@ -5,12 +5,21 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 const ACTIVITY_POINTS: Record<string, number> = {
   prayer: 10,
   workout: 10,
   deep_work: 15,
   scripture: 5,
   fellowship: 10,
+};
+
+const PILLAR_ICONS: Record<string, string> = {
+  faith: "✝️",
+  discipline: "⚔️",
+  building: "🏗️",
 };
 
 export default {
@@ -65,9 +74,12 @@ export default {
       .single();
 
     if (!discordAccount) {
-      await interaction.editReply({
-        content: "Please link your Discord account to The Argent Order portal first.",
-      });
+      const embed = new EmbedBuilder()
+        .setTitle("⚠️ Account Not Linked")
+        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setColor(0xf59e0b)
+        .setTimestamp();
+      await interaction.editReply({ embeds: [embed] });
       return;
     }
 
@@ -114,28 +126,28 @@ export default {
 
     let streak = 0;
     if (recentEvents && recentEvents.length > 0) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
       const uniqueDays = new Set(
         recentEvents.map((e) => new Date(e.created_at).toISOString().split("T")[0])
       );
       streak = uniqueDays.size;
     }
 
-    const activitiesText = activities.map((a) => `${a.name} (+${a.points})`).join("\n") || "None";
+    const activitiesText = activities.map((a) => `${PILLAR_ICONS[a.pillar] || ""} ${a.name} (+${a.points})`).join("\n") || "None";
 
     const embed = new EmbedBuilder()
-      .setTitle("✅ Daily Check-In Complete")
+      .setTitle("⚔️ Daily Check-In Complete")
+      .setDescription(activities.length > 0 ? "" : "No activities logged today.")
       .addFields(
         { name: "Activities", value: activitiesText, inline: true },
         { name: "Points Earned", value: `**+${totalPoints}**`, inline: true },
         { name: "🔥 Streak", value: `${streak} days`, inline: true }
       )
-      .setColor(0x00_99_ff)
-      .setTimestamp();
+      .setColor(ARGENT_SILVER)
+      .setTimestamp()
+      .setFooter({ text: "Execute your formation every day." });
 
     if (note) {
-      embed.setFooter({ text: `Note: ${note}` });
+      embed.addFields({ name: "Note", value: note, inline: false });
     }
 
     await interaction.editReply({ embeds: [embed] });

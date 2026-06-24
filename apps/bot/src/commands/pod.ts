@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("pod")
@@ -59,7 +62,7 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Use **/link** to connect your Discord account first",
     });
     return;
   }
@@ -74,7 +77,7 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
     const embed = new EmbedBuilder()
       .setTitle("👥 No Pod")
       .setDescription("You are not in a pod yet. Contact your captain or officer to be assigned to a pod.")
-      .setColor(0xff9900);
+      .setColor(ARGENT_SILVER);
     await interaction.editReply({ embeds: [embed] });
     return;
   }
@@ -95,7 +98,7 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
       { name: "Status", value: "Active", inline: true },
       { name: "Captain", value: "Contact officer", inline: true }
     )
-    .setColor(0x22c55e);
+    .setColor(ARGENT_SILVER);
 
   if (meetings && meetings.length > 0) {
     const nextMeeting = meetings[0];
@@ -118,7 +121,7 @@ async function showPodMembers(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Use **/link** to connect your Discord account first",
     });
     return;
   }
@@ -144,7 +147,7 @@ async function showPodMembers(interaction: ChatInputCommandInteraction) {
   const embed = new EmbedBuilder()
     .setTitle("👥 Pod Members")
     .setDescription(`${members?.length || 0} members`)
-    .setColor(0x0099ff);
+    .setColor(ARGENT_SILVER);
 
   if (members && members.length > 0) {
     for (const member of members.slice(0, 10)) {
@@ -171,7 +174,7 @@ async function shareWin(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Use **/link** to connect your Discord account first",
     });
     return;
   }
@@ -189,7 +192,7 @@ async function shareWin(interaction: ChatInputCommandInteraction) {
     .setTitle("🏆 Win Shared!")
     .setDescription(message)
     .setFooter({ text: "Keep building!" })
-    .setColor(0x22c55e);
+    .setColor(ARGENT_SILVER);
 
   await interaction.editReply({ embeds: [embed] });
 }

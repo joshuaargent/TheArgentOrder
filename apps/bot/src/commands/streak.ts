@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("streak")
@@ -21,9 +24,12 @@ export default {
       .single();
 
     if (!discordAccount) {
-      await interaction.editReply({
-        content: "Please link your Discord account to The Argent Order portal first.",
-      });
+      const embed = new EmbedBuilder()
+        .setTitle("⚠️ Account Not Linked")
+        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setColor(0xf59e0b)
+        .setTimestamp();
+      await interaction.editReply({ embeds: [embed] });
       return;
     }
 
@@ -45,13 +51,10 @@ export default {
         .filter((e) => e.pillar === pillar)
         .map((e) => e.created_at.split("T")[0]);
 
-      // Get unique days with activity
       const uniqueDays = [...new Set(pillarEvents)];
-      uniqueDays.sort((a, b) => b.localeCompare(a)); // Sort descending
+      uniqueDays.sort((a, b) => b.localeCompare(a));
 
-      // Calculate current streak
       let streak = 0;
-      const today = new Date().toISOString().split("T")[0];
       let checkDate = new Date();
 
       for (let i = 0; i < 90; i++) {
@@ -59,7 +62,6 @@ export default {
         if (uniqueDays.includes(dateStr)) {
           streak++;
         } else if (i > 0) {
-          // Only break if we're past today (allow today to be missing)
           break;
         }
         checkDate.setDate(checkDate.getDate() - 1);
@@ -70,8 +72,7 @@ export default {
     }
 
     // Overall streak
-    const allDays = (events || [])
-      .map((e) => e.created_at.split("T")[0]);
+    const allDays = (events || []).map((e) => e.created_at.split("T")[0]);
     const uniqueAllDays = [...new Set(allDays)].sort((a, b) => b.localeCompare(a));
 
     let overallStreak = 0;
@@ -99,17 +100,18 @@ export default {
       .setTitle("🔥 Formation Streaks")
       .addFields(
         { name: "Overall Streak", value: `**${overallStreak}** days`, inline: true },
-        { name: "Longest Ever", value: `**${longestOverall}** days`, inline: true },
-        { name: "\u200B", value: "\u200B" },
+        { name: "Longest Ever", value: `**${longestOverall}** days`, inline: true }
+      )
+      .addFields(
         { name: `${PILLAR_ICONS.faith} Faith`, value: `${streaks.faith} days 🔥`, inline: true },
         { name: `${PILLAR_ICONS.discipline} Discipline`, value: `${streaks.discipline} days 🔥`, inline: true },
         { name: `${PILLAR_ICONS.brotherhood} Brotherhood`, value: `${streaks.brotherhood} days 🔥`, inline: true },
         { name: `${PILLAR_ICONS.building} Building`, value: `${streaks.building} days 🔥`, inline: true },
         { name: `${PILLAR_ICONS.truth} Truth`, value: `${streaks.truth} days 🔥`, inline: true }
       )
-      .setColor(0xff_99_00)
+      .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "Keep building your streaks every day!" });
+      .setFooter({ text: "Consistency is formation. Execute daily." });
 
     await interaction.editReply({ embeds: [embed] });
   },

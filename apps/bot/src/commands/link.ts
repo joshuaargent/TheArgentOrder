@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_SILVER = 0xa1a1aa;
+
 export default {
   data: new SlashCommandBuilder()
     .setName("link")
@@ -23,8 +26,8 @@ export default {
     if (existingLink) {
       const embed = new EmbedBuilder()
         .setTitle("🔗 Account Already Linked")
-        .setDescription("Your Discord account is already connected to The Argent Order portal.")
-        .setColor(0xff_99_00);
+        .setDescription("Your Discord account is already connected to The Argent Order portal.\n\nUse **/sync** to update your Discord role.")
+        .setColor(ARGENT_SILVER);
       
       await interaction.editReply({ embeds: [embed] });
       return;
@@ -32,7 +35,7 @@ export default {
 
     // Generate a unique link code
     const linkCode = generateLinkCode();
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     // Store the link code
     const { error } = await supabase.from("discord_link_codes").insert({
@@ -44,7 +47,7 @@ export default {
     if (error) {
       console.error("Failed to create link code:", error);
       await interaction.editReply({
-        content: "Failed to generate link code. Please try again.",
+        content: "⚠️ Failed to generate link code. Please try again.",
       });
       return;
     }
@@ -52,15 +55,16 @@ export default {
     const embed = new EmbedBuilder()
       .setTitle("🔗 Link Your Account")
       .setDescription(
-        `Use this code on The Argent Order portal to link your Discord account:\n\n` +
+        `Use this code on The Argent Order portal to connect your Discord account:\n\n` +
         `**Code: \`${linkCode}\`**\n\n` +
         `This code expires in 10 minutes.`
       )
       .addFields(
         { name: "Expires", value: expiresAt.toLocaleTimeString(), inline: true }
       )
-      .setColor(0x00_ff_88)
-      .setTimestamp();
+      .setColor(ARGENT_SILVER)
+      .setTimestamp()
+      .setFooter({ text: "After linking, use /sync to get your rank role." });
 
     await interaction.editReply({ embeds: [embed] });
   },
