@@ -17,16 +17,16 @@ export default {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`Error executing command ${interaction.commandName}:`, error);
+      console.error(`Command failed: ${interaction.commandName}:`, error);
       
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
-          content: "There was an error executing this command!",
+          content: "⚠️ Command failed. Try again or contact an officer.",
           ephemeral: true,
         });
       } else {
         await interaction.reply({
-          content: "There was an error executing this command!",
+          content: "⚠️ Command failed. Try again or contact an officer.",
           ephemeral: true,
         });
       }

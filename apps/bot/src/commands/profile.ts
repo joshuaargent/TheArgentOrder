@@ -39,7 +39,7 @@ export default {
 
       if (!discordAccount) {
         const embed = new EmbedBuilder()
-          .setTitle(`${targetUser.username}'s Formation Profile`)
+          .setTitle(`${targetUser.username}'s FORMATION PROFILE`)
           .setThumbnail(targetUser.displayAvatarURL())
           .setDescription("This brother hasn't linked their account yet.\nUse **/link** to connect your Discord account.")
           .setColor(0xf59e0b);
@@ -72,7 +72,7 @@ export default {
         .single();
 
       const embed = new EmbedBuilder()
-        .setTitle(`${profile?.display_name || targetUser.username}'s Formation Profile`)
+        .setTitle(`${profile?.display_name || targetUser.username}'s FORMATION PROFILE`)
         .setThumbnail(targetUser.displayAvatarURL())
         .addFields(
           { name: "Rank", value: `**${userRank?.ranks?.name || "Initiate"}**`, inline: true },
@@ -87,14 +87,14 @@ export default {
         )
         .setColor(ARGENT_SILVER)
         .setTimestamp()
-        .setFooter({ text: "Execute your formation. Every day counts." });
+        .setFooter({ text: "Execute. Build. Lead. Every day." });
 
       await interaction.editReply({ embeds: [embed] });
     } catch (error) {
       console.error("Error fetching profile:", error);
       
       const embed = new EmbedBuilder()
-        .setTitle(`${targetUser.username}'s Formation Profile`)
+        .setTitle(`${targetUser.username}'s FORMATION PROFILE`)
         .setThumbnail(targetUser.displayAvatarURL())
         .setDescription("Unable to fetch profile data. Please try again later.")
         .setColor(0xef4444);

@@ -11,7 +11,7 @@ const ARGENT_SILVER = 0xa1a1aa;
 export default {
   data: new SlashCommandBuilder()
     .setName("link")
-    .setDescription("Generate a link code to connect your Discord account to The Argent Order portal"),
+    .setDescription("Backup: Generate a link code to connect your Discord account (OAuth is the primary flow)"),
 
   async execute(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
@@ -26,7 +26,7 @@ export default {
     if (existingLink) {
       const embed = new EmbedBuilder()
         .setTitle("🔗 Account Already Linked")
-        .setDescription("Your Discord account is already connected to The Argent Order portal.\n\nUse **/sync** to update your Discord role.")
+        .setDescription("Your Discord account is already connected.\n\nUse **/sync** to update your Discord role.")
         .setColor(ARGENT_SILVER);
       
       await interaction.editReply({ embeds: [embed] });
@@ -52,19 +52,23 @@ export default {
       return;
     }
 
+    const portalUrl = process.env.PORTAL_URL || "https://portal.theargentorder.com";
     const embed = new EmbedBuilder()
-      .setTitle("🔗 Link Your Account")
+      .setTitle("🔗 MANUAL LINK (BACKUP)")
       .setDescription(
-        `Use this code on The Argent Order portal to connect your Discord account:\n\n` +
-        `**Code: \`${linkCode}\`**\n\n` +
-        `This code expires in 10 minutes.`
+        `**Use the OAuth invite for direct access.**\n\n` +
+        `This is a backup flow if OAuth failed.\n\n` +
+        `**Code:** \`${linkCode}\`\n\n` +
+        `Enter this code at: ${portalUrl}/link\n\n` +
+        `Code expires in 10 minutes.`
       )
       .addFields(
+        { name: "Primary Flow", value: "Use the OAuth invite link for automatic linking", inline: false },
         { name: "Expires", value: expiresAt.toLocaleTimeString(), inline: true }
       )
       .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "After linking, use /sync to get your rank role." });
+      .setFooter({ text: "Execute. Build. Lead." });
 
     await interaction.editReply({ embeds: [embed] });
   },

@@ -60,7 +60,7 @@ async function listProjects(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Use **/link** to connect your Discord account first",
+      content: "Link your account with **/link**, or use OAuth invite to connect your Discord account first",
     });
     return;
   }
@@ -80,7 +80,7 @@ async function listProjects(interaction: ChatInputCommandInteraction) {
   }
 
   const embed = new EmbedBuilder()
-    .setTitle("🏗️ Your Projects")
+    .setTitle("🏗️ YOUR PROJECTS")
     .setColor(ARGENT_SILVER);
 
   for (const project of projects) {
@@ -106,7 +106,7 @@ async function updateProject(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Use **/link** to connect your Discord account first",
+      content: "Link your account with **/link**, or use OAuth invite to connect your Discord account first",
     });
     return;
   }
@@ -143,7 +143,7 @@ async function updateProject(interaction: ChatInputCommandInteraction) {
   });
 
   const embed = new EmbedBuilder()
-    .setTitle("📝 Project Updated!")
+    .setTitle("📝 PROJECT UPDATED!")
     .setDescription(`**${project.title}**`)
     .addFields(
       { name: "Progress", value: progress, inline: false },

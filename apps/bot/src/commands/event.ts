@@ -162,7 +162,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use OAuth invite to connect your Discord account first.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -293,7 +293,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use OAuth invite to connect your Discord account first.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -325,7 +325,7 @@ export default {
 
     if (attendees.includes(discordAccount.user_id)) {
       const embed = new EmbedBuilder()
-        .setTitle("ℹ️ Already Joined")
+        .setTitle("ℹ️ ALREADY JOINED")
         .setDescription("You're already registered for this event.")
         .setColor(0xf59e0b)
         .setTimestamp();
@@ -352,7 +352,7 @@ export default {
     const eventTypeInfo = EVENT_TYPES.find((t) => t.value === metadata.event_type);
 
     const embed = new EmbedBuilder()
-      .setTitle("✅ Registered!")
+      .setTitle("✅ REGISTERED!")
       .setDescription(`You're in for **${metadata.reason || "the event"}**`)
       .addFields(
         {
@@ -392,7 +392,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use OAuth invite to connect your Discord account first.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -425,7 +425,7 @@ export default {
 
     if (userIndex === -1) {
       const embed = new EmbedBuilder()
-        .setTitle("ℹ️ Not Registered")
+        .setTitle("ℹ️ Not REGISTERED")
         .setDescription("You weren't registered for this event.")
         .setColor(0xf59e0b)
         .setTimestamp();
@@ -450,7 +450,7 @@ export default {
     }
 
     const embed = new EmbedBuilder()
-      .setTitle("👋 Left Event")
+      .setTitle("👋 EVENT LEFT")
       .setDescription(`You've been removed from **${metadata.reason || "the event"}**`)
       .addFields({
         name: "Attendees",
@@ -487,7 +487,7 @@ export default {
 
     if (!events || events.length === 0) {
       const embed = new EmbedBuilder()
-        .setTitle("📅 Upcoming Events")
+        .setTitle("📅 UPCOMING EVENTS")
         .setDescription("No events scheduled.\nLeaders can create events with **/event create**.")
         .setColor(EVENT_BLUE)
         .setTimestamp();
@@ -509,7 +509,7 @@ export default {
     }).join("\n\n");
 
     const embed = new EmbedBuilder()
-      .setTitle("📅 Upcoming Events")
+      .setTitle("📅 UPCOMING EVENTS")
       .setDescription(eventList)
       .addFields({
         name: "RSVP",

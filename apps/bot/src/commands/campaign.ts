@@ -63,20 +63,20 @@ async function listCampaigns(interaction: ChatInputCommandInteraction) {
 
   if (!campaigns || campaigns.length === 0) {
     await interaction.editReply({
-      content: "No active campaigns available right now.",
+      content: "No active campaigns. Check back soon or contact an officer.",
     });
     return;
   }
 
   const embed = new EmbedBuilder()
-    .setTitle("📜 Available Campaigns")
-    .setDescription("Join a campaign to start your formation journey")
+    .setTitle("🎯 ACTIVE CAMPAIGNS")
+    .setDescription("**Pick one. Execute. Transform.**\n\nUse `/campaign join <slug>` to enroll.")
     .setColor(ARGENT_SILVER);
 
   for (const campaign of campaigns.slice(0, 10)) {
     embed.addFields({
-      name: campaign.title,
-      value: `${campaign.description}\nDuration: ${campaign.duration_days} days\nType: ${campaign.campaign_type}`,
+      name: `⚔️ ${campaign.title}`,
+      value: `${campaign.description}\n**Duration:** ${campaign.duration_days} days\n**Type:** ${campaign.campaign_type}`,
       inline: false,
     });
   }
@@ -96,7 +96,7 @@ async function joinCampaign(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account to The Argent Order portal first using /link",
+      content: "Link your account first with **/link**, or use the OAuth invite.",
     });
     return;
   }
@@ -110,7 +110,7 @@ async function joinCampaign(interaction: ChatInputCommandInteraction) {
 
   if (!campaign) {
     await interaction.editReply({
-      content: `Campaign "${slug}" not found. Use /campaign list to see available campaigns.`,
+      content: `Campaign "${slug}" not found. Use **/campaign list** to see available campaigns.`,
     });
     return;
   }
@@ -126,7 +126,7 @@ async function joinCampaign(interaction: ChatInputCommandInteraction) {
 
   if (existing) {
     await interaction.editReply({
-      content: `You're already enrolled in ${campaign.title}!`,
+      content: `You're already enrolled in **${campaign.title}**. Execute.`,
     });
     return;
   }
@@ -157,13 +157,15 @@ async function joinCampaign(interaction: ChatInputCommandInteraction) {
   });
 
   const embed = new EmbedBuilder()
-    .setTitle("✅ Joined Campaign!")
-    .setDescription(campaign.title)
+    .setTitle("⚔️ ENROLLED")
+    .setDescription(`**${campaign.title}**\n\nThis is where the work begins.\n\nExecute. Complete. Transform.`)
     .addFields(
       { name: "Duration", value: `${campaign.duration_days} days`, inline: true },
-      { name: "Type", value: campaign.campaign_type, inline: true }
+      { name: "Type", value: campaign.campaign_type, inline: true },
+      { name: "Action", value: "Use **/campaign progress** to track", inline: false }
     )
-    .setColor(ARGENT_SILVER);
+    .setColor(ARGENT_SILVER)
+    .setFooter({ text: "Ship or die. No excuses." });
 
   await interaction.editReply({ embeds: [embed] });
 }
@@ -177,7 +179,7 @@ async function showProgress(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Please link your Discord account first using /link",
+      content: "Link your account first with **/link**, or use the OAuth invite.",
     });
     return;
   }
@@ -190,20 +192,23 @@ async function showProgress(interaction: ChatInputCommandInteraction) {
 
   if (!enrollments || enrollments.length === 0) {
     await interaction.editReply({
-      content: "You're not enrolled in any campaigns. Use /campaign join to get started!",
+      content: "No active campaigns. Use **/campaign list** to enroll in one.\n\nPick a campaign. Execute. Transform.",
     });
     return;
   }
 
   const embed = new EmbedBuilder()
-    .setTitle("🎯 Your Campaigns")
+    .setTitle("🎯 YOUR CAMPAIGNS")
+    .setDescription("**Execute. Complete. Lead.**")
     .setColor(ARGENT_SILVER);
 
   for (const enrollment of enrollments) {
     const campaign = enrollment.campaigns;
+    const progress = enrollment.completion_percent || 0;
+    const bar = "█".repeat(Math.floor(progress / 10)) + "░".repeat(10 - Math.floor(progress / 10));
     embed.addFields({
-      name: campaign.title,
-      value: `${campaign.description}\nProgress: ${enrollment.completion_percent || 0}%`,
+      name: `⚔️ ${campaign.title}`,
+      value: `${campaign.description}\n\`${bar}\` ${progress}%\n**Type:** ${campaign.campaign_type}`,
       inline: false,
     });
   }

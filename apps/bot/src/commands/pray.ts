@@ -60,7 +60,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -100,16 +100,16 @@ export default {
       .single();
 
     const embed = new EmbedBuilder()
-      .setTitle("✝️ Prayer Logged")
-      .setDescription(`${typeConfig.icon} **${typeConfig.name}**`)
+      .setTitle("✝️ PRAYER LOGGED")
+      .setDescription(`${typeConfig.icon} **${typeConfig.name}**\n\n*Pray without ceasing.*`)
       .addFields(
         { name: "Duration", value: `${duration} min`, inline: true },
-        { name: "Points Earned", value: `**+${points}**`, inline: true },
+        { name: "+⚡ Points", value: `**${points}**`, inline: true },
         { name: "Faith Score", value: String(scores?.faith_score || 0), inline: true }
       )
       .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "Pray without ceasing." });
+      .setFooter({ text: "Execute. Build. Lead. In Christ." });
 
     await interaction.editReply({ embeds: [embed] });
   },

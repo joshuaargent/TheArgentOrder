@@ -76,7 +76,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setDescription("Use **/link** to connect your Discord account.\n\nOr use the OAuth invite link to join directly.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -135,16 +135,16 @@ export default {
     const activitiesText = activities.map((a) => `${PILLAR_ICONS[a.pillar] || ""} ${a.name} (+${a.points})`).join("\n") || "None";
 
     const embed = new EmbedBuilder()
-      .setTitle("⚔️ Daily Check-In Complete")
-      .setDescription(activities.length > 0 ? "" : "No activities logged today.")
+      .setTitle(activities.length > 0 ? "⚔️ CHECK-IN LOGGED" : "⚠️ NO ACTIVITIES LOGGED")
+      .setDescription(activities.length > 0 ? "Another day of execution. Keep the streak alive." : "You checked in but didn't log any activities.")
       .addFields(
-        { name: "Activities", value: activitiesText, inline: true },
-        { name: "Points Earned", value: `**+${totalPoints}**`, inline: true },
+        { name: "📋 Completed", value: activitiesText, inline: true },
+        { name: "+⚡ Points", value: `**${totalPoints}**`, inline: true },
         { name: "🔥 Streak", value: `${streak} days`, inline: true }
       )
       .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "Execute your formation every day." });
+      .setFooter({ text: "Execute. Build. Lead. Every day." });
 
     if (note) {
       embed.addFields({ name: "Note", value: note, inline: false });

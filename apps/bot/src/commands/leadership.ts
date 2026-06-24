@@ -271,7 +271,7 @@ export default {
     if (!recommenderAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Your Discord account is not linked.")
+        .setDescription("Link your account with /link, or use the OAuth invite.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -365,7 +365,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with /link, or use the OAuth invite.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });

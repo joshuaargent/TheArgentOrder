@@ -37,37 +37,13 @@ async function sendWelcomeDM(member: GuildMember) {
     content: undefined,
     embeds: [
       {
-        title: "⚔️ Welcome to The Argent Order, Brother.",
+        title: "⚔️ WELCOME TO THE ARGENT ORDER",
         description: hasInitiateRole
-          ? `Your account is linked. You're now an **Initiate**.
-
-**Your first 72 hours:**
-
-1. Read #welcome, #mission, #constitution
-2. Introduce yourself in #introductions
-3. Use /checkin to start your daily formation
-4. Pick a campaign: /campaign list
-5. Join a pod: ask in #accountability-pods
-
-**Your portal is ready:**
-${portalUrl}/dashboard
-
-Track your formation, streaks, and progress there.`,
-          : `You've joined the Order. Now activate your account.
-
-**Activate your portal:**
-${portalUrl}
-
-Use the code from /link command to connect your Discord account.
-
-Once linked:
-• Complete your profile
-• Read the Constitution
-• Introduce yourself in #introductions
-• Start your first check-in`,
+          ? "**You are now an Initiate.**\n\nThis is not a community. This is a forge.\n\n**Your first 72 hours:**\n\n1. Read #welcome and #mission\n2. Introduce yourself in #introductions\n3. Complete /checkin TODAY\n4. Join a campaign: /campaign list\n5. Ship your first output in #ship-log\n\n**Execute. Build. Lead.**\n\nYour portal: " + portalUrl + "/dashboard"
+          : "**You've entered the Order.**\n\nNow prove you belong here.\n\n**Your activation:**\n" + portalUrl + "\n\nUse /link to connect your Discord account.\n\nOnce linked:\n• Read #welcome and #mission\n• Introduce yourself in #introductions\n• Complete /checkin TODAY\n• Join a campaign\n\n**No spectators. Only brothers.**",
         color: EMBED_COLORS.PRIMARY,
         footer: {
-          text: "The Argent Order — Forged in Faith, Discipline, and Brotherhood",
+          text: "⚔️ Execute. Build. Lead.",
         },
         timestamp: new Date().toISOString(),
       },
@@ -81,7 +57,7 @@ Once linked:
               {
                 type: 2,
                 style: 5,
-                label: "Activate Your Portal",
+                label: "Activate Now",
                 url: portalUrl,
                 emoji: {
                   name: "⚔️",

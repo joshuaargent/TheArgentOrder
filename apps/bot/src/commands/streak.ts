@@ -26,7 +26,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -97,7 +97,7 @@ export default {
     };
 
     const embed = new EmbedBuilder()
-      .setTitle("🔥 Formation Streaks")
+      .setTitle("🔥 YOUR STREAKS")
       .addFields(
         { name: "Overall Streak", value: `**${overallStreak}** days`, inline: true },
         { name: "Longest Ever", value: `**${longestOverall}** days`, inline: true }
@@ -111,7 +111,7 @@ export default {
       )
       .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "Consistency is formation. Execute daily." });
+      .setFooter({ text: "Execute. Build. Lead. Every day." });
 
     await interaction.editReply({ embeds: [embed] });
   },

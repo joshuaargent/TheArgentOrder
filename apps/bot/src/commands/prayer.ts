@@ -117,7 +117,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite..")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -152,7 +152,7 @@ export default {
     }
 
     const embed = new EmbedBuilder()
-      .setTitle("🙏 Prayer Request Submitted")
+      .setTitle("🙏 PRAYER REQUEST SUBMITTED")
       .setDescription(requestText)
       .addFields(
         {
@@ -168,7 +168,7 @@ export default {
       )
       .setColor(PRAYER_PURPLE)
       .setTimestamp()
-      .setFooter({ text: "Your brothers are praying for you." });
+      .setFooter({ text: "Your brothers intercede for you.." });
 
     await interaction.editReply({ embeds: [embed] });
 
@@ -213,7 +213,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite..")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -244,14 +244,14 @@ export default {
 
     const embed = new EmbedBuilder()
       .setTitle("✨ Prayer Answered!")
-      .setDescription(testimony ? `**Praise Report:**\n${testimony}` : "God is good!")
+      .setDescription(testimony ? `**Praise Report:**\n${testimony}` : "Glory to God!")
       .addFields({
         name: "Thank God!",
         value: "Share your testimony with your brothers when you're ready.",
       })
       .setColor(ANSWERED_GREEN)
       .setTimestamp()
-      .setFooter({ text: "He hears our prayers." });
+      .setFooter({ text: "Execute. Build. Lead. In Christ.." });
 
     await interaction.editReply({ embeds: [embed] });
 
@@ -291,7 +291,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite..")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -376,7 +376,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account first.")
+        .setDescription("Link your account with **/link**, or use the OAuth invite..")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });

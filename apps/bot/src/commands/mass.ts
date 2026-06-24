@@ -25,7 +25,7 @@ export default {
 
     if (!discordAccount) {
       await interaction.editReply({
-        content: "Use **/link** to connect your Discord account first.",
+        content: "Link your account with **/link**, or use the OAuth invite.",
       });
       return;
     }
@@ -47,7 +47,7 @@ export default {
 
     if (existing) {
       await interaction.editReply({
-        content: "You've already logged Mass today! Come back tomorrow.",
+        content: "**Mass already logged today.** Return tomorrow.\n\n*Offer your communion for the Order.*",
       });
       return;
     }
@@ -73,14 +73,14 @@ export default {
     }
 
     const embed = new EmbedBuilder()
-      .setTitle("💒 Mass Logged")
-      .setDescription("Thanks for attending Mass!")
+      .setTitle("✝️ MASS LOGGED")
+      .setDescription("**Glory to God.** The Eucharist strengthens your formation.")
       .addFields(
-        { name: "Points Earned", value: `**+${points}**`, inline: true }
+        { name: "+⚡ Points", value: `**${points}**`, inline: true }
       )
       .setColor(ARGENT_SILVER)
-      .setTimestamp();
-      .setFooter({ text: "The Eucharist strengthens your formation." })
+      .setTimestamp()
+      .setFooter({ text: "Execute. Build. Lead. In Christ." });
 
     await interaction.editReply({ embeds: [embed] });
   },

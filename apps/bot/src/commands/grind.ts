@@ -43,7 +43,7 @@ export default {
     if (!discordAccount) {
       const embed = new EmbedBuilder()
         .setTitle("⚠️ Account Not Linked")
-        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setDescription("Link your account with **/link**, or use OAuth invite to connect your Discord account to The Argent Order portal first.")
         .setColor(0xf59e0b)
         .setTimestamp();
       await interaction.editReply({ embeds: [embed] });
@@ -83,7 +83,7 @@ export default {
       .single();
 
     const embed = new EmbedBuilder()
-      .setTitle("🏗️ Grind Session Logged")
+      .setTitle("🏗️ BUILD LOGGED")
       .setDescription(project ? `Project: **${project}**` : "Building session completed.")
       .addFields(
         { name: "Duration", value: `${hours}h`, inline: true },
@@ -92,7 +92,7 @@ export default {
       )
       .setColor(ARGENT_SILVER)
       .setTimestamp()
-      .setFooter({ text: "A builder ships. Execute." });
+      .setFooter({ text: "Ship or be shipped." });
 
     await interaction.editReply({ embeds: [embed] });
   },

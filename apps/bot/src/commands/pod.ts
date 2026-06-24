@@ -62,7 +62,7 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Use **/link** to connect your Discord account first",
+      content: "Link your account first with **/link**, or use the OAuth invite.",
     });
     return;
   }
@@ -75,8 +75,8 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
 
   if (!membership) {
     const embed = new EmbedBuilder()
-      .setTitle("👥 No Pod")
-      .setDescription("You are not in a pod yet. Contact your captain or officer to be assigned to a pod.")
+      .setTitle("🔥 NO POD ASSIGNED")
+      .setDescription("You're not in a pod yet.\n\nContact your Captain or Officer. Pods are mandatory.")
       .setColor(ARGENT_SILVER);
     await interaction.editReply({ embeds: [embed] });
     return;
@@ -92,13 +92,14 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
     .limit(3);
 
   const embed = new EmbedBuilder()
-    .setTitle(`👥 ${pod.name}`)
-    .setDescription(pod.description || "No description")
+    .setTitle(`🔥 YOUR POD: ${pod.name}`)
+    .setDescription(pod.description || "Accountability unit")
     .addFields(
-      { name: "Status", value: "Active", inline: true },
-      { name: "Captain", value: "Contact officer", inline: true }
+      { name: "Status", value: "Active - Execute together", inline: true },
+      { name: "Captain", value: "Contact via #my-pod", inline: true }
     )
-    .setColor(ARGENT_SILVER);
+    .setColor(ARGENT_SILVER)
+    .setFooter({ text: "Brotherhood. Accountability. Execution." });
 
   if (meetings && meetings.length > 0) {
     const nextMeeting = meetings[0];
@@ -121,7 +122,7 @@ async function showPodMembers(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Use **/link** to connect your Discord account first",
+      content: "Link your account with /link, or use the OAuth invite.",
     });
     return;
   }
@@ -134,7 +135,7 @@ async function showPodMembers(interaction: ChatInputCommandInteraction) {
 
   if (!membership) {
     await interaction.editReply({
-      content: "You are not in a pod yet.",
+      content: "You are not in a pod yet. Contact your Captain or Officer.",
     });
     return;
   }
@@ -145,14 +146,14 @@ async function showPodMembers(interaction: ChatInputCommandInteraction) {
     .eq("pod_id", membership.pod_id);
 
   const embed = new EmbedBuilder()
-    .setTitle("👥 Pod Members")
-    .setDescription(`${members?.length || 0} members`)
+    .setTitle("🔥 POD MEMBERS")
+    .setDescription(`${members?.length || 0} brothers in your pod`)
     .setColor(ARGENT_SILVER);
 
   if (members && members.length > 0) {
     for (const member of members.slice(0, 10)) {
       embed.addFields({
-        name: `Brother`,
+        name: "Brother",
         value: `Joined: ${new Date(member.joined_at).toLocaleDateString()}`,
         inline: true,
       });
@@ -174,7 +175,7 @@ async function shareWin(interaction: ChatInputCommandInteraction) {
 
   if (!discordAccount) {
     await interaction.editReply({
-      content: "Use **/link** to connect your Discord account first",
+      content: "Link your account with /link, or use the OAuth invite.",
     });
     return;
   }
@@ -189,9 +190,9 @@ async function shareWin(interaction: ChatInputCommandInteraction) {
   });
 
   const embed = new EmbedBuilder()
-    .setTitle("🏆 Win Shared!")
+    .setTitle("🏆 WIN SHARED")
     .setDescription(message)
-    .setFooter({ text: "Keep building!" })
+    .setFooter({ text: "Execute. Build. Lead. Together." })
     .setColor(ARGENT_SILVER);
 
   await interaction.editReply({ embeds: [embed] });

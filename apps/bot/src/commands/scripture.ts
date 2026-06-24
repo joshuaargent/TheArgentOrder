@@ -35,7 +35,7 @@ export default {
 
     if (!discordAccount) {
       await interaction.editReply({
-        content: "Use **/link** to connect your Discord account to The Argent Order portal first.",
+        content: "Link your account with **/link**, or use the OAuth invite.",
       });
       return;
     }
@@ -63,14 +63,14 @@ export default {
     }
 
     const embed = new EmbedBuilder()
-      .setTitle("📖 Scripture Logged")
-      .setDescription(`Read **${chapters}** chapter${chapters > 1 ? "s" : ""} of scripture`)
+      .setTitle("📖 SCRIPTURE LOGGED")
+      .setDescription(`**${chapters}** chapter${chapters > 1 ? "s" : ""} read.\n\n*The Word strengthens your foundation.*`)
       .addFields(
-        { name: "Points Earned", value: `**+${points}**`, inline: true }
+        { name: "+⚡ Points", value: `**${points}**`, inline: true }
       )
       .setColor(ARGENT_SILVER)
-      .setTimestamp();
-      .setFooter({ text: "The Word strengthens your foundation." })
+      .setTimestamp()
+      .setFooter({ text: "Execute. Build. Lead. In Christ." });
 
     await interaction.editReply({ embeds: [embed] });
   },
