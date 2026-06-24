@@ -261,7 +261,7 @@ export default function HomePage() {
               { icon: Target, title: "Campaigns", desc: "90-day challenges that transform habits.", color: '#ef4444' },
               { icon: BookOpen, title: "Rule of Life", desc: "Build your personal operating system.", color: '#06b6d4' },
               { icon: Shield, title: "Leadership Pipeline", desc: "From Initiate to Steward.", color: '#eab308' },
-              { icon: Swords, title: "Builder Hall", desc: "Ship projects. Get accountability.", color: '#f97316' },
+              { icon: Swords, title: "🛠️ WORKSHOP", desc: "Ship projects. Get accountability.", color: '#f97316' },
             ].map((feature, i) => (
               <div key={i} className="glass-card p-6 hover:border-primary/30 transition-all">
                 <div

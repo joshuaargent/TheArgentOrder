@@ -121,7 +121,7 @@ We prohibit:
 • Harassment, bullying, or intimidation
 • Sharing members' personal information without consent
 • Content that contradicts Catholic teaching
-• Spam, self-promotion outside of Builder Hall, or solicitation`
+• Spam, self-promotion outside of 🛠️ WORKSHOP, or solicitation`
             },
             {
               title: "Intellectual Property",

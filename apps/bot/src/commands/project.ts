@@ -11,7 +11,7 @@ const ARGENT_SILVER = 0xa1a1aa;
 export default {
   data: new SlashCommandBuilder()
     .setName("project")
-    .setDescription("Builder Hall project commands")
+    .setDescription("🛠️ WORKSHOP project commands - track your builds")
     .addSubcommand((subcommand) =>
       subcommand
         .setName("list")
