@@ -36,7 +36,7 @@ argent-order/
 ### Prerequisites
 
 - **Node.js 20+** - [Install](https://nodejs.org/)
-- **pnpm 9+** - `npm install -g pnpm`
+- **npm** - Comes with Node.js (no separate install needed)
 - **Supabase CLI** - `npm install -g supabase`
 - **Git**
 - Discord Developer Account (for bot)
@@ -46,7 +46,7 @@ argent-order/
 ```bash
 git clone https://github.com/joshuaargent/TheArgentOrder.git
 cd TheArgentOrder
-pnpm install
+npm install
 ```
 
 ### Step 2: Create Supabase Project
@@ -85,7 +85,7 @@ supabase login
 supabase link --project-ref your-project-ref
 
 # Push migrations
-pnpm db:migrate
+npm run db:migrate
 ```
 
 This creates:
@@ -102,7 +102,7 @@ This creates:
 ### Step 6: Run Development Server
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
@@ -131,7 +131,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ```bash
 cd apps/bot
-pnpm dev
+npm run dev
 ```
 
 Available commands:
@@ -195,21 +195,21 @@ Available commands:
 
 ```bash
 # Development
-pnpm dev              # Run all apps in parallel
-pnpm dev:web          # Run only web app
-pnpm dev:bot          # Run only Discord bot
+npm run dev              # Run all apps in parallel
+npm run dev:web          # Run only web app
+npm run dev:bot          # Run only Discord bot
 
 # Building
-pnpm build            # Build all apps
-pnpm build:web        # Build web app
+npm run build            # Build all apps
+npm run build:web        # Build web app
 
 # Database
-pnpm db:migrate       # Push migrations to Supabase
-pnpm db:generate      # Generate Supabase types
+npm run db:migrate       # Push migrations to Supabase
+npm run db:generate      # Generate Supabase types
 
 # Quality
-pnpm lint             # Run ESLint
-pnpm type-check       # Run TypeScript checks
+npm run lint             # Run ESLint
+npm run type-check       # Run TypeScript checks
 ```
 
 ---
@@ -228,7 +228,7 @@ pnpm type-check       # Run TypeScript checks
 1. Push to GitHub
 2. Connect to Railway/Render
 3. Add environment variables
-4. Set start command: `pnpm start:bot`
+4. Set start command: `npm run start:bot`
 
 ---
 

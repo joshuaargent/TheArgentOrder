@@ -460,13 +460,13 @@ Build Successfully
 Required Commands
 
 ```bash
-pnpm lint
+npm run lint
 
-pnpm typecheck
+npm run typecheck
 
-pnpm test
+npm run test
 
-pnpm build
+npm run build
 ```
 
 ---

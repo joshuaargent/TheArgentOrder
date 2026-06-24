@@ -59,7 +59,7 @@ Install:
 ```text id="tools1"
 Node.js
 TypeScript
-pnpm
+npm (comes with Node.js)
 Supabase CLI
 Docker
 ```
