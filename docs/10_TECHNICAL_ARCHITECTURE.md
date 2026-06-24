@@ -124,7 +124,7 @@ Discord Integration
 
 # Core Domains
 
-The platform consists of 11 domains.
+The platform consists of 12 domains.
 
 Identity
 
@@ -147,6 +147,8 @@ Content
 Administration
 
 Analytics
+
+Leadership
 
 ---
 
