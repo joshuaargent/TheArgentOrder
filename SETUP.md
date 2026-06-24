@@ -512,11 +512,16 @@ The bot automatically sends a welcome DM when someone joins your Discord server:
 1. **DM Content**: Welcome message with portal activation link
 2. **Setup Required**:
    - Set `PORTAL_URL` environment variable to your portal URL
-   - (Optional) Create a "New Member" role in your Discord server
+   - Run `/setup` command (creates all roles including **Visitor**)
 3. **What it does**:
    - Sends welcome DM with portal activation link
-   - Assigns "New Member" role automatically
+   - Assigns **Visitor** role automatically (entry-level role per docs)
    - Portal URL button makes it easy to activate
+
+**Note on Roles**: Per docs, the role progression is:
+- **Visitor** → assigned on join
+- **Initiate** → after portal setup and /link
+- **Brother** → after 30 days + campaigns + pod participation
 
 **DM Message**:
 > Welcome to The Argent Order, Brother.

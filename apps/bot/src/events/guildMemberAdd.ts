@@ -86,8 +86,9 @@ Your brothers are waiting. Your formation starts now.`,
 
 async function assignNewMemberRole(member: GuildMember) {
   try {
-    // Look for "New Member" or "Member" role
-    const roleName = "New Member";
+    // Per docs: "Visitor" is the entry-level role
+    // After portal setup and linking, /sync upgrades to Initiate
+    const roleName = "Visitor";
     const role = member.guild.roles.cache.find(
       (r) => r.name.toLowerCase() === roleName.toLowerCase()
     );
@@ -96,7 +97,7 @@ async function assignNewMemberRole(member: GuildMember) {
       await member.roles.add(role);
       console.log(`Assigned ${roleName} role to ${member.user.tag}`);
     } else {
-      console.log(`Role "${roleName}" not found in server`);
+      console.log(`Role "${roleName}" not found - run /setup to create roles`);
     }
   } catch (error) {
     console.error("Error assigning role:", error);
