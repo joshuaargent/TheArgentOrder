@@ -81,7 +81,7 @@ export async function GET(request: Request) {
       const { data: profile } = await supabase
         .from("profiles")
         .select("email")
-        .eq("id", existingLink.user_id)
+        .eq("user_id", existingLink.user_id)
         .single();
 
       if (profile?.email) {
@@ -119,7 +119,7 @@ export async function GET(request: Request) {
     if (existingUser) {
       // Link Discord to existing account
       await supabase.from("discord_accounts").insert({
-        user_id: existingUser.id,
+        user_id: existingUser.user_id,
         discord_id: discordUser.id,
         linked_at: new Date().toISOString(),
       });
@@ -179,13 +179,39 @@ export async function GET(request: Request) {
         linked_at: new Date().toISOString(),
       });
 
-      // Create profile
+      // Create profile with user_id matching auth user id
       await supabase.from("profiles").insert({
         id: authData.user.id,
+        user_id: authData.user.id,
         email: discordUser.email,
         display_name: discordUser.global_name || discordUser.username,
         avatar_url: avatarUrl,
       });
+
+      // Create initial formation scores
+      await supabase.from("formation_scores").insert({
+        user_id: authData.user.id,
+        faith_score: 0,
+        discipline_score: 0,
+        brotherhood_score: 0,
+        building_score: 0,
+        truth_score: 0,
+        overall_score: 0,
+      });
+
+      // Assign initial rank (Initiate)
+      const { data: initiateRank } = await supabase
+        .from("ranks")
+        .select("id")
+        .eq("name", "Initiate")
+        .single();
+
+      if (initiateRank) {
+        await supabase.from("user_ranks").insert({
+          user_id: authData.user.id,
+          rank_id: initiateRank.id,
+        });
+      }
     }
 
     // Redirect to check email
