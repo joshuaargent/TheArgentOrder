@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Sword, Mail, Lock, User, CheckCircle } from "lucide-react";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -18,10 +18,8 @@ export default function SignupPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-
     const supabase = createClient();
 
-    // Validate display name
     if (!displayName.trim()) {
       setError("Display name is required");
       setLoading(false);
@@ -31,11 +29,7 @@ export default function SignupPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          display_name: displayName,
-        },
-      },
+      options: { data: { display_name: displayName } },
     });
 
     if (error) {
@@ -48,117 +42,134 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="w-full max-w-md space-y-8 rounded-lg border bg-card p-8 text-center">
-          <div className="text-4xl">📧</div>
-          <h1 className="text-2xl font-bold">Check Your Email</h1>
-          <p className="text-muted-foreground">
-            We sent a confirmation link to <strong>{email}</strong>.
-            Click the link to activate your account and begin your formation journey.
-          </p>
-          <Link href="/login" className="text-primary hover:underline">
-            Back to Login
-          </Link>
+      <div className="min-h-screen mesh-gradient flex items-center justify-center relative">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+          <div className="ambient-orb w-[500px] h-[500px] bg-primary/5 -top-40 -left-40" />
+          <div className="ambient-orb w-[400px] h-[400px] bg-green-500/3 bottom-0 right-0" style={{ animationDelay: '-5s' }} />
+        </div>
+        <div className="w-full max-w-md px-4 relative z-10">
+          <div className="glass-card p-8 md:p-10 text-center">
+            <div className="w-20 h-20 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-6 animate-float">
+              <CheckCircle className="h-10 w-10 text-green-500" />
+            </div>
+            <h1 className="text-2xl font-bold mb-4">Check Your Email</h1>
+            <p className="text-muted-foreground mb-6">
+              We sent a confirmation link to <strong className="text-foreground">{email}</strong>.
+              Click the link to activate your account and begin your formation journey.
+            </p>
+            <Link href="/login" className="text-primary hover:underline font-medium">
+              Back to Login
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md space-y-8 rounded-lg border bg-card p-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Join The Argent Order</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Begin your journey of Catholic formation
-          </p>
-        </div>
+    <div className="min-h-screen mesh-gradient flex items-center justify-center relative">
+      {/* Ambient Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="ambient-orb w-[500px] h-[500px] bg-primary/5 -top-40 -left-40" />
+        <div className="ambient-orb w-[400px] h-[400px] bg-primary/3 bottom-0 right-0" style={{ animationDelay: '-7s' }} />
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {error && (
-            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              {error}
+      <div className="w-full max-w-md px-4 relative z-10">
+        <div className="glass-card p-8 md:p-10">
+          <div className="text-center mb-8">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 animate-float">
+              <Sword className="h-8 w-8 text-primary" />
             </div>
-          )}
-
-          <div className="space-y-4">
-            <div>
-              <label
-                htmlFor="displayName"
-                className="block text-sm font-medium text-foreground"
-              >
-                Display Name
-              </label>
-              <input
-                id="displayName"
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2"
-                placeholder="Brother Michael"
-                required
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-foreground"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-foreground"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2"
-                placeholder="••••••••"
-                minLength={8}
-                required
-              />
-              <p className="mt-1 text-xs text-muted-foreground">
-                Minimum 8 characters
-              </p>
-            </div>
+            <h1 className="text-2xl font-bold mb-2">Join The Argent Order</h1>
+            <p className="text-sm text-muted-foreground">
+              Begin your journey of Catholic formation
+            </p>
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating account...
-              </>
-            ) : (
-              "Create Account"
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-4 text-sm text-destructive">
+                {error}
+              </div>
             )}
-          </Button>
-        </form>
 
-        <p className="text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
-          <Link href="/login" className="text-primary hover:underline">
-            Sign in
-          </Link>
-        </p>
+            <div className="space-y-2">
+              <label htmlFor="displayName" className="block text-sm font-medium text-foreground">
+                Display Name
+              </label>
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  id="displayName"
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  className="w-full rounded-xl border border-border bg-background/50 pl-12 pr-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  placeholder="Brother Michael"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">
+                Email
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-xl border border-border bg-background/50 pl-12 pr-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-xl border border-border bg-background/50 pl-12 pr-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  placeholder="••••••••"
+                  minLength={8}
+                  required
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">Minimum 8 characters</p>
+            </div>
+
+            <Button type="submit" className="w-full btn-elegant h-12" disabled={loading}>
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                "Create Account"
+              )}
+            </Button>
+          </form>
+
+          <div className="mt-6 pt-6 border-t border-border/50 text-center">
+            <p className="text-sm text-muted-foreground">
+              Already have an account?{" "}
+              <Link href="/login" className="text-primary hover:underline font-medium">
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
