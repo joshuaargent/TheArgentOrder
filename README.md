@@ -78,14 +78,17 @@ DISCORD_CLIENT_ID=your-client-id
 ### Step 4: Push Database Schema
 
 ```bash
+# Install Supabase CLI (if not installed)
+npm install -g supabase
+
 # Login to Supabase
 supabase login
 
 # Link your project
 supabase link --project-ref your-project-ref
 
-# Push migrations
-npm run db:migrate
+# Push migrations directly
+supabase db push
 ```
 
 This creates:
@@ -102,7 +105,11 @@ This creates:
 ### Step 6: Run Development Server
 
 ```bash
+# Run web app only
 npm run dev
+
+# OR run bot only (in separate terminal)
+cd apps/bot && npm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
@@ -131,23 +138,29 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ```bash
 cd apps/bot
+npm install
 npm run dev
 ```
 
-Available commands:
-- `/setup` - Set up server structure (Admin only - idempotent)
-- `/sync` - Sync your Discord role with portal rank
-- `/link` - Connect Discord to portal account
-- `/profile` - View your formation profile
-- `/pray` - Log prayer session
-- `/scripture` - Log scripture reading
-- `/mass` - Log Mass attendance
-- `/checkin` - Daily formation check-in
-- `/grind` - Log deep work session
-- `/streak` - View your formation streaks
-- `/project` - Builder Hall project commands
-- `/pod` - Pod accountability commands
-- `/campaign` - Campaign management
+Once running, use **/setup** (Admin) to create the server structure.
+
+### Available Bot Commands
+
+| Command | Description |
+|---------|-------------|
+| `/setup` | Set up server structure (Admin only - idempotent) |
+| `/sync` | Sync your Discord role with portal rank |
+| `/link` | Connect Discord to portal account |
+| `/profile` | View your formation profile |
+| `/pray` | Log prayer session |
+| `/scripture` | Log scripture reading |
+| `/mass` | Log Mass attendance |
+| `/checkin` | Daily formation check-in |
+| `/grind` | Log deep work session |
+| `/streak` | View your formation streaks |
+| `/project list/update` | Builder Hall project commands |
+| `/pod info/members/wins` | Pod accountability |
+| `/campaign list/join/progress` | Campaign management |
 
 ---
 
@@ -203,21 +216,19 @@ Available commands:
 
 ```bash
 # Development
-npm run dev              # Run all apps in parallel
-npm run dev:web          # Run only web app
-npm run dev:bot          # Run only Discord bot
+npm run dev          # Run web app (Next.js)
+npm run build         # Build web app
 
-# Building
-npm run build            # Build all apps
-npm run build:web        # Build web app
+# Bot (run separately)
+cd apps/bot && npm run dev
 
-# Database
-npm run db:migrate       # Push migrations to Supabase
-npm run db:generate      # Generate Supabase types
+# Database (run via npx or global supabase CLI)
+supabase db push     # Push migrations
+supabase db generate # Generate types
 
 # Quality
-npm run lint             # Run ESLint
-npm run type-check       # Run TypeScript checks
+npm run lint         # Run ESLint
+npm run type-check   # Run TypeScript checks
 ```
 
 ---

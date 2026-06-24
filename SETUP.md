@@ -277,9 +277,9 @@ Once the bot is running, use these slash commands in Discord:
 | `/checkin` | Daily formation check-in |
 | `/grind` | Log deep work session |
 | `/streak` | View your formation streaks |
-| `/project` | Builder Hall project commands |
-| `/pod` | Pod accountability commands |
-| `/campaign` | Campaign management |
+| `/project list/update` | Builder Hall project commands |
+| `/pod info/members/wins` | Pod accountability |
+| `/campaign list/join/progress` | Campaign management |
 
 ---
 
