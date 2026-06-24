@@ -7,6 +7,94 @@
 - npm (comes with Node.js)
 - Supabase account
 - Discord developer account
+- Beehiiv account (for newsletter)
+
+---
+
+## Step 0: Create Beehiiv Account (Newsletter)
+
+Beehiiv handles email capture, lead magnets, and the welcome email sequence.
+
+### 0.1: Sign Up for Beehiiv
+
+1. Go to **https://www.beehiiv.com**
+2. Click **"Start for free"**
+3. Sign up with Google or email
+4. Complete onboarding wizard
+
+### 0.2: Create Your Publication
+
+1. In Beehiiv dashboard, click **"Create Publication"**
+2. Name it: `The Argent Order`
+3. Set your niche: `Catholic Formation for Men`
+4. Choose a template or skip
+
+### 0.3: Get Your Publication ID
+
+1. Go to **Settings** (gear icon) → **Publication**
+2. Copy the **Publication ID** (starts with `pub_...`)
+3. This becomes: `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID`
+
+### 0.4: Generate API Key
+
+1. Go to **Settings** → **API Keys**
+2. Click **"Create new API key"**
+3. Name it: `The Argent Order App`
+4. Copy the key immediately (you won't see it again)
+5. This becomes: `BEEHIIV_API_KEY`
+
+### 0.5: Create Your Lead Magnet (The "Catholic Builder Starter Kit")
+
+Beehiiv handles delivering the lead magnet automatically.
+
+1. Go to **Audience** → **Drive Traffic** → **Recommendation**
+2. Click **"Create recommendation"**
+3. Set up your lead magnet:
+
+| Field | Value |
+|-------|-------|
+| Name | Catholic Builder Starter Kit |
+| Description | Everything you need to start building a Rule of Life |
+| Delivery Method | Direct Download |
+
+4. Upload these files (create them yourself or use placeholders):
+   - Rule of Life Blueprint (PDF)
+   - 90-Day Campaign Planner (PDF)
+   - Morning Protocol Guide (PDF)
+   - Catholic Man's Oath (PDF)
+
+### 0.6: Create Your Welcome Email Sequence
+
+Beehiiv automations handle the 7-day sequence from the docs.
+
+1. Go to **Audience** → **Automations** → **Create Automation**
+2. Name it: `Welcome Sequence`
+3. Set trigger: **Subscribes to recommendation** → Select your lead magnet
+
+4. **Email 1** (Day 0 - Immediate):
+   - Subject: "Your Catholic Builder Starter Kit is ready"
+   - Include the recommendation embed
+
+5. **Email 2** (Day 1):
+   - Subject: "Why you're not where you should be"
+   - Identity content - call out the problem
+
+6. **Email 3** (Day 2):
+   - Subject: "The system that builds discipline"
+   - Introduce the 5 pillars
+
+7. **Email 4** (Day 4):
+   - Subject: "The brotherhood that doesn't let you quit"
+   - Brotherhood stories, then Discord invitation
+
+8. **Email 5** (Day 6):
+   - Subject: "Last step before you start"
+   - Commitment CTA - if serious, act now
+
+### 0.7: Get Your Discord Invite Link
+
+1. Create a Discord invite with **max age: never, max uses: unlimited**
+2. Include this link in Email 4 of your sequence
 
 ---
 
@@ -96,6 +184,10 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...your-service-role-key
 # Discord Bot (from Step 3)
 DISCORD_TOKEN=MTIz...your-bot-token
 DISCORD_CLIENT_ID=123456789012345678
+
+# Beehiiv Newsletter (from Step 0)
+BEEHIIV_API_KEY=your-beehiiv-api-key
+NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID=pub_xxxxxxxxxxxx
 ```
 
 ---
@@ -154,13 +246,38 @@ Visit **http://localhost:3000**
 3. Import your GitHub repo: `joshuaargent/TheArgentOrder`
 4. **Important**: Set **Root Directory** to `apps/web`
 5. Add Environment Variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+| Variable | Value |
+|----------|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
+| `BEEHIIV_API_KEY` | Your Beehiiv API key (private) |
+| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Your Beehiiv publication ID |
+
 6. Click **Deploy**
 
 After deployment, update Supabase Auth:
 - Set **Site URL** to your Vercel URL (e.g., `https://your-app.vercel.app`)
 - Add redirect URLs for Vercel
+
+### Discord Bot - Vercel Serverless (Alternative to Linux PC)
+
+Instead of running on your Linux PC 24/7, you can host the Discord bot as a serverless function on Vercel.
+
+**Note**: Discord bots typically need to stay online 24/7. Serverless functions have cold starts and timeouts. For production, a Linux PC with PM2 is more reliable. However, for testing/development:
+
+1. Create a separate Vercel project for the bot:
+   - Root Directory: `apps/bot`
+   - Build Command: `npm run build`
+   - Install Command: `npm install`
+
+2. Add environment variables in Vercel:
+   - `DISCORD_TOKEN`
+   - `DISCORD_CLIENT_ID`
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+3. **Important**: Set a cron job or use Uptime Robot to ping your bot URL every 5 minutes to prevent cold starts
 
 ---
 
@@ -292,6 +409,8 @@ Once the bot is running, use these slash commands in Discord:
 | Supabase Service | `SUPABASE_SERVICE_ROLE_KEY` | Settings → API → service_role |
 | Discord Token | `DISCORD_TOKEN` | Bot → Token |
 | Discord App ID | `DISCORD_CLIENT_ID` | General → Application ID |
+| Beehiiv API Key | `BEEHIIV_API_KEY` | Settings → API Keys |
+| Beehiiv Pub ID | `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Settings → Publication |
 
 ---
 
@@ -306,3 +425,154 @@ Once the bot is running, use these slash commands in Discord:
 | CORS error | Ensure Supabase allowed domains includes localhost |
 | Bot goes offline | Use tmux/PM2 to keep it running |
 | Bot won't start | Check .env.local has correct DISCORD_TOKEN |
+| Newsletter not working | Verify BEEHIIV_API_KEY and NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID are set |
+| Email capture fails silently | The app gracefully falls back - check Beehiiv dashboard for subscriber count |
+| Lead magnet not sending | Check Beehiiv automations are active and connected to recommendation |
+
+---
+
+## Discord Bot - Detailed Setup
+
+### Required Bot Permissions
+
+When adding the bot to your server, use these permissions:
+
+**Text Permissions**:
+- Send Messages
+- Embed Links
+- Use Slash Commands
+- Add Reactions
+- Read Message History
+
+**Admin Permissions** (required for `/setup` command):
+- Manage Roles
+- Manage Channels
+- Manage Server
+
+**OAuth2 URL Generator Settings**:
+```
+Scopes: bot, applications.commands
+Bot Permissions: Administrator (easiest) or specific permissions above
+```
+
+### The `/setup` Command (Creates Server Structure)
+
+When you first run `/setup` in Discord, it creates:
+
+| Channel Category | Purpose |
+|-----------------|---------|
+| 🏛️ FORMATION | Prayer requests, scripture, daily check-in |
+| 🔨 BUILDER HALL | Project showcase, accountability |
+| 👥 POD LOUNGE | Pod-specific discussions |
+| 📋 CAMPAIGNS | Active campaign channels |
+| 📊 FORMATION TRACKING | Weekly review, stats |
+| ⚡ ACCOUNTABILITY | Check-ins, wins, streaks |
+| 🏆 LEADERSHIP | Officer discussions |
+
+### Available Slash Commands
+
+| Command | Description | Access |
+|---------|-------------|--------|
+| `/setup` | Creates all server channels and roles | Admin only |
+| `/sync` | Sync Discord role with portal rank | All members |
+| `/link` | Connect Discord to portal account | All members |
+| `/profile` | View your formation profile | All members |
+| `/prayer` | Prayer request/answered/list/mine | All members |
+| `/event` | Create/join/leave/list events | All members |
+| `/leadership` | Leaderboard, pod-health, community-health | All members |
+| `/admin` | Warn, mute, kick, ban, lockdown, announce | Admin only |
+| `/examen` | Daily examen reflection | All members |
+| `/formation` | View formation scores and streaks | All members |
+| `/campaign` | List, join, progress campaigns | All members |
+| `/pod` | Pod info, members, wins | All members |
+| `/project` | List, update projects | All members |
+
+### Setting Up Bot Commands (for development)
+
+The bot auto-registers slash commands on startup. To manually sync:
+
+```bash
+cd apps/bot
+npm run dev
+```
+
+Commands will register automatically. If you add new commands, restart the bot.
+
+### Keeping the Bot Online (Free Options)
+
+1. **Your Own PC** (using tmux/PM2 - see above)
+2. **Railway** (has free tier): `https://railway.app`
+   - Connect GitHub repo
+   - Set environment variables
+   - Deploy
+3. **Render** (free tier available): `https://render.com`
+   - Create Web Service
+   - Connect GitHub
+   - Use a persistent disk for state
+4. **Oracle Cloud Free** (permanent free tier): `https://oracle.com/cloud/free`
+   - Create always-free VM
+   - Ubuntu + Node.js
+   - Install PM2
+   - Run 24/7 for free
+
+---
+
+## Creating Your Lead Magnet PDFs
+
+The lead magnet kit includes 4 PDFs. Here's what each should contain:
+
+### 1. Rule of Life Blueprint ($97 value)
+**Purpose**: Core framework for daily formation
+
+**Contents**:
+- Introduction: Why every man needs a Rule of Life
+- The 5 Pillars: Faith, Discipline, Brotherhood, Building, Truth
+- Daily Structure template (morning, midday, evening)
+- Weekly Review template
+- Monthly Assessment template
+- 12 categories to fill in
+
+### 2. 90-Day Campaign Planner ($67 value)
+**Purpose**: Turn intention into action
+
+**Contents**:
+- Campaign concept explanation
+- Goal setting framework
+- 90-day calendar template
+- Weekly milestones
+- Monthly checkpoints
+- Progress tracking sheets
+
+### 3. Morning Protocol Guide ($47 value)
+**Purpose**: Compound daily habits
+
+**Contents**:
+- Why morning routine matters
+- The 30-minute protocol:
+  - 5 min: Prayer/Meditation
+  - 10 min: Exercise
+  - 10 min: Learning (reading/study)
+  - 5 min: Planning the day
+- Cold shower protocol
+- Troubleshooting common obstacles
+
+### 4. Catholic Man's Oath ($36 value)
+**Purpose**: Identity declaration
+
+**Contents**:
+- The Oath text (memorable, punchy)
+- Daily recitation reminder
+- Wall poster version
+- Wallet card version
+
+**Example Oath**:
+> I am a Catholic man.
+> I seek discipline over comfort.
+> I build instead of consuming.
+> I pursue truth over convenience.
+> I serve my brothers as they serve me.
+> I will not waste this day.
+
+---
+
+**Tip**: You can use free tools like Canva or Google Docs to create these PDFs. Keep them simple but professional.
