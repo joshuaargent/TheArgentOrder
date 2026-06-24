@@ -25,20 +25,64 @@ export const meta = {
 };
 
 // ============================================
-// Navigation
+// Navigation - Simplified for Better UX
 // ============================================
 
-export const mainNav = [
-  { label: 'Dashboard', href: '/dashboard', icon: 'home' },
-  { label: 'Formation', href: '/formation', icon: 'flame' },
-  { label: 'Rule of Life', href: '/rule-of-life', icon: 'check-square' },
-  { label: 'Campaigns', href: '/campaigns', icon: 'target' },
-  { label: 'Brotherhood', href: '/brotherhood', icon: 'users' },
-  { label: 'Journal', href: '/journal', icon: 'book-open' },
-  { label: 'Reviews', href: '/reviews', icon: 'calendar' },
-  { label: 'Projects', href: '/projects', icon: 'briefcase' },
-  { label: 'Achievements', href: '/achievements', icon: 'trophy' },
-  { label: 'Leaderboard', href: '/leaderboard', icon: 'bar-chart' },
+export interface NavItem {
+  label: string;
+  href: string;
+  icon?: string;
+  description?: string;
+}
+
+export interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+export const mainNavGroups: NavGroup[] = [
+  {
+    label: 'Core',
+    items: [
+      { label: 'Dashboard', href: '/dashboard', icon: 'home' },
+      { label: 'Formation', href: '/formation', icon: 'flame', description: 'Track your spiritual growth' },
+      { label: 'Rule of Life', href: '/rule-of-life', icon: 'check-square', description: 'Daily execution system' },
+    ],
+  },
+  {
+    label: 'Growth',
+    items: [
+      { label: 'Campaigns', href: '/campaigns', icon: 'target', description: '30-day formation journeys' },
+      { label: 'Projects', href: '/projects', icon: 'briefcase', description: 'Build things that matter' },
+      { label: 'Achievements', href: '/achievements', icon: 'trophy', description: 'Milestones and badges' },
+    ],
+  },
+  {
+    label: 'Community',
+    items: [
+      { label: 'Brotherhood', href: '/brotherhood', icon: 'users', description: 'Pods and accountability' },
+      { label: 'Journal', href: '/journal', icon: 'book-open', description: 'Reflection and examen' },
+      { label: 'Reviews', href: '/reviews', icon: 'calendar', description: 'Weekly and monthly reviews' },
+    ],
+  },
+  {
+    label: 'Explore',
+    items: [
+      { label: 'Leaderboard', href: '/leaderboard', icon: 'bar-chart', description: 'Community rankings' },
+      { label: 'Certifications', href: '/certifications', icon: 'award', description: 'Earn credentials' },
+    ],
+  },
+];
+
+// Flat navigation for simple display (dropdown items)
+export const mainNav = mainNavGroups.flatMap(group => group.items);
+
+// Quick actions for dashboard
+export const quickActions = [
+  { label: 'Log Prayer', href: '/formation', icon: 'cross', points: '+10' },
+  { label: 'Complete Rule', href: '/rule-of-life', icon: 'check', points: '+15' },
+  { label: 'Add Journal Entry', href: '/journal', icon: 'pen', points: '+5' },
+  { label: 'Submit Review', href: '/reviews', icon: 'calendar', points: '+20' },
 ];
 
 export const footerNav = {

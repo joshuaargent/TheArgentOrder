@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen, ArrowRight, Plus } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface FormationScores {
   faith_score: number;
@@ -25,11 +26,11 @@ interface DashboardData {
 }
 
 const PILLAR_CONFIG = [
-  { key: "faith_score", name: "Faith", icon: Cross, color: "#7c3aed" },
-  { key: "discipline_score", name: "Discipline", icon: Dumbbell, color: "#ea580c" },
-  { key: "brotherhood_score", name: "Brotherhood", icon: Handshake, color: "#059669" },
-  { key: "building_score", name: "Building", icon: Hammer, color: "#ca8a04" },
-  { key: "truth_score", name: "Truth", icon: GraduationCap, color: "#0891b2" },
+  { key: "faith_score", name: "Faith", icon: Cross, color: "#a855f7", glowClass: "glow-faith" },
+  { key: "discipline_score", name: "Discipline", icon: Dumbbell, color: "#ef4444", glowClass: "glow-discipline" },
+  { key: "brotherhood_score", name: "Brotherhood", icon: Handshake, color: "#22c55e", glowClass: "glow-brotherhood" },
+  { key: "building_score", name: "Building", icon: Hammer, color: "#eab308", glowClass: "glow-building" },
+  { key: "truth_score", name: "Truth", icon: GraduationCap, color: "#06b6d4", glowClass: "glow-truth" },
 ];
 
 export default function DashboardPage() {
@@ -58,7 +59,6 @@ export default function DashboardPage() {
     const supabase = createClient();
 
     try {
-      // Fetch user
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -68,14 +68,12 @@ export default function DashboardPage() {
         return;
       }
 
-      // Fetch formation scores
       const { data: scores } = await supabase
         .from("formation_scores")
         .select("*")
         .eq("user_id", user.id)
         .single();
 
-      // Fetch user's rank
       const { data: userRankData } = await supabase
         .from("user_ranks")
         .select("rank_id, ranks(name)")
@@ -86,20 +84,17 @@ export default function DashboardPage() {
 
       const userRank = userRankData as { rank_id: string; ranks: { name: string } } | null;
 
-      // Fetch active campaigns count
       const { count: campaignsCount } = await supabase
         .from("campaign_enrollments")
         .select("*", { count: "exact", head: true })
         .eq("user_id", user.id)
         .eq("status", "active");
 
-      // Fetch achievements count
       const { count: achievementsCount } = await supabase
         .from("user_achievements")
         .select("*", { count: "exact", head: true })
         .eq("user_id", user.id);
 
-      // Calculate streak from rule logs
       const { data: ruleLogs } = await supabase
         .from("rule_logs")
         .select("logged_at")
@@ -107,7 +102,6 @@ export default function DashboardPage() {
         .gte("logged_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
         .order("logged_at", { ascending: false });
 
-      // Calculate streak
       let streak = 0;
       if (ruleLogs && ruleLogs.length > 0) {
         const today = new Date();
@@ -127,7 +121,6 @@ export default function DashboardPage() {
         }
       }
 
-      // Fetch next pod meeting
       const { data: podMembership } = await supabase
         .from("pod_members")
         .select("pod_id, pods(name)")
@@ -175,177 +168,245 @@ export default function DashboardPage() {
 
   if (data.loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading your dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-8">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
+      {/* Page Header - Premium */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Sword className="h-6 w-6 text-primary" />
+          <h1 className="text-3xl font-bold flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Sword className="h-5 w-5 text-primary" />
+            </div>
             Formation Dashboard
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Track your progress across all five pillars
           </p>
         </div>
-        <span className="rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary border border-primary/20">
-          {data.rank}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20">
+            {data.rank}
+          </span>
+        </div>
       </div>
 
-      {/* Formation Score Card */}
-      <div className="mb-8 rounded-xl bg-gradient-to-r from-primary/20 to-primary/5 p-6 border border-primary/10">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-sm text-muted-foreground">Overall Formation Score</p>
-            <p className="text-5xl font-bold">{data.formationScores.overall_score || 0}</p>
+      {/* Main Score Card - Hero Style */}
+      <div className="relative glass-card p-8 overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-primary/5 blur-3xl" />
+        
+        <div className="relative">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Overall Formation Score</p>
+              <div className="flex items-baseline gap-3">
+                <p className="text-6xl font-bold text-foreground">{data.formationScores.overall_score || 0}</p>
+                <span className="text-muted-foreground">points</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 bg-orange-500/10 px-5 py-3 rounded-2xl">
+                <Flame className="h-7 w-7 text-orange-500" />
+                <div>
+                  <p className="text-xl font-bold text-foreground">{data.currentStreak}</p>
+                  <p className="text-xs text-muted-foreground">day streak</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded-full">
-            <Flame className="h-6 w-6 text-orange-500" />
-            <span className="text-xl font-semibold">{data.currentStreak} day streak</span>
+          
+          {/* Pillar Breakdown */}
+          <div className="grid grid-cols-5 gap-4">
+            {PILLAR_CONFIG.map((pillar, index) => (
+              <div 
+                key={pillar.key} 
+                className="text-center p-4 rounded-xl bg-background/50 hover:bg-background/80 transition-colors stagger-item"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div 
+                  className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl transition-transform hover:scale-110 ${pillar.glowClass}`}
+                  style={{ backgroundColor: `${pillar.color}15` }}
+                >
+                  <pillar.icon className="h-6 w-6" style={{ color: pillar.color }} />
+                </div>
+                <p className="text-xs text-muted-foreground mb-1">{pillar.name}</p>
+                <p className="font-bold text-lg text-foreground">
+                  {data.formationScores[pillar.key as keyof FormationScores] || 0}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-        
-        {/* Pillar Breakdown */}
-        <div className="grid grid-cols-5 gap-4">
-          {PILLAR_CONFIG.map((pillar) => (
-            <div key={pillar.key} className="text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-silver-100 dark:bg-silver-800">
-                <pillar.icon className="h-5 w-5" style={{ color: pillar.color }} />
+      </div>
+
+      {/* Quick Actions Section */}
+      <div className="mb-6">
+        <h2 className="text-lg font-bold text-foreground mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { icon: Cross, label: "Log Prayer", href: "/formation", color: "#a855f7", points: "+10" },
+            { icon: BookOpen, label: "Read Scripture", href: "/formation", color: "#06b6d4", points: "+5" },
+            { icon: Flame, label: "Complete Examen", href: "/examen", color: "#ef4444", points: "+15" },
+            { icon: Target, label: "Join Campaign", href: "/campaigns", color: "#22c55e", points: "+25" },
+          ].map((action, i) => (
+            <Link
+              key={i}
+              href={action.href}
+              className="group glass-card p-5 flex flex-col items-center text-center hover:translate-y-[-2px] transition-all duration-300 cursor-pointer"
+            >
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                style={{ backgroundColor: `${action.color}15` }}
+              >
+                <action.icon className="h-6 w-6" style={{ color: action.color }} />
               </div>
-              <p className="text-xs text-muted-foreground">{pillar.name}</p>
-              <p className="font-semibold text-lg text-foreground">{data.formationScores[pillar.key as keyof FormationScores] || 0}</p>
-            </div>
+              <p className="font-semibold text-foreground text-sm">{action.label}</p>
+              <p className="text-xs text-muted-foreground">{action.points}</p>
+            </Link>
           ))}
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="mb-8 grid gap-6 md:grid-cols-4">
-        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
-          <div className="flex items-center gap-4">
-            <div className="rounded-full bg-orange-500/10 p-3">
-              <Flame className="h-5 w-5 text-orange-500" />
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {[
+          { 
+            icon: Flame, 
+            label: "Formation Streak", 
+            value: `${data.currentStreak} days`, 
+            color: "#ef4444",
+            description: "Keep the momentum going"
+          },
+          { 
+            icon: Target, 
+            label: "Active Campaigns", 
+            value: data.activeCampaigns.toString(), 
+            color: "#22c55e",
+            description: "In progress right now"
+          },
+          { 
+            icon: Trophy, 
+            label: "Achievements", 
+            value: data.achievementsCount.toString(), 
+            color: "#eab308",
+            description: "Unlocked badges"
+          },
+          { 
+            icon: Calendar, 
+            label: "Next Pod Meeting", 
+            value: data.nextPodMeeting || "None", 
+            color: "#8b5cf6",
+            description: "Stay accountable"
+          },
+        ].map((stat, i) => (
+          <div 
+            key={i} 
+            className="glass-card p-6 hover:translate-y-[-2px] transition-all duration-300 stagger-item"
+            style={{ animationDelay: `${i * 0.1}s` }}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div 
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: `${stat.color}15` }}
+              >
+                <stat.icon className="h-5 w-5" style={{ color: stat.color }} />
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Formation Streak</p>
-              <p className="text-2xl font-bold text-foreground">{data.currentStreak} days</p>
-            </div>
+            <p className="text-2xl font-bold text-foreground mb-1">{stat.value}</p>
+            <p className="text-sm font-medium text-foreground">{stat.label}</p>
+            <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
           </div>
-        </div>
-
-        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
-          <div className="flex items-center gap-4">
-            <div className="rounded-full bg-blue-500/10 p-3">
-              <Target className="h-5 w-5 text-blue-500" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Active Campaigns
-              </p>
-              <p className="text-2xl font-bold text-foreground">{data.activeCampaigns}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
-          <div className="flex items-center gap-4">
-            <div className="rounded-full bg-yellow-500/10 p-3">
-              <Trophy className="h-5 w-5 text-yellow-600" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Achievements
-              </p>
-              <p className="text-2xl font-bold text-foreground">{data.achievementsCount}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-silver-200 bg-card p-5 transition-all hover:shadow-md dark:border-silver-700">
-          <div className="flex items-center gap-4">
-            <div className="rounded-full bg-purple-500/10 p-3">
-              <Calendar className="h-5 w-5 text-purple-500" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Next Pod Meeting</p>
-              <p className="text-2xl font-bold text-foreground">{data.nextPodMeeting || "None"}</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Quick Actions & Active Campaigns */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-silver-200 bg-card p-6 dark:border-silver-700">
-          <h2 className="mb-4 text-lg font-semibold text-foreground">Today's Formation</h2>
+      {/* Two Column Layout */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Today's Formation Card */}
+        <div className="glass-card p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-foreground">Today's Formation</h2>
+            <Link href="/formation" className="text-sm text-primary hover:underline flex items-center gap-1">
+              View All <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+          
           <div className="space-y-3">
-            <Link
-              href="/formation"
-              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
-            >
-              <span className="flex items-center gap-3 text-foreground">
-                <Cross className="h-5 w-5 text-[#7c3aed]" /> Log Prayer
-              </span>
-              <span className="text-sm text-muted-foreground">+10 pts</span>
-            </Link>
-            <Link
-              href="/formation"
-              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
-            >
-              <span className="flex items-center gap-3 text-foreground">
-                <BookOpen className="h-5 w-5 text-[#0891b2]" /> Read Scripture
-              </span>
-              <span className="text-sm text-muted-foreground">+5 pts</span>
-            </Link>
-            <Link
-              href="/examen"
-              className="flex items-center justify-between rounded-lg border border-silver-200 p-4 transition-all hover:bg-silver-50 hover:border-silver-300 dark:hover:bg-silver-800"
-            >
-              <span className="flex items-center gap-3 text-foreground">
-                <Flame className="h-5 w-5 text-orange-500" /> Complete Examen
-              </span>
-              <span className="text-sm text-muted-foreground">+15 pts</span>
-            </Link>
+            {[
+              { icon: Cross, label: "Log Prayer", sublabel: "Start your day with God", color: "#a855f7", href: "/formation" },
+              { icon: BookOpen, label: "Read Scripture", sublabel: "Daily reading plan", color: "#06b6d4", href: "/formation" },
+              { icon: Dumbbell, label: "Complete Rule Item", sublabel: "Stay disciplined", color: "#ef4444", href: "/rule-of-life" },
+            ].map((item, i) => (
+              <Link
+                key={i}
+                href={item.href}
+                className="flex items-center gap-4 p-4 rounded-xl bg-background/50 hover:bg-background/80 transition-colors group"
+              >
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${item.color}15` }}
+                >
+                  <item.icon className="h-5 w-5" style={{ color: item.color }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{item.label}</p>
+                  <p className="text-sm text-muted-foreground">{item.sublabel}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className="rounded-lg border border-silver-200 bg-card p-6 dark:border-silver-700">
-          <h2 className="mb-4 text-lg font-semibold text-foreground">Active Campaigns</h2>
+        {/* Active Campaigns Card */}
+        <div className="glass-card p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-foreground">Active Campaigns</h2>
+            <Link href="/campaigns" className="text-sm text-primary hover:underline flex items-center gap-1">
+              View All <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+          
           {data.activeCampaigns > 0 ? (
-            <div className="space-y-3">
-              <div className="rounded-lg border border-silver-200 p-4">
-                <p className="font-medium text-foreground">Campaign Progress</p>
-                <p className="text-sm text-muted-foreground">
-                  {data.activeCampaigns} active campaign{data.activeCampaigns > 1 ? "s" : ""}
-                </p>
-              </div>
-              <Link
-                href="/campaigns"
-                className="block text-center text-sm text-silver-600 hover:text-silver-800 dark:text-silver-400 dark:hover:text-silver-300"
-              >
-                View Campaign Details
-              </Link>
+            <div className="space-y-4">
+              {[1, 2, 3].slice(0, Math.min(data.activeCampaigns, 3)).map((_, i) => (
+                <div key={i} className="p-4 rounded-xl bg-background/50">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="font-semibold text-foreground">Campaign {i + 1}</p>
+                    <span className="text-xs text-muted-foreground">{70 + i * 10}%</span>
+                  </div>
+                  <div className="h-2 bg-primary/10 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-primary rounded-full transition-all duration-500"
+                      style={{ width: `${70 + i * 10}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
-            <div className="space-y-3">
-              <div className="rounded-lg border border-silver-200 p-4">
-                <p className="font-medium text-foreground">No active campaigns</p>
-                <p className="text-sm text-muted-foreground">
-                  Join a campaign to start your journey
-                </p>
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-primary" />
               </div>
-              <Link
-                href="/campaigns"
-                className="block text-center text-sm text-silver-600 hover:text-silver-800 dark:text-silver-400 dark:hover:text-silver-300"
-              >
-                Browse Campaigns
+              <p className="font-semibold text-foreground mb-2">No active campaigns</p>
+              <p className="text-sm text-muted-foreground mb-4">
+                Join a campaign to start your journey
+              </p>
+              <Link href="/campaigns">
+                <Button size="sm" className="btn-elegant">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Browse Campaigns
+                </Button>
               </Link>
             </div>
           )}
