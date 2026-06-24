@@ -263,7 +263,9 @@ Full documentation in `/docs`:
 | 03_MEMBER_JOURNEY.md | User lifecycle |
 | 05_ROLES_AND_PERMISSIONS.md | Rank system |
 | 08_FORMATION_SYSTEM.md | 5 pillars |
-| 17_IMPLEMENTATION_ROADMAP.md | Build order |
+| 25_GROWTH_ENGINE.md | Funnel and growth |
+| 27_PORTAL_PRODUCT_SPEC.md | Portal specification |
+| 38_DATABASE_REFERENCE.md | Database schema reference |
 
 ---
 

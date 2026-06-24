@@ -1,11 +1,13 @@
 -- Migration 006: Certification System
 -- Adds certifications for earned competence tracking
+-- Note: Uses IF NOT EXISTS to handle fresh installs and existing databases
 
 ----------------------------------------------------
 -- CERTIFICATION DEFINITIONS
 ----------------------------------------------------
 
-create table certifications (
+-- Create certifications table if not exists (001 may have created it)
+create table if not exists certifications (
   id uuid primary key default uuid_generate_v4(),
   slug text not null unique,
   name text not null,
@@ -13,12 +15,31 @@ create table certifications (
   category text not null, -- 'builder', 'discipline', 'brotherhood', 'faith', 'leadership'
   icon text,
   color text,
-  requirements jsonb not null, -- {campaigns: [], achievements: [], points: {}, custom: []}
+  requirements jsonb not null default '{}', -- {campaigns: [], achievements: [], points: {}, custom: []}
   points_required int default 0,
   sort_order int default 0,
   active boolean default true,
   created_at timestamp with time zone default now()
 );
+
+-- Add columns that might not exist in older schemas
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS requirements jsonb not null default '{}';
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS points_required int default 0;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS sort_order int default 0;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
 
 create index idx_certifications_category on certifications(category);
 create index idx_certifications_active on certifications(active) where active = true;
@@ -27,7 +48,8 @@ create index idx_certifications_active on certifications(active) where active = 
 -- USER CERTIFICATION EARNINGS
 ----------------------------------------------------
 
-create table user_certifications (
+-- Create user_certifications table if not exists
+create table if not exists user_certifications (
   id uuid primary key default uuid_generate_v4(),
   user_id uuid not null references profiles(user_id) on delete cascade,
   certification_id uuid not null references certifications(id) on delete cascade,
@@ -36,6 +58,19 @@ create table user_certifications (
   notes text,
   unique(user_id, certification_id)
 );
+
+-- Add columns that might not exist
+DO $$BEGIN
+  ALTER TABLE user_certifications ADD COLUMN IF NOT EXISTS verified_by uuid references profiles(user_id);
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
+DO $$BEGIN
+  ALTER TABLE user_certifications ADD COLUMN IF NOT EXISTS notes text;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
 
 create index idx_user_certs_user on user_certifications(user_id);
 create index idx_user_certs_cert on user_certifications(certification_id);
