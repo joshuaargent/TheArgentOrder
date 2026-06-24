@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Bell, CheckCircle, Clock, Trash2, Filter, Check, X } from "lucide-react";
+import { Bell, CheckCircle, Clock, Trash2, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface Notification {

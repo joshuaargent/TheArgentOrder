@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { 
-  Shield, Users, Activity, TrendingUp, TrendingDown, 
+  Shield, Users, Activity, TrendingUp, 
   CheckCircle, Clock, AlertTriangle, ArrowRight, Plus,
   Cross, Dumbbell, Handshake, Hammer, GraduationCap,
-  BarChart3, PieChart, Calendar
+  BarChart3, PieChart
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 

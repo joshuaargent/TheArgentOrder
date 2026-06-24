@@ -35,10 +35,31 @@ export default function JoinPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email,
+          leadMagnet: 'CATHOLIC_BUILDER_STARTER'
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success || data.warning) {
+        setSubmitted(true);
+      } else {
+        throw new Error(data.error || 'Subscription failed');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription failed:', error);
+      // Still show success to not block conversion
       setSubmitted(true);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const offer = {

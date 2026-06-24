@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { 
-  CheckSquare, Clock, Plus, X, Edit2, Trash2, 
+import {
+  CheckSquare, Plus, X, Edit2, Trash2, Check, Target, Calendar,
   Cross, Dumbbell, Handshake, Hammer, GraduationCap,
-  ChevronDown, Check, Target, Calendar
 } from "lucide-react";
 
 interface Rule {

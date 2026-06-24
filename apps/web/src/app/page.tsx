@@ -15,7 +15,6 @@ import {
   GraduationCap,
   Swords,
   CheckCircle,
-  Star,
   Zap,
   AlertTriangle,
   Lock,

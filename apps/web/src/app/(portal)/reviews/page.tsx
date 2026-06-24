@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { 
-  Calendar, CheckCircle, Clock, Plus, ChevronLeft, ChevronRight,
+  Calendar, CheckCircle, Clock, Plus,
   Cross, Dumbbell, Handshake, Hammer, GraduationCap,
-  Star, TrendingUp, Target, AlertTriangle, X
+  Star, TrendingUp, X
 } from "lucide-react";
 
 interface Review {
@@ -53,22 +53,22 @@ export default function ReviewsPage() {
   };
 
   const getDefaultReviews = (): Review[] => [
-    { id: '1', review_type: 'weekly', week_start: getWeekStart(-1), completed: true, score: 85 },
-    { id: '2', review_type: 'weekly', week_start: getWeekStart(0), completed: false },
-    { id: '3', review_type: 'monthly', week_start: getMonthStart(-1), completed: true, score: 78 },
+    { id: '1', review_type: 'weekly', week_start: getWeekStart(-1) || 'last-week', completed: true, score: 85 },
+    { id: '2', review_type: 'weekly', week_start: getWeekStart(0) || 'this-week', completed: false },
+    { id: '3', review_type: 'monthly', week_start: getMonthStart(-1) || 'last-month', completed: true, score: 78 },
   ];
 
   function getWeekStart(weeksAgo: number): string {
     const date = new Date();
     date.setDate(date.getDate() - date.getDay() - (weeksAgo * 7));
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split('T')[0] ?? '';
   }
 
   function getMonthStart(monthsAgo: number): string {
     const date = new Date();
     date.setMonth(date.getMonth() + monthsAgo);
     date.setDate(1);
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split('T')[0] ?? '';
   }
 
   const startReview = (review: Review) => {
@@ -145,7 +145,7 @@ export default function ReviewsPage() {
                     value={responses[pillar]?.score || 5}
                     onChange={(e) => setResponses({
                       ...responses,
-                      [pillar]: { ...responses[pillar], score: parseInt(e.target.value) }
+                      [pillar]: { ...responses[pillar] ?? { score: 5, notes: "" }, score: parseInt(e.target.value) }
                     })}
                     className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer"
                   />
@@ -155,16 +155,20 @@ export default function ReviewsPage() {
 
               {/* Questions */}
               <div className="space-y-3 mb-4">
-                {config.questions.map((q, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm">
-                    <div className={`w-5 h-5 rounded border flex items-center justify-center ${
-                      responses[pillar]?.score >= (i + 1) * 2.5 ? 'bg-green-500 border-green-500' : 'border-border'
-                    }`}>
-                      {responses[pillar]?.score >= (i + 1) * 2.5 && <CheckCircle className="h-3 w-3 text-white" />}
+                {config.questions.map((q, i) => {
+                  const score = responses[pillar]?.score ?? 0;
+                  const filled = score >= (i + 1) * 2.5;
+                  return (
+                    <div key={i} className="flex items-center gap-3 text-sm">
+                      <div className={`w-5 h-5 rounded border flex items-center justify-center ${
+                        filled ? 'bg-green-500 border-green-500' : 'border-border'
+                      }`}>
+                        {filled && <CheckCircle className="h-3 w-3 text-white" />}
+                      </div>
+                      <span className="text-muted-foreground">{q}</span>
                     </div>
-                    <span className="text-muted-foreground">{q}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Notes */}
@@ -173,7 +177,7 @@ export default function ReviewsPage() {
                 value={responses[pillar]?.notes || ''}
                 onChange={(e) => setResponses({
                   ...responses,
-                  [pillar]: { ...responses[pillar], notes: e.target.value }
+                  [pillar]: { ...responses[pillar] ?? { score: 5, notes: "" }, notes: e.target.value }
                 })}
                 rows={2}
                 className="w-full px-4 py-2 rounded-lg border border-border bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none text-sm"

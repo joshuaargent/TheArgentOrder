@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen, ArrowRight, Plus, Shield, Crown } from "lucide-react";
+import { Loader2, Trophy, Flame, Target, Calendar, Sword, Cross, Dumbbell, Handshake, Hammer, GraduationCap, BookOpen, ArrowRight, Plus, Crown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface FormationScores {
@@ -33,7 +33,6 @@ const PILLAR_CONFIG = [
   { key: "truth_score", name: "Truth", icon: GraduationCap, color: "#06b6d4", glowClass: "glow-truth" },
 ];
 
-const RANK_PROGRESSION = ["Initiate", "Brother", "Veteran", "Captain", "Officer", "Mentor", "Steward"];
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData>({
