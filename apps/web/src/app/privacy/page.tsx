@@ -1,0 +1,178 @@
+import Link from "next/link";
+import { Shield, Lock, Eye, Database, Mail, AlertTriangle } from "lucide-react";
+
+export default function PrivacyPage() {
+  return (
+    <main className="min-h-screen mesh-gradient relative">
+      {/* Ambient Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 -top-48 -left-48" />
+        <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-0 right-0" style={{ animationDelay: '-5s' }} />
+      </div>
+
+      {/* Sticky Nav */}
+      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+              </svg>
+              <span className="font-bold text-lg">The Argent Order</span>
+            </div>
+            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              ← Back to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 py-16 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <Shield className="h-8 w-8 text-primary" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Privacy Policy</h1>
+          <p className="text-muted-foreground">Last updated: June 2024</p>
+        </div>
+
+        {/* Important Notice */}
+        <div className="glass-card p-6 mb-8 border-green-500/20">
+          <div className="flex items-start gap-4">
+            <Lock className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-bold mb-2">Your Privacy Matters</h3>
+              <p className="text-sm text-muted-foreground">
+                We collect only what is necessary for your formation. We never sell your data. 
+                We protect your information as we protect our brotherhood—with honor.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Sections */}
+        <div className="space-y-8">
+          {[
+            {
+              title: "Information We Collect",
+              icon: Database,
+              content: `We collect information you provide directly:
+
+• Account Information: Name, email address, password, and profile details
+• Formation Data: Prayer habits, check-ins, campaign progress, and formation scores
+• Brotherhood Activity: Pod membership, interactions with other members, and accountability logs
+• Content You Submit: Journal entries, prayer requests, and project updates
+
+We do not collect payment information—transactions are handled by secure third-party processors.`
+            },
+            {
+              title: "How We Use Your Information",
+              icon: Eye,
+              content: `We use your information to:
+
+• Create and maintain your account within The Argent Order
+• Track your formation progress across the five pillars
+• Connect you with your accountability pod
+• Send you formation reminders and accountability notifications
+• Provide access to campaigns, certifications, and formation resources
+• Improve our formation systems and member experience
+
+We do not use your information for advertising or sell it to third parties.`
+            },
+            {
+              title: "Data Storage and Security",
+              icon: Shield,
+              content: `Your data is stored securely using industry-standard practices:
+
+• Supabase: Our primary database provider, offering enterprise-grade security
+• Encryption: Data is encrypted in transit and at rest
+• Access Control: Only authorized personnel can access member data
+• Retention: We retain your data as long as your account is active
+
+While we implement robust security measures, no system is completely secure. 
+We commit to transparency about any data incidents that may affect you.`
+            },
+            {
+              title: "Your Rights",
+              icon: Lock,
+              content: `You have the right to:
+
+• Access your personal data at any time
+• Correct inaccurate information
+• Request deletion of your account and data
+• Export your formation data
+• Opt out of non-essential communications
+
+To exercise these rights, contact us at the email below. 
+We will respond within 30 days.`
+            },
+            {
+              title: "Cookies and Tracking",
+              icon: AlertTriangle,
+              content: `We use minimal cookies:
+
+• Essential Cookies: Required for authentication and session management
+• Analytics Cookies: Anonymous usage data to improve our platform
+• No Third-Party Tracking: We do not allow external tracking on our platform
+
+You can disable cookies in your browser, though some features may not function properly.`
+            },
+            {
+              title: "Children's Privacy",
+              icon: AlertTriangle,
+              content: `The Argent Order is designed for adult men seeking Catholic formation.
+
+We do not knowingly collect information from individuals under 18 years of age. 
+If you believe a minor has provided us with personal information, please contact us immediately.`
+            },
+            {
+              title: "Changes to This Policy",
+              icon: Shield,
+              content: `We may update this Privacy Policy from time to time.
+
+If we make significant changes, we will:
+• Notify you via email or platform notification
+• Update the "Last updated" date at the top of this page
+• Provide a summary of changes
+
+Your continued use of The Argent Order after changes constitutes acceptance of the updated policy.`
+            },
+            {
+              title: "Contact Us",
+              icon: Mail,
+              content: `For privacy-related questions or concerns:
+
+Email: privacy@theargentorder.com
+
+We take privacy seriously and welcome your questions and feedback.`
+            }
+          ].map((section, i) => (
+            <div key={i} className="glass-card p-6">
+              <h2 className="text-xl font-bold mb-4 flex items-center gap-3">
+                <section.icon className="h-5 w-5 text-primary" />
+                {section.title}
+              </h2>
+              <div className="text-muted-foreground whitespace-pre-line text-sm leading-relaxed">
+                {section.content}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-12 text-center">
+          <div className="flex justify-center gap-6 text-sm text-muted-foreground mb-4">
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} The Argent Order. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </main>
+  );
+}
