@@ -481,3 +481,212 @@ If Phase 1 is strong, everything scales.
 The goal is not a platform.
 
 The goal is a formation engine that produces disciplined men who act.
+
+---
+
+# DEPLOYMENT ARCHITECTURE
+
+Version: 1.0
+
+Status: Production Infrastructure Blueprint
+
+---
+
+## Infrastructure Philosophy
+
+### Principle 1: Buy Simplicity
+
+Build infrastructure that can easily reach 10,000 users. Scale later.
+
+### Principle 2: Managed Services First
+
+Self-host only when there is a compelling reason. Time spent managing servers is time not spent building formation.
+
+### Principle 3: Operational Requirements
+
+Every component must have: Monitoring, Logging, Backups, Recovery procedures
+
+---
+
+## Production Architecture
+
+```
+Users → Cloudflare → Vercel → Next.js Portal → Internal API Layer → Supabase (Postgres, Auth, Storage, Realtime) → Discord Bot → Discord
+```
+
+---
+
+## Hosting Platforms
+
+### Frontend: Vercel
+
+Benefits: Automatic Deployments, Preview Deployments, Edge Network, Easy Rollbacks
+
+### Database: Supabase
+
+Responsibilities: Authentication, Postgres, Storage, Realtime, RLS
+
+Requirements: Daily Backups, Point In Time Recovery, Database Monitoring, Connection Monitoring
+
+### Discord Bot: Railway (Preferred)
+
+Alternatives: Fly.io, VPS, DigitalOcean
+
+Requirements: Always On, Auto Restart, Health Checks, Crash Recovery
+
+---
+
+## Domain Architecture
+
+Primary: joshuaargent.com
+
+Subdomains:
+* app.joshuaargent.com - Portal
+* api.joshuaargent.com - API
+* join.joshuaargent.com - Lead Capture
+* docs.joshuaargent.com - Public Documentation
+
+---
+
+## Cloudflare Layer
+
+Features: DNS, Caching, DDoS Protection, SSL, Rate Limiting
+
+Required Rules: Protect API, Protect Login, Protect Admin Endpoints
+
+---
+
+## Environment Separation
+
+Development: Local Machine
+
+Staging: Preview Environment
+
+Production: Live Environment
+
+Separate: Database, Storage, Secrets, Discord Applications
+
+---
+
+## Secrets Management
+
+Never store secrets in source control.
+
+Required Secrets:
+```
+SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY,
+DISCORD_TOKEN, DISCORD_CLIENT_ID, DISCORD_PUBLIC_KEY,
+OPENAI_API_KEY, POSTHOG_API_KEY, SENTRY_DSN
+```
+
+Storage: Vercel Environment Variables, Railway Environment Variables
+
+---
+
+## CI/CD Pipeline
+
+Flow: Push → GitHub → Tests → Build → Deploy → Health Check → Production
+
+Every PR must: Pass Linting, Pass Type Check, Pass Tests, Build Successfully
+
+---
+
+## Database Migrations
+
+Never modify production manually.
+
+Structure: supabase/migrations/
+
+Examples: 202607010001_initial_schema.sql, 202607020001_add_campaigns.sql
+
+---
+
+## Observability Stack
+
+### Error Monitoring: Sentry
+
+Track: Frontend Errors, Backend Errors, Discord Bot Errors, API Failures
+
+### Product Analytics: PostHog
+
+Track: Signups, Retention, Campaign Participation, Project Creation, Review Completion, Conversion Rates
+
+### Logging: Structured JSON Logs
+
+Categories: Auth, Formation, Campaigns, Discord, Leadership, Admin
+
+---
+
+## Health Monitoring
+
+Every service must expose: /health
+
+Checks: Database, API, Discord, Storage
+
+---
+
+## Backup Strategy
+
+Database: Daily
+
+Retention: 30 Days Minimum
+
+Critical Exports: Users, Formation Events, Campaign Data, Projects, Achievements
+
+---
+
+## Recovery Procedures
+
+Database Failure: Freeze Writes → Restore Backup → Validate Data → Reopen System
+
+Discord Bot Failure: Restart Container → Review Logs → Restore Service
+
+API Failure: Rollback Deployment → Restore Previous Build
+
+---
+
+## Security Architecture
+
+Authentication: Supabase Auth
+
+Authorization: RLS, API Checks, Leadership Permissions
+
+Admin Protection: Officer+ required, MFA Recommended, Audit Logs
+
+Audit Logging: Every sensitive action recorded (Promotion, Ban, Role Change, Achievement Grant, Certification Grant)
+
+---
+
+## Rate Limiting
+
+Required for: Authentication, Discord Sync, AI Endpoints, Admin Endpoints
+
+---
+
+## Future Scaling
+
+Current Target: 100–1,000 active members
+
+Next Stage (1,000–10,000): Redis, Queues, Background Workers, Caching Layer
+
+Large Scale (10,000+): Dedicated API, Dedicated Worker Cluster, Read Replicas, Advanced Analytics Pipeline
+
+---
+
+## Launch Checklist
+
+Infrastructure: Domain, SSL, DNS, Database, Bot, Monitoring
+
+Application: Authentication, Dashboard, Formation, Campaigns, Builder Hall, Brotherhood
+
+Operations: Discord, Email, Analytics, Moderation
+
+---
+
+## Final Principle
+
+The platform must survive: Founder absence, Bot failure, Deployment failure, Traffic spikes, Growth
+
+without losing data, trust, or momentum.
+
+Infrastructure exists to support formation. Formation exists to serve the mission.
