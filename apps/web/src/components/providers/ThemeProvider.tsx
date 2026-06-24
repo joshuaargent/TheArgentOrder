@@ -31,10 +31,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 // ============================================
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
+  // Default to dark mode
+  const [theme, setThemeState] = useState<Theme>('dark');
   const [isMounted, setIsMounted] = useState(false);
 
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage or default to dark
   useEffect(() => {
     setIsMounted(true);
 
@@ -42,7 +43,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     if (storedTheme) {
       setThemeState(storedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    } else {
+      // Default to dark mode
       setThemeState('dark');
     }
   }, []);
@@ -62,16 +64,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('theme', theme);
   }, [theme, isMounted]);
 
-  // Listen for system theme changes
+  // Listen for system theme changes (only if no stored preference)
   useEffect(() => {
     if (!isMounted) return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    const handleChange = (e: MediaQueryListEvent) => {
+    const handleChange = () => {
       const storedTheme = localStorage.getItem('theme');
       if (!storedTheme) {
-        setThemeState(e.matches ? 'dark' : 'light');
+        // Default to dark mode on system change too
+        setThemeState('dark');
       }
     };
 
@@ -87,7 +90,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(newTheme);
   };
 
-  // Prevent flash of wrong theme
+  // Prevent flash of wrong theme - use dark by default
   if (!isMounted) {
     return <>{children}</>;
   }
@@ -109,7 +112,7 @@ export function useTheme() {
   // Return default values if used outside ThemeProvider
   if (context === undefined) {
     return {
-      theme: 'light' as Theme,
+      theme: 'dark' as Theme,
       toggleTheme: () => {},
       setTheme: () => {},
     };
