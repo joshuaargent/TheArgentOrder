@@ -435,7 +435,7 @@ Full operational authority.
 
 # FOUNDER
 
-**Note:** The "Founder" is not a formation rank within The Argent Order. The Founder exists outside the formation hierarchy as described in 35_FOUNDER_PLAYBOOK.md.
+**Note:** The "Founder" is not a formation rank within The Argent Order. The Founder exists outside the formation hierarchy as described in 29_FOUNDER_PLAYBOOK.md.
 
 ## Purpose
 

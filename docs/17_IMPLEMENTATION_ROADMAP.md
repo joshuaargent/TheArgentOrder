@@ -85,7 +85,7 @@ OPENAI_API_KEY=
 Execute:
 
 ```text id="db1"
-15_DATABASE_SCHEMA.sql
+12_DATABASE_SCHEMA.sql
 ```
 
 ---
@@ -95,7 +95,7 @@ Execute:
 Execute:
 
 ```text id="db2"
-16_RLS_POLICIES.sql
+13_RLS_POLICIES.sql
 ```
 
 ---
