@@ -974,8 +974,424 @@ Leaders build the future.
 
 ---
 
-# Related Documents
+---
 
-For content acquisition funnel strategy, see: **34_CONTENT_AQUISITION_SYSTEM.md**
+# CONTENT ACQUISITION SYSTEM
 
-For growth engine overview, see: **25_GROWTH_ENGINE.md**
+Version: 1.0
+
+Status: Canonical Growth Engine
+
+---
+
+## Purpose
+
+This system defines how men enter The Argent Order at scale.
+
+Without acquisition, the system is perfect but empty.
+
+Without structure, acquisition produces noise.
+
+This system ensures:
+
+```
+The right men enter the system through the right message and the right funnel
+```
+
+---
+
+## Core Principle
+
+```
+You do not attract users.
+You attract identity alignment.
+```
+
+People do not join The Argent Order because of features.
+
+They join because they recognise themselves in the message.
+
+---
+
+## Acquisition Engine Overview
+
+The system has 4 layers:
+
+```
+Identity Content → Authority Content → Problem Content → Conversion Layer (Portal Entry)
+```
+
+---
+
+## Identity Content
+
+**Purpose:** Create recognition.
+
+**Message Type:**
+- "This is who you are"
+- "This is who you should become"
+- "This is the man you are called to be"
+
+**Themes:** Discipline, Catholic formation, Brotherhood, Responsibility, Builder mindset
+
+**Function:** This content filters attention. Only aligned men continue.
+
+---
+
+## Authority Content
+
+**Purpose:** Establish system credibility.
+
+**Message Type:** Systems thinking, Leadership structure breakdown, Formation methodology explanation
+
+**Themes:** discipline systems, accountability structures, behavioural engineering, Catholic formation philosophy
+
+**Function:** Shows this is not motivation. It is structure.
+
+---
+
+## Problem Content
+
+**Purpose:** Expose current failure state.
+
+**Message Type:** Why men fail today, Why discipline collapses, Why motivation systems fail, Why modern masculinity breaks down
+
+**Function:** Creates tension between current state and desired state.
+
+---
+
+## Content Stack Rule
+
+Every content piece must contain:
+
+```
+Identity tension + problem awareness + structural solution hint
+```
+
+Not entertainment. Not inspiration alone.
+
+---
+
+## Platform Strategy
+
+Content is distributed across:
+
+**Short Form:** TikTok, Reels, YouTube Shorts
+- Purpose: identity hooks, attention capture
+
+**Long Form:** YouTube, Articles, Twitter/X threads
+- Purpose: authority building, system explanation
+
+**Community Funnels:** Discord entry, Portal onboarding, Email capture
+- Purpose: conversion into system
+
+---
+
+## Funnel Design
+
+**Step 1 — ATTENTION:** User sees identity-based content with discipline tension
+
+**Step 2 — INTEREST:** User engages, reads explanation, understands system exists
+
+**Step 3 — ENTRY:** User enters Discord OR Portal onboarding
+
+**Step 4 — ACTIVATION:** User completes onboarding: Rule of Life, First campaign, Pod assignment
+
+**Step 5 — RETENTION:** User becomes active participant, accountable member
+
+---
+
+## Conversion Principle
+
+```
+Content does not sell access.
+Content recruits participation.
+```
+
+---
+
+## Content Filtering Rule
+
+Every piece of content must pass:
+
+1. **Identity Test** — Does it attract aligned men?
+2. **Clarity Test** — Does it communicate structure clearly?
+3. **Activation Test** — Does it push toward action, not consumption?
+4. **Catholic Alignment Test** — Does it align with formation values?
+
+---
+
+## Virality Rule
+
+Virality is allowed only if:
+- it increases alignment
+- it increases clarity
+- it increases system entry
+
+Virality that attracts wrong users is failure.
+
+---
+
+## System Integration
+
+Content feeds directly into:
+- Portal (onboarding flow)
+- Discord (community entry point)
+- Pod system (assignment base)
+
+---
+
+## Acquisition Metrics
+
+Success is measured by:
+- Discord join conversion rate
+- Portal activation rate
+- 7-day retention after entry
+- campaign completion rate of entrants
+
+Not measured by: views, likes, shares, impressions
+
+---
+
+# GROWTH ENGINE
+
+Version: 1.0
+
+Status: Canonical Acquisition & Expansion System
+
+---
+
+## Purpose
+
+Growth is not the goal.
+
+Growth is the byproduct of transformation.
+
+The Growth Engine exists to:
+
+```
+Attract the right men
+Filter the wrong men
+Convert interest into commitment
+Convert commitment into formation
+Convert formation into leadership
+```
+
+---
+
+## Core Principle
+
+Attention is cheap. Transformation is expensive.
+
+We optimise for:
+
+```
+Depth of commitment, not volume of users
+```
+
+---
+
+## Funnel Architecture
+
+```
+Content → Landing Page → Email Capture → Email Sequence → Discord Entry → Onboarding → Rule Of Life Assignment → Campaign Entry → Formation Tracking → Leadership Pipeline
+```
+
+---
+
+## Stage 1 — CONTENT ATTRACTOR
+
+**Objective:** Generate attention from aligned men.
+
+**Platforms:** YouTube, Short Form (TikTok/Reels/Shorts), Twitter/X, Instagram Reels
+
+**Content Types:** Truth confrontation, Catholic formation teaching, Masculinity correction, Builder mindset, Brotherhood necessity
+
+**Filtering Principle:** Content must repel weak alignment. Not everyone is meant to join.
+
+---
+
+## Stage 2 — LANDING SYSTEM
+
+**Purpose:** Convert attention into ownership.
+
+**Landing Page:** joshuaargent.com/join
+
+**Structure:**
+1. Identity Statement — What this is
+2. Problem Statement — Why men are lost
+3. Solution Framework — Faith, Discipline, Brotherhood, Building, Truth
+4. Proof — Transformation stories
+5. Call To Action — Join the mission
+
+---
+
+## Stage 3 — EMAIL CAPTURE
+
+**Purpose:** Own the audience.
+
+**Platform:** Beehiiv
+
+**Lead Magnets:**
+- **Foundation Pack:** Rule of Life, Daily structure, Prayer system
+- **Builder Pack:** Project framework, Deep work system, Execution guide
+- **Discipline Pack:** Habit system, Wake protocol, Focus system
+
+---
+
+## Stage 4 — EMAIL SEQUENCE
+
+**Purpose:** Convert interest into identity shift.
+
+**Sequence Structure:**
+1. Email 1 — Identity Shock: "You are not where you should be."
+2. Email 2 — Truth Exposure: Why modern men fail
+3. Email 3 — System Introduction: Faith, discipline, structure
+4. Email 4 — Invitation: Join Discord
+5. Email 5 — Commitment Test: If you're serious, act
+
+**Principle:** Every email increases pressure. No passive reading.
+
+---
+
+## Stage 5 — DISCORD ENTRY
+
+**Purpose:** Filter commitment.
+
+**Entry Rules:** Must complete onboarding, Must complete roll-call, Must accept Rule Of Life assignment
+
+**Failure to act = exit.**
+
+---
+
+## Stage 6 — ONBOARDING FILTER
+
+**Purpose:** Remove tourists.
+
+**Steps:** Read rules, Post introduction, Declare intention, Join pod, Accept first campaign
+
+**Only those who act stay.**
+
+---
+
+## Stage 7 — FORMATION ACTIVATION
+
+**Purpose:** Turn members into participants.
+
+**Mechanisms:** Rule Of Life assignment, Campaign entry, Daily logging, Pod accountability
+
+**Principle:** No passive membership exists.
+
+---
+
+## Stage 8 — RETENTION ENGINE
+
+**Purpose:** Keep men engaged through structure.
+
+**Retention systems:**
+1. Daily Directive — One action per day
+2. Campaigns — Structured progression
+3. Pods — Social accountability
+4. Leadership pipeline — Future identity
+
+**Retention is not entertainment. Retention is responsibility.**
+
+---
+
+## Stage 9 — TRANSFORMATION SYSTEM
+
+**Purpose:** Turn members into testimonials.
+
+**Transformation triggers:** Campaign completion, Project launch, Discipline consistency, Leadership promotion
+
+**Output:** Before → After narratives
+
+---
+
+## Stage 10 — REFERRAL SYSTEM
+
+**Purpose:** Organic growth through identity.
+
+**Mechanism:** Members bring men who want discipline, faith, structure, and reject modern chaos
+
+**Referral trigger:** Transformation creates evangelism.
+
+---
+
+## Stage 11 — VIRAL CONTENT LOOP
+
+```
+Content → Emotion → Reflection → Share → New Entry
+```
+
+**Key insight:** Men share truth when it changes them. Not when it entertains them.
+
+---
+
+## Expansion Strategies
+
+### Parish Strategy (Long-Term)
+**Approach:** Serve first. Promote second.
+**Methods:** Workshops, Men's Events, Formation Talks, Builder Workshops, Faith & Work Discussions
+
+### University Strategy (High Potential)
+**Target:** Catholic students, Young men, Builders, Leaders
+**Methods:** Campus ambassadors, Student pods, Formation groups, Builder groups
+
+### Creator Strategy
+**Partner with:** Catholic creators, developers, entrepreneurs, educators, podcasters
+**Criteria:** Character first. Audience second.
+
+### Partnership Strategy
+**Potential Partners:** Catholic Organizations, Businesses, Podcasts, Authors, Ministries, Schools
+**Goal:** Shared mission. Not audience extraction.
+
+---
+
+## Growth Milestones
+
+**Stage 1:** 0-100 Members — Founder-Led
+**Stage 2:** 100-500 Members — Captain-Led
+**Stage 3:** 500-2,000 Members — Mentor-Led
+**Stage 4:** 2,000-10,000 Members — Steward-Led
+**Stage 5:** 10,000+ — Institution-Led
+
+**The 10,000 Member Principle:** At 10,000 members, most men should never interact directly with the Founder. They interact with Pods, Captains, Mentors, Formation Systems, and The Institution. The system must scale. Not the Founder.
+
+---
+
+## Growth Principles
+
+**Principle 1 — Filter First:** Do not optimise for mass. Optimise for alignment.
+
+**Principle 2 — Pressure Creates Commitment:** Soft onboarding produces weak members. Hard onboarding produces strong ones.
+
+**Principle 3 — Identity Drives Action:** Men act when they become "A disciplined man," "A builder," "A Catholic man in formation."
+
+**Principle 4 — Structure Converts Better Than Motivation:** Campaigns > inspiration.
+
+---
+
+## Growth Metrics
+
+- **Acquisition:** Email signups, Discord joins, Landing conversion rate
+- **Activation:** Roll-call completion, First campaign start, Rule of Life creation
+- **Retention:** Daily logs, Campaign completion rate, Pod attendance
+- **Transformation:** Project launches, Leadership promotions, Testimonies
+- **Expansion:** Referrals, Content shares, Organic growth loops
+
+---
+
+## System Warning
+
+If growth is high but transformation is low: The system is failing.
+
+---
+
+## Final Principle
+
+Growth is not success. Transformation is success.
+
+The Argent Order grows only if it produces: Faithful men, Disciplined men, Responsible men, Builders, Leaders
+
+Anything else is noise growth.
