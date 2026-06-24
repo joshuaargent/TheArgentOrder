@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Users, Calendar, MessageSquare, Plus, Cross, Flame } from "lucide-react";
+import { Users, Calendar, Plus, Cross, Flame } from "lucide-react";
 
 export default function BrotherhoodPage() {
   const [pod, setPod] = useState<any>(null);

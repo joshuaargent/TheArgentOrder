@@ -44,7 +44,16 @@ export default function ProfilePage() {
   };
 
   if (loading) {
-    return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-center"><div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 animate-pulse"><div className="w-5 h-5 rounded-full bg-primary/50"></div></div></div><p className="text-muted-foreground">Loading your profile...</p></div></div>;
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <User className="h-5 w-5 text-primary" />
+          </div>
+          <p className="text-muted-foreground">Loading your profile...</p>
+        </div>
+      </div>
+    );
   }
 
   const totalScore = profile ? Object.entries(profile).reduce((sum, [key, val]) => 

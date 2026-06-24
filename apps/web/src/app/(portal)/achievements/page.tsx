@@ -20,7 +20,16 @@ export default function AchievementsPage() {
     try { const res = await fetch("/api/achievements"); const data = await res.json(); setAchievements(data.achievements || []); }
     catch (error) { console.error("Failed:", error); } finally { setLoading(false); }
   };
-  if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-center"><div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 animate-pulse"><div className="w-5 h-5 rounded-full bg-primary/50"></div></div></div><p className="text-muted-foreground">Loading...</p></div></div>;
+  if (loading) return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="text-center">
+        <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <Trophy className="h-5 w-5 text-yellow-500" />
+        </div>
+        <p className="text-muted-foreground">Loading your achievements...</p>
+      </div>
+    </div>
+  );
   const filtered = filter ? achievements.filter((a) => a.category === filter) : achievements;
   const earnedCount = achievements.filter((a) => a.earned).length;
   return (
