@@ -1,172 +1,18 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Bell, Check, CheckCheck } from "lucide-react";
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  type: string;
-  read: boolean;
-  created_at: string;
-}
-
+import { Bell, CheckCircle, Clock } from "lucide-react";
+interface Notification { id: string; title: string; message: string; read: boolean; created_at: string; }
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
-
-  const fetchNotifications = async () => {
-    try {
-      const res = await fetch("/api/notifications");
-      const data = await res.json();
-      setNotifications(data.notifications || []);
-    } catch (error) {
-      console.error("Failed to fetch notifications:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const markAsRead = async (ids: string[]) => {
-    try {
-      await fetch("/api/notifications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ notification_ids: ids }),
-      });
-      fetchNotifications();
-    } catch (error) {
-      console.error("Failed to mark as read:", error);
-    }
-  };
-
-  const markAllAsRead = async () => {
-    try {
-      await fetch("/api/notifications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mark_all_read: true }),
-      });
-      fetchNotifications();
-    } catch (error) {
-      console.error("Failed to mark all as read:", error);
-    }
-  };
-
-  const unreadCount = notifications.filter((n) => !n.read).length;
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "achievement":
-        return "🏆";
-      case "campaign":
-        return "🎯";
-      case "formation":
-        return "✝️";
-      case "brotherhood":
-        return "🤝";
-      default:
-        return "🔔";
-    }
-  };
-
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    
-    if (hours < 1) return "Just now";
-    if (hours < 24) return `${hours}h ago`;
-    if (hours < 48) return "Yesterday";
-    return date.toLocaleDateString();
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-muted-foreground">Loading...</div>
-      </div>
-    );
-  }
-
+  useEffect(() => { fetchNotifications(); }, []);
+  const fetchNotifications = async () => { try { const res = await fetch("/api/notifications"); const data = await res.json(); setNotifications(data.notifications || []); } catch (error) { console.error("Failed:", error); } finally { setLoading(false); } };
+  if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
+  const unread = notifications.filter(n => !n.read).length;
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Notifications</h1>
-          <p className="text-muted-foreground">
-            {unreadCount > 0 ? `${unreadCount} unread` : "All caught up"}
-          </p>
-        </div>
-        {unreadCount > 0 && (
-          <Button variant="outline" onClick={markAllAsRead}>
-            <CheckCheck className="h-4 w-4 mr-2" />
-            Mark All Read
-          </Button>
-        )}
-      </div>
-
-      {notifications.length === 0 ? (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <Bell className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">No notifications yet.</p>
-            <p className="text-sm text-muted-foreground">
-              Complete campaigns and achievements to earn notifications!
-            </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="space-y-2">
-          {notifications.map((notification) => (
-            <Card
-              key={notification.id}
-              className={`transition-colors ${
-                !notification.read ? "border-l-4 border-l-primary" : ""
-              }`}
-            >
-              <CardContent className="py-4">
-                <div className="flex items-start gap-4">
-                  <div className="text-2xl">{getTypeIcon(notification.type)}</div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className={`font-medium ${!notification.read ? "text-foreground" : "text-muted-foreground"}`}>
-                          {notification.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {notification.message}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground">
-                          {formatDate(notification.created_at)}
-                        </span>
-                        {!notification.read && (
-                          <button
-                            onClick={() => markAsRead([notification.id])}
-                            className="p-1 hover:bg-accent rounded"
-                          >
-                            <Check className="h-4 w-4 text-muted-foreground" />
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
+    <div className="space-y-8">
+      <div><h1 className="text-3xl font-bold flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center"><Bell className="h-5 w-5 text-purple-500" /></div>Notifications</h1><p className="text-muted-foreground mt-1">{unread} unread</p></div>
+      {notifications.length > 0 ? notifications.map((n) => (<div key={n.id} className={`glass-card p-4 flex items-start gap-4 ${!n.read ? "border-l-2 border-l-primary" : ""}`}><div className="w-10 h-10 rounded-xl bg-background/50 flex items-center justify-center">{n.read ? <CheckCircle className="h-5 w-5 text-muted-foreground" /> : <Clock className="h-5 w-5 text-primary" />}</div><div className="flex-1"><p className="font-medium">{n.title}</p><p className="text-sm text-muted-foreground">{n.message}</p><p className="text-xs text-muted-foreground mt-1">{new Date(n.created_at).toLocaleString()}</p></div></div>)) : <div className="glass-card p-12 text-center"><Bell className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><h3 className="text-lg font-semibold mb-2">No Notifications</h3><p className="text-muted-foreground">You're all caught up!</p></div>}
     </div>
   );
 }

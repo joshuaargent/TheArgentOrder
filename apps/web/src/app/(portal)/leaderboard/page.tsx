@@ -1,57 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Trophy, Medal, Award } from "lucide-react";
+import { Trophy, Medal, Award, Flame } from "lucide-react";
 
 interface LeaderboardEntry {
   rank: number;
-  user_id: string;
   display_name: string;
-  avatar_url: string | null;
-  faith: number;
-  discipline: number;
-  brotherhood: number;
-  building: number;
-  truth: number;
-  overall: number;
+  score: number;
+  streak: number;
+  avatar_url?: string;
 }
 
-const PILLAR_COLORS: Record<string, string> = {
-  faith: "text-blue-500",
-  discipline: "text-red-500",
-  brotherhood: "text-purple-500",
-  building: "text-green-500",
-  truth: "text-yellow-500",
-};
-
-const PILLAR_ICONS: Record<string, string> = {
-  faith: "✝️",
-  discipline: "⚔️",
-  brotherhood: "🤝",
-  building: "🏗️",
-  truth: "📖",
-};
-
 export default function LeaderboardPage() {
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [selectedPillar, setSelectedPillar] = useState<string>("overall");
+  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchLeaderboard();
-  }, [selectedPillar]);
+  useEffect(() => { fetchLeaderboard(); }, []);
 
   const fetchLeaderboard = async () => {
-    setLoading(true);
     try {
-      const url =
-        selectedPillar === "overall"
-          ? "/api/leaderboard"
-          : `/api/leaderboard?pillar=${selectedPillar}`;
-      const res = await fetch(url);
+      const res = await fetch("/api/leaderboard");
       const data = await res.json();
-      setLeaderboard(data.leaderboard || []);
+      setEntries(data.leaderboard || []);
     } catch (error) {
       console.error("Failed to fetch leaderboard:", error);
     } finally {
@@ -59,135 +29,57 @@ export default function LeaderboardPage() {
     }
   };
 
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return <Trophy className="h-6 w-6 text-yellow-500" />;
-      case 2:
-        return <Medal className="h-6 w-6 text-gray-400" />;
-      case 3:
-        return <Award className="h-6 w-6 text-amber-600" />;
-      default:
-        return <span className="text-lg font-bold text-muted-foreground">#{rank}</span>;
-    }
-  };
+  if (loading) {
+    return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading leaderboard...</div></div>;
+  }
 
-  const getScore = (entry: LeaderboardEntry) => {
-    if (selectedPillar === "overall") {
-      return entry.overall;
-    }
-    return entry[selectedPillar as keyof LeaderboardEntry] as number;
+  const getRankIcon = (rank: number) => {
+    if (rank === 1) return <Trophy className="h-6 w-6 text-yellow-500" />;
+    if (rank === 2) return <Medal className="h-6 w-6 text-gray-400" />;
+    if (rank === 3) return <Award className="h-6 w-6 text-amber-600" />;
+    return <span className="text-lg font-bold text-muted-foreground">#{rank}</span>;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Leaderboard</h1>
-        <p className="text-muted-foreground">See how you stack up against your brothers</p>
+        <h1 className="text-3xl font-bold flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+            <Trophy className="h-5 w-5 text-yellow-500" />
+          </div>
+          Leaderboard
+        </h1>
+        <p className="text-muted-foreground mt-1">See how you rank against the brotherhood</p>
       </div>
 
-      {/* Pillar Filter */}
-      <div className="flex flex-wrap gap-2">
-        <button
-          onClick={() => setSelectedPillar("overall")}
-          className={`px-4 py-2 rounded-full font-medium transition-colors ${
-            selectedPillar === "overall"
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary hover:bg-secondary/80"
-          }`}
-        >
-          Overall
-        </button>
-        {Object.keys(PILLAR_ICONS).map((pillar) => (
-          <button
-            key={pillar}
-            onClick={() => setSelectedPillar(pillar)}
-            className={`px-4 py-2 rounded-full font-medium transition-colors ${
-              selectedPillar === pillar
-                ? "bg-primary text-primary-foreground"
-                : "bg-secondary hover:bg-secondary/80"
-            }`}
-          >
-            {PILLAR_ICONS[pillar]} {pillar.charAt(0).toUpperCase() + pillar.slice(1)}
-          </button>
-        ))}
-      </div>
-
-      {/* Leaderboard */}
-      {loading ? (
-        <div className="flex items-center justify-center h-64">
-          <div className="text-muted-foreground">Loading...</div>
-        </div>
-      ) : leaderboard.length === 0 ? (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <Trophy className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">No leaderboard data yet.</p>
-            <p className="text-sm text-muted-foreground">
-              Start forming to appear on the leaderboard!
-            </p>
-          </CardContent>
-        </Card>
-      ) : (
+      {entries.length > 0 ? (
         <div className="space-y-3">
-          {leaderboard.map((entry) => (
-            <Card
-              key={entry.user_id}
-              className={entry.rank <= 3 ? "border-yellow-500/30" : ""}
-            >
-              <CardContent className="py-4">
-                <div className="flex items-center gap-4">
-                  {/* Rank */}
-                  <div className="w-12 flex justify-center">{getRankIcon(entry.rank)}</div>
-
-                  {/* Avatar */}
-                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                    {entry.avatar_url ? (
-                      <img
-                        src={entry.avatar_url}
-                        alt={entry.display_name}
-                        className="w-full h-full rounded-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-xl font-bold">
-                        {entry.display_name[0]?.toUpperCase()}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Name */}
-                  <div className="flex-1">
-                    <p className="font-semibold">{entry.display_name}</p>
-                    {selectedPillar === "overall" && (
-                      <div className="flex gap-3 text-xs text-muted-foreground">
-                        <span>✝️ {entry.faith}</span>
-                        <span>⚔️ {entry.discipline}</span>
-                        <span>🤝 {entry.brotherhood}</span>
-                        <span>🏗️ {entry.building}</span>
-                        <span>📖 {entry.truth}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Score */}
-                  <div className="text-right">
-                    <p
-                      className={`text-2xl font-bold ${
-                        selectedPillar === "overall"
-                          ? ""
-                          : PILLAR_COLORS[selectedPillar] || ""
-                      }`}
-                    >
-                      {getScore(entry)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {selectedPillar === "overall" ? "total" : selectedPillar}
-                    </p>
-                  </div>
+          {entries.map((entry, index) => (
+            <div key={entry.rank} className={`glass-card p-4 flex items-center gap-4 stagger-item ${index < 3 ? "border-yellow-500/20" : ""}`} style={{ animationDelay: `${index * 0.05}s` }}>
+              <div className="w-12 h-12 rounded-xl bg-background/50 flex items-center justify-center flex-shrink-0">
+                {getRankIcon(entry.rank)}
+              </div>
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span className="font-bold">{entry.display_name[0]?.toUpperCase() || "?"}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-bold truncate">{entry.display_name}</p>
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1"><Flame className="h-3 w-3 text-orange-500" />{entry.streak} day streak</span>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="text-xl font-bold">{entry.score.toLocaleString()}</p>
+                <p className="text-xs text-muted-foreground">points</p>
+              </div>
+            </div>
           ))}
+        </div>
+      ) : (
+        <div className="glass-card p-12 text-center">
+          <Trophy className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+          <h3 className="text-lg font-semibold mb-2">No Rankings Yet</h3>
+          <p className="text-muted-foreground">Start earning points to appear on the leaderboard.</p>
         </div>
       )}
     </div>

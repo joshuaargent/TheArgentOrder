@@ -1,205 +1,42 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Target, Calendar, ArrowRight } from "lucide-react";
-
-interface Campaign {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  campaign_type: string;
-  difficulty: string;
-  duration_days: number;
-  start_date: string | null;
-  end_date: string | null;
-  active: boolean;
-}
-
+import { Target, Calendar, ArrowRight, Cross, Zap, Shield } from "lucide-react";
+interface Campaign { id: string; slug: string; title: string; description: string; campaign_type: string; difficulty: string; duration_days: number; start_date: string | null; end_date: string | null; active: boolean; }
 export default function CampaignsPage() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchCampaigns();
-  }, []);
-
-  const fetchCampaigns = async () => {
-    try {
-      const res = await fetch("/api/campaigns");
-      const data = await res.json();
-      setCampaigns(data.campaigns || data || []);
-    } catch (error) {
-      console.error("Failed to fetch campaigns:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return "bg-green-500/10 text-green-500 border-green-500/20";
-      case "intermediate":
-        return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-      case "advanced":
-        return "bg-red-500/10 text-red-500 border-red-500/20";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "lent":
-        return "✝️";
-      case "advent":
-        return "🎄";
-      case "sprint":
-        return "⚡";
-      case "foundation":
-        return "🏛️";
-      case "faith":
-        return "🙏";
-      case "discipline":
-        return "⚔️";
-      case "brotherhood":
-        return "🤝";
-      case "building":
-        return "🏗️";
-      case "truth":
-        return "📖";
-      case "vocation":
-        return "💍";
-      case "leadership":
-        return "⭐";
-      default:
-        return "🎯";
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-muted-foreground">Loading campaigns...</div>
-      </div>
-    );
-  }
-
+  useEffect(() => { fetchCampaigns(); }, []);
+  const fetchCampaigns = async () => { try { const res = await fetch("/api/campaigns"); const data = await res.json(); setCampaigns(data.campaigns || data || []); } catch (error) { console.error("Failed:", error); } finally { setLoading(false); } };
+  if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Target className="h-8 w-8 text-primary" />
-          Campaigns
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Join structured transformation campaigns to accelerate your formation
-        </p>
-      </div>
-
-      {/* Campaign Types */}
+      <div><h1 className="text-3xl font-bold flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><Target className="h-5 w-5 text-red-500" /></div>Campaigns</h1><p className="text-muted-foreground mt-1">Join structured transformation campaigns</p></div>
       <div className="grid gap-4 md:grid-cols-4">
-        <div className="flex items-center gap-3 rounded-lg border bg-card p-4">
-          <div className="rounded-full bg-purple-100 p-2">✝️</div>
-          <div>
-            <p className="text-sm text-muted-foreground">Liturgical</p>
-            <p className="font-semibold">Lent & Advent</p>
+        {[{ icon: Cross, color: "#a855f7", label: "Liturgical", desc: "Lent & Advent" }, { icon: Zap, color: "#06b6d4", label: "Focused", desc: "Sprints" }, { icon: Shield, color: "#22c55e", label: "Ongoing", desc: "Permanent" }, { icon: Target, color: "#eab308", label: "Community", desc: "Group Challenge" }].map((t, idx) => (
+          <div key={idx} className="glass-card p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${t.color}15` }}><t.icon className="h-5 w-5" style={{ color: t.color }} /></div>
+            <div><p className="text-sm text-muted-foreground">{t.label}</p><p className="font-semibold text-sm">{t.desc}</p></div>
           </div>
-        </div>
-        <div className="flex items-center gap-3 rounded-lg border bg-card p-4">
-          <div className="rounded-full bg-blue-100 p-2">⚡</div>
-          <div>
-            <p className="text-sm text-muted-foreground">Focused</p>
-            <p className="font-semibold">Sprints</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 rounded-lg border bg-card p-4">
-          <div className="rounded-full bg-green-100 p-2">🔱</div>
-          <div>
-            <p className="text-sm text-muted-foreground">Ongoing</p>
-            <p className="font-semibold">Permanent</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 rounded-lg border bg-card p-4">
-          <div className="rounded-full bg-orange-100 p-2">🏆</div>
-          <div>
-            <p className="text-sm text-muted-foreground">Community</p>
-            <p className="font-semibold">Group Challenge</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Campaigns Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {campaigns.map((campaign) => (
-          <Card key={campaign.id} className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="text-4xl">{getTypeIcon(campaign.campaign_type)}</div>
-                <Badge className={getDifficultyColor(campaign.difficulty)}>
-                  {campaign.difficulty}
-                </Badge>
-              </div>
-              <CardTitle className="mt-4">{campaign.title}</CardTitle>
-              <CardDescription>{campaign.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {/* Campaign Stats */}
-                <div className="flex gap-4 text-sm">
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>{campaign.duration_days} days</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Target className="h-4 w-4" />
-                    <span>{campaign.campaign_type}</span>
-                  </div>
-                </div>
-
-                {/* Dates */}
-                {(campaign.start_date || campaign.end_date) && (
-                  <div className="text-sm text-muted-foreground">
-                    {campaign.start_date && (
-                      <span>Starts: {new Date(campaign.start_date).toLocaleDateString()}</span>
-                    )}
-                    {campaign.start_date && campaign.end_date && " - "}
-                    {campaign.end_date && (
-                      <span>Ends: {new Date(campaign.end_date).toLocaleDateString()}</span>
-                    )}
-                  </div>
-                )}
-
-                {/* Action */}
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href={`/campaigns/${campaign.slug}`}>
-                    View Campaign
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         ))}
       </div>
-
-      {campaigns.length === 0 && (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <Target className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold">No Active Campaigns</h3>
-            <p className="text-muted-foreground mt-2">
-              Check back soon for new campaigns and challenges.
-            </p>
-          </CardContent>
-        </Card>
-      )}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {campaigns.map((campaign) => (
+          <div key={campaign.id} className="glass-card p-6">
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center"><Cross className="h-6 w-6 text-primary" /></div>
+              <Badge className="capitalize" style={{ backgroundColor: "rgba(161,161,170,0.1)", color: "#a1a1aa" }}>{campaign.difficulty}</Badge>
+            </div>
+            <h3 className="font-bold text-lg mb-2">{campaign.title}</h3>
+            <p className="text-sm text-muted-foreground mb-4">{campaign.description}</p>
+            <div className="flex items-center gap-1 text-sm text-muted-foreground mb-4"><Calendar className="h-4 w-4" />{campaign.duration_days} days</div>
+            <Button variant="outline" className="w-full border-border/50" asChild><Link href={`/campaigns/${campaign.slug}`}>View Campaign <ArrowRight className="h-4 w-4 ml-2" /></Link></Button>
+          </div>
+        ))}
+      </div>
+      {campaigns.length === 0 && <div className="glass-card p-12 text-center"><Target className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground">No campaigns available.</p></div>}
     </div>
   );
 }
