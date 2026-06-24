@@ -209,11 +209,11 @@ export default function JoinPage() {
             
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Users className="h-5 w-5 text-primary" />
+                <Users className="h-5 w-5 text-green-500" />
               </div>
               <div>
-                <h3 className="font-bold">Invitation to apply</h3>
-                <p className="text-sm text-muted-foreground">If you're aligned, you'll receive an invitation to join the brotherhood</p>
+                <h3 className="font-bold">Discord Invitation</h3>
+                <p className="text-sm text-muted-foreground">Complete the sequence and you'll receive an invitation to join our brotherhood on Discord</p>
               </div>
             </div>
           </div>
