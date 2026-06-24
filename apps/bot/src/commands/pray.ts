@@ -5,6 +5,9 @@ import {
 } from "discord.js";
 import { supabase } from "../index";
 
+// Argent Order brand colors
+const ARGENT_GOLD = 0xc0c0c0;
+
 const PRAYER_TYPES: Record<string, { name: string; multiplier: number; icon: string }> = {
   morning: { name: "Morning Prayer", multiplier: 1.2, icon: "🛐" },
   general: { name: "General Prayer", multiplier: 1.0, icon: "🙏" },
@@ -55,9 +58,12 @@ export default {
       .single();
 
     if (!discordAccount) {
-      await interaction.editReply({
-        content: "Please link your Discord account to The Argent Order portal first.",
-      });
+      const embed = new EmbedBuilder()
+        .setTitle("⚠️ Account Not Linked")
+        .setDescription("Use **/link** to connect your Discord account to The Argent Order portal first.")
+        .setColor(0xf59e0b)
+        .setTimestamp();
+      await interaction.editReply({ embeds: [embed] });
       return;
     }
 
@@ -81,7 +87,7 @@ export default {
     if (error) {
       console.error("Failed to log prayer:", error);
       await interaction.editReply({
-        content: "Failed to log prayer. Please try again.",
+        content: "⚠️ Failed to log prayer. Please try again.",
       });
       return;
     }
@@ -94,15 +100,16 @@ export default {
       .single();
 
     const embed = new EmbedBuilder()
-      .setTitle("🙏 Prayer Logged")
+      .setTitle("✝️ Prayer Logged")
       .setDescription(`${typeConfig.icon} **${typeConfig.name}**`)
       .addFields(
-        { name: "Duration", value: `${duration} minutes`, inline: true },
+        { name: "Duration", value: `${duration} min`, inline: true },
         { name: "Points Earned", value: `**+${points}**`, inline: true },
         { name: "Faith Score", value: String(scores?.faith_score || 0), inline: true }
       )
-      .setColor(0x0099ff)
-      .setTimestamp();
+      .setColor(ARGENT_GOLD)
+      .setTimestamp()
+      .setFooter({ text: "Pray without ceasing." });
 
     await interaction.editReply({ embeds: [embed] });
   },

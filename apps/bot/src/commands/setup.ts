@@ -4,8 +4,14 @@ import {
   EmbedBuilder,
   ChannelType,
   PermissionFlagsBits,
+  OverwriteType,
+  RolePosition,
 } from "discord.js";
 import { supabase } from "../index";
+
+// Argent Order brand colors
+const ARGENT_GOLD = 0xc0c0c0; // Silver/Argent
+const ARGENT_DARK = 0x1a1a2e;
 
 // Full server structure based on documentation
 const CATEGORIES = [
@@ -15,6 +21,7 @@ const CATEGORIES = [
     { name: "constitution", type: "text", description: "Community expectations", readOnly: true },
     { name: "start-here", type: "text", description: "Onboarding guide", readOnly: true },
     { name: "faq", type: "text", description: "Common questions", readOnly: true },
+    { name: "verification", type: "text", description: "Verify your account", readOnly: true },
   ]},
   { name: "🙏 Chapel", emoji: "pray", channels: [
     { name: "daily-gospel", type: "text", description: "Daily Gospel readings" },
@@ -68,7 +75,7 @@ const CATEGORIES = [
     { name: "pod-beta", type: "text", description: "Pod Beta channel" },
   ]},
   { name: "🔒 Operations", emoji: "lock", channels: [
-    { name: "officer-room", type: "text", description: "Leadership discussion" },
+    { name: "officer-room", type: "text", description: "Leadership discussion", private: true },
     { name: "moderation-log", type: "text", description: "Moderation records" },
     { name: "campaign-planning", type: "text", description: "Future campaigns" },
     { name: "portal-development", type: "text", description: "Platform development" },
@@ -90,6 +97,150 @@ const ROLES = [
   { name: "Builder", color: "Yellow", hoist: false },
   { name: "Moderator", color: "DarkRed", hoist: true },
 ];
+
+// Welcome messages for key channels
+const WELCOME_MESSAGES: Record<string, { title: string; content: string }> = {
+  "welcome": {
+    title: "⚔️ Welcome to The Argent Order",
+    content: `**Catholic Formation for Builders**
+
+You have entered a brotherhood of men committed to faith, discipline, and building.
+
+**What We Are:**
+A Catholic men's formation community focused on becoming men of virtue who create lasting value.
+
+**The Five Pillars:**
+• Faith - Prayer, Scripture, Mass
+• Discipline - Fitness, habits, execution
+• Brotherhood - Accountability, pods, relationships
+• Building - Projects, skills, creation
+• Truth - Catholic intellectual tradition
+
+**First Steps:**
+1. Read #mission and #constitution
+2. Complete #start-here
+3. Introduce yourself in #introductions
+4. Use /link to connect your portal account
+5. Use /sync to get your rank role
+
+**No spectators. Only brothers.**`
+  },
+  "mission": {
+    title: "🎯 Our Mission",
+    content: `**The Argent Order exists to form men who:**
+
+**1. Pursue Holiness**
+Through daily prayer, regular Sacraments, and deep Catholic faith.
+
+**2. Build with Purpose**
+Creating projects, businesses, and skills that outlive us.
+
+**3. Hold Each Other Accountable**
+Through pods, weekly meetings, and honest brotherhood.
+
+**4. Think Clearly**
+Engaging the Catholic intellectual tradition with rigor.
+
+**Our Goal:**
+Not mere community, but formation. Not entertainment, but execution. Not discussion, but transformation.
+
+*"In sterling we trust."*`
+  },
+  "constitution": {
+    title: "📜 The Argent Order Constitution",
+    content: `**Core Principles**
+
+**I am my brother's keeper.**
+We hold each other accountable. We do not let brothers fade.
+
+**Formation over comfort.**
+We choose growth over ease. Every day counts.
+
+**Action over words.**
+We ship. We execute. We leave something behind.
+
+**Truth over diplomacy.**
+We speak honestly, with charity. No snowflakes.
+
+**The Order protects:**
+• Catholic Orthodoxy
+• Brotherhood
+• Formation
+• Safety
+• Mission
+
+**The Order removes:**
+• Heresy
+• Harassment
+• Pornography
+• Chronic disengagement
+• Disruption of formation
+
+*Every brother agrees to these terms by joining.*`
+  },
+  "start-here": {
+    title: "📋 Getting Started",
+    content: `**Your First 72 Hours**
+
+**Day 1:**
+• Read #welcome, #mission, #constitution
+• Connect Discord to portal: /link
+• Sync your role: /sync
+
+**Day 2:**
+• Introduce yourself in #introductions
+• Join a pod (ask in #accountability-pods)
+• Complete your first #roll-call
+
+**Day 3:**
+• Pick a campaign: /campaign list
+• Set up your Rule of Life
+• Start your streak
+
+**Required Commands:**
+• /link - Connect portal account
+• /sync - Get your rank role
+• /checkin - Daily formation check-in
+• /pray - Log prayer
+
+*"The forge is hot. Begin hammering."*`
+  },
+  "faq": {
+    title: "❓ Frequently Asked Questions",
+    content: `**Q: I'm not very religious. Can I join?**
+A: This is a Catholic formation community. You don't need to be perfect, just willing to grow in faith.
+
+**Q: What if I don't have a project or business?**
+A: Building is a pillar, not a prerequisite. Start where you are.
+
+**Q: How much time does this require?**
+A: Formation is daily work. Plan 30-60 minutes minimum daily.
+
+**Q: What are pods?**
+A: Small groups of 4-8 men who hold each other accountable. You'll be assigned one.
+
+**Q: Can I just lurk?**
+A: No. Brotherhood requires participation. We track engagement.
+
+**Q: I'm a married man/father. Is this for me?**
+A: Yes. Many brothers are married with families. Formation serves your vocation.
+
+**Q: Is this a trad Catholic thing?**
+A: We hold to Catholic orthodoxy. How you live that is between you and your priest.`
+  },
+  "verification": {
+    title: "🔐 Account Verification",
+    content: `**Verify your account to access The Argent Order.**
+
+1. Use **/link** to generate a connection code
+2. Enter the code on The Argent Order portal
+3. Use **/sync** to get your rank role
+
+This connects your Discord account to your formation profile.
+
+If you need help, ask in #brother-support.`
+  }
+};
 
 export default {
   data: new SlashCommandBuilder()
@@ -118,14 +269,13 @@ export default {
 
     try {
       await interaction.editReply({
-        content: "🔨 Setting up The Argent Order server structure...\n\nThis may take a moment.",
+        content: "⚔️ Setting up The Argent Order server structure...\n\nThis may take a moment.",
       });
 
-      const createdCategories = await createCategories(guild);
-      const createdRoles = await createRoles(guild);
+      const { categoriesCreated, channelsCreated, rolesCreated, rolesUpdated } = await setupServer(guild);
       
       await interaction.editReply({
-        content: `✅ Server structure created!\n\n📁 ${createdCategories.length} categories\n👔 ${createdRoles.length} roles\n\nRunning /sync to update member roles...`,
+        content: `⚔️ **Server Setup Complete!**\n\n📁 ${categoriesCreated} categories created\n💬 ${channelsCreated} channels created\n👔 ${rolesCreated} roles created/updated\n\nRun **/sync all** to sync member roles.`,
       });
 
     } catch (error) {
@@ -137,43 +287,128 @@ export default {
   },
 };
 
-async function createCategories(guild: any) {
-  const categories: any[] = [];
+async function setupServer(guild: any) {
+  let categoriesCreated = 0;
+  let channelsCreated = 0;
+  let rolesCreated = 0;
+  let rolesUpdated = 0;
 
+  // First, get existing channels and roles to avoid duplicates
+  const existingChannels = guild.channels.cache;
+  const existingRoles = guild.roles.cache;
+
+  // Create or find roles first (needed for permissions)
+  const roleMap = new Map<string, any>();
+  
+  for (const roleDef of ROLES) {
+    let role = existingRoles.find((r: any) => r.name === roleDef.name);
+    
+    if (!role) {
+      role = await guild.roles.create({
+        name: roleDef.name,
+        color: roleDef.color as any,
+        hoist: roleDef.hoist,
+        position: roleDef.position,
+      });
+      rolesCreated++;
+    } else {
+      // Update existing role
+      if (role.color !== roleDef.color || role.hoist !== roleDef.hoist) {
+        await role.edit({
+          color: roleDef.color as any,
+          hoist: roleDef.hoist,
+        });
+        rolesUpdated++;
+      }
+    }
+    roleMap.set(roleDef.name, role);
+  }
+
+  // Get the @everyone role
+  const everyoneRole = guild.roles.everyone;
+
+  // Create categories and channels
   for (const catDef of CATEGORIES) {
-    const category = await guild.channels.create({
-      name: catDef.name,
-      type: ChannelType.GuildCategory,
-    });
-    categories.push(category);
+    // Check if category already exists
+    let category = existingChannels.find(
+      (c: any) => c.type === ChannelType.GuildCategory && c.name === catDef.name
+    );
+
+    if (!category) {
+      category = await guild.channels.create({
+        name: catDef.name,
+        type: ChannelType.GuildCategory,
+      });
+      categoriesCreated++;
+    }
 
     for (const chDef of catDef.channels) {
-      const channelType = chDef.type === "announcement" 
-        ? ChannelType.GuildAnnouncement 
-        : ChannelType.GuildText;
-      
-      const channelOptions: any = {
-        name: chDef.name,
-        type: channelType,
-        parent: category.id,
-      };
+      // Check if channel already exists (by name within category)
+      const existingChannel = existingChannels.find(
+        (c: any) => c.name === chDef.name && c.parentId === category.id
+      );
 
-      if (chDef.private) {
-        channelOptions.permissionOverwrites = [
-          { id: guild.id, deny: [PermissionFlagsBits.ViewChannel] },
-        ];
+      if (!existingChannel) {
+        const channelType = chDef.type === "announcement" 
+          ? ChannelType.GuildAnnouncement 
+          : ChannelType.GuildText;
+        
+        const channelOptions: any = {
+          name: chDef.name,
+          type: channelType,
+          parent: category.id,
+          topic: chDef.description,
+        };
+
+        // Set permissions for private channels
+        if (chDef.private) {
+          const officerRole = roleMap.get("Officer");
+          const mentorRole = roleMap.get("Mentor");
+          
+          channelOptions.permissionOverwrites = [
+            {
+              id: everyoneRole.id,
+              deny: [PermissionFlagsBits.ViewChannel],
+            },
+            ...(officerRole ? [{ id: officerRole.id, allow: [PermissionFlagsBits.ViewChannel] }] : []),
+            ...(mentorRole ? [{ id: mentorRole.id, allow: [PermissionFlagsBits.ViewChannel] }] : []),
+          ];
+        }
+
+        const channel = await guild.channels.create(channelOptions);
+        channelsCreated++;
+
+        // Send welcome message if defined
+        const welcomeInfo = WELCOME_MESSAGES[chDef.name];
+        if (welcomeInfo) {
+          const welcomeEmbed = new EmbedBuilder()
+            .setTitle(welcomeInfo.title)
+            .setDescription(welcomeInfo.content)
+            .setColor(ARGENT_GOLD)
+            .setTimestamp();
+
+          // Pin the message for read-only channels
+          const welcomeMsg = await channel.send({ embeds: [welcomeEmbed] });
+          if (chDef.readOnly) {
+            await channel.messages.fetch({ limit: 1 });
+          }
+        }
       }
-
-      await guild.channels.create(channelOptions);
     }
   }
 
-  // Create voice channels
-  const voiceCategory = await guild.channels.create({
-    name: "🔊 Voice Channels",
-    type: ChannelType.GuildCategory,
-  });
-  categories.push(voiceCategory);
+  // Create voice channels category
+  let voiceCategory = existingChannels.find(
+    (c: any) => c.type === ChannelType.GuildCategory && c.name === "🔊 Voice Channels"
+  );
+
+  if (!voiceCategory) {
+    voiceCategory = await guild.channels.create({
+      name: "🔊 Voice Channels",
+      type: ChannelType.GuildCategory,
+    });
+    categoriesCreated++;
+  }
 
   const voiceChannels = [
     "Morning Prayer",
@@ -185,27 +420,19 @@ async function createCategories(guild: any) {
   ];
 
   for (const vc of voiceChannels) {
-    await guild.channels.create({
-      name: vc,
-      type: ChannelType.GuildVoice,
-      parent: voiceCategory.id,
-    });
+    const existingVC = existingChannels.find(
+      (c: any) => c.name === vc && c.parentId === voiceCategory.id
+    );
+    
+    if (!existingVC) {
+      await guild.channels.create({
+        name: vc,
+        type: ChannelType.GuildVoice,
+        parent: voiceCategory.id,
+      });
+      channelsCreated++;
+    }
   }
 
-  return categories;
-}
-
-async function createRoles(guild: any) {
-  const roles: any[] = [];
-
-  for (const roleDef of ROLES) {
-    const discordRole = await guild.roles.create({
-      name: roleDef.name,
-      color: roleDef.color as any,
-      hoist: roleDef.hoist,
-    });
-    roles.push(discordRole);
-  }
-
-  return roles;
+  return { categoriesCreated, channelsCreated, rolesCreated, rolesUpdated };
 }
