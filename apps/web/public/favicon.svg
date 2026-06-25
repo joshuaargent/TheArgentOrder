@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="23" fill="#09090b" stroke="#a1a1aa" stroke-width="1"/>
+  
+  <!-- Vertical beam of the cross -->
+  <rect x="21" y="6" width="6" height="32" rx="1" fill="#a1a1aa"/>
+  
+  <!-- Horizontal beam of the cross -->
+  <rect x="10" y="16" width="28" height="6" rx="1" fill="#a1a1aa"/>
+  
+  <!-- Crown at top (symbolizing leadership) -->
+  <path d="M24 6L22 10H26L24 6Z" fill="#d4d4d8"/>
+  
+  <!-- Base at bottom -->
+  <path d="M24 38L21 44H27L24 38Z" fill="#71717a"/>
+</svg>
