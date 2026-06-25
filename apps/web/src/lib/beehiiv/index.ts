@@ -182,10 +182,10 @@ export const COHORTS = {
 export const LEAD_MAGNETS = {
   CATHOLIC_BUILDER_STARTER: {
     id: 'catholic_builder_starter',
-    name: 'Catholic Builder Starter Kit',
-    description: 'Rule of Life template, 90-Day Campaign Planner, Morning Protocol, Catholic Man\'s Oath',
-    value: '$247',
-    cohort: 'starter_kit_downloaded',
+    name: 'Catholic Builder System',
+    description: 'Instant access to Discord brotherhood + Portal with Rule of Life Builder, Campaigns, Pods, Daily Protocol',
+    value: 'Priceless',
+    cohort: 'catholic_builder_system_access',
   },
   FOUNDATION_PACK: {
     id: 'foundation_pack',

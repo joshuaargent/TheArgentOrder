@@ -11,21 +11,23 @@ import {
   Handshake, 
   Hammer, 
   GraduationCap, 
-  Shield,
   AlertTriangle,
   Users,
   Zap,
-  Lock,
   Loader2,
-  Mail,
-  BookOpen,
   Target,
   Play,
-  
   ThumbsUp,
-  Clock,
-  Award
+  Crown
 } from "lucide-react";
+
+const pillars = [
+  { name: "Faith", icon: Cross, color: "#a855f7", desc: "Prayer, Mass, Scripture" },
+  { name: "Discipline", icon: Dumbbell, color: "#ef4444", desc: "Fitness, Cold, Sleep" },
+  { name: "Brotherhood", icon: Handshake, color: "#22c55e", desc: "Pods, Accountability" },
+  { name: "Building", icon: Hammer, color: "#eab308", desc: "Projects, Skills" },
+  { name: "Truth", icon: GraduationCap, color: "#06b6d4", desc: "Reading, Thinking" },
+];
 
 export default function JoinPage() {
   const [email, setEmail] = useState("");
@@ -55,80 +57,11 @@ export default function JoinPage() {
       }
     } catch (error) {
       console.error('Newsletter subscription failed:', error);
-      // Still show success to not block conversion
       setSubmitted(true);
     } finally {
       setLoading(false);
     }
   };
-
-  const offer = {
-    title: "Catholic Builder Starter Kit",
-    subtitle: "Everything you need to start building a Rule of Life TODAY",
-    value: "$247",
-    components: [
-      { 
-        icon: BookOpen, 
-        title: "Rule of Life Blueprint", 
-        desc: "The exact framework our most disciplined members use. 12 categories. Fill in the blanks.",
-        value: "$97"
-      },
-      { 
-        icon: Target, 
-        title: "90-Day Campaign Planner", 
-        desc: "Map your first 90 days. What you'll build. Who you'll become. How you'll measure it.",
-        value: "$67"
-      },
-      { 
-        icon: Zap, 
-        title: "Morning Protocol Guide", 
-        desc: "The 30-minute morning routine that compounds into permanent transformation.",
-        value: "$47"
-      },
-      { 
-        icon: Shield, 
-        title: "Catholic Man's Oath", 
-        desc: "A daily declaration to anchor your identity. Print it. Live it.",
-        value: "$36"
-      },
-    ]
-  };
-
-
-  const objections = [
-    {
-      q: "I'm not Catholic enough for this.",
-      a: "Catholic in foundation. Catholic in practice. But men of any faith who respect the tradition are welcome. What matters is alignment with the five pillars: Faith, Discipline, Brotherhood, Building, Truth."
-    },
-    {
-      q: "I don't have time for another commitment.",
-      a: "You don't have time NOT to do this. 30 minutes daily. That's the minimum. The men here are busier than you-they've just prioritized differently."
-    },
-    {
-      q: "What if I fail?",
-      a: "You will fail. The question is whether you have a system to learn from failure. We do. Failure in the Order means growth, not expulsion."
-    },
-    {
-      q: "I've tried accountability groups before. They didn't work.",
-      a: "Most accountability groups have no teeth. No consequences. No skin in the game. Our pods are different: they're assigned, not chosen, and the weekly meeting has a structured format with real follow-up."
-    },
-  ];
-
-  const requirements = [
-    "You believe men need brotherhood to become great",
-    "You're willing to be held accountable-even when it's uncomfortable",
-    "You want to build something that outlasts you",
-    "You accept that discipline is the price of freedom",
-    "You're ready to show up every single day",
-  ];
-
-  const pillars = [
-    { name: "Faith", icon: Cross, color: "#a855f7", desc: "Prayer, Mass, Scripture" },
-    { name: "Discipline", icon: Dumbbell, color: "#ef4444", desc: "Fitness, Cold, Sleep" },
-    { name: "Brotherhood", icon: Handshake, color: "#22c55e", desc: "Pods, Accountability" },
-    { name: "Building", icon: Hammer, color: "#eab308", desc: "Projects, Skills" },
-    { name: "Truth", icon: GraduationCap, color: "#06b6d4", desc: "Reading, Thinking" },
-  ];
 
   if (submitted) {
     return (
@@ -145,47 +78,43 @@ export default function JoinPage() {
           
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-6">
             <ThumbsUp className="h-4 w-4" />
-            Check your inbox
+            Welcome to The Order
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            You're on the list.
+            Check your email.
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-6">
-            Your Catholic Builder Starter Kit is on its way.
+          <p className="text-xl text-muted-foreground mb-8">
+            Your access links are on the way.
           </p>
           
           <div className="glass-card p-8 space-y-6 text-left">
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Mail className="h-5 w-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Users className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold">Email #1 arrives in 2 minutes</h3>
-                <p className="text-sm text-muted-foreground">Your Starter Kit + immediate actions to take today</p>
+                <h3 className="font-bold text-lg">Join Discord</h3>
+                <p className="text-muted-foreground">Click the link in your email to join the brotherhood</p>
               </div>
             </div>
             
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Clock className="h-5 w-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Zap className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold">Email sequence over 7 days</h3>
-                <p className="text-sm text-muted-foreground">Truth exposure, identity shift, brotherhood stories</p>
+                <h3 className="font-bold text-lg">Access Portal</h3>
+                <p className="text-muted-foreground">Your account is ready. Start your formation.</p>
               </div>
             </div>
-            
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Users className="h-5 w-5 text-green-500" />
-              </div>
-              <div>
-                <h3 className="font-bold">Discord Invitation</h3>
-                <p className="text-sm text-muted-foreground">Complete the sequence and you'll receive an invitation to join our brotherhood on Discord</p>
-              </div>
-            </div>
+          </div>
+          
+          <div className="mt-8">
+            <Link href="/mission" className="text-primary hover:underline">
+              Read our Mission →
+            </Link>
           </div>
         </div>
       </main>
@@ -194,246 +123,59 @@ export default function JoinPage() {
 
   return (
     <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
-      {/* Ambient Background - Decorative */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
         <div className="ambient-orb w-[700px] h-[700px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
-        <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
       {/* HERO */}
-      <section className="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
-        <div className="max-w-5xl mx-auto relative z-10">
-
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm">
-              <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit - No Credit Card</span>
-            </div>
+      <section className="relative pt-20 md:pt-28 pb-16 px-4" aria-labelledby="join-heading">
+        <div className="max-w-3xl mx-auto relative z-10 text-center">
+          
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-8">
+            <span className="text-green-400 font-medium">Free. Forever. No monetization.</span>
           </div>
 
-          <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
-            Catholic Men.{" "}
-            <span className="text-primary">Forged in Discipline.</span>
+          <h1 id="join-heading" className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            A brotherhood for men who{" "}
+            <span className="text-primary">build with purpose.</span>
           </h1>
+          
+          <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto">
+            The Argent Order is a formation system for Catholic men. 
+            Five pillars. Structured progression. Real accountability.
+          </p>
 
-          <div className="text-center">
-            <p className="text-lg md:text-xl text-primary font-medium mb-4 inline-block">
-              Build. Ship. Lead.
-            </p>
-          </div>
-
-          <div className="text-center">
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 px-4">
-              Not a community. Not a course. A formation system with documented methodology,
-              structured progression, and real accountability.
-            </p>
-          </div>
-
-          <div className="text-center mb-8">
-            <a
-              href="#apply"
-              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30"
-            >
-              <Play className="h-6 w-6" />
-              Get Your Free Starter Kit
-              <ArrowRight className="h-6 w-6" />
-            </a>
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mt-3 inline-block">
-                $247 value - Yours free. No credit card required.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-8 flex-wrap text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-500" />
-              <span>Immediate access</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-500" />
-              <span>5 pillars methodology</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-500" />
-              <span>Pod accountability</span>
-            </div>
-          </div>
-
+          <a
+            href="#apply"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
+          >
+            <Play className="h-6 w-6" />
+            Join The Order
+            <ArrowRight className="h-6 w-6" />
+          </a>
+          
+          <p className="text-muted-foreground">
+            Discord + Portal access →
+          </p>
         </div>
       </section>
 
-      {/* STICKY VALUE BAR */}
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="flex justify-center gap-6 md:gap-12 flex-wrap text-sm">
-            {pillars.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-muted-foreground">
-                <item.icon className="h-4 w-4 text-primary" />
-                <span>{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* PAIN */}
-      <section className="py-20 px-4 bg-card/30 relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-red-400/70 uppercase tracking-widest">The Problem</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Most Men Are Exactly Where They Don't Want to Be
-            </h2>
-          </div>
-          
-          <div className="space-y-4">
-            {[
-              { text: "You know you should be praying more, exercising daily, building something real.", color: "text-red-400" },
-              { text: "You have 'potential.' Everyone tells you that. But potential without execution is just a comfortable excuse.", color: "text-orange-400" },
-              { text: "Your friends don't challenge you. Your job doesn't require your best.", color: "text-yellow-400" },
-              { text: "You tell yourself 'someday.' Someday you'll start that project.", color: "text-primary" },
-              { text: "The man you were supposed to become is 10 years away. And counting.", color: "text-primary font-semibold" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 rounded-xl border border-border/50 glass-card">
-                <AlertTriangle className={`h-6 w-6 flex-shrink-0 mt-0.5 ${item.color}`} />
-                <p className={`text-lg ${item.color}`}>{item.text}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-10 p-8 rounded-2xl bg-primary/10 border border-primary/20">
-            <p className="text-xl font-medium">
-              There's a different way. Not motivation. Not willpower.
-            </p>
-            <p className="text-primary text-xl font-bold mt-2">
-              A system that makes excellence inevitable.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* THE OFFER */}
-      <section id="free-kit" className="py-20 px-4 relative scroll-mt-20">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium mb-4">
-              <CheckCircle className="h-4 w-4" />
-              <span>$247 Value - Yours FREE</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Catholic Builder Starter Kit
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-lg">
-              Everything you need to start building a Rule of Life-before you even join.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6 mb-10">
-            {offer.components.map((item, i) => (
-              <div key={i} className="glass-card p-6 relative overflow-hidden group hover:border-primary/30 transition-all">
-                <div className="absolute top-0 right-0 px-3 py-1 rounded-bl-xl text-xs font-bold bg-green-500/10 text-green-400">
-                  FREE
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-all">
-                    <item.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center">
-            <a 
-              href="#apply" 
-              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all hover:scale-105 shadow-2xl shadow-primary/30"
-            >
-              Get Instant Access
-              <ArrowRight className="h-6 w-6" />
-            </a>
-            <p className="text-sm text-muted-foreground mt-3">
-              Enter your email. Get immediate access. No credit card.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT HAPPENS NEXT */}
-      <section className="py-20 px-4 bg-card/30 relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Process</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              What Happens After You Sign Up
-            </h2>
-          </div>
-          
-          <div className="space-y-6">
-            {[
-              {
-                step: "01",
-                title: "Check Your Email",
-                desc: "Your Catholic Builder Starter Kit arrives instantly. Download it. Read it. Start building your Rule of Life today."
-              },
-              {
-                step: "02", 
-                title: "Join Our Discord",
-                desc: "Get access to the brotherhood. See how men show up for each other. No pressure to speak—just observe."
-              },
-              {
-                step: "03",
-                title: "Start a 90-Day Campaign",
-                desc: "When you're ready, join a campaign. Set a goal. Get a pod. Ship something that matters."
-              }
-            ].map((item, i) => (
-              <div key={i} className="glass-card p-6 flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-primary">{item.step}</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-10">
-            <p className="text-muted-foreground text-lg">
-              No commitments. No pressure. Just a system that works—if you work it.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* THE METHOD */}
-      <section className="py-20 px-4 relative">
+      {/* WHAT IS THIS */}
+      <section className="py-16 px-4 bg-card/50 relative">
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Method</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              Five Pillars of Formation
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-              Every member is formed in all five areas. Mastery in all five produces men who lead.
-            </p>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            Five Pillars of Formation
+          </h2>
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {pillars.map((pillar, i) => (
-              <div key={i} className="glass-card p-5 text-center hover:border-primary/30 transition-all">
+              <div key={i} className="glass-card p-5 text-center">
                 <div 
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${pillar.color}15` }}
                 >
-                  <pillar.icon className="h-8 w-8" style={{ color: pillar.color }} />
+                  <pillar.icon className="h-7 w-7" style={{ color: pillar.color }} />
                 </div>
                 <h3 className="font-bold mb-1">{pillar.name}</h3>
                 <p className="text-xs text-muted-foreground">{pillar.desc}</p>
@@ -443,114 +185,148 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* OBJECTIONS */}
-      <section className="py-20 px-4 bg-card/30 relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Honest Answers</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              Questions You Might Have
-            </h2>
-          </div>
+      {/* HOW IT WORKS */}
+      <section className="py-16 px-4 relative">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            How It Works
+          </h2>
           
-          <div className="space-y-4">
-            {objections.map((obj, i) => (
-              <div key={i} className="glass-card p-6">
-                <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <span className="text-primary">Q:</span> {obj.q}
-                </h3>
-                <p className="text-muted-foreground pl-6 leading-relaxed">
-                  <span className="text-primary font-medium">A:</span> {obj.a}
-                </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="glass-card p-6 text-center">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-6 w-6 text-primary" />
               </div>
-            ))}
+              <h3 className="font-bold text-lg mb-2">Campaigns</h3>
+              <p className="text-sm text-muted-foreground">
+                90-day structured challenges. Set goals. Track progress. Ship results.
+              </p>
+            </div>
+            
+            <div className="glass-card p-6 text-center">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">Pods</h3>
+              <p className="text-sm text-muted-foreground">
+                Groups of 5 men. Assigned, not chosen. Weekly meetings. Real accountability.
+              </p>
+            </div>
+            
+            <div className="glass-card p-6 text-center">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Crown className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">Rule of Life</h3>
+              <p className="text-sm text-muted-foreground">
+                Build your personal framework. 12 categories. The GPS for your life.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* REQUIREMENTS */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-2xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Filter</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              This Is For Men Who...
-            </h2>
+      {/* THE PROBLEM */}
+      <section className="py-16 px-4 bg-card/50 relative">
+        <div className="max-w-3xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Sound familiar?
+          </h2>
+          
+          <div className="space-y-4">
+            {[
+              "You know you should be doing more. You just aren't.",
+              "Your friends are comfortable. You want more.",
+              "You tell yourself 'someday' but someday never comes.",
+              "Potential without execution is just an excuse.",
+            ].map((text, i) => (
+              <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border/50 glass-card">
+                <div className="w-2 h-2 rounded-full bg-red-500 mt-3 flex-shrink-0" />
+                <p className="text-lg">{text}</p>
+              </div>
+            ))}
           </div>
           
+          <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
+            <p className="text-lg font-medium">
+              The problem isn't motivation. It's <span className="text-primary font-bold">structure</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FOR WHO */}
+      <section className="py-16 px-4 relative">
+        <div className="max-w-3xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            This is for men who...
+          </h2>
+          
           <div className="space-y-3">
-            {requirements.map((req, i) => (
+            {[
+              "Want brotherhood, not just another group chat",
+              "Are tired of potential and ready to execute",
+              "Will show up even when they don't feel like it",
+              "Want to build something that matters",
+            ].map((req, i) => (
               <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-green-500/20 bg-green-500/5">
                 <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
                 <span className="text-lg">{req}</span>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* NOT FOR */}
+      <section className="py-16 px-4 bg-card/50 relative">
+        <div className="max-w-3xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            This is NOT for men who...
+          </h2>
           
-          <div className="text-center mt-10">
-            <p className="text-muted-foreground text-lg">
-              This is not for everyone. If this is for you-we'll see you inside.
-            </p>
+          <div className="space-y-3">
+            {[
+              "Want a casual community to kill time",
+              "Aren't willing to be held accountable",
+              "Think faith and discipline don't go together",
+              "Want instant results without putting in work",
+            ].map((req, i) => (
+              <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-red-500/20 bg-red-500/5">
+                <AlertTriangle className="h-6 w-6 text-red-500 flex-shrink-0" />
+                <span className="text-lg">{req}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* GUARANTEE */}
-      <section className="py-16 px-4 bg-card/30 relative">
-        <div className="max-w-2xl mx-auto relative z-10">
-          <div className="glass-card p-8 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center mx-auto mb-6">
-              <Shield className="h-8 w-8 text-green-500" />
-            </div>
-            <h3 className="text-2xl font-bold mb-6">Our Promise to You</h3>
-            <div className="space-y-4 text-left">
-              {[
-                "100% free. No credit card. No upsell.",
-                "If you use the kit for 30 days and don't feel more disciplined, we'll connect you with a mentor personally.",
-                "If you join the Order and it's not for you after 30 days, you can leave with no hard feelings.",
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* MAIN CTA */}
+      {/* CTA */}
       <section id="apply" className="py-24 px-4 relative scroll-mt-20">
         <div className="max-w-xl mx-auto relative z-10">
           <div className="glass-card p-10 text-center overflow-hidden relative">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-primary/20 blur-[100px]" />
             
             <div className="relative">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Award className="h-8 w-8 text-primary" />
-              </div>
-              
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Get Your Free Starter Kit
+                Join The Argent Order
               </h2>
               
-              <p className="text-muted-foreground mb-8 text-lg">
-                Enter your email. Get immediate access.
+              <p className="text-muted-foreground mb-8">
+                Enter your email. Get access to Discord + Portal.
                 <br />
-                <span className="text-primary font-medium">No credit card. No spam.</span>
+                <span className="text-primary font-medium">100% Free. No monetization.</span>
               </p>
               
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    required
-                    className="w-full px-6 py-4 rounded-xl border border-border bg-background/50 text-foreground text-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  />
-                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className="w-full px-6 py-4 rounded-xl border border-border bg-background/50 text-foreground text-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                />
                 <Button 
                   type="submit" 
                   disabled={loading} 
@@ -559,11 +335,11 @@ export default function JoinPage() {
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="h-5 w-5 animate-spin" />
-                      Processing...
+                      Joining...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Get Instant Access <ArrowRight className="h-5 w-5" />
+                      Join The Order <ArrowRight className="h-5 w-5" />
                     </span>
                   )}
                 </Button>
@@ -571,26 +347,13 @@ export default function JoinPage() {
               
               <div className="flex justify-center gap-6 mt-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <Lock className="h-4 w-4" />
-                  <span>Secure</span>
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Instant access</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  <span>No spam</span>
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>Free forever</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" />
-                  <span>Unsubscribe anytime</span>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-border/50 text-center">
-                <p className="text-sm text-muted-foreground">
-                  Already subscribed?{" "}
-                  <Link href="/login" className="text-primary hover:underline font-medium">
-                    Sign in to your account
-                  </Link>
-                </p>
               </div>
             </div>
           </div>
@@ -610,8 +373,6 @@ export default function JoinPage() {
           <div className="flex gap-8 text-sm text-muted-foreground">
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
             <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
           </div>
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>

@@ -84,7 +84,7 @@ export default function HomePage() {
           <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
             Catholic Men. Forged in Discipline.
           </p>
-          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-6">
+          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-6 inline-block">
             Build. Ship. Lead.
           </p>
 
