@@ -13,9 +13,9 @@ import {
   CheckCircle,
   AlertTriangle,
   Lock,
-  Play,
-  User,
   Loader2,
+  Users,
+  Shield,
 } from "lucide-react";
 
 const pillars = [
@@ -303,47 +303,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRANSFORMATIONS - HORMOZI: REAL SOCIAL PROOF */}
+      {/* FOUNDING COHORT - HORMOZI: HONEST NO-PROOF STRATEGY */}
       <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            What Members Say
+            Be Among The First
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              {
-                quote: "After 90 days, I shipped my first SaaS. Would've taken 2 years alone.",
-                name: "Michael R.",
-                role: "Software Engineer",
-                pillar: "Building"
-              },
-              {
-                quote: "Went to Confession weekly for the first time in 10 years. The structure changed everything.",
-                name: "Thomas K.",
-                role: "Father of 4",
-                pillar: "Faith"
-              },
-              {
-                quote: "Lost 30 lbs. More importantly, my wife says I'm present again.",
-                name: "James W.",
-                role: "Entrepreneur",
-                pillar: "Discipline"
-              },
-            ].map((testimonial, i) => (
-              <div key={i} className="glass-card p-6">
-                <p className="text-sm mb-4 italic">"{testimonial.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-primary font-bold">{testimonial.name[0]}</span>
+          <div className="glass-card p-8 md:p-10 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+              <Users className="h-8 w-8 text-primary" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-4">Join the Founding Cohort</h3>
+            
+            <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+              We're building The Argent Order together. No fake testimonials. 
+              Just men committed to the forge—accountability, structure, and formation.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {[
+                { icon: Shield, title: "Shape the System", desc: "Your feedback shapes how we build" },
+                { icon: CheckCircle, title: "Founding Member", desc: "Permanent founding cohort status" },
+                { icon: Users, title: "Early Access", desc: "Direct access to founders" },
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="text-center">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                      <Icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <p className="font-bold text-sm">{item.title}</p>
+                    <p className="text-xs text-muted-foreground">{item.desc}</p>
                   </div>
-                  <div>
-                    <p className="font-bold text-sm">{testimonial.name}</p>
-                    <p className="text-xs text-muted-foreground">{testimonial.role} • {testimonial.pillar}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
