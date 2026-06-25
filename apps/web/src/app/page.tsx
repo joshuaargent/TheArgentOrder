@@ -68,16 +68,13 @@ export default function HomePage() {
           </div>
 
           {/* Headline */}
-          <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 leading-tight">
+          <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
             The Argent Order
           </h1>
-          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
+          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-4">
             Catholic men. Forged in discipline.
           </p>
-          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-4 inline-block">
-            Build. Ship. Lead.
-          </p>
-          <p className="text-base md:text-lg text-center text-muted-foreground mb-8">
+          <p className="text-lg md:text-xl text-center text-muted-foreground mb-8">
             Not a community. A forge.
           </p>
 
