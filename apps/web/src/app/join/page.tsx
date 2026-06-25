@@ -141,10 +141,6 @@ export default function JoinPage() {
             <span className="text-primary">build with purpose.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-xl mx-auto">
-            ⚔️ Catholic men. Forged in discipline.
-          </p>
-          
           <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
             Five pillars. Structured progression. Real accountability.
           </p>
