@@ -245,14 +245,18 @@ export default function JoinPage() {
             <span className="text-primary">Forged in Discipline.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-center text-primary font-medium mb-4">
-            Build. Ship. Lead.
-          </p>
+          <div className="text-center">
+            <p className="text-lg md:text-xl text-primary font-medium mb-4 inline-block">
+              Build. Ship. Lead.
+            </p>
+          </div>
 
-          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-8">
-            Not a community. Not a course. A formation system with documented methodology,
-            structured progression, and real accountability.
-          </p>
+          <div className="text-center">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 px-4">
+              Not a community. Not a course. A formation system with documented methodology,
+              structured progression, and real accountability.
+            </p>
+          </div>
 
           <div className="text-center mb-8">
             <a
