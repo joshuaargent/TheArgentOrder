@@ -12,6 +12,7 @@ import {
   Shield,
   Play,
   ThumbsUp,
+  User,
 } from "lucide-react";
 
 export default function JoinPage() {
@@ -131,18 +132,27 @@ export default function JoinPage() {
             In 90 days, you'll have a Rule of Life, 5 accountability partners, and completed projects.
           </p>
           
-          <p className="text-sm text-muted-foreground mb-10">
+          <p className="text-sm text-muted-foreground mb-6">
             Catholic men. Forged in discipline.
           </p>
 
           <a
             href="#apply"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
           >
             <Play className="h-6 w-6" />
             Join the Order
             <ArrowRight className="h-6 w-6" />
           </a>
+
+          <div className="mt-4">
+            <Link href="/login">
+              <Button variant="ghost" size="sm" className="text-muted-foreground h-9 px-4 gap-2">
+                <User className="h-4 w-4" />
+                Already a member? Sign In
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

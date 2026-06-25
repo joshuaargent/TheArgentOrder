@@ -109,15 +109,16 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Headline */}
-          <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+          {/* HORMOZI: ONE HEADLINE - LET LOGO + BRAND STAND */}
+          <h1 id="hero-heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6 leading-tight">
             The Argent Order
           </h1>
-          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-4">
-            Catholic men. Forged in discipline.
-          </p>
+
+          {/* HORMOZI: MICRO-COMMITMENT BEFORE EMAIL */}
           <p className="text-lg md:text-xl text-center text-muted-foreground mb-8">
-            Not a community. A forge.
+            <Link href="/mission" className="text-primary hover:underline">
+              See what we offer →
+            </Link>
           </p>
 
           {/* HORMOZI: EMAIL CAPTURE ABOVE THE FOLD */}
@@ -148,7 +149,16 @@ export default function HomePage() {
                 )}
               </Button>
             </form>
-            <p className="text-xs text-muted-foreground mt-3">Instant access to Discord + Portal</p>
+            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <CheckCircle className="h-3 w-3 text-green-500" />
+                Instant access
+              </span>
+              <span className="flex items-center gap-1">
+                <CheckCircle className="h-3 w-3 text-green-500" />
+                Founding cohort pricing
+              </span>
+            </div>
           </div>
 
           <div className="flex justify-center gap-4 flex-wrap">
@@ -161,20 +171,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* STICKY VALUE BAR */}
-      <div className="sticky top-[65px] z-40 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="flex justify-center gap-6 md:gap-12 flex-wrap text-sm">
-            {pillars.map((item) => (
-              <div key={item.id} className="flex items-center gap-2 text-muted-foreground">
-                <PillarIcon id={item.id} className="h-4 w-4 text-primary" />
-                <span className="text-sm">{item.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* THE PROBLEM */}
       <section className="py-16 md:py-20 px-4 relative">
@@ -268,22 +264,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WHAT YOU GET - HORMOZI: VALUE STACK */}
+      {/* WHAT YOU GET - HORMOZI: OUTCOMES, NOT FEATURES */}
       <section className="py-16 md:py-20 px-4 bg-card/50 relative">
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            What You Get
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+            In 90 Days, You'll Have:
           </h2>
-          <p className="text-center text-muted-foreground mb-8">Everything you need to build with purpose</p>
+          <p className="text-center text-muted-foreground mb-8">The structure most men never build</p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: Cross, color: '#a855f7', title: 'Daily Formation', desc: 'Prayer, scripture, examen. Build your spiritual life.' },
-              { icon: Dumbbell, color: '#ef4444', title: 'Discipline Training', desc: 'Cold showers, workouts, sleep tracking. Forge your body.' },
-              { icon: Handshake, color: '#22c55e', title: 'Accountability Pod', desc: '5 men who text you when you miss a day.' },
-              { icon: Hammer, color: '#eab308', title: '90-Day Campaigns', desc: 'Structured challenges. Ship projects. Build momentum.' },
-              { icon: GraduationCap, color: '#06b6d4', title: 'Rule of Life', desc: 'Your personal GPS. Know what to do every day.' },
-              { icon: CheckCircle, color: '#8b5cf6', title: 'Achievement System', desc: 'Track your formation. Earn certifications.' },
+              { icon: GraduationCap, color: '#06b6d4', title: 'A Rule of Life', outcome: 'Wake up knowing exactly what to do every day' },
+              { icon: Handshake, color: '#22c55e', title: '5 Brothers', outcome: 'Men who text when you miss a day' },
+              { icon: Hammer, color: '#eab308', title: 'Completed Projects', outcome: 'Shipped something real, not just ideas' },
+              { icon: Cross, color: '#a855f7', title: 'Consistent Prayer', outcome: 'Daily prayer habit you thought impossible' },
+              { icon: Dumbbell, color: '#ef4444', title: 'A Body Ready', outcome: 'Energy for the mission, not excuses' },
+              { icon: CheckCircle, color: '#8b5cf6', title: 'Evidence of Growth', outcome: 'Certifications that prove you showed up' },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
@@ -295,7 +291,7 @@ export default function HomePage() {
                     <Icon className="h-5 w-5" style={{ color: item.color }} />
                   </div>
                   <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  <p className="text-sm text-muted-foreground">{item.outcome}</p>
                 </div>
               );
             })}
