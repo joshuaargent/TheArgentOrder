@@ -13,10 +13,11 @@ import {
   CheckCircle,
   AlertTriangle,
   Lock,
-  Loader2,
   Users,
   Shield,
   Play,
+  User,
+  Loader2,
 } from "lucide-react";
 
 const pillars = [
@@ -68,7 +69,7 @@ export default function HomePage() {
             <CheckCircle className="h-10 w-10 text-green-500" />
           </div>
           <h1 className="text-3xl font-bold mb-4">Check Your Email</h1>
-          <p className="text-muted-foreground mb-8">Your access links are on the way. Check your inbox.</p>
+          <p className="text-muted-foreground mb-8">Your access links are on the way.</p>
           <Link href="/mission" className="text-primary hover:underline text-sm">
             Read our Mission →
           </Link>
@@ -85,13 +86,15 @@ export default function HomePage() {
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* HERO - HORMOZI STYLE: ONE CLEAR OFFER */}
+      {/* HERO - HORMOZI: STRONG HEADLINE + SIGN IN */}
       <section className="relative pt-8 md:pt-12 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
-        <div className="max-w-3xl mx-auto relative z-10 text-center">
+        <div className="max-w-5xl mx-auto relative z-10">
           {/* Filter Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-sm mb-6">
-            <Lock className="h-4 w-4 text-red-400" />
-            <span className="text-red-400 font-medium">100% Free. No monetization.</span>
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-sm">
+              <Lock className="h-4 w-4 text-red-400" />
+              <span className="text-red-400 font-medium">Selective Brotherhood. Not everyone who applies is accepted.</span>
+            </div>
           </div>
 
           {/* Logo */}
@@ -106,16 +109,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* HORMOZI: ONE HEADLINE - PICK THE STRONGEST */}
-          <h1 id="hero-heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6 leading-tight">
-            Not a community.
-            <br />
-            <span className="text-primary">A forge.</span>
+          {/* Headline */}
+          <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+            The Argent Order
           </h1>
-
-          {/* HORMOZI: SPECIFIC OUTCOME PROMISE */}
-          <p className="text-xl md:text-2xl text-center mb-8 text-muted-foreground">
-            In 90 days, you'll have a Rule of Life, 5 accountability partners, and completed projects.
+          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-4">
+            Catholic men. Forged in discipline.
+          </p>
+          <p className="text-lg md:text-xl text-center text-muted-foreground mb-8">
+            Not a community. A forge.
           </p>
 
           {/* HORMOZI: EMAIL CAPTURE ABOVE THE FOLD */}
@@ -149,10 +151,14 @@ export default function HomePage() {
             <p className="text-xs text-muted-foreground mt-3">Instant access to Discord + Portal</p>
           </div>
 
-          {/* Social proof placeholder */}
-          <p className="text-sm text-muted-foreground">
-            Join the founding cohort of Catholic men building with purpose
-          </p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Link href="/login">
+              <Button variant="ghost" size="sm" className="text-muted-foreground h-9 px-4 gap-2">
+                <User className="h-4 w-4" />
+                Already a member? Sign In
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
