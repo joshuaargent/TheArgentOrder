@@ -234,18 +234,20 @@ export default function JoinPage() {
       {/* HERO */}
       <section className="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
         <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-6">
+              
+              <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit - No Credit Card</span>
+            </div>
+          </div>
           
           <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
-            Catholic Men.{" "}
-            <span className="text-primary">Forged in Discipline.</span>
+            The Brotherhood That Turns{" "}
+            <span className="text-primary">Men Into Leaders</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-center text-primary font-medium mb-3">
-            Build. Ship. Lead.
-          </p>
-
-          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-8">
-            Not a community. A forge.
+          <p className="text-xl md:text-2xl text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+            Not a community. Not a course. A formation system with documented methodology,
+            structured progression, and real accountability.
           </p>
           
           <div className="text-center mb-12">
