@@ -20,7 +20,7 @@ import {
   BookOpen,
   Target,
   Play,
-  Quote,
+  
   ThumbsUp,
   Clock,
   Award
@@ -93,7 +93,6 @@ export default function JoinPage() {
     ]
   };
 
-  const testimonials = [];
 
   const objections = [
     {
@@ -381,38 +380,52 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF */}
+      {/* WHAT HAPPENS NEXT */}
       <section className="py-20 px-4 bg-card/30 relative">
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-3xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Results</span>
+            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Process</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              Men Who Showed Up
+              What Happens After You Sign Up
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.map((t, i) => (
-              <div key={i} className="glass-card p-8 relative">
-                <Quote className="absolute top-6 right-6 h-8 w-8 text-primary/20" />
-                
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-400/80 text-xs font-medium">
-                    {t.badge}
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                    {t.result}
+          <div className="space-y-6">
+            {[
+              {
+                step: "01",
+                title: "Check Your Email",
+                desc: "Your Catholic Builder Starter Kit arrives instantly. Download it. Read it. Start building your Rule of Life today."
+              },
+              {
+                step: "02", 
+                title: "Join Our Discord",
+                desc: "Get access to the brotherhood. See how men show up for each other. No pressure to speak—just observe."
+              },
+              {
+                step: "03",
+                title: "Start a 90-Day Campaign",
+                desc: "When you're ready, join a campaign. Set a goal. Get a pod. Ship something that matters."
+              }
+            ].map((item, i) => (
+              <div key={i} className="glass-card p-6 flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-primary">{item.step}</span>
                   </div>
                 </div>
-                
-                <p className="text-lg mb-6 leading-relaxed">"{t.quote}"</p>
-                
-                <div className="border-t border-border/50 pt-4">
-                  <p className="font-bold">{t.name}</p>
-                  <p className="text-sm text-muted-foreground">{t.role}</p>
+                <div>
+                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className="text-center mt-10">
+            <p className="text-muted-foreground text-lg">
+              No commitments. No pressure. Just a system that works—if you work it.
+            </p>
           </div>
         </div>
       </section>
