@@ -93,36 +93,7 @@ export default function JoinPage() {
     ]
   };
 
-  const testimonials = [
-    {
-      quote: "I downloaded the kit on a Tuesday. By Thursday I had a Rule of Life. By Friday I had a project. By month two, I had my first paying client. The system works.",
-      name: "Patrick M.",
-      role: "Father of 3, Software Engineer",
-      badge: "Builder",
-      result: "Shipped first product in 60 days"
-    },
-    {
-      quote: "I was dormant for 5 years. The kit gave me structure when I had none. Then the brotherhood gave me accountability when structure wasn't enough.",
-      name: "Michael R.",
-      role: "Former Navy SEAL, Entrepreneur",
-      badge: "Pod Alpha Leader",
-      result: "184-day streak, zero missed check-ins"
-    },
-    {
-      quote: "Every man needs someone who will call him out when he's lying to himself. The kit starts that conversation. The brotherhood continues it.",
-      name: "Thomas K.",
-      role: "Deacon, Business Owner",
-      badge: "Steward",
-      result: "Mentored 12 men this year"
-    },
-    {
-      quote: "I've bought $10k+ in courses. This $0 kit did more for my clarity than all of them combined. The simplicity is the point.",
-      name: "Joseph W.",
-      role: "Physician, Father of 5",
-      badge: "Campaign Graduate",
-      result: "Completed 3 campaigns, leading fourth"
-    },
-  ];
+  const testimonials = [];
 
   const objections = [
     {
@@ -413,57 +384,6 @@ export default function JoinPage() {
       {/* SOCIAL PROOF */}
       <section className="py-20 px-4 bg-card/30 relative">
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Transformations</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              From Dreaming to Doing
-            </h2>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-500/80 text-xs font-medium">
-                  90-Day Graduate
-                </div>
-              </div>
-              <h3 className="text-lg font-bold mb-3">From Scattered to Shipped</h3>
-              <p className="text-muted-foreground text-sm mb-4 italic">"I had 47 unfinished projects. After 90 days in a campaign, I shipped my first product. The system forces action."</p>
-              <div className="border-t border-border/50 pt-4">
-                <p className="font-semibold text-sm">Marcus T.</p>
-                <p className="text-xs text-muted-foreground">Father of 2 | Software Engineer</p>
-              </div>
-            </div>
-            
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-500/80 text-xs font-medium">
-                  Pod Leader
-                </div>
-              </div>
-              <h3 className="text-lg font-bold mb-3">From Isolated to Accountable</h3>
-              <p className="text-muted-foreground text-sm mb-4 italic">"I was the guy who said 'I don't need anyone.' My pod called me out. Now I check in with them before anyone else."</p>
-              <div className="border-t border-border/50 pt-4">
-                <p className="font-semibold text-sm">James R.</p>
-                <p className="text-xs text-muted-foreground">Former Navy SEAL | Entrepreneur</p>
-              </div>
-            </div>
-            
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="px-3 py-1 rounded-full bg-green-500/10 text-green-500/80 text-xs font-medium">
-                  Consistency King
-                </div>
-              </div>
-              <h3 className="text-lg font-bold mb-3">From Drifting to Focused</h3>
-              <p className="text-muted-foreground text-sm mb-4 italic">"Multitasking was my identity. The Rule of Life gave me boundaries I didn't know I needed. My output tripled."</p>
-              <div className="border-t border-border/50 pt-4">
-                <p className="font-semibold text-sm">David M.</p>
-                <p className="text-xs text-muted-foreground">Father of 4 | Business Owner</p>
-              </div>
-            </div>
-          </div>
-
           <div className="text-center mb-12">
             <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Results</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-4">
