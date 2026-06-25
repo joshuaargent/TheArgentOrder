@@ -129,17 +129,21 @@ export default function JoinPage() {
       </div>
 
       {/* HERO */}
-      <section className="relative pt-8 md:pt-12 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
+      <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 px-4" aria-labelledby="join-heading">
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-8">
             <span className="text-green-400 font-medium">Free. Forever. No monetization.</span>
           </div>
 
-          <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+          <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
             A brotherhood for men who{" "}
             <span className="text-primary">build with purpose.</span>
           </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-xl mx-auto">
+            ⚔️ Catholic men. Forged in discipline.
+          </p>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
             Five pillars. Structured progression. Real accountability.
@@ -147,7 +151,7 @@ export default function JoinPage() {
 
           <a
             href="#apply"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-3"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
           >
             <Play className="h-5 w-5" />
             Join Free
@@ -334,6 +338,8 @@ export default function JoinPage() {
           <div className="flex gap-6 text-xs text-muted-foreground">
             <Link href="/mission" className="hover:text-foreground">Mission</Link>
             <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
+            <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground">Terms</Link>
           </div>
           <p className="text-xs text-muted-foreground">© {new Date().getFullYear()}</p>
         </div>

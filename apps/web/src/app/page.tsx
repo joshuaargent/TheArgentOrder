@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   Lock,
   Play,
+  User,
 } from "lucide-react";
 
 const pillars = [
@@ -71,10 +72,13 @@ export default function HomePage() {
             The Argent Order
           </h1>
           <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
-            Catholic Men. Forged in Discipline.
+            ⚔️ Catholic men. Forged in discipline.
           </p>
-          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-6 inline-block">
+          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-4 inline-block">
             Build. Ship. Lead.
+          </p>
+          <p className="text-base md:text-lg text-center text-muted-foreground mb-8">
+            Not a community. A forge.
           </p>
 
           {/* CTAs */}
@@ -82,13 +86,14 @@ export default function HomePage() {
             <Link href="/join">
               <Button size="lg" className="btn-elegant gap-2 px-8 h-12 text-base">
                 <Play className="h-4 w-4" />
-                Apply for Membership
+                Join Free
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/mission">
-              <Button variant="outline" size="lg" className="border-border/50 h-12 px-8 text-base">
-                Learn More
+            <Link href="/login">
+              <Button variant="outline" size="lg" className="border-border/50 h-12 px-8 text-base gap-2">
+                <User className="h-4 w-4" />
+                Sign In
               </Button>
             </Link>
           </div>
@@ -275,6 +280,8 @@ export default function HomePage() {
           <div className="flex gap-8 text-sm text-muted-foreground">
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
             <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
           </div>
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>
