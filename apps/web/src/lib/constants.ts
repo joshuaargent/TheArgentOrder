@@ -42,34 +42,34 @@ export interface NavGroup {
 
 export const mainNavGroups: NavGroup[] = [
   {
-    label: 'Core',
+    label: 'Execute',
     items: [
-      { label: 'Dashboard', href: '/dashboard', icon: 'home' },
-      { label: 'Formation', href: '/formation', icon: 'flame', description: 'Track your spiritual growth' },
-      { label: 'Rule of Life', href: '/rule-of-life', icon: 'check-square', description: 'Daily execution system' },
+      { label: 'Dashboard', href: '/dashboard', icon: 'home', description: 'Command Center' },
+      { label: 'Formation', href: '/formation', icon: 'flame', description: 'Track your growth' },
+      { label: 'Rule of Life', href: '/rule-of-life', icon: 'check-square', description: 'Daily execution' },
     ],
   },
   {
-    label: 'Growth',
+    label: 'Build',
     items: [
-      { label: 'Campaigns', href: '/campaigns', icon: 'target', description: '30-day formation journeys' },
-      { label: 'Projects', href: '/projects', icon: 'briefcase', description: 'Build things that matter' },
-      { label: 'Achievements', href: '/achievements', icon: 'trophy', description: 'Milestones and badges' },
+      { label: '🛠️ WORKSHOP', href: '/workshop', icon: 'briefcase', description: 'Ship or be shipped' },
+      { label: 'Campaigns', href: '/campaigns', icon: 'target', description: '90-day transformations' },
+      { label: 'Achievements', href: '/achievements', icon: 'trophy', description: 'Earn your stripes' },
     ],
   },
   {
-    label: 'Community',
+    label: 'Brotherhood',
     items: [
-      { label: 'Brotherhood', href: '/brotherhood', icon: 'users', description: 'Pods and accountability' },
-      { label: 'Journal', href: '/journal', icon: 'book-open', description: 'Reflection and examen' },
-      { label: 'Reviews', href: '/reviews', icon: 'calendar', description: 'Weekly and monthly reviews' },
+      { label: 'Pods', href: '/brotherhood', icon: 'users', description: 'Accountability units' },
+      { label: 'Journal', href: '/journal', icon: 'book-open', description: 'Daily examen' },
+      { label: 'Reviews', href: '/reviews', icon: 'calendar', description: 'Weekly & monthly' },
     ],
   },
   {
-    label: 'Explore',
+    label: 'Lead',
     items: [
-      { label: 'Leaderboard', href: '/leaderboard', icon: 'bar-chart', description: 'Community rankings' },
-      { label: 'Certifications', href: '/certifications', icon: 'award', description: 'Earn credentials' },
+      { label: 'Leaderboard', href: '/leaderboard', icon: 'bar-chart', description: 'Rankings' },
+      { label: 'Certifications', href: '/certifications', icon: 'award', description: 'Credentials' },
     ],
   },
 ];

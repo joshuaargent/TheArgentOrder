@@ -25,10 +25,10 @@ interface FormEvent {
 
 const PILLAR_CONFIG = {
   faith: { icon: Cross, name: "Faith", color: "#a855f7", description: "Prayer, Mass, Scripture, Sacraments" },
-  discipline: { icon: Dumbbell, name: "Discipline", color: "#ef4444", description: "Habits, Fitness, Deep Work, Execution" },
-  brotherhood: { icon: Handshake, name: "Brotherhood", color: "#22c55e", description: "Community, Pod, Mentorship" },
-  building: { icon: Hammer, name: "Building", color: "#eab308", description: "Projects, Creation, Launch" },
-  truth: { icon: GraduationCap, name: "Truth", color: "#06b6d4", description: "Learning, Apologetics, Wisdom" },
+  discipline: { icon: Dumbbell, name: "Discipline", color: "#ef4444", description: "Habits, Cold, Sleep, Fitness" },
+  brotherhood: { icon: Handshake, name: "Brotherhood", color: "#22c55e", description: "Pods, Accountability, Mentorship" },
+  building: { icon: Hammer, name: "Building", color: "#eab308", description: "Ship projects. Create value." },
+  truth: { icon: GraduationCap, name: "Truth", color: "#06b6d4", description: "Learning, Reading, Thinking" },
 };
 
 const PILLAR_ACTIONS = {
@@ -92,15 +92,15 @@ export default function FormationPage() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <Flame className="h-5 w-5 text-primary" />
             </div>
             Formation
           </h1>
-          <p className="text-muted-foreground mt-1">Track your progress across all five pillars</p>
+          <p className="text-muted-foreground mt-1">Execute. Build. Track your growth.</p>
         </div>
       </div>
 
