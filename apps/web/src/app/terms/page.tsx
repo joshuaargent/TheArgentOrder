@@ -91,7 +91,7 @@ We reserve the right to accept or deny membership at our discretion.`
 • Follow the Rule of Life you create
 • Contribute positively to the brotherhood
 
-These obligations are not optional—they are the foundation of formation.`
+These obligations are not optional-they are the foundation of formation.`
             },
             {
               title: "Formation Standards",
@@ -104,7 +104,7 @@ These obligations are not optional—they are the foundation of formation.`
 • We prohibit any form of harassment or abuse
 • We reserve the right to remove members who undermine formation
 
-Formation is a gift—we protect it for those who are serious.`
+Formation is a gift-we protect it for those who are serious.`
             },
             {
               title: "Content and Conduct",
@@ -126,7 +126,7 @@ We prohibit:
             {
               title: "Intellectual Property",
               icon: BookOpen,
-              content: `The materials provided through The Argent Order—including guides, templates, and formation resources—are for your personal formation.
+              content: `The materials provided through The Argent Order-including guides, templates, and formation resources-are for your personal formation.
 
 You may:
 • Use materials for your own formation
@@ -156,7 +156,7 @@ You may also terminate your membership at any time by contacting us.`
             {
               title: "Limitation of Liability",
               icon: Gavel,
-              content: `The Argent Order provides formation resources and community—we do not guarantee specific outcomes.
+              content: `The Argent Order provides formation resources and community-we do not guarantee specific outcomes.
 
 We are not liable for:
 • Your formation results or progress

@@ -206,8 +206,8 @@ export default function HomePage() {
               </div>
               <ul className="space-y-3">
                 {[
-                  "Want faith, discipline, and brotherhood—not just community",
-                  "Are ready to be held accountable—really held accountable",
+                  "Want faith, discipline, and brotherhood-not just community",
+                  "Are ready to be held accountable-really held accountable",
                   "Want to build something that outlasts them",
                   "Accept that discipline is not optional",
                   "Are ready to show up every single day"
@@ -299,7 +299,7 @@ export default function HomePage() {
             {[
               { icon: Shield, title: "Apply & Get Accepted", desc: "Tell us who you are. If you're serious and aligned, you'll receive an invitation within 48 hours." },
               { icon: BookOpen, title: "Build Your Rule of Life", desc: "In the first 72 hours, create your personal operating system with daily habits." },
-              { icon: Users, title: "Join a Pod", desc: "Get assigned to a group of 5 men who will hold you accountable—men who won't let you quit." },
+              { icon: Users, title: "Join a Pod", desc: "Get assigned to a group of 5 men who will hold you accountable-men who won't let you quit." },
               { icon: Zap, title: "Execute Daily", desc: "Log your progress. Track streaks. Pod meetings every week. Campaigns every 90 days." },
               { icon: Crown, title: "Lead Others", desc: "Prove yourself through action. Become a Captain. Mentor new members." },
             ].map((step, i) => (
@@ -370,7 +370,7 @@ export default function HomePage() {
               </h2>
 
               <p className="text-muted-foreground mb-8 text-lg">
-                Get the Catholic Builder Starter Kit—free. No credit card.
+                Get the Catholic Builder Starter Kit-free. No credit card.
               </p>
 
               <Link href="/join">
@@ -382,7 +382,7 @@ export default function HomePage() {
               </Link>
 
               <p className="text-sm text-muted-foreground mt-6">
-                $247 value — Yours free
+                $247 value - Yours free
               </p>
             </div>
           </div>

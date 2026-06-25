@@ -132,7 +132,7 @@ export default function JoinPage() {
     },
     {
       q: "I don't have time for another commitment.",
-      a: "You don't have time NOT to do this. 30 minutes daily. That's the minimum. The men here are busier than you—they've just prioritized differently."
+      a: "You don't have time NOT to do this. 30 minutes daily. That's the minimum. The men here are busier than you-they've just prioritized differently."
     },
     {
       q: "What if I fail?",
@@ -146,7 +146,7 @@ export default function JoinPage() {
 
   const requirements = [
     "You believe men need brotherhood to become great",
-    "You're willing to be held accountable—even when it's uncomfortable",
+    "You're willing to be held accountable-even when it's uncomfortable",
     "You want to build something that outlasts you",
     "You accept that discipline is the price of freedom",
     "You're ready to show up every single day",
@@ -237,7 +237,7 @@ export default function JoinPage() {
           <div className="text-center mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm animate-pulse">
               <Star className="h-4 w-4 text-green-400 fill-green-400" />
-              <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit — No Credit Card</span>
+              <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit - No Credit Card</span>
             </div>
           </div>
           
@@ -268,7 +268,7 @@ export default function JoinPage() {
               <ArrowRight className="h-6 w-6" />
             </a>
             <p className="text-sm text-muted-foreground mt-3">
-              $247 value — Yours free. No credit card required.
+              $247 value - Yours free. No credit card required.
             </p>
           </div>
           
@@ -345,13 +345,13 @@ export default function JoinPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium mb-4">
               <CheckCircle className="h-4 w-4" />
-              <span>$247 Value — Yours FREE</span>
+              <span>$247 Value - Yours FREE</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold">
               Catholic Builder Starter Kit
             </h2>
             <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-lg">
-              Everything you need to start building a Rule of Life—before you even join.
+              Everything you need to start building a Rule of Life-before you even join.
             </p>
           </div>
           
@@ -501,7 +501,7 @@ export default function JoinPage() {
           
           <div className="text-center mt-10">
             <p className="text-muted-foreground text-lg">
-              This is not for everyone. If this is for you—we'll see you inside.
+              This is not for everyone. If this is for you-we'll see you inside.
             </p>
           </div>
         </div>

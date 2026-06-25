@@ -46,7 +46,7 @@ export default function PrivacyPage() {
               <h3 className="font-bold mb-2">Your Privacy Matters</h3>
               <p className="text-sm text-muted-foreground">
                 We collect only what is necessary for your formation. We never sell your data. 
-                We protect your information as we protect our brotherhood—with honor.
+                We protect your information as we protect our brotherhood-with honor.
               </p>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
 • Brotherhood Activity: Pod membership, interactions with other members, and accountability logs
 • Content You Submit: Journal entries, prayer requests, and project updates
 
-We do not collect payment information—transactions are handled by secure third-party processors.`
+We do not collect payment information-transactions are handled by secure third-party processors.`
             },
             {
               title: "How We Use Your Information",
