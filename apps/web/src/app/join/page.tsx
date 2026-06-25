@@ -19,7 +19,6 @@ import {
   Play,
   ThumbsUp,
   Crown,
-  User,
 } from "lucide-react";
 
 const pillars = [
