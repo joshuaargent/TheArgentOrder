@@ -266,7 +266,7 @@ export default function JoinPage() {
       </section>
 
       {/* STICKY VALUE BAR */}
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
+      <div className="sticky top-16 z-40 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center gap-6 md:gap-12 flex-wrap text-sm">
             {pillars.map((item, i) => (
