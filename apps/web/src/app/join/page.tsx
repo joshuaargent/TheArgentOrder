@@ -249,8 +249,12 @@ export default function JoinPage() {
             Build. Ship. Lead.
           </p>
 
-          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-10">
+          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-4">
             Not a community. A forge.
+          </p>
+
+          <p className="text-sm text-muted-foreground/70 text-center max-w-2xl mx-auto mb-10">
+            Formation over engagement. Transformation over activity.
           </p>
 
           <div className="text-center mb-8">
