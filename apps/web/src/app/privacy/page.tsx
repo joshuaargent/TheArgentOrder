@@ -3,19 +3,19 @@ import { Shield, Lock, Eye, Database, Mail, AlertTriangle } from "lucide-react";
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen mesh-gradient relative">
-      {/* Ambient Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
+      {/* Ambient Background - Decorative */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
         <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-0 right-0" style={{ animationDelay: '-5s' }} />
       </div>
 
       {/* Sticky Nav */}
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
+      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-3 md:py-4 shadow-lg" role="banner">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none" aria-hidden="true">
                 <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
                 <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
               </svg>
@@ -26,22 +26,22 @@ export default function PrivacyPage() {
             </Link>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="max-w-3xl mx-auto px-4 py-16 relative z-10">
+      <div className="max-w-3xl mx-auto px-4 py-12 md:py-16 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-            <Shield className="h-8 w-8 text-primary" />
+        <div className="text-center mb-8 md:mb-12">
+          <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 md:mb-6">
+            <Shield className="h-7 w-7 md:h-8 md:w-8 text-primary" aria-hidden="true" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Privacy Policy</h1>
-          <p className="text-muted-foreground">Last updated: June 2024</p>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Privacy Policy</h1>
+          <p className="text-muted-foreground text-sm md:text-base">Last updated: June 2024</p>
         </div>
 
         {/* Important Notice */}
-        <div className="glass-card p-6 mb-8 border-green-500/20">
-          <div className="flex items-start gap-4">
-            <Lock className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+        <div className="glass-card p-5 md:p-6 mb-6 md:mb-8 border-green-500/20">
+          <div className="flex items-start gap-3 md:gap-4">
+            <Lock className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <h3 className="font-bold mb-2">Your Privacy Matters</h3>
               <p className="text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
         </div>
 
         {/* Sections */}
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           {[
             {
               title: "Information We Collect",
@@ -149,29 +149,29 @@ Email: privacy@theargentorder.com
 We take privacy seriously and welcome your questions and feedback.`
             }
           ].map((section, i) => (
-            <div key={i} className="glass-card p-6">
-              <h2 className="text-xl font-bold mb-4 flex items-center gap-3">
-                <section.icon className="h-5 w-5 text-primary" />
+            <article key={i} className="glass-card p-5 md:p-6">
+              <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 flex items-center gap-2 md:gap-3">
+                <section.icon className="h-5 w-5 text-primary" aria-hidden="true" />
                 {section.title}
               </h2>
               <div className="text-muted-foreground whitespace-pre-line text-sm leading-relaxed">
                 {section.content}
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="mt-12 text-center">
-          <div className="flex justify-center gap-6 text-sm text-muted-foreground mb-4">
+        <footer className="mt-8 md:mt-12 text-center" role="contentinfo">
+          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-muted-foreground mb-4" aria-label="Footer navigation">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
             <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-          </div>
+          </nav>
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} The Argent Order. All rights reserved.
           </p>
-        </div>
+        </footer>
       </div>
     </main>
   );

@@ -2,36 +2,42 @@ import { Shield, BookOpen, Scale, Users, Cross } from "lucide-react";
 
 export default function ConstitutionPage() {
   return (
-    <main className="min-h-screen mesh-gradient relative">
+    <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
+      {/* Ambient Background - Decorative */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+        <div className="ambient-orb w-[700px] h-[700px] bg-primary/5 -top-48 -left-48" />
+        <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
+      </div>
+
       {/* Hero */}
-      <section className="py-20 px-4">
+      <section className="py-16 md:py-20 px-4" aria-labelledby="constitution-heading">
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-8">
-            <BookOpen className="h-10 w-10 text-primary" />
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 md:mb-8">
+            <BookOpen className="h-8 w-8 md:h-10 md:w-10 text-primary" aria-hidden="true" />
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 id="constitution-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 px-4">
             Constitution
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 px-4">
             The governing document of The Argent Order
           </p>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm">
-            Version 1.0
+            <span>Version 1.0</span>
           </div>
         </div>
       </section>
 
       {/* Preamble */}
-      <section className="py-16 px-4 bg-card/30">
+      <section className="py-12 md:py-16 px-4 bg-card/30" aria-labelledby="preamble-heading">
         <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-2xl font-bold mb-6 text-center">
+          <h2 id="preamble-heading" className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">
             Preamble
           </h2>
 
-          <div className="glass-card p-8 space-y-4">
+          <div className="glass-card p-6 md:p-8 space-y-4">
             <p>
               The Argent Order exists to help men become who God created them to be.
             </p>
@@ -49,14 +55,14 @@ export default function ConstitutionPage() {
       </section>
 
       {/* Article I: Authority */}
-      <section className="py-16 px-4">
+      <section className="py-12 md:py-16 px-4" aria-labelledby="authority-heading">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-6">
-            <Scale className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">Article I: Authority</h2>
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
+            <Scale className="h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+            <h2 id="authority-heading" className="text-xl md:text-2xl font-bold">Article I: Authority</h2>
           </div>
 
-          <div className="glass-card p-8">
+          <div className="glass-card p-6 md:p-8">
             <p className="mb-4">
               The ultimate authority of The Argent Order is:
             </p>
@@ -80,14 +86,14 @@ export default function ConstitutionPage() {
       </section>
 
       {/* Article II: Core Values */}
-      <section className="py-16 px-4 bg-card/30">
+      <section className="py-12 md:py-16 px-4 bg-card/30" aria-labelledby="values-heading">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-6">
-            <Shield className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">Article II: Core Values</h2>
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
+            <Shield className="h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+            <h2 id="values-heading" className="text-xl md:text-2xl font-bold">Article II: Core Values</h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {[
               {
                 title: "Faith",
@@ -115,32 +121,33 @@ export default function ConstitutionPage() {
                 color: "#06b6d4"
               },
             ].map((value, i) => (
-              <div key={i} className="glass-card p-6">
-                <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
+              <article key={i} className="glass-card p-5 md:p-6">
+                <h3 className="font-bold text-base md:text-lg mb-2 flex items-center gap-2">
                   <span 
-                    className="w-3 h-3 rounded-full"
+                    className="w-3 h-3 rounded-full flex-shrink-0"
                     style={{ backgroundColor: value.color }}
+                    aria-hidden="true"
                   />
                   {value.title}
                 </h3>
-                <p className="text-muted-foreground">{value.desc}</p>
-              </div>
+                <p className="text-muted-foreground text-sm md:text-base">{value.desc}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* Article III: Member Expectations */}
-      <section className="py-16 px-4">
+      <section className="py-12 md:py-16 px-4" aria-labelledby="expectations-heading">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-6">
-            <Users className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">Article III: Member Expectations</h2>
+          <div className="flex items-center gap-3 mb-4 md:mb-6">
+            <Users className="h-5 w-5 md:h-6 md:w-6 text-primary" aria-hidden="true" />
+            <h2 id="expectations-heading" className="text-xl md:text-2xl font-bold">Article III: Member Expectations</h2>
           </div>
 
-          <div className="glass-card p-8">
+          <div className="glass-card p-6 md:p-8">
             <p className="mb-4 font-medium">Every member is expected to:</p>
-            <ul className="space-y-3">
+            <ul className="space-y-2 md:space-y-3" role="list">
               {[
                 "Pursue holiness",
                 "Seek truth",
@@ -151,8 +158,8 @@ export default function ConstitutionPage() {
                 "Live the Catholic faith"
               ].map((expectation, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <span>{expectation}</span>
+                  <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
+                  <span className="text-sm md:text-base">{expectation}</span>
                 </li>
               ))}
             </ul>
@@ -161,11 +168,11 @@ export default function ConstitutionPage() {
       </section>
 
       {/* Final Principle */}
-      <section className="py-16 px-4 bg-card/30">
+      <section className="py-12 md:py-16 px-4 bg-card/30" aria-labelledby="final-heading">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="glass-card p-8 text-center">
-            <Cross className="h-8 w-8 text-primary mx-auto mb-4" />
-            <p className="text-lg font-medium">
+          <div className="glass-card p-6 md:p-8 text-center">
+            <Cross className="h-7 w-7 md:h-8 md:w-8 text-primary mx-auto mb-4" aria-hidden="true" />
+            <p id="final-heading" className="text-base md:text-lg font-medium">
               The Argent Order exists to help men become who God created them to be.
             </p>
           </div>
@@ -173,17 +180,17 @@ export default function ConstitutionPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4">
-        <div className="max-w-xl mx-auto text-center relative z-10">
-          <h2 className="text-2xl font-bold mb-4">
+      <section className="py-12 md:py-16 px-4" aria-labelledby="cta-heading">
+        <div className="max-w-xl mx-auto text-center relative z-10 px-4">
+          <h2 id="cta-heading" className="text-xl md:text-2xl font-bold mb-4">
             Ready to Join?
           </h2>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-6 md:mb-8 text-sm md:text-base">
             Begin your formation journey today.
           </p>
           <a 
             href="/join" 
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all min-h-[48px] text-base md:text-lg"
           >
             Get Started Free
           </a>

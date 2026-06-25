@@ -416,31 +416,6 @@ html:not(.dark) .glass-card:hover {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* Glass effect variants */
-.glass {
-  background: rgba(15, 15, 16, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(161, 161, 170, 0.1);
-}
-
-html:not(.dark) .glass {
-  background: rgba(255, 255, 255, 0.6);
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-.glass-strong {
-  background: rgba(15, 15, 16, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(161, 161, 170, 0.15);
-}
-
-html:not(.dark) .glass-strong {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
 /* Mesh Gradient Backgrounds - Light Mode Compatible */
 .mesh-gradient {
   background: 
@@ -838,3 +813,420 @@ html:not(.dark) .divider-gradient {
     transparent 100%
   );
 }
+
+/* ============================================
+ Accessibility & Performance Enhancements
+ ============================================ */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float,
+  .animate-float-delayed,
+  .ambient-orb,
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-down,
+  .animate-scale-in,
+  .animate-glow {
+    animation: none !important;
+  }
+}
+
+/* Touch Target Sizes - WCAG 2.2 AAA Compliance */
+@media (pointer: coarse) {
+  /* Increase touch targets on touch devices */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [tabindex="0"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Larger tap areas for interactive elements */
+  .glass-card,
+  .btn-elegant,
+  button[class*="btn"],
+  a[class*="btn"] {
+    min-height: 48px;
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Screen reader only but focusable */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #52525b;
+    --color-primary: #e4e4e7;
+  }
+  
+  .glass-card {
+    border-width: 2px;
+    border-color: var(--color-border);
+  }
+  
+  button,
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Mobile-specific Optimizations */
+@media (max-width: 640px) {
+  /* Prevent horizontal overflow */
+  body {
+    max-width: 100vw;
+  }
+  
+  /* Adjust spacing for mobile */
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Larger text inputs on mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Better button sizing for thumbs */
+  .btn-elegant,
+  button[class*="variant"] {
+    min-height: 48px;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print,
+  nav,
+  .sticky,
+  .ambient-orb,
+  button,
+  .btn-elegant {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* Smooth scrolling with reduced motion fallback */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lazy loading placeholder */
+img[loading="lazy"] {
+  background-color: var(--color-muted);
+}
+
+/* Video optimization */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Interactive elements cursor */
+button,
+[role="button"],
+a,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label[for] {
+  cursor: pointer;
+}
+
+/* Disabled state */
+button:disabled,
+[disabled],
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Focus trap helper */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+
+/* Mesh gradient background - Dark Mode */
+.mesh-gradient {
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(161, 161, 170, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(161, 161, 170, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 100%, rgba(161, 161, 170, 0.06) 0%, transparent 50%),
+    var(--color-background);
+}
+
+/* Mesh gradient background - Light Mode */
+html:not(.dark) .mesh-gradient {
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(82, 82, 91, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(82, 82, 91, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 100%, rgba(82, 82, 91, 0.04) 0%, transparent 50%),
+    var(--color-background);
+}
+
+/* ============================================
+   LIGHT MODE OVERRIDES - Complete
+   ============================================ */
+
+/* Light mode link colors */
+html:not(.dark) a {
+  color: #52525b;
+}
+
+html:not(.dark) a:hover {
+  color: #27272a;
+  opacity: 1;
+}
+
+/* Light mode selection */
+html:not(.dark) ::selection {
+  background-color: rgba(82, 82, 91, 0.2);
+  color: #18181b;
+}
+
+/* Light mode focus */
+html:not(.dark) :focus-visible {
+  outline-color: #52525b;
+}
+
+/* Light mode scrollbar */
+html:not(.dark) ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f4f4f5;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 4px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+/* Light mode container premium */
+html:not(.dark) .container-premium {
+  background: transparent;
+}
+
+/* Light mode surface */
+html:not(.dark) .surface-dark {
+  background: #f4f4f5;
+  border-color: #e4e4e7;
+}
+
+html:not(.dark) .surface-elevated {
+  background: #ffffff;
+  border-color: #e4e4e7;
+}
+
+/* Light mode icon container */
+html:not(.dark) .icon-container {
+  background: linear-gradient(135deg, rgba(82, 82, 91, 0.1) 0%, rgba(82, 82, 91, 0.05) 100%);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode btn-elegant */
+html:not(.dark) .btn-elegant {
+  background: linear-gradient(135deg, #71717a 0%, #52525b 100%);
+  border-color: rgba(82, 82, 91, 0.2);
+}
+
+html:not(.dark) .btn-elegant:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Light mode premium text */
+html:not(.dark) .text-gradient-silver {
+  background: linear-gradient(135deg, #52525b, #71717a, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Light mode text glow */
+html:not(.dark) .text-glow {
+  text-shadow: 0 0 30px rgba(82, 82, 91, 0.4);
+}
+
+/* Light mode shimmer */
+html:not(.dark) .shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(82, 82, 91, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+
+/* Light mode card gradient */
+html:not(.dark) .card-gradient {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.9) 100%);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) .card-gradient:hover {
+  border-color: rgba(82, 82, 91, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 30px rgba(82, 82, 91, 0.05);
+}
+
+/* Light mode glow effects */
+html:not(.dark) .glow-silver {
+  box-shadow: 0 0 20px rgba(82, 82, 91, 0.15), 0 0 40px rgba(82, 82, 91, 0.08);
+}
+
+html:not(.dark) .glow-silver-intense {
+  box-shadow: 0 0 30px rgba(82, 82, 91, 0.2), 0 0 60px rgba(82, 82, 91, 0.12);
+}
+
+/* Light mode gradient border */
+html:not(.dark) .gradient-border::before {
+  background: linear-gradient(135deg, rgba(82, 82, 91, 0.3) 0%, rgba(82, 82, 91, 0.05) 50%, rgba(82, 82, 91, 0.3) 100%);
+}
+
+/* Light mode skeleton */
+html:not(.dark) .skeleton {
+  background: linear-gradient(90deg, rgba(228, 228, 231, 1) 25%, rgba(244, 244, 245, 1) 50%, rgba(228, 228, 231, 1) 75%);
+  background-size: 200% 100%;
+}
+
+/* Light mode text premium */
+html:not(.dark) .text-premium {
+  color: #18181b;
+}
+
+/* Light mode divider gradient */
+html:not(.dark) .divider-gradient {
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+}
+
+/* Light mode premium glow effects for pillars */
+html:not(.dark) .glow-faith { box-shadow: 0 0 30px rgba(168, 85, 247, 0.15); }
+html:not(.dark) .glow-discipline { box-shadow: 0 0 30px rgba(239, 68, 68, 0.15); }
+html:not(.dark) .glow-brotherhood { box-shadow: 0 0 30px rgba(34, 197, 94, 0.15); }
+html:not(.dark) .glow-building { box-shadow: 0 0 30px rgba(234, 179, 8, 0.15); }
+html:not(.dark) .glow-truth { box-shadow: 0 0 30px rgba(6, 182, 212, 0.15); }
+
+/* Light mode ambient orbs */
+html:not(.dark) .ambient-orb {
+  opacity: 0.15;
+  filter: blur(100px);
+}
+
+/* Light mode hero gradient */
+html:not(.dark) .hero-gradient {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(82, 82, 91, 0.08) 0%, transparent 60%), var(--color-background);
+}
+
+html:not(.dark) .hero-glow {
+  background: radial-gradient(ellipse at center, rgba(82, 82, 91, 0.05) 0%, transparent 70%);
+}
+
+/* Light mode card premium */
+html:not(.dark) .card-premium {
+  border-color: #e4e4e7;
+  background: #ffffff;
+}
+
+html:not(.dark) .card-premium:hover {
+  border-color: #a1a1aa;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode glass effect */
+html:not(.dark) .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .glass-strong {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile menu - ensure full opacity in both modes */
+.mobile-menu-overlay {
+  background-color: var(--color-background) !important;
+}
+
+html:not(.dark) .mobile-menu-overlay {
+  background-color: #ffffff !important;
+}
+
+

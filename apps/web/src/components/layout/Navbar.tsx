@@ -328,7 +328,7 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[45] pt-20 lg:hidden overflow-y-auto"
           >
-            <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+            <div className="absolute inset-0 mobile-menu-overlay backdrop-blur-md" />
             <nav className="relative container py-6">
               <div className="space-y-6">
                 {mainNavGroups.map((group) => (

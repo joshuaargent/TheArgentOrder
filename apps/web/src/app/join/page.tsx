@@ -223,16 +223,16 @@ export default function JoinPage() {
   }
 
   return (
-    <main className="min-h-screen mesh-gradient relative">
-      {/* Ambient Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
+      {/* Ambient Background - Decorative */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
         <div className="ambient-orb w-[700px] h-[700px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
       {/* HERO */}
-      <section className="relative pt-20 pb-16 px-4">
+      <section className="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm animate-pulse">
@@ -241,7 +241,7 @@ export default function JoinPage() {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+          <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
             The Brotherhood That Turns{" "}
             <span className="text-primary">Men Into Leaders</span>
           </h1>

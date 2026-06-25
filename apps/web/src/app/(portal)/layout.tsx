@@ -8,13 +8,13 @@ export default function PortalLayout({
 }) {
   return (
     <div className="min-h-screen mesh-gradient flex flex-col relative">
-      {/* Ambient Orbs for Portal Pages */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+      {/* Ambient Orbs for Portal Pages - Decorative */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/3 -top-20 -right-20" />
         <div className="ambient-orb w-[300px] h-[300px] bg-primary/2 bottom-40 -left-20" style={{ animationDelay: '-8s' }} />
       </div>
       <Navbar />
-      <main className="flex-1 container-premium py-8 relative z-10">{children}</main>
+      <main id="main-content" className="flex-1 container-premium py-8 md:py-12 lg:py-16 relative z-10" role="main">{children}</main>
       <Footer />
     </div>
   );
