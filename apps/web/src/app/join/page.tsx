@@ -129,30 +129,6 @@ export default function JoinPage() {
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
       </div>
 
-      {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
-              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
-            </svg>
-            <span className="font-bold">The Argent Order</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/mission" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden md:block">
-              Mission
-            </Link>
-            <Link href="/login">
-              <Button variant="outline" size="sm" className="gap-2">
-                <User className="h-4 w-4" />
-                Sign In
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* HERO */}
       <section className="relative pt-8 md:pt-12 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
         <div className="max-w-3xl mx-auto relative z-10 text-center">

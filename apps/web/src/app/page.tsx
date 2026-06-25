@@ -44,30 +44,6 @@ export default function HomePage() {
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
-              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
-            </svg>
-            <span className="font-bold">The Argent Order</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/mission" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden md:block">
-              Mission
-            </Link>
-            <Link href="/login">
-              <Button variant="outline" size="sm" className="gap-2">
-                <User className="h-4 w-4" />
-                Sign In
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* HERO - KEEPING WHAT WORKS */}
       <section className="relative pt-8 md:pt-12 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
         <div className="max-w-5xl mx-auto relative z-10">
