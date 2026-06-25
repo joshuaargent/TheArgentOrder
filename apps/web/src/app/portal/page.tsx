@@ -12,16 +12,16 @@ const REDIRECT_URI = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/discord/callba
 
 export default function PortalPage() {
   const router = useRouter();
-  const supabase = createClient();
 
   useEffect(() => {
     // Check if already logged in
+    const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {
         router.push("/dashboard");
       }
     });
-  }, []);
+  }, [router]);
 
   const handleDiscordLogin = () => {
     const params = new URLSearchParams({
