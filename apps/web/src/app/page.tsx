@@ -198,6 +198,42 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* THE FIVE PILLARS - User explicitly wanted to keep */}
+      <section className="py-16 md:py-20 px-4 bg-card/50 relative">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+            Five Pillars of Formation
+          </h2>
+          <p className="text-center text-muted-foreground mb-8">Build your life on these foundations</p>
+
+          <div className="grid grid-cols-5 gap-4">
+            {pillars.map((pillar) => (
+              <div key={pillar.id} className="glass-card p-5 text-center">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
+                  style={{ backgroundColor: `${pillar.color}15` }}
+                >
+                  <PillarIcon id={pillar.id} className="h-6 w-6" style={{ color: pillar.color }} />
+                </div>
+                <h3 className="font-bold text-sm">{pillar.name}</h3>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-5 gap-3 mt-4">
+            {[
+              'Prayer • Mass • Scripture',
+              'Cold • Fitness • Sleep',
+              'Pods • Accountability',
+              'Projects • Skills',
+              'Reading • Thinking',
+            ].map((desc, i) => (
+              <p key={i} className="text-xs text-muted-foreground text-center">{desc}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS - HORMOZI STYLE: SPECIFIC */}
       <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-3xl mx-auto relative z-10">
