@@ -16,7 +16,7 @@ export function Footer() {
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              ⚔️ Catholic Men. Forged in Discipline.
+              Catholic Men. Forged in Discipline.
             </p>
             <p className="text-sm text-primary/80 font-medium">
               Build. Ship. Lead.

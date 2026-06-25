@@ -82,16 +82,10 @@ export default function HomePage() {
             The Argent Order
           </h1>
           <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
-            ⚔️ Catholic Men. Forged in Discipline.
+            Catholic Men. Forged in Discipline.
           </p>
-          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-4">
+          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-6">
             Build. Ship. Lead.
-          </p>
-          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-6">
-            Not a community. A forge.
-          </p>
-          <p className="text-sm text-muted-foreground/70 text-center max-w-2xl mx-auto mb-10">
-            Formation over engagement. Transformation over activity.
           </p>
 
           {/* CTAs */}
@@ -267,7 +261,7 @@ export default function HomePage() {
               { icon: Target, title: "Campaigns", desc: "90-day challenges that transform habits.", color: '#ef4444' },
               { icon: BookOpen, title: "Rule of Life", desc: "Build your personal operating system.", color: '#06b6d4' },
               { icon: Shield, title: "Leadership Pipeline", desc: "From Initiate to Steward.", color: '#eab308' },
-              { icon: Swords, title: "🛠️ WORKSHOP", desc: "Ship projects. Get accountability.", color: '#f97316' },
+              { icon: Swords, title: "WORKSHOP", desc: "Ship projects. Get accountability.", color: '#f97316' },
             ].map((feature, i) => (
               <div key={i} className="glass-card p-6 hover:border-primary/30 transition-all">
                 <div

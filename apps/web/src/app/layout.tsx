@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "The Argent Order | Catholic Formation System for Men",
     template: "%s | The Argent Order",
   },
-  description: "⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge. Five pillars: Faith, Discipline, Brotherhood, Building, Truth.",
+  description: "Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge. Five pillars: Faith, Discipline, Brotherhood, Building, Truth.",
   keywords: [
     "catholic formation",
     "men's brotherhood",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "The Argent Order | Catholic Formation for Builders",
-    description: "⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.",
+    description: "Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.",
     siteId: "",
     creatorId: "",
   },
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://argentorder.com',
     siteName: "The Argent Order",
     title: "The Argent Order | Catholic Formation for Builders",
-    description: "⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge. Five pillars: Faith, Discipline, Brotherhood, Building, Truth.",
+    description: "Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge. Five pillars: Faith, Discipline, Brotherhood, Building, Truth.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "⚔️ Catholic men forged in discipline. Build. Ship. Lead.",
+        alt: "Catholic men forged in discipline. Build. Ship. Lead.",
       },
     ],
   },

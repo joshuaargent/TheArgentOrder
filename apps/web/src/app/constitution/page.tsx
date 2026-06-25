@@ -25,7 +25,7 @@ export default function ConstitutionPage() {
           </p>
           
           <p className="text-base md:text-lg text-primary font-medium">
-            ⚔️ Execute. Build. Lead.
+            Execute. Build. Lead.
           </p>
 
           <p className="text-sm text-muted-foreground/70 mt-1">

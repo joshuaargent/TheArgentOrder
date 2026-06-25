@@ -81,7 +81,7 @@ export default function WorkshopPage() {
             <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
               <Hammer className="h-5 w-5 text-orange-500" />
             </div>
-            🛠️ WORKSHOP
+            WORKSHOP
           </h1>
           <p className="text-muted-foreground mt-1">Ship or be shipped.</p>
         </div>

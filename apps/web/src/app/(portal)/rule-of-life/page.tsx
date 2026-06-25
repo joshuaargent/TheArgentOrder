@@ -257,7 +257,7 @@ export default function RuleOfLifePage() {
                 {/* Streak */}
                 <div className="hidden sm:flex items-center gap-1 text-xs">
                   <span className={rule.streak > 0 ? 'text-orange-400' : 'text-muted-foreground'}>
-                    🔥
+                    
                   </span>
                   <span className={rule.streak > 0 ? 'text-orange-400' : 'text-muted-foreground'}>
                     {rule.streak}

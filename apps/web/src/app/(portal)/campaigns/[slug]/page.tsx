@@ -163,7 +163,7 @@ export default function CampaignDetailPage() {
       case "monthly":
         return "🗓️";
       default:
-        return "⭐";
+        return "";
     }
   };
 

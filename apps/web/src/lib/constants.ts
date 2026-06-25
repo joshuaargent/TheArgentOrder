@@ -4,7 +4,7 @@
 
 export const siteConfig = {
   name: 'The Argent Order',
-  description: '⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
+  description: 'Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://argentorder.com',
   ogImage: '/og-image.png',
   author: {
@@ -19,7 +19,7 @@ export const siteConfig = {
 
 export const meta = {
   title: 'The Argent Order - Catholic Formation for Builders',
-  description: '⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
+  description: 'Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
   keywords: ['catholic', 'formation', 'discipleship', 'brotherhood', 'builders', 'faith', 'discipline'] as string[],
   siteName: 'The Argent Order',
 };
@@ -52,7 +52,7 @@ export const mainNavGroups: NavGroup[] = [
   {
     label: 'Build',
     items: [
-      { label: '🛠️ WORKSHOP', href: '/workshop', icon: 'briefcase', description: 'Ship or be shipped' },
+      { label: 'WORKSHOP', href: '/workshop', icon: 'briefcase', description: 'Ship or be shipped' },
       { label: 'Campaigns', href: '/campaigns', icon: 'target', description: '90-day transformations' },
       { label: 'Achievements', href: '/achievements', icon: 'trophy', description: 'Earn your stripes' },
     ],
@@ -130,7 +130,7 @@ export const pillars = [
   {
     id: 'discipline',
     name: 'Discipline',
-    icon: '⚔️',
+    icon: 'cross',
     description: 'Habits, Execution, Fitness',
     color: '#f97316',
   },

@@ -235,14 +235,14 @@ export default function JoinPage() {
       <section className="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm animate-pulse">
-              <Star className="h-4 w-4 text-green-400 fill-green-400" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm">
+              
               <span className="text-green-400 font-medium">FREE Catholic Builder Starter Kit - No Credit Card</span>
             </div>
           </div>
           
           <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
-            ⚔️ Catholic Men.{" "}
+            Catholic Men.{" "}
             <span className="text-primary">Forged in Discipline.</span>
           </h1>
           

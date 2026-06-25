@@ -49,7 +49,7 @@ export default function PortalPage() {
             <Sword className="h-8 w-8 text-primary" />
           </div>
           <h1 className="text-3xl font-bold mb-2">The Argent Order</h1>
-          <p className="text-primary font-medium mb-1">⚔️ Execute. Build. Lead.</p>
+          <p className="text-primary font-medium mb-1">Execute. Build. Lead.</p>
           <p className="text-muted-foreground">Enter the forge.</p>
         </div>
 
@@ -91,7 +91,7 @@ export default function PortalPage() {
                 <Zap className="w-4 h-4 text-orange-500" />
               </div>
               <div>
-                <p className="font-medium text-sm">⚔️ Execute. Build. Lead.</p>
+                <p className="font-medium text-sm">Execute. Build. Lead.</p>
                 <p className="text-xs text-muted-foreground">Formation over engagement. Transformation over activity.</p>
               </div>
             </div>
