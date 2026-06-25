@@ -16,6 +16,7 @@ import {
   Loader2,
   Users,
   Shield,
+  Play,
 } from "lucide-react";
 
 const pillars = [
