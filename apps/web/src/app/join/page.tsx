@@ -15,7 +15,6 @@ import {
   AlertTriangle,
   Users,
   Zap,
-  Star,
   Lock,
   Mail,
   BookOpen,
