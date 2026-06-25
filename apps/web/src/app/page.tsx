@@ -13,7 +13,6 @@ import {
   AlertTriangle,
   Lock,
   Play,
-  User,
 } from "lucide-react";
 
 const pillars = [
