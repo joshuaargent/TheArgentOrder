@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Shield, Lock, Eye, Database, Mail, AlertTriangle } from "lucide-react";
 
 export default function PrivacyPage() {
@@ -9,24 +8,6 @@ export default function PrivacyPage() {
         <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-0 right-0" style={{ animationDelay: '-5s' }} />
       </div>
-
-      {/* Sticky Nav */}
-      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-3 md:py-4 shadow-lg" role="banner">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
-              </svg>
-              <span className="font-bold text-lg">The Argent Order</span>
-            </div>
-            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
-      </header>
 
       <div className="max-w-3xl mx-auto px-4 py-12 md:py-16 relative z-10">
         {/* Header */}

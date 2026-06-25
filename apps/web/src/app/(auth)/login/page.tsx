@@ -68,7 +68,7 @@ export default function LoginPage() {
             </div>
             <h1 className="text-2xl font-bold mb-2">Welcome Back, Brother</h1>
             <p className="text-sm text-muted-foreground">
-              Sign in to continue your formation
+              Catholic men. Forged in discipline.
             </p>
           </div>
 

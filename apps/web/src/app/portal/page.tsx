@@ -49,8 +49,8 @@ export default function PortalPage() {
             <Sword className="h-8 w-8 text-primary" />
           </div>
           <h1 className="text-3xl font-bold mb-2">The Argent Order</h1>
-          <p className="text-primary font-medium mb-1">Execute. Build. Lead.</p>
-          <p className="text-muted-foreground">Enter the forge.</p>
+          <p className="text-primary font-medium">Catholic men. Forged in discipline.</p>
+          <p className="text-muted-foreground mt-1">Not a community. A forge.</p>
         </div>
 
         {/* Main Card */}

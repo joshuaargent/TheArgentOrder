@@ -172,13 +172,13 @@ export default function MissionPage() {
             Ready to Begin Your Formation?
           </h2>
           <p className="text-muted-foreground mb-6 md:mb-8 text-sm md:text-base">
-            Get the Catholic Builder Starter Kit and start building your Rule of Life today.
+            Five pillars. Structured progression. Real accountability.
           </p>
           <a 
             href="/join" 
             className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all min-h-[48px] text-base md:text-lg"
           >
-            Get Started Free
+            Join Free
           </a>
         </div>
       </section>
