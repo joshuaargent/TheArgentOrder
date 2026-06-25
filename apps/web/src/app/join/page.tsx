@@ -150,7 +150,7 @@ export default function JoinPage() {
             className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
           >
             <Play className="h-5 w-5" />
-            Join Free
+            Join the Order
             <ArrowRight className="h-5 w-5" />
           </a>
           
