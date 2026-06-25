@@ -228,12 +228,6 @@ export default function JoinPage() {
           </h1>
 
           <div className="text-center">
-            <p className="text-lg md:text-xl text-muted-foreground mb-4 inline-block">
-              The Catholic brotherhood for men who build.
-            </p>
-          </div>
-
-          <div className="text-center">
             <p className="text-lg md:text-xl text-primary font-medium mb-4 inline-block">
               Build. Ship. Lead.
             </p>
