@@ -210,18 +210,6 @@ export default function JoinPage() {
             </div>
           </div>
 
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <div className="relative">
-              <svg className="h-20 w-20" viewBox="0 0 48 48" fill="none">
-                <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
-                <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
-                <path d="M24 38L20 48H28L24 38Z" className="fill-primary opacity-30"/>
-              </svg>
-              <div className="absolute inset-0 bg-primary/20 blur-2xl opacity-50" />
-            </div>
-          </div>
-
           <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
             Catholic Men.{" "}
             <span className="text-primary">Forged in Discipline.</span>
