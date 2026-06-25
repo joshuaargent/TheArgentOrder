@@ -23,8 +23,16 @@ export default function ConstitutionPage() {
           <p className="text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 px-4">
             The governing document of The Argent Order
           </p>
+          
+          <p className="text-base md:text-lg text-primary font-medium">
+            ⚔️ Execute. Build. Lead.
+          </p>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm">
+          <p className="text-sm text-muted-foreground/70 mt-1">
+            Formation over engagement. Transformation over activity.
+          </p>
+
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm mt-4">
             <span>Version 1.0</span>
           </div>
         </div>

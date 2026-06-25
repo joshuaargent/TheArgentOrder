@@ -242,13 +242,20 @@ export default function JoinPage() {
           </div>
           
           <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-tight px-4">
-            The Brotherhood That Turns{" "}
-            <span className="text-primary">Men Into Leaders</span>
+            ⚔️ Catholic Men.{" "}
+            <span className="text-primary">Forged in Discipline.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground text-center max-w-2xl mx-auto mb-8">
-            Not a community. Not a course. A formation system with documented methodology,
-            structured progression, and real accountability.
+          <p className="text-lg md:text-xl text-center text-primary font-medium mb-3">
+            Build. Ship. Lead.
+          </p>
+
+          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+            Not a community. A forge.
+          </p>
+          
+          <p className="text-sm text-muted-foreground/70 text-center max-w-2xl mx-auto mb-8">
+            Formation over engagement. Transformation over activity.
           </p>
           
           <div className="text-center mb-12">

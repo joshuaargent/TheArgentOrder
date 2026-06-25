@@ -4,7 +4,7 @@
 
 export const siteConfig = {
   name: 'The Argent Order',
-  description: 'Catholic Formation Operating System for Builders',
+  description: '⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://argentorder.com',
   ogImage: '/og-image.png',
   author: {
@@ -18,8 +18,8 @@ export const siteConfig = {
 // ============================================
 
 export const meta = {
-  title: 'The Argent Order - Catholic Formation Operating System',
-  description: 'Catholic Formation Operating System for Builders. Build faith, discipline, brotherhood, and projects.',
+  title: 'The Argent Order - Catholic Formation for Builders',
+  description: '⚔️ Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge.',
   keywords: ['catholic', 'formation', 'discipleship', 'brotherhood', 'builders', 'faith', 'discipline'] as string[],
   siteName: 'The Argent Order',
 };

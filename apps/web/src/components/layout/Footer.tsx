@@ -16,7 +16,10 @@ export function Footer() {
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Execute. Build. Lead. Catholic brotherhood for men who build.
+              ⚔️ Catholic Men. Forged in Discipline.
+            </p>
+            <p className="text-sm text-primary/80 font-medium">
+              Build. Ship. Lead.
             </p>
           </div>
 

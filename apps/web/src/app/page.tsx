@@ -81,11 +81,17 @@ export default function HomePage() {
           <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 leading-tight">
             The Argent Order
           </h1>
-          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-4">
-            The Catholic brotherhood for men who build.
+          <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
+            ⚔️ Catholic Men. Forged in Discipline.
           </p>
-          <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-            Not a community. Not a course. A formation system that transforms men who show up into men who lead.
+          <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-4">
+            Build. Ship. Lead.
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-6">
+            Not a community. A forge.
+          </p>
+          <p className="text-sm text-muted-foreground/70 text-center max-w-2xl mx-auto mb-10">
+            Formation over engagement. Transformation over activity.
           </p>
 
           {/* CTAs */}
