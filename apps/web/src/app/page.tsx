@@ -72,7 +72,7 @@ export default function HomePage() {
             The Argent Order
           </h1>
           <p className="text-xl md:text-2xl text-center text-primary font-medium mb-3">
-            ⚔️ Catholic men. Forged in discipline.
+            Catholic men. Forged in discipline.
           </p>
           <p className="text-lg md:text-xl text-center text-primary/80 font-medium mb-4 inline-block">
             Build. Ship. Lead.
