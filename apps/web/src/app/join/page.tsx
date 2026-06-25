@@ -249,12 +249,9 @@ export default function JoinPage() {
             Build. Ship. Lead.
           </p>
 
-          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-4">
-            Not a community. A forge.
-          </p>
-
-          <p className="text-sm text-muted-foreground/70 text-center max-w-2xl mx-auto mb-10">
-            Formation over engagement. Transformation over activity.
+          <p className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+            Not a community. Not a course. A formation system with documented methodology,
+            structured progression, and real accountability.
           </p>
 
           <div className="text-center mb-8">
