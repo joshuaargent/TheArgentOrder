@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Shield, Scale, AlertTriangle, Users, BookOpen, Gavel } from "lucide-react";
 
 export default function TermsPage() {

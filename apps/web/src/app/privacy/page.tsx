@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Shield, Lock, Eye, Database, Mail, AlertTriangle } from "lucide-react";
 
 export default function PrivacyPage() {
