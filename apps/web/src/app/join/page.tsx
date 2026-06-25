@@ -267,9 +267,11 @@ export default function JoinPage() {
               Get Your Free Starter Kit
               <ArrowRight className="h-6 w-6" />
             </a>
-            <p className="text-sm text-muted-foreground mt-3">
-              $247 value - Yours free. No credit card required.
-            </p>
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground mt-3 inline-block">
+                $247 value - Yours free. No credit card required.
+              </p>
+            </div>
           </div>
 
           <div className="flex justify-center gap-8 flex-wrap text-sm text-muted-foreground">
