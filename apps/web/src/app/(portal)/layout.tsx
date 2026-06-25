@@ -14,7 +14,7 @@ export default function PortalLayout({
         <div className="ambient-orb w-[300px] h-[300px] bg-primary/2 bottom-40 -left-20" style={{ animationDelay: '-8s' }} />
       </div>
       <Navbar />
-      <main id="main-content" className="flex-1 container-premium py-8 md:py-12 lg:py-16 relative z-10" role="main">{children}</main>
+      <main id="main-content" className="flex-1 container-premium pt-8 pb-24 md:pt-12 md:pb-28 lg:pt-16 lg:pb-32 relative z-10" role="main">{children}</main>
       <Footer />
     </div>
   );
