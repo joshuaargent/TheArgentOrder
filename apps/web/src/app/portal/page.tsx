@@ -49,7 +49,8 @@ export default function PortalPage() {
             <Sword className="h-8 w-8 text-primary" />
           </div>
           <h1 className="text-3xl font-bold mb-2">The Argent Order</h1>
-          <p className="text-muted-foreground">Activate your portal</p>
+          <p className="text-primary font-medium mb-1">⚔️ Execute. Build. Lead.</p>
+          <p className="text-muted-foreground">Enter the forge.</p>
         </div>
 
         {/* Main Card */}
@@ -72,8 +73,8 @@ export default function PortalPage() {
                 <CheckCircle className="w-4 h-4 text-green-500" />
               </div>
               <div>
-                <p className="font-medium text-sm">Your formation is tracked here</p>
-                <p className="text-xs text-muted-foreground">Daily check-ins, streaks, campaigns</p>
+                <p className="font-medium text-sm">Formation tracked here</p>
+                <p className="text-xs text-muted-foreground">5 pillars: Faith, Discipline, Brotherhood, Building, Truth</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -81,8 +82,8 @@ export default function PortalPage() {
                 <Shield className="w-4 h-4 text-purple-500" />
               </div>
               <div>
-                <p className="font-medium text-sm">Your community is on Discord</p>
-                <p className="text-xs text-muted-foreground">Brothers, pods, accountability</p>
+                <p className="font-medium text-sm">Brotherhood on Discord</p>
+                <p className="text-xs text-muted-foreground">Pods, accountability, daily check-ins</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -90,8 +91,8 @@ export default function PortalPage() {
                 <Zap className="w-4 h-4 text-orange-500" />
               </div>
               <div>
-                <p className="font-medium text-sm">One click activation</p>
-                <p className="text-xs text-muted-foreground">Connect once, access everything</p>
+                <p className="font-medium text-sm">⚔️ Execute. Build. Lead.</p>
+                <p className="text-xs text-muted-foreground">Formation over engagement. Transformation over activity.</p>
               </div>
             </div>
           </div>
