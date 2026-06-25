@@ -4,33 +4,24 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import {
   ArrowRight,
-  Shield,
-  Users,
-  Target,
-  Flame,
-  BookOpen,
   Cross,
   Dumbbell,
   Handshake,
   Hammer,
   GraduationCap,
-  Swords,
   CheckCircle,
-  Zap,
   AlertTriangle,
   Lock,
-  Crown,
-  Star,
   Play,
-  Quote
+  User,
 } from "lucide-react";
 
 const pillars = [
-  { id: 'faith', name: 'Faith', description: 'Prayer, Mass, Scripture', color: '#a855f7' },
-  { id: 'discipline', name: 'Discipline', description: 'Fitness, Cold, Sleep', color: '#ef4444' },
-  { id: 'brotherhood', name: 'Brotherhood', description: 'Pods, Accountability', color: '#22c55e' },
-  { id: 'building', name: 'Building', description: 'Projects, Skills', color: '#eab308' },
-  { id: 'truth', name: 'Truth', description: 'Reading, Thinking', color: '#06b6d4' },
+  { id: 'faith', name: 'Faith', color: '#a855f7' },
+  { id: 'discipline', name: 'Discipline', color: '#ef4444' },
+  { id: 'brotherhood', name: 'Brotherhood', color: '#22c55e' },
+  { id: 'building', name: 'Building', color: '#eab308' },
+  { id: 'truth', name: 'Truth', color: '#06b6d4' },
 ];
 
 const PillarIcon = ({ id, className, style }: { id: string; className?: string; style?: React.CSSProperties }) => {
@@ -47,15 +38,38 @@ const PillarIcon = ({ id, className, style }: { id: string; className?: string; 
 export default function HomePage() {
   return (
     <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
-      {/* Ambient Background - Decorative */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
         <div className="ambient-orb w-[700px] h-[700px] bg-primary/5 -top-48 -left-48" />
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* HERO */}
-      <section className="relative pt-16 md:pt-20 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
+      {/* NAV */}
+      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+            </svg>
+            <span className="font-bold">The Argent Order</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/mission" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden md:block">
+              Mission
+            </Link>
+            <Link href="/login">
+              <Button variant="outline" size="sm" className="gap-2">
+                <User className="h-4 w-4" />
+                Sign In
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* HERO - KEEPING WHAT WORKS */}
+      <section className="relative pt-8 md:pt-12 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
         <div className="max-w-5xl mx-auto relative z-10">
           {/* Filter Badge */}
           <div className="text-center mb-6">
@@ -107,171 +121,65 @@ export default function HomePage() {
       </section>
 
       {/* STICKY VALUE BAR */}
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
+      <div className="sticky top-[65px] z-40 bg-card/95 backdrop-blur-md border-b border-border/50 py-4 shadow-lg">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center gap-6 md:gap-12 flex-wrap text-sm">
             {pillars.map((item) => (
               <div key={item.id} className="flex items-center gap-2 text-muted-foreground">
                 <PillarIcon id={item.id} className="h-4 w-4 text-primary" />
-                <span>{item.name}</span>
+                <span className="text-sm">{item.name}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* PROBLEM */}
-      <section className="py-20 px-4 bg-card/30 relative">
+      {/* THE PROBLEM */}
+      <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-red-400/70 uppercase tracking-widest">The Problem</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Most Men Are Exactly Where They Don't Want to Be
-            </h2>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Sound familiar?
+          </h2>
 
           <div className="space-y-4">
             {[
-              { text: "You know you should be praying more, exercising daily, building something real.", color: "text-red-400" },
-              { text: "You have 'potential.' Everyone tells you that. But potential without execution is just a comfortable excuse.", color: "text-orange-400" },
-              { text: "Your friends don't challenge you. Your job doesn't require your best.", color: "text-yellow-400" },
-              { text: "You tell yourself 'someday.' Someday you'll start that project.", color: "text-primary" },
-              { text: "The man you were supposed to become is 10 years away. And counting.", color: "text-primary font-semibold" },
-            ].map((item, i) => (
+              "You know you should be doing more. You just aren't.",
+              "Your friends are comfortable. You want more.",
+              "You tell yourself 'someday' but someday never comes.",
+              "Potential without execution is just an excuse.",
+            ].map((text, i) => (
               <div key={i} className="flex items-start gap-4 p-5 rounded-xl border border-border/50 glass-card">
-                <AlertTriangle className={`h-6 w-6 flex-shrink-0 mt-0.5 ${item.color}`} />
-                <p className={`text-lg ${item.color}`}>{item.text}</p>
+                <div className="w-2 h-2 rounded-full bg-red-500 mt-3 flex-shrink-0" />
+                <p className="text-lg">{text}</p>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-10 p-8 rounded-2xl bg-primary/10 border border-primary/20">
-            <p className="text-xl font-medium">
-              There's a different way. Not motivation. Not willpower.
-            </p>
-            <p className="text-primary text-xl font-bold mt-2">
-              A system that makes excellence inevitable.
+          <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
+            <p className="text-lg font-medium">
+              The problem isn't motivation. It's <span className="text-primary font-bold">structure</span>.
             </p>
           </div>
         </div>
       </section>
 
-      {/* PILLARS */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Method</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Five Pillars of Formation
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-              Every member is formed in all five areas. Mastery in all five produces men who lead.
-            </p>
-          </div>
+      {/* THE FIVE PILLARS */}
+      <section className="py-16 md:py-20 px-4 bg-card/50 relative">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Five Pillars of Formation
+          </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {pillars.map((pillar) => (
-              <div key={pillar.id} className="glass-card p-5 text-center hover:border-primary/30 transition-all">
+              <div key={pillar.id} className="glass-card p-5 text-center">
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${pillar.color}15` }}
                 >
-                  <PillarIcon id={pillar.id} className="h-8 w-8" style={{ color: pillar.color }} />
+                  <PillarIcon id={pillar.id} className="h-6 w-6" style={{ color: pillar.color }} />
                 </div>
-                <h3 className="font-bold mb-1">{pillar.name}</h3>
-                <p className="text-xs text-muted-foreground">{pillar.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WHO THIS IS FOR */}
-      <section className="py-20 px-4 bg-card/30 relative">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* IS FOR */}
-            <div className="glass-card p-8 border-green-500/20">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                </div>
-                <h3 className="text-xl font-bold">This Is For Men Who...</h3>
-              </div>
-              <ul className="space-y-3">
-                {[
-                  "Want faith, discipline, and brotherhood-not just community",
-                  "Are ready to be held accountable-really held accountable",
-                  "Want to build something that outlasts them",
-                  "Accept that discipline is not optional",
-                  "Are ready to show up every single day"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* NOT FOR */}
-            <div className="glass-card p-8 border-red-500/20">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
-                  <Crown className="h-5 w-5 text-red-500" />
-                </div>
-                <h3 className="text-xl font-bold">This Is NOT For Men Who...</h3>
-              </div>
-              <ul className="space-y-3">
-                {[
-                  "Want to consume content without commitment",
-                  "Believe they don't need accountability",
-                  "Are looking for a social club or hobby community",
-                  "Want instant results without consistent work",
-                  "Are not serious about their Catholic faith"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                    <Crown className="h-5 w-5 text-red-500/70 flex-shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Tools</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Built for Formation, Not Entertainment
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-              Every feature drives action. Nothing wastes your time.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { icon: Flame, title: "Formation Dashboard", desc: "Track your growth across all five pillars.", color: '#a855f7' },
-              { icon: Users, title: "Accountability Pods", desc: "Groups of 5 men who hold you accountable.", color: '#22c55e' },
-              { icon: Target, title: "Campaigns", desc: "90-day challenges that transform habits.", color: '#ef4444' },
-              { icon: BookOpen, title: "Rule of Life", desc: "Build your personal operating system.", color: '#06b6d4' },
-              { icon: Shield, title: "Leadership Pipeline", desc: "From Initiate to Steward.", color: '#eab308' },
-              { icon: Swords, title: "WORKSHOP", desc: "Ship projects. Get accountability.", color: '#f97316' },
-            ].map((feature, i) => (
-              <div key={i} className="glass-card p-6 hover:border-primary/30 transition-all">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                  style={{ backgroundColor: `${feature.color}15` }}
-                >
-                  <feature.icon className="h-6 w-6" style={{ color: feature.color }} />
-                </div>
-                <h3 className="font-bold mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                <h3 className="font-bold text-sm">{pillar.name}</h3>
               </div>
             ))}
           </div>
@@ -279,33 +187,25 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-20 px-4 bg-card/30 relative">
+      <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">The Path</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              How Transformation Happens
-            </h2>
-            <p className="text-muted-foreground mt-2">Structure creates what motivation cannot.</p>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            How It Works
+          </h2>
 
           <div className="space-y-4">
             {[
-              { icon: Shield, title: "Apply & Get Accepted", desc: "Tell us who you are. If you're serious and aligned, you'll receive an invitation within 48 hours." },
-              { icon: BookOpen, title: "Build Your Rule of Life", desc: "In the first 72 hours, create your personal operating system with daily habits." },
-              { icon: Users, title: "Join a Pod", desc: "Get assigned to a group of 5 men who will hold you accountable-men who won't let you quit." },
-              { icon: Zap, title: "Execute Daily", desc: "Log your progress. Track streaks. Pod meetings every week. Campaigns every 90 days." },
-              { icon: Crown, title: "Lead Others", desc: "Prove yourself through action. Become a Captain. Mentor new members." },
+              { title: "Join Free", desc: "Enter your email. Get immediate access to Discord + Portal." },
+              { title: "Build Your Rule of Life", desc: "Create your personal operating system with daily habits." },
+              { title: "Join a Pod", desc: "Get assigned to 5 men who will hold you accountable." },
+              { title: "Execute Daily", desc: "Log progress. Weekly pod meetings. 90-day campaigns." },
             ].map((step, i) => (
-              <div key={i} className="glass-card p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <div key={i} className="glass-card p-5 flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg font-bold text-primary">{i + 1}</span>
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold mb-1 flex items-center gap-2">
-                    <step.icon className="h-5 w-5 text-primary" />
-                    {step.title}
-                  </h3>
+                <div>
+                  <h3 className="font-bold mb-1">{step.title}</h3>
                   <p className="text-sm text-muted-foreground">{step.desc}</p>
                 </div>
               </div>
@@ -314,70 +214,74 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="text-xs font-medium text-primary/70 uppercase tracking-widest">Results</span>
-            <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Men Who Showed Up
-            </h2>
-          </div>
-
+      {/* FOR WHO */}
+      <section className="py-16 md:py-20 px-4 bg-card/50 relative">
+        <div className="max-w-3xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { quote: "I was dormant for 5 years. The kit gave me structure when I had none. Then the brotherhood gave me accountability.", name: "Michael R.", role: "Former Navy SEAL, Entrepreneur", badge: "Pod Alpha Leader", result: "184-day streak" },
-              { quote: "Every man needs someone who will call him out when he's lying to himself. The brotherhood continues that conversation.", name: "Thomas K.", role: "Deacon, Business Owner", badge: "Steward", result: "Mentored 12 men" },
-              { quote: "I've bought $10k+ in courses. This $0 kit did more for my clarity than all of them combined.", name: "Joseph W.", role: "Physician, Father of 5", badge: "Campaign Graduate", result: "3 campaigns completed" },
-              { quote: "The system works. By month two, I had my first paying client from a project I started in the Order.", name: "Patrick M.", role: "Father of 3, Software Engineer", badge: "Builder", result: "First product shipped" },
-            ].map((t, i) => (
-              <div key={i} className="glass-card p-6 relative">
-                <Quote className="absolute top-4 right-4 h-6 w-6 text-primary/20" />
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400/80 text-xs font-medium">{t.badge}</span>
-                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">{t.result}</span>
-                </div>
-                <p className="text-lg mb-4 leading-relaxed">"{t.quote}"</p>
-                <div className="border-t border-border/50 pt-4">
-                  <p className="font-bold">{t.name}</p>
-                  <p className="text-sm text-muted-foreground">{t.role}</p>
-                </div>
-              </div>
-            ))}
+            <div className="glass-card p-6 border-green-500/20">
+              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                This is for men who...
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {[
+                  "Want brotherhood, not another group chat",
+                  "Are tired of potential",
+                  "Will show up even when they don't feel like it",
+                  "Want to build something that matters",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="glass-card p-6 border-red-500/20">
+              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-red-500" />
+                This is NOT for men who...
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {[
+                  "Want a casual community to kill time",
+                  "Aren't willing to be held accountable",
+                  "Think faith and discipline don't mix",
+                  "Want results without putting in work",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="py-24 px-4 relative">
-        <div className="max-w-2xl mx-auto relative z-10">
-          <div className="glass-card p-12 text-center overflow-hidden relative">
+      {/* CTA */}
+      <section className="py-16 md:py-24 px-4 relative">
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="glass-card p-8 md:p-10 text-center overflow-hidden relative">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-primary/20 blur-[100px]" />
-
             <div className="relative">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Star className="h-8 w-8 text-primary" />
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
                 Ready to Begin?
               </h2>
-
-              <p className="text-muted-foreground mb-8 text-lg">
-                Get the Catholic Builder Starter Kit-free. No credit card.
+              <p className="text-muted-foreground mb-8">
+                Enter your email. Get instant access to Discord + Portal.
+                <br />
+                <span className="text-primary font-medium">100% Free. No monetization.</span>
               </p>
-
               <Link href="/join">
                 <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg">
                   <Play className="h-5 w-5" />
-                  Get Started Free
+                  Join Free
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-
-              <p className="text-sm text-muted-foreground mt-6">
-                $247 value - Yours free
-              </p>
             </div>
           </div>
         </div>
@@ -396,8 +300,6 @@ export default function HomePage() {
           <div className="flex gap-8 text-sm text-muted-foreground">
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
             <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
           </div>
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>

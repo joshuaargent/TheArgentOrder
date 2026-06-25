@@ -18,7 +18,8 @@ import {
   Target,
   Play,
   ThumbsUp,
-  Crown
+  Crown,
+  User,
 } from "lucide-react";
 
 const pillars = [
@@ -72,8 +73,8 @@ export default function JoinPage() {
         </div>
         
         <div className="text-center max-w-xl mx-auto px-4 relative z-10">
-          <div className="w-28 h-28 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
-            <CheckCircle className="h-14 w-14 text-green-500" />
+          <div className="w-24 h-24 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
+            <CheckCircle className="h-12 w-12 text-green-500" />
           </div>
           
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-6">
@@ -81,38 +82,38 @@ export default function JoinPage() {
             Welcome to The Order
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Check your email.
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             Your access links are on the way.
           </p>
           
-          <div className="glass-card p-8 space-y-6 text-left">
+          <div className="glass-card p-6 space-y-4 text-left max-w-md mx-auto">
             <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Users className="h-6 w-6 text-primary" />
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Users className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Join Discord</h3>
-                <p className="text-muted-foreground">Click the link in your email to join the brotherhood</p>
+                <h3 className="font-bold">Join Discord</h3>
+                <p className="text-sm text-muted-foreground">Click the link to join the brotherhood</p>
               </div>
             </div>
             
             <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Zap className="h-6 w-6 text-primary" />
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Zap className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Access Portal</h3>
-                <p className="text-muted-foreground">Your account is ready. Start your formation.</p>
+                <h3 className="font-bold">Access Portal</h3>
+                <p className="text-sm text-muted-foreground">Your account is ready</p>
               </div>
             </div>
           </div>
           
           <div className="mt-8">
-            <Link href="/mission" className="text-primary hover:underline">
+            <Link href="/mission" className="text-primary hover:underline text-sm">
               Read our Mission →
             </Link>
           </div>
@@ -128,232 +129,217 @@ export default function JoinPage() {
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
       </div>
 
+      {/* NAV */}
+      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+            </svg>
+            <span className="font-bold">The Argent Order</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/mission" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden md:block">
+              Mission
+            </Link>
+            <Link href="/login">
+              <Button variant="outline" size="sm" className="gap-2">
+                <User className="h-4 w-4" />
+                Sign In
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
       {/* HERO */}
-      <section className="relative pt-20 md:pt-28 pb-16 px-4" aria-labelledby="join-heading">
+      <section className="relative pt-8 md:pt-12 pb-12 md:pb-16 px-4" aria-labelledby="join-heading">
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-6">
             <span className="text-green-400 font-medium">Free. Forever. No monetization.</span>
           </div>
 
-          <h1 id="join-heading" className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 id="join-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
             A brotherhood for men who{" "}
             <span className="text-primary">build with purpose.</span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto">
-            The Argent Order is a formation system for Catholic men. 
+          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
             Five pillars. Structured progression. Real accountability.
           </p>
 
           <a
             href="#apply"
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-3"
           >
-            <Play className="h-6 w-6" />
-            Join The Order
-            <ArrowRight className="h-6 w-6" />
+            <Play className="h-5 w-5" />
+            Join Free
+            <ArrowRight className="h-5 w-5" />
           </a>
           
-          <p className="text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Discord + Portal access →
           </p>
         </div>
       </section>
 
-      {/* WHAT IS THIS */}
-      <section className="py-16 px-4 bg-card/50 relative">
+      {/* PILLARS + HOW IT WORKS (COMBINED) */}
+      <section className="py-12 px-4 bg-card/50 relative">
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-            Five Pillars of Formation
-          </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="text-center mb-8">
+            <h2 className="text-xl md:text-2xl font-bold">
+              Five Pillars of Formation
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-5 gap-3 mb-10">
             {pillars.map((pillar, i) => (
-              <div key={i} className="glass-card p-5 text-center">
+              <div key={i} className="glass-card p-4 text-center">
                 <div 
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2"
                   style={{ backgroundColor: `${pillar.color}15` }}
                 >
-                  <pillar.icon className="h-7 w-7" style={{ color: pillar.color }} />
+                  <pillar.icon className="h-5 w-5" style={{ color: pillar.color }} />
                 </div>
-                <h3 className="font-bold mb-1">{pillar.name}</h3>
-                <p className="text-xs text-muted-foreground">{pillar.desc}</p>
+                <p className="text-xs font-bold">{pillar.name}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-16 px-4 relative">
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-            How It Works
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Target className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Campaigns</h3>
-              <p className="text-sm text-muted-foreground">
-                90-day structured challenges. Set goals. Track progress. Ship results.
-              </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="glass-card p-5 text-center">
+              <Target className="h-6 w-6 text-primary mx-auto mb-2" />
+              <h3 className="font-bold text-sm mb-1">Campaigns</h3>
+              <p className="text-xs text-muted-foreground">90-day structured challenges</p>
             </div>
             
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Pods</h3>
-              <p className="text-sm text-muted-foreground">
-                Groups of 5 men. Assigned, not chosen. Weekly meetings. Real accountability.
-              </p>
+            <div className="glass-card p-5 text-center">
+              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
+              <h3 className="font-bold text-sm mb-1">Pods</h3>
+              <p className="text-xs text-muted-foreground">5 men. Weekly meetings.</p>
             </div>
             
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Crown className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Rule of Life</h3>
-              <p className="text-sm text-muted-foreground">
-                Build your personal framework. 12 categories. The GPS for your life.
-              </p>
+            <div className="glass-card p-5 text-center">
+              <Crown className="h-6 w-6 text-primary mx-auto mb-2" />
+              <h3 className="font-bold text-sm mb-1">Rule of Life</h3>
+              <p className="text-xs text-muted-foreground">Your personal GPS</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* THE PROBLEM */}
-      <section className="py-16 px-4 bg-card/50 relative">
+      {/* SOUND FAMILIAR + FOR WHO (COMBINED) */}
+      <section className="py-12 px-4 relative">
         <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+          
+          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">
             Sound familiar?
           </h2>
           
-          <div className="space-y-4">
+          <div className="space-y-2 mb-6">
             {[
               "You know you should be doing more. You just aren't.",
               "Your friends are comfortable. You want more.",
-              "You tell yourself 'someday' but someday never comes.",
+              "Someday never comes.",
               "Potential without execution is just an excuse.",
             ].map((text, i) => (
-              <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border/50 glass-card">
-                <div className="w-2 h-2 rounded-full bg-red-500 mt-3 flex-shrink-0" />
-                <p className="text-lg">{text}</p>
+              <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border/50 glass-card">
+                <div className="w-2 h-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                <p className="text-sm">{text}</p>
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
-            <p className="text-lg font-medium">
+          <div className="text-center p-4 rounded-xl bg-primary/10 border border-primary/20 mb-6">
+            <p className="text-sm font-medium">
               The problem isn't motivation. It's <span className="text-primary font-bold">structure</span>.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* FOR WHO */}
-      <section className="py-16 px-4 relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            This is for men who...
-          </h2>
-          
-          <div className="space-y-3">
-            {[
-              "Want brotherhood, not just another group chat",
-              "Are tired of potential and ready to execute",
-              "Will show up even when they don't feel like it",
-              "Want to build something that matters",
-            ].map((req, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-green-500/20 bg-green-500/5">
-                <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                <span className="text-lg">{req}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="glass-card p-4 border-green-500/20">
+              <h3 className="font-bold text-sm mb-3 flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-500" />
+                This is for men who...
+              </h3>
+              <ul className="space-y-1 text-xs text-muted-foreground">
+                <li>• Want brotherhood, not another chat</li>
+                <li>• Are tired of potential</li>
+                <li>• Will show up even when they don't feel like it</li>
+              </ul>
+            </div>
 
-      {/* NOT FOR */}
-      <section className="py-16 px-4 bg-card/50 relative">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            This is NOT for men who...
-          </h2>
-          
-          <div className="space-y-3">
-            {[
-              "Want a casual community to kill time",
-              "Aren't willing to be held accountable",
-              "Think faith and discipline don't go together",
-              "Want instant results without putting in work",
-            ].map((req, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-red-500/20 bg-red-500/5">
-                <AlertTriangle className="h-6 w-6 text-red-500 flex-shrink-0" />
-                <span className="text-lg">{req}</span>
-              </div>
-            ))}
+            <div className="glass-card p-4 border-red-500/20">
+              <h3 className="font-bold text-sm mb-3 flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-500" />
+                This is NOT for men who...
+              </h3>
+              <ul className="space-y-1 text-xs text-muted-foreground">
+                <li>• Want a casual community to kill time</li>
+                <li>• Aren't willing to be held accountable</li>
+                <li>• Want results without putting in work</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section id="apply" className="py-24 px-4 relative scroll-mt-20">
-        <div className="max-w-xl mx-auto relative z-10">
-          <div className="glass-card p-10 text-center overflow-hidden relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-primary/20 blur-[100px]" />
+      <section id="apply" className="py-12 md:py-16 px-4 relative scroll-mt-20">
+        <div className="max-w-md mx-auto relative z-10">
+          <div className="glass-card p-8 text-center overflow-hidden relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-primary/20 blur-[80px]" />
             
             <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Join The Argent Order
+              <h2 className="text-xl md:text-2xl font-bold mb-3">
+                Join The Order
               </h2>
               
-              <p className="text-muted-foreground mb-8">
-                Enter your email. Get access to Discord + Portal.
+              <p className="text-muted-foreground mb-6 text-sm">
+                Enter your email. Get instant access.
                 <br />
-                <span className="text-primary font-medium">100% Free. No monetization.</span>
+                <span className="text-primary font-medium">100% Free.</span>
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   required
-                  className="w-full px-6 py-4 rounded-xl border border-border bg-background/50 text-foreground text-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  className="w-full px-5 py-3 rounded-xl border border-border bg-background/50 text-foreground text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                 />
                 <Button 
                   type="submit" 
                   disabled={loading} 
-                  className="w-full h-14 text-lg font-bold"
+                  className="w-full h-12 text-base font-bold"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
-                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                       Joining...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Join The Order <ArrowRight className="h-5 w-5" />
+                      Join Free <ArrowRight className="h-4 w-4" />
                     </span>
                   )}
                 </Button>
               </form>
               
-              <div className="flex justify-center gap-6 mt-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>Instant access</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span>Free forever</span>
-                </div>
+              <div className="flex justify-center gap-4 mt-4 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  Instant
+                </span>
+                <span className="flex items-center gap-1">
+                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  Free forever
+                </span>
               </div>
             </div>
           </div>
@@ -361,20 +347,20 @@ export default function JoinPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-12 px-4 border-t border-border/50 bg-card/50 relative z-10">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="py-8 px-4 border-t border-border/50 bg-card/50 relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
               <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
               <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
             </svg>
-            <span className="font-bold text-lg">The Argent Order</span>
+            <span className="font-bold text-sm">The Argent Order</span>
           </div>
-          <div className="flex gap-8 text-sm text-muted-foreground">
-            <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
-            <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <Link href="/mission" className="hover:text-foreground">Mission</Link>
+            <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
           </div>
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()}</p>
         </div>
       </footer>
     </main>
