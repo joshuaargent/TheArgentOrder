@@ -123,7 +123,7 @@ export const pillars = [
   {
     id: 'faith',
     name: 'Faith',
-    icon: '✝️',
+    icon: 'cross',
     description: 'Prayer, Mass, Scripture, Rosary',
     color: '#6366f1',
   },
@@ -137,21 +137,21 @@ export const pillars = [
   {
     id: 'brotherhood',
     name: 'Brotherhood',
-    icon: '🤝',
+    icon: 'users',
     description: 'Community, Mentorship, Pods',
     color: '#22c55e',
   },
   {
     id: 'building',
     name: 'Building',
-    icon: '🏗️',
+    icon: 'hammer',
     description: 'Projects, Creation, Launch',
     color: '#eab308',
   },
   {
     id: 'truth',
     name: 'Truth',
-    icon: '📖',
+    icon: 'book',
     description: 'Learning, Apologetics, Wisdom',
     color: '#8b5cf6',
   },
