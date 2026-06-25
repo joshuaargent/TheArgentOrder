@@ -266,11 +266,25 @@ export default function JoinPage() {
               Get Your Free Starter Kit
               <ArrowRight className="h-6 w-6" />
             </a>
+            <p className="text-sm text-muted-foreground mt-3">
+              $247 value - Yours free. No credit card required.
+            </p>
           </div>
 
-          <p className="text-sm text-muted-foreground text-center">
-            Free. No credit card required.
-          </p>
+          <div className="flex justify-center gap-8 flex-wrap text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Immediate access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>5 pillars methodology</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Pod accountability</span>
+            </div>
+          </div>
 
         </div>
       </section>
