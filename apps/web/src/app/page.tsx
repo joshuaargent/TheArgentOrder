@@ -57,46 +57,54 @@ export default function HomePage() {
               <svg className="h-24 w-24 animate-float" viewBox="0 0 48 48">
                 <defs>
                   <linearGradient id="heroBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fafafa"/>
-                    <stop offset="15%" stop-color="#e5e5e5"/>
-                    <stop offset="35%" stop-color="#d4d4d4"/>
-                    <stop offset="50%" stop-color="#f5f5f5"/>
-                    <stop offset="65%" stop-color="#a3a3a3"/>
-                    <stop offset="85%" stop-color="#71717a"/>
-                    <stop offset="100%" stop-color="#52525b"/>
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="15%" stop-color="#f0f0f0"/>
+                    <stop offset="35%" stop-color="#d6d6d6"/>
+                    <stop offset="60%" stop-color="#b8b8b8"/>
+                    <stop offset="85%" stop-color="#9a9a9a"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
+                  </linearGradient>
+                  <linearGradient id="heroEdge" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#bfbfbf" stop-opacity="0.3"/>
+                  </linearGradient>
+                  <linearGradient id="heroFuller" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#cfcfcf"/>
+                    <stop offset="50%" stop-color="#9a9a9a"/>
+                    <stop offset="100%" stop-color="#6a6a6a"/>
                   </linearGradient>
                   <linearGradient id="heroGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#e5e5e5"/>
-                    <stop offset="25%" stop-color="#d4d4d4"/>
-                    <stop offset="50%" stop-color="#a3a3a3"/>
-                    <stop offset="100%" stop-color="#525252"/>
+                    <stop offset="0%" stop-color="#4a4a4f"/>
+                    <stop offset="50%" stop-color="#2a2a2d"/>
+                    <stop offset="100%" stop-color="#1a1a1d"/>
                   </linearGradient>
-                  <linearGradient id="heroHandle" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#52525b"/>
-                    <stop offset="50%" stop-color="#3f3f46"/>
-                    <stop offset="100%" stop-color="#27272a"/>
+                  <linearGradient id="heroGrip" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#2c2c30"/>
+                    <stop offset="50%" stop-color="#1f1f23"/>
+                    <stop offset="100%" stop-color="#141417"/>
                   </linearGradient>
                   <radialGradient id="heroPommel" cx="40%" cy="30%" r="70%">
                     <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="40%" stop-color="#a3a3a3"/>
-                    <stop offset="100%" stop-color="#525252"/>
+                    <stop offset="40%" stop-color="#c7c7c7"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
                   </radialGradient>
-                  <linearGradient id="heroEdge" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-                    <stop offset="100%" stop-color="#a3a3a3" stop-opacity="0.3"/>
-                  </linearGradient>
                 </defs>
-                <path d="M24 2L28 36H20L24 2Z" fill="url(#heroBlade)"/>
-                <path d="M24 5L24.5 30" stroke="#71717a" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.6"/>
-                <path d="M24 2L20.5 36" stroke="url(#heroEdge)" stroke-width="0.8" stroke-linecap="round"/>
-                <rect x="8" y="36" width="32" height="5" rx="1" fill="url(#heroGuard)"/>
-                <rect x="8" y="36" width="32" height="1.5" rx="0.5" fill="#f5f5f5" fill-opacity="0.5"/>
-                <rect x="8" y="36" width="2" height="5" rx="0.5" fill="#e5e5e5" fill-opacity="0.3"/>
-                <rect x="38" y="36" width="2" height="5" rx="0.5" fill="#525252" fill-opacity="0.3"/>
-                <rect x="20" y="41" width="8" height="5" rx="1" fill="url(#heroHandle)"/>
-                <path d="M20 42.5H28M20 44.5H28" stroke="#18181b" stroke-width="0.6" stroke-opacity="0.5"/>
-                <ellipse cx="24" cy="47" rx="5" ry="2" fill="url(#heroPommel)"/>
-                <ellipse cx="22.5" cy="46.2" rx="1.5" ry="0.6" fill="#ffffff" fill-opacity="0.5"/>
+                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#heroBlade)"/>
+                <path d="M24 3 L26 32 Q24 33 22 32 Z" fill="url(#heroEdge)" opacity="0.35"/>
+                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#heroFuller)" opacity="0.55"/>
+                <line x1="23" y1="8" x2="25" y2="8" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
+                <line x1="23" y1="12" x2="25" y2="12" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
+                <line x1="23" y1="16" x2="25" y2="16" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
+                <line x1="23" y1="20" x2="25" y2="20" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
+                <line x1="23" y1="24" x2="25" y2="24" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
+                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#heroGuard)"/>
+                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#heroGrip)"/>
+                <line x1="21" y1="35" x2="27" y2="35" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
+                <line x1="21" y1="37" x2="27" y2="37" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
+                <line x1="21" y1="39" x2="27" y2="39" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
+                <circle cx="24" cy="43" r="3.5" fill="url(#heroPommel)"/>
+                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
+                <ellipse cx="23" cy="42" rx="1.2" ry="0.6" fill="#ffffff" opacity="0.55"/>
               </svg>
               <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-50" />
             </div>
@@ -404,28 +412,33 @@ export default function HomePage() {
             <svg className="h-6 w-6" viewBox="0 0 48 48">
                 <defs>
                   <linearGradient id="homeBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fafafa"/>
-                    <stop offset="15%" stop-color="#e5e5e5"/>
-                    <stop offset="50%" stop-color="#f5f5f5"/>
-                    <stop offset="85%" stop-color="#71717a"/>
-                    <stop offset="100%" stop-color="#52525b"/>
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#d6d6d6"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
+                  </linearGradient>
+                  <linearGradient id="homeFuller" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#cfcfcf"/>
+                    <stop offset="100%" stop-color="#6a6a6a"/>
                   </linearGradient>
                   <linearGradient id="homeGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#e5e5e5"/>
-                    <stop offset="50%" stop-color="#a3a3a3"/>
-                    <stop offset="100%" stop-color="#525252"/>
+                    <stop offset="0%" stop-color="#4a4a4f"/>
+                    <stop offset="100%" stop-color="#1a1a1d"/>
                   </linearGradient>
-                  <linearGradient id="homeHandle" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#52525b"/>
-                    <stop offset="100%" stop-color="#27272a"/>
+                  <linearGradient id="homeGrip" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#2c2c30"/>
+                    <stop offset="100%" stop-color="#141417"/>
                   </linearGradient>
+                  <radialGradient id="homePommel" cx="40%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#f5f5f5"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
+                  </radialGradient>
                 </defs>
-                <path d="M24 2L28 36H20L24 2Z" fill="url(#homeBlade)"/>
-                <path d="M24 5L24.5 30" stroke="#71717a" stroke-width="1" stroke-linecap="round" stroke-opacity="0.6"/>
-                <rect x="8" y="36" width="32" height="5" rx="1" fill="url(#homeGuard)"/>
-                <rect x="8" y="36" width="32" height="1.5" rx="0.5" fill="#f5f5f5" fill-opacity="0.5"/>
-                <rect x="20" y="41" width="8" height="5" rx="1" fill="url(#homeHandle)"/>
-                <ellipse cx="24" cy="47" rx="5" ry="2" fill="url(#homeGuard)"/>
+                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#homeBlade)"/>
+                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#homeFuller)" opacity="0.55"/>
+                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#homeGuard)"/>
+                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#homeGrip)"/>
+                <circle cx="24" cy="43" r="3.5" fill="url(#homePommel)"/>
+                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
               </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>

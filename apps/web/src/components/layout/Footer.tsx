@@ -12,28 +12,33 @@ export function Footer() {
               <svg className="h-8 w-8" viewBox="0 0 48 48">
                 <defs>
                   <linearGradient id="footerBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fafafa"/>
-                    <stop offset="15%" stop-color="#e5e5e5"/>
-                    <stop offset="50%" stop-color="#f5f5f5"/>
-                    <stop offset="85%" stop-color="#71717a"/>
-                    <stop offset="100%" stop-color="#52525b"/>
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#d6d6d6"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
+                  </linearGradient>
+                  <linearGradient id="footerFuller" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#cfcfcf"/>
+                    <stop offset="100%" stop-color="#6a6a6a"/>
                   </linearGradient>
                   <linearGradient id="footerGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#e5e5e5"/>
-                    <stop offset="50%" stop-color="#a3a3a3"/>
-                    <stop offset="100%" stop-color="#525252"/>
+                    <stop offset="0%" stop-color="#4a4a4f"/>
+                    <stop offset="100%" stop-color="#1a1a1d"/>
                   </linearGradient>
-                  <linearGradient id="footerHandle" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#52525b"/>
-                    <stop offset="100%" stop-color="#27272a"/>
+                  <linearGradient id="footerGrip" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#2c2c30"/>
+                    <stop offset="100%" stop-color="#141417"/>
                   </linearGradient>
+                  <radialGradient id="footerPommel" cx="40%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#f5f5f5"/>
+                    <stop offset="100%" stop-color="#7a7a7a"/>
+                  </radialGradient>
                 </defs>
-                <path d="M24 2L28 36H20L24 2Z" fill="url(#footerBlade)"/>
-                <path d="M24 5L24.5 30" stroke="#71717a" stroke-width="1" stroke-linecap="round" stroke-opacity="0.6"/>
-                <rect x="8" y="36" width="32" height="5" rx="1" fill="url(#footerGuard)"/>
-                <rect x="8" y="36" width="32" height="1.5" rx="0.5" fill="#f5f5f5" fill-opacity="0.5"/>
-                <rect x="20" y="41" width="8" height="5" rx="1" fill="url(#footerHandle)"/>
-                <ellipse cx="24" cy="47" rx="5" ry="2" fill="url(#footerGuard)"/>
+                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#footerBlade)"/>
+                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#footerFuller)" opacity="0.55"/>
+                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#footerGuard)"/>
+                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#footerGrip)"/>
+                <circle cx="24" cy="43" r="3.5" fill="url(#footerPommel)"/>
+                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
