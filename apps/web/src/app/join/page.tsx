@@ -113,7 +113,7 @@ export default function JoinPage() {
       </div>
 
       {/* HORMOZI: Centered, minimal, CTA above fold */}
-      <section className="min-h-screen flex items-center justify-center px-6" aria-labelledby="join-heading">
+      <section className="py-24 md:py-32 px-6" aria-labelledby="join-heading">
         <div className="w-full max-w-lg mx-auto relative z-10 text-center">
           
           {/* Founding Badge */}
@@ -124,22 +124,22 @@ export default function JoinPage() {
           </div>
 
           {/* HORMOZI: Punchy headline */}
-          <h1 id="join-heading" className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight">
+          <h1 id="join-heading" className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
             Not a community.
             <br />
             <span className="text-primary">A forge.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-6">
             Catholic men who execute. Ship. Lead.
           </p>
           
-          <p className="text-lg text-primary font-medium mb-10">
+          <p className="text-lg text-primary font-medium mb-12">
             90 days. 5 accountability partners. Real transformation.
           </p>
 
           {/* HORMOZI: Primary CTA */}
-          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+          <form onSubmit={handleSubmit} className="space-y-4 mb-8">
             <input
               type="email"
               value={email}
@@ -165,25 +165,27 @@ export default function JoinPage() {
             </Button>
           </form>
 
-          <p className="text-sm text-muted-foreground mb-10 flex items-center justify-center gap-2">
+          <p className="text-sm text-muted-foreground mb-16 flex items-center justify-center gap-3">
             <span className="text-primary font-medium">100% Free</span>
+            <span className="text-muted-foreground/50">|</span>
             <span>No credit card</span>
+            <span className="text-muted-foreground/50">|</span>
             <span>Catholic men only</span>
           </p>
 
           {/* What you get */}
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="glass-card p-5">
-              <Cross className="h-7 w-7 text-primary mx-auto mb-2" />
-              <p className="font-bold text-sm">Rule of Life</p>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="glass-card p-6">
+              <Cross className="h-8 w-8 text-primary mx-auto mb-3" />
+              <p className="font-bold">Rule of Life</p>
             </div>
-            <div className="glass-card p-5">
-              <Users className="h-7 w-7 text-primary mx-auto mb-2" />
-              <p className="font-bold text-sm">5 Brothers</p>
+            <div className="glass-card p-6">
+              <Users className="h-8 w-8 text-primary mx-auto mb-3" />
+              <p className="font-bold">5 Brothers</p>
             </div>
-            <div className="glass-card p-5">
-              <Hammer className="h-7 w-7 text-primary mx-auto mb-2" />
-              <p className="font-bold text-sm">Ship Projects</p>
+            <div className="glass-card p-6">
+              <Hammer className="h-8 w-8 text-primary mx-auto mb-3" />
+              <p className="font-bold">Ship Projects</p>
             </div>
           </div>
         </div>
