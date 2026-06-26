@@ -81,7 +81,7 @@ export default function HomePage() {
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
             <Link href="/login" className="hover:text-foreground transition-colors">
-              Already a member? Sign in →
+              Already a member? Sign in
             </Link>
           </p>
         </div>
@@ -205,10 +205,10 @@ export default function HomePage() {
             })}
           </div>
 
-          {/* HORMOZI: Founding frame - no fake social proof with 0 members */}
+          {/* HORMOZI: Founding frame */}
           <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
             <p className="text-muted-foreground">
-              <span className="text-primary font-bold">Founding Cohort</span> — Shape the Order from Day 1
+              <span className="text-primary font-bold">Founding Cohort</span> &nbsp; Shape the Order from Day 1
             </p>
             <p className="text-sm text-muted-foreground mt-1">100% Free. The only investment: your commitment.</p>
           </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
 
             <div className="space-y-6 max-w-lg mx-auto">
               {[
-                { icon: Shield, title: "Your name in the charter—forever", desc: "When future men join, they'll see you were there from the beginning. That's permanent." },
+                { icon: Shield, title: "Your name in the charter forever", desc: "When future men join, they'll see you were there from the beginning. That's permanent." },
                 { icon: Users, title: "Direct line to founders", desc: "Private Discord access. Your voice shapes how we build." },
                 { icon: CheckCircle, title: "Founding member badge", desc: "Even when we scale to thousands, you keep your founding status." },
               ].map((item, i) => {
@@ -325,7 +325,7 @@ export default function HomePage() {
           <p className="text-center mt-6 text-sm text-muted-foreground">
             Still reading? You're probably the right fit.{' '}
             <Link href="/join" className="text-primary hover:underline font-medium">
-              Enter the forge →
+              Enter the forge
             </Link>
           </p>
         </div>
@@ -375,9 +375,9 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Sign in →
+              Sign in
             </Link>
-            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()}</p>
+            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
           </div>
         </div>
       </footer>

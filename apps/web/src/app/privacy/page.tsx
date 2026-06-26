@@ -28,7 +28,7 @@ export default function PrivacyPage() {
               <h3 className="font-bold mb-2">Your Privacy Matters</h3>
               <p className="text-sm text-muted-foreground">
                 We collect only what is necessary for your formation. We never sell your data. 
-                We protect your information as we protect our brotherhood—with honor.
+                We protect your information as we protect our brotherhood with honor.
               </p>
             </div>
           </div>
@@ -146,12 +146,13 @@ We take privacy seriously and welcome your questions and feedback.`
         {/* Footer */}
         <footer className="mt-8 md:mt-12 text-center" role="contentinfo">
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-muted-foreground mb-4" aria-label="Footer navigation">
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/join" className="hover:text-foreground transition-colors">Join</Link>
+            <Link href="/login" className="hover:text-foreground transition-colors">Sign in</Link>
           </nav>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} The Argent Order. All rights reserved.
+            © {new Date().getFullYear()} The Argent Order
           </p>
         </footer>
       </div>

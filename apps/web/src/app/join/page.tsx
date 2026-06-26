@@ -98,7 +98,7 @@ export default function JoinPage() {
           
           <div className="mt-8">
             <Link href="/mission" className="text-primary hover:underline text-sm">
-              Read our Mission →
+              Read our Mission
             </Link>
           </div>
         </div>
@@ -204,8 +204,9 @@ export default function JoinPage() {
             <Link href="/mission" className="hover:text-foreground">Mission</Link>
             <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="hover:text-foreground">Terms</Link>
+            <Link href="/login" className="hover:text-foreground">Sign in</Link>
           </div>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()}</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>
       </footer>
     </main>

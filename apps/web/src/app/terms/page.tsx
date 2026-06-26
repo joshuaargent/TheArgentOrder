@@ -194,12 +194,13 @@ We respond to all legitimate inquiries within a reasonable timeframe.`
         {/* Footer */}
         <footer className="mt-8 md:mt-12 text-center" role="contentinfo">
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-muted-foreground mb-4" aria-label="Footer navigation">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
             <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/join" className="hover:text-foreground transition-colors">Join</Link>
+            <Link href="/login" className="hover:text-foreground transition-colors">Sign in</Link>
           </nav>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} The Argent Order. All rights reserved.
+            © {new Date().getFullYear()} The Argent Order
           </p>
         </footer>
       </div>

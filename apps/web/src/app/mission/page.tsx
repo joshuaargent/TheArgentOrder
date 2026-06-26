@@ -29,7 +29,7 @@ export default function MissionPage() {
             href="/join" 
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all text-lg"
           >
-            Enter The Forge →
+            Enter The Forge
           </Link>
         </div>
       </section>
@@ -109,16 +109,37 @@ export default function MissionPage() {
               href="/join" 
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all text-lg"
             >
-              Enter The Forge →
+              Enter The Forge
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               <Link href="/constitution" className="hover:text-foreground">
-                Read our Constitution →
+                Read our Constitution
               </Link>
             </p>
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-3">
+            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+            </svg>
+            <span className="font-bold text-sm">The Argent Order</span>
+          </div>
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <Link href="/join" className="hover:text-foreground">Join</Link>
+            <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
+            <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground">Terms</Link>
+            <Link href="/login" className="hover:text-foreground">Sign in</Link>
+          </div>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
+        </div>
+      </footer>
     </main>
   );
 }
