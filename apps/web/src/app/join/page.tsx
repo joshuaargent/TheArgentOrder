@@ -9,7 +9,6 @@ import {
   Users,
   Zap,
   Loader2,
-  Shield,
   ThumbsUp,
   Hammer,
   Cross,
@@ -57,7 +56,7 @@ export default function JoinPage() {
           <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 bottom-0 right-0" />
         </div>
         
-        <div className="text-center max-w-xl mx-auto px-4 relative z-10">
+        <div className="w-full max-w-md mx-auto px-6 text-center relative z-10">
           <div className="w-24 h-24 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
             <CheckCircle className="h-12 w-12 text-green-500" />
           </div>
@@ -75,7 +74,7 @@ export default function JoinPage() {
             Your access links are on the way.
           </p>
           
-          <div className="glass-card p-6 space-y-4 text-left max-w-md mx-auto">
+          <div className="glass-card p-6 space-y-4 text-left">
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Users className="h-5 w-5 text-primary" />
@@ -114,9 +113,9 @@ export default function JoinPage() {
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
       </div>
 
-      {/* HORMOZI: Primary CTA above fold - NO SCROLLING */}
-      <section className="min-h-screen flex items-center justify-center px-4" aria-labelledby="join-heading">
-        <div className="max-w-xl mx-auto relative z-10 text-center">
+      {/* HORMOZI: Centered, minimal, CTA above fold */}
+      <section className="min-h-screen flex items-center justify-center px-6" aria-labelledby="join-heading">
+        <div className="w-full max-w-lg mx-auto relative z-10 text-center">
           
           {/* Founding Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-sm mb-8">
@@ -125,23 +124,23 @@ export default function JoinPage() {
             </span>
           </div>
 
-          {/* HORMOZI: Punchy, identity-based headline */}
-          <h1 id="join-heading" className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          {/* HORMOZI: Punchy headline */}
+          <h1 id="join-heading" className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight">
             Not a community.
             <br />
             <span className="text-primary">A forge.</span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-6 max-w-lg mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-4">
             Catholic men who execute. Ship. Lead.
           </p>
           
-          <p className="text-lg text-primary font-medium mb-8">
+          <p className="text-lg text-primary font-medium mb-10">
             90 days. 5 accountability partners. Real transformation.
           </p>
 
-          {/* HORMOZI: Primary CTA - big, clear */}
-          <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mb-6">
+          {/* HORMOZI: Primary CTA */}
+          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
             <input
               type="email"
               value={email}
@@ -157,46 +156,42 @@ export default function JoinPage() {
               className="w-full h-16 text-xl font-bold btn-elegant gap-3"
             >
               {loading ? (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   <Loader2 className="h-6 w-6 animate-spin" />
                   Entering...
                 </span>
               ) : (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   Enter The Forge <ArrowRight className="h-6 w-6" />
                 </span>
               )}
             </Button>
           </form>
 
-          <p className="text-sm text-muted-foreground mb-8">
-            <span className="text-primary font-medium">100% Free</span> · No credit card · Catholic men only
+          <p className="text-sm text-muted-foreground mb-10">
+            <span className="text-primary font-medium">100% Free</span> &nbsp;&nbsp; No credit card &nbsp;&nbsp; Catholic men only
           </p>
 
-          {/* Social proof / What you get */}
-          <div className="grid grid-cols-3 gap-4 text-center mb-8">
-            <div className="glass-card p-4">
-              <Cross className="h-6 w-6 text-primary mx-auto mb-2" />
+          {/* What you get */}
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="glass-card p-5">
+              <Cross className="h-7 w-7 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">Rule of Life</p>
             </div>
-            <div className="glass-card p-4">
-              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
+            <div className="glass-card p-5">
+              <Users className="h-7 w-7 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">5 Brothers</p>
             </div>
-            <div className="glass-card p-4">
-              <Hammer className="h-6 w-6 text-primary mx-auto mb-2" />
+            <div className="glass-card p-5">
+              <Hammer className="h-7 w-7 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">Ship Projects</p>
             </div>
           </div>
-          
-          <p className="text-sm text-muted-foreground">
-            Already a member? <Link href="/login" className="text-primary hover:underline font-medium">Sign in →</Link>
-          </p>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="py-6 px-4 border-t border-border/50 bg-card/50 relative z-10">
+      <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
