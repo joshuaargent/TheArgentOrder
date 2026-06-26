@@ -153,36 +153,9 @@ We take privacy seriously and welcome your questions and feedback.`
         <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <svg className="h-6 w-6" viewBox="0 0 48 48">
-                <defs>
-                  <linearGradient id="privBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="50%" stop-color="#d6d6d6"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </linearGradient>
-                  <linearGradient id="privFuller" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#cfcfcf"/>
-                    <stop offset="100%" stop-color="#6a6a6a"/>
-                  </linearGradient>
-                  <linearGradient id="privGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#4a4a4f"/>
-                    <stop offset="100%" stop-color="#1a1a1d"/>
-                  </linearGradient>
-                  <linearGradient id="privGrip" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#2c2c30"/>
-                    <stop offset="100%" stop-color="#141417"/>
-                  </linearGradient>
-                  <radialGradient id="privPommel" cx="40%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </radialGradient>
-                </defs>
-                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#privBlade)"/>
-                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#privFuller)" opacity="0.55"/>
-                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#privGuard)"/>
-                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#privGrip)"/>
-                <circle cx="24" cy="43" r="3.5" fill="url(#privPommel)"/>
-                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
+              <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
               </svg>
               <span className="font-bold text-sm">The Argent Order</span>
             </div>

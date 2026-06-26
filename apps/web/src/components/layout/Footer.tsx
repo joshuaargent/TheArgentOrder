@@ -9,36 +9,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="h-8 w-8" viewBox="0 0 48 48">
-                <defs>
-                  <linearGradient id="footerBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="50%" stop-color="#d6d6d6"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </linearGradient>
-                  <linearGradient id="footerFuller" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#cfcfcf"/>
-                    <stop offset="100%" stop-color="#6a6a6a"/>
-                  </linearGradient>
-                  <linearGradient id="footerGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#4a4a4f"/>
-                    <stop offset="100%" stop-color="#1a1a1d"/>
-                  </linearGradient>
-                  <linearGradient id="footerGrip" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#2c2c30"/>
-                    <stop offset="100%" stop-color="#141417"/>
-                  </linearGradient>
-                  <radialGradient id="footerPommel" cx="40%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </radialGradient>
-                </defs>
-                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#footerBlade)"/>
-                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#footerFuller)" opacity="0.55"/>
-                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#footerGuard)"/>
-                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#footerGrip)"/>
-                <circle cx="24" cy="43" r="3.5" fill="url(#footerPommel)"/>
-                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
+              <svg className="h-8 w-8 text-primary" viewBox="0 0 36 36" fill="none">
+                <rect x="15" y="4" width="6" height="28" rx="1" fill="currentColor"/>
+                <rect x="6" y="12" width="24" height="6" rx="1" fill="currentColor"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>

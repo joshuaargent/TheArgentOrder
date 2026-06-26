@@ -54,57 +54,10 @@ export default function HomePage() {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <svg className="h-24 w-24 animate-float" viewBox="0 0 48 48">
-                <defs>
-                  <linearGradient id="heroBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="15%" stop-color="#f0f0f0"/>
-                    <stop offset="35%" stop-color="#d6d6d6"/>
-                    <stop offset="60%" stop-color="#b8b8b8"/>
-                    <stop offset="85%" stop-color="#9a9a9a"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </linearGradient>
-                  <linearGradient id="heroEdge" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-                    <stop offset="100%" stop-color="#bfbfbf" stop-opacity="0.3"/>
-                  </linearGradient>
-                  <linearGradient id="heroFuller" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#cfcfcf"/>
-                    <stop offset="50%" stop-color="#9a9a9a"/>
-                    <stop offset="100%" stop-color="#6a6a6a"/>
-                  </linearGradient>
-                  <linearGradient id="heroGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#4a4a4f"/>
-                    <stop offset="50%" stop-color="#2a2a2d"/>
-                    <stop offset="100%" stop-color="#1a1a1d"/>
-                  </linearGradient>
-                  <linearGradient id="heroGrip" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#2c2c30"/>
-                    <stop offset="50%" stop-color="#1f1f23"/>
-                    <stop offset="100%" stop-color="#141417"/>
-                  </linearGradient>
-                  <radialGradient id="heroPommel" cx="40%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="40%" stop-color="#c7c7c7"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </radialGradient>
-                </defs>
-                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#heroBlade)"/>
-                <path d="M24 3 L26 32 Q24 33 22 32 Z" fill="url(#heroEdge)" opacity="0.35"/>
-                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#heroFuller)" opacity="0.55"/>
-                <line x1="23" y1="8" x2="25" y2="8" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
-                <line x1="23" y1="12" x2="25" y2="12" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
-                <line x1="23" y1="16" x2="25" y2="16" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
-                <line x1="23" y1="20" x2="25" y2="20" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
-                <line x1="23" y1="24" x2="25" y2="24" stroke="#bfbfbf" stroke-width="0.5" opacity="0.25"/>
-                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#heroGuard)"/>
-                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#heroGrip)"/>
-                <line x1="21" y1="35" x2="27" y2="35" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
-                <line x1="21" y1="37" x2="27" y2="37" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
-                <line x1="21" y1="39" x2="27" y2="39" stroke="#000" stroke-width="0.5" stroke-opacity="0.45"/>
-                <circle cx="24" cy="43" r="3.5" fill="url(#heroPommel)"/>
-                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
-                <ellipse cx="23" cy="42" rx="1.2" ry="0.6" fill="#ffffff" opacity="0.55"/>
+              <svg className="h-20 w-20 animate-float" viewBox="0 0 48 48" fill="none">
+                <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
+                <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
+                <path d="M24 38L20 48H28L24 38Z" className="fill-primary opacity-30"/>
               </svg>
               <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-50" />
             </div>
@@ -409,37 +362,10 @@ export default function HomePage() {
       <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-6 w-6" viewBox="0 0 48 48">
-                <defs>
-                  <linearGradient id="homeBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="50%" stop-color="#d6d6d6"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </linearGradient>
-                  <linearGradient id="homeFuller" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#cfcfcf"/>
-                    <stop offset="100%" stop-color="#6a6a6a"/>
-                  </linearGradient>
-                  <linearGradient id="homeGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#4a4a4f"/>
-                    <stop offset="100%" stop-color="#1a1a1d"/>
-                  </linearGradient>
-                  <linearGradient id="homeGrip" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#2c2c30"/>
-                    <stop offset="100%" stop-color="#141417"/>
-                  </linearGradient>
-                  <radialGradient id="homePommel" cx="40%" cy="30%" r="70%">
-                    <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="100%" stop-color="#7a7a7a"/>
-                  </radialGradient>
-                </defs>
-                <path d="M24 2 L27 32 Q24 34 21 32 Z" fill="url(#homeBlade)"/>
-                <path d="M24 4 L25 30 Q24 31 23 30 Z" fill="url(#homeFuller)" opacity="0.55"/>
-                <path d="M14 32 Q18 30 22 31 H26 Q30 30 34 32 Q30 34 26 33 H22 Q18 34 14 32 Z" fill="url(#homeGuard)"/>
-                <rect x="21" y="33" width="6" height="8" rx="1" fill="url(#homeGrip)"/>
-                <circle cx="24" cy="43" r="3.5" fill="url(#homePommel)"/>
-                <circle cx="24" cy="43" r="2" fill="#ffffff"/>
-              </svg>
+            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+            </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>
           <div className="flex gap-6 text-xs text-muted-foreground">
