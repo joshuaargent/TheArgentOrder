@@ -11,7 +11,6 @@ import {
   GraduationCap,
   CheckCircle,
   AlertTriangle,
-  Lock,
   Users,
   Shield,
   Zap,
@@ -45,30 +44,9 @@ export default function HomePage() {
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* STICKY TOP BAR - HORMOZI: One clear message */}
-      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-3 shadow-lg">
-        <div className="max-w-5xl mx-auto px-4">
-          <p className="text-center text-sm">
-            <span className="text-primary font-bold">100% Free</span>
-            <span className="text-muted-foreground mx-2">·</span>
-            Catholic Men Only
-            <span className="text-muted-foreground mx-2">·</span>
-            <Link href="/join" className="text-primary hover:underline font-medium">
-              Join the Founding Cohort →
-            </Link>
-          </p>
-        </div>
-      </div>
-
       {/* HERO */}
-      <section className="relative pt-12 md:pt-20 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
+      <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
         <div className="max-w-4xl mx-auto relative z-10 text-center">
-          {/* Filter Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-sm mb-8">
-            <Lock className="h-4 w-4 text-red-400" />
-            <span className="text-red-400 font-medium">Selective Brotherhood. Not everyone who applies is accepted.</span>
-          </div>
-
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="relative">
@@ -81,14 +59,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* HORMOZI HEADLINE: Outcome-based, specific */}
+          {/* HORMOZI HEADLINE: Clear brand identity */}
           <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
-            The 90-Day Catholic Brotherhood
-            <br />
-            <span className="text-primary">That Turns Comfortable Men Into Builders</span>
+            The Argent Order
           </h1>
 
-          {/* Sub-headline: filters audience */}
+          {/* Sub-headline: describes what it is */}
           <p className="text-xl md:text-2xl text-center text-muted-foreground mb-8">
             Catholic men serious about faith, discipline, and purpose.
           </p>
