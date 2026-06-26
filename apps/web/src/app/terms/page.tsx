@@ -203,6 +203,7 @@ We respond to all legitimate inquiries within a reasonable timeframe.`
             </div>
             <div className="flex gap-6 text-xs text-muted-foreground">
               <Link href="/mission" className="hover:text-foreground">Mission</Link>
+              <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
               <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
               <Link href="/terms" className="hover:text-foreground">Terms</Link>
               <Link href="/login" className="hover:text-foreground">Sign in</Link>
