@@ -1,16 +1,10 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Sword, CheckCircle, Zap, Shield, ArrowRight } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Member Portal | The Argent Order",
-  description: "Connect with Discord to access The Argent Order formation portal. Track your progress in faith, discipline, brotherhood, building, and truth.",
-};
 
 const DISCORD_OAUTH_URL = "https://discord.com/api/oauth2/authorize";
 const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID!;
