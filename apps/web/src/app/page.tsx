@@ -54,16 +54,42 @@ export default function HomePage() {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <svg className="h-24 w-24 animate-float" viewBox="0 0 36 36" fill="none">
+              <svg className="h-24 w-24 animate-float" viewBox="0 0 48 48" fill="none">
                 <defs>
-                  <linearGradient id="crossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#d4d4d4"/>
-                    <stop offset="50%" stop-color="#a1a1aa"/>
-                    <stop offset="100%" stop-color="#71717a"/>
+                  <linearGradient id="crossVert" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#525252"/>
+                    <stop offset="15%" stop-color="#737373"/>
+                    <stop offset="30%" stop-color="#a3a3a3"/>
+                    <stop offset="50%" stop-color="#d4d4d4"/>
+                    <stop offset="70%" stop-color="#a3a3a3"/>
+                    <stop offset="85%" stop-color="#737373"/>
+                    <stop offset="100%" stop-color="#525252"/>
                   </linearGradient>
+                  <linearGradient id="crossHoriz" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#f5f5f5"/>
+                    <stop offset="20%" stop-color="#d4d4d4"/>
+                    <stop offset="50%" stop-color="#a3a3a3"/>
+                    <stop offset="80%" stop-color="#737373"/>
+                    <stop offset="100%" stop-color="#525252"/>
+                  </linearGradient>
+                  <filter id="crossGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="1" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
                 </defs>
-                <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#crossGrad)"/>
-                <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#crossGrad)"/>
+                {/* Shadow/depth layer */}
+                <rect x="20" y="6" width="8" height="36" rx="1" fill="#27272a" opacity="0.3"/>
+                <rect x="8" y="14" width="32" height="8" rx="1" fill="#27272a" opacity="0.3"/>
+                {/* Main cross */}
+                <rect x="19" y="4" width="10" height="38" rx="2" fill="url(#crossVert)" filter="url(#crossGlow)"/>
+                <rect x="6" y="12" width="36" height="10" rx="2" fill="url(#crossHoriz)"/>
+                {/* Highlight on horizontal bar */}
+                <rect x="6" y="12" width="36" height="3" rx="1" fill="#ffffff" opacity="0.4"/>
+                {/* Highlight on vertical bar */}
+                <rect x="19" y="4" width="3" height="38" rx="1" fill="#ffffff" opacity="0.25"/>
               </svg>
               <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-50" />
             </div>
@@ -368,16 +394,25 @@ export default function HomePage() {
       <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+            <svg className="h-6 w-6" viewBox="0 0 48 48" fill="none">
               <defs>
-                <linearGradient id="homeCrossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#d4d4d4"/>
-                  <stop offset="50%" stop-color="#a1a1aa"/>
-                  <stop offset="100%" stop-color="#71717a"/>
+                <linearGradient id="homeCrossVert" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#525252"/>
+                  <stop offset="50%" stop-color="#d4d4d4"/>
+                  <stop offset="100%" stop-color="#525252"/>
+                </linearGradient>
+                <linearGradient id="homeCrossHoriz" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f5f5f5"/>
+                  <stop offset="50%" stop-color="#a3a3a3"/>
+                  <stop offset="100%" stop-color="#525252"/>
                 </linearGradient>
               </defs>
-              <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#homeCrossGrad)"/>
-              <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#homeCrossGrad)"/>
+              <rect x="20" y="6" width="8" height="36" rx="1" fill="#27272a" opacity="0.3"/>
+              <rect x="8" y="14" width="32" height="8" rx="1" fill="#27272a" opacity="0.3"/>
+              <rect x="19" y="4" width="10" height="38" rx="2" fill="url(#homeCrossVert)"/>
+              <rect x="6" y="12" width="36" height="10" rx="2" fill="url(#homeCrossHoriz)"/>
+              <rect x="6" y="12" width="36" height="3" rx="1" fill="#ffffff" opacity="0.4"/>
+              <rect x="19" y="4" width="3" height="38" rx="1" fill="#ffffff" opacity="0.25"/>
             </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>

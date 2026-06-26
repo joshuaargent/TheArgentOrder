@@ -216,16 +216,25 @@ export default function ConstitutionPage() {
       <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+            <svg className="h-6 w-6" viewBox="0 0 48 48" fill="none">
               <defs>
-                <linearGradient id="consCrossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#d4d4d4"/>
-                  <stop offset="50%" stop-color="#a1a1aa"/>
-                  <stop offset="100%" stop-color="#71717a"/>
+                <linearGradient id="consCrossVert" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#525252"/>
+                  <stop offset="50%" stop-color="#d4d4d4"/>
+                  <stop offset="100%" stop-color="#525252"/>
+                </linearGradient>
+                <linearGradient id="consCrossHoriz" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f5f5f5"/>
+                  <stop offset="50%" stop-color="#a3a3a3"/>
+                  <stop offset="100%" stop-color="#525252"/>
                 </linearGradient>
               </defs>
-              <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#consCrossGrad)"/>
-              <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#consCrossGrad)"/>
+              <rect x="20" y="6" width="8" height="36" rx="1" fill="#27272a" opacity="0.3"/>
+              <rect x="8" y="14" width="32" height="8" rx="1" fill="#27272a" opacity="0.3"/>
+              <rect x="19" y="4" width="10" height="38" rx="2" fill="url(#consCrossVert)"/>
+              <rect x="6" y="12" width="36" height="10" rx="2" fill="url(#consCrossHoriz)"/>
+              <rect x="6" y="12" width="36" height="3" rx="1" fill="#ffffff" opacity="0.4"/>
+              <rect x="19" y="4" width="3" height="38" rx="1" fill="#ffffff" opacity="0.25"/>
             </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>
