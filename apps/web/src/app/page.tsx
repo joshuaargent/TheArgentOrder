@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import {
@@ -15,17 +14,15 @@ import {
   Lock,
   Users,
   Shield,
-  Play,
-  User,
-  Loader2,
+  Zap,
 } from "lucide-react";
 
 const pillars = [
-  { id: 'faith', name: 'Faith', color: '#a855f7' },
-  { id: 'discipline', name: 'Discipline', color: '#ef4444' },
-  { id: 'brotherhood', name: 'Brotherhood', color: '#22c55e' },
-  { id: 'building', name: 'Building', color: '#eab308' },
-  { id: 'truth', name: 'Truth', color: '#06b6d4' },
+  { id: 'faith', name: 'Faith', color: '#a855f7', outcome: 'A prayer habit that actually sticks' },
+  { id: 'discipline', name: 'Discipline', color: '#ef4444', outcome: 'Energy to lead your family, not excuses' },
+  { id: 'brotherhood', name: 'Brotherhood', color: '#22c55e', outcome: '5 men who text when you miss a day' },
+  { id: 'building', name: 'Building', color: '#eab308', outcome: 'Projects you ship, not just plan' },
+  { id: 'truth', name: 'Truth', color: '#06b6d4', outcome: 'Clarity on what matters and what doesn\'t' },
 ];
 
 const PillarIcon = ({ id, className, style }: { id: string; className?: string; style?: React.CSSProperties }) => {
@@ -40,44 +37,6 @@ const PillarIcon = ({ id, className, style }: { id: string; className?: string; 
 };
 
 export default function HomePage() {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, leadMagnet: 'CATHOLIC_BUILDER_STARTER' }),
-      });
-      setSubmitted(true);
-    } catch (error) {
-      console.error('Failed to subscribe:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (submitted) {
-    return (
-      <main className="min-h-screen mesh-gradient flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
-          <div className="w-20 h-20 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-6 animate-bounce-slow">
-            <CheckCircle className="h-10 w-10 text-green-500" />
-          </div>
-          <h1 className="text-3xl font-bold mb-4">Check Your Email</h1>
-          <p className="text-muted-foreground mb-8">Your access links are on the way.</p>
-          <Link href="/mission" className="text-primary hover:underline text-sm">
-            Read our Mission →
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main id="main-content" className="min-h-screen mesh-gradient relative" role="main">
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
@@ -86,21 +45,34 @@ export default function HomePage() {
         <div className="ambient-orb w-[400px] h-[400px] bg-primary/4 top-1/2 left-1/4" style={{ animationDelay: '-10s' }} />
       </div>
 
-      {/* HERO - HORMOZI: STRONG HEADLINE + SIGN IN */}
-      <section className="relative pt-8 md:pt-12 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
-        <div className="max-w-5xl mx-auto relative z-10">
+      {/* STICKY TOP BAR - HORMOZI: One clear message */}
+      <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 py-3 shadow-lg">
+        <div className="max-w-5xl mx-auto px-4">
+          <p className="text-center text-sm">
+            <span className="text-primary font-bold">100% Free</span>
+            <span className="text-muted-foreground mx-2">·</span>
+            Catholic Men Only
+            <span className="text-muted-foreground mx-2">·</span>
+            <Link href="/join" className="text-primary hover:underline font-medium">
+              Join the Founding Cohort →
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      {/* HERO */}
+      <section className="relative pt-12 md:pt-20 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
           {/* Filter Badge */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-sm">
-              <Lock className="h-4 w-4 text-red-400" />
-              <span className="text-red-400 font-medium">Selective Brotherhood. Not everyone who applies is accepted.</span>
-            </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-sm mb-8">
+            <Lock className="h-4 w-4 text-red-400" />
+            <span className="text-red-400 font-medium">Selective Brotherhood. Not everyone who applies is accepted.</span>
           </div>
 
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <svg className="h-24 w-24 animate-float" viewBox="0 0 48 48" fill="none">
+              <svg className="h-20 w-20 animate-float" viewBox="0 0 48 48" fill="none">
                 <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
                 <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
                 <path d="M24 38L20 48H28L24 38Z" className="fill-primary opacity-30"/>
@@ -109,74 +81,41 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* HORMOZI: ONE HEADLINE - LET LOGO + BRAND STAND */}
-          <h1 id="hero-heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6 leading-tight">
-            The Argent Order
+          {/* HORMOZI HEADLINE: Outcome-based, specific */}
+          <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+            The 90-Day Catholic Brotherhood
+            <br />
+            <span className="text-primary">That Turns Comfortable Men Into Builders</span>
           </h1>
 
-          {/* HORMOZI: MICRO-COMMITMENT BEFORE EMAIL */}
-          <p className="text-lg md:text-xl text-center text-muted-foreground mb-8">
-            <Link href="/mission" className="text-primary hover:underline">
-              See what we offer →
-            </Link>
+          {/* Sub-headline: filters audience */}
+          <p className="text-xl md:text-2xl text-center text-muted-foreground mb-8">
+            Catholic men serious about faith, discipline, and purpose.
           </p>
 
-          {/* HORMOZI: EMAIL CAPTURE ABOVE THE FOLD */}
-          <div className="glass-card p-6 md:p-8 max-w-lg mx-auto mb-8">
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="w-full px-5 py-3 rounded-xl border border-border bg-background/50 text-foreground text-base placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <Button 
-                type="submit" 
-                disabled={loading} 
-                className="w-full h-12 text-base font-bold btn-elegant"
-              >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Joining...
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    Join Free <ArrowRight className="h-4 w-4" />
-                  </span>
-                )}
-              </Button>
-            </form>
-            <div className="flex items-center justify-center gap-4 mt-3 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <CheckCircle className="h-3 w-3 text-green-500" />
-                Instant access
-              </span>
-              <span className="flex items-center gap-1">
-                <CheckCircle className="h-3 w-3 text-green-500" />
-                Founding cohort pricing
-              </span>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="text-muted-foreground h-9 px-4 gap-2">
-                <User className="h-4 w-4" />
-                Already a member? Sign In
+          {/* HORMOZI CTAs: Clear action + secondary as text */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link href="/join">
+              <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg w-full sm:w-auto">
+                <Zap className="h-5 w-5" />
+                Enter The Forge
+                <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
           </div>
+          <p className="mt-4 text-sm text-muted-foreground">
+            <Link href="/login" className="hover:text-foreground transition-colors">
+              Already a member? Sign in →
+            </Link>
+          </p>
         </div>
       </section>
 
       {/* THE PROBLEM */}
       <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            Sound familiar?
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+            Sound familiar, Catholic man?
           </h2>
 
           <div className="space-y-4">
@@ -193,23 +132,27 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
-            <p className="text-lg font-medium">
-              The problem isn't motivation. It's <span className="text-primary font-bold">structure</span>.
+          {/* HORMOZI: Agitation - pivot to solution */}
+          <div className="text-center mt-8 p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
+            <p className="text-lg font-medium text-red-400">
+              The problem isn't your motivation.
+            </p>
+            <p className="text-lg font-medium mt-1">
+              The problem is you're doing it <span className="font-bold">alone</span>.
             </p>
           </div>
         </div>
       </section>
 
-      {/* THE FIVE PILLARS - User explicitly wanted to keep */}
+      {/* THE FIVE PILLARS - HORMOZI: Outcomes, not features */}
       <section className="py-16 md:py-20 px-4 bg-card/50 relative">
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
             Five Pillars of Formation
           </h2>
-          <p className="text-center text-muted-foreground mb-8">Build your life on these foundations</p>
+          <p className="text-center text-muted-foreground mb-8">What you actually get</p>
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {pillars.map((pillar) => (
               <div key={pillar.id} className="glass-card p-5 text-center">
                 <div
@@ -218,20 +161,9 @@ export default function HomePage() {
                 >
                   <PillarIcon id={pillar.id} className="h-6 w-6" style={{ color: pillar.color }} />
                 </div>
-                <h3 className="font-bold text-sm">{pillar.name}</h3>
+                <h3 className="font-bold text-sm mb-2">{pillar.name}</h3>
+                <p className="text-xs text-muted-foreground">{pillar.outcome}</p>
               </div>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-5 gap-3 mt-4">
-            {[
-              'Prayer • Mass • Scripture',
-              'Cold • Fitness • Sleep',
-              'Pods • Accountability',
-              'Projects • Skills',
-              'Reading • Thinking',
-            ].map((desc, i) => (
-              <p key={i} className="text-xs text-muted-foreground text-center">{desc}</p>
             ))}
           </div>
         </div>
@@ -278,8 +210,8 @@ export default function HomePage() {
               { icon: Handshake, color: '#22c55e', title: '5 Brothers', outcome: 'Men who text when you miss a day' },
               { icon: Hammer, color: '#eab308', title: 'Completed Projects', outcome: 'Shipped something real, not just ideas' },
               { icon: Cross, color: '#a855f7', title: 'Consistent Prayer', outcome: 'Daily prayer habit you thought impossible' },
-              { icon: Dumbbell, color: '#ef4444', title: 'A Body Ready', outcome: 'Energy for the mission, not excuses' },
-              { icon: CheckCircle, color: '#8b5cf6', title: 'Evidence of Growth', outcome: 'Certifications that prove you showed up' },
+              { icon: Dumbbell, color: '#ef4444', title: 'A Body Ready', outcome: 'Energy to lead your family, not excuses' },
+              { icon: CheckCircle, color: '#8b5cf6', title: 'Evidence of Growth', outcome: 'Metrics that prove you showed up' },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
@@ -297,52 +229,73 @@ export default function HomePage() {
             })}
           </div>
 
+          {/* HORMOZI: Founding frame - no fake social proof with 0 members */}
           <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
             <p className="text-muted-foreground">
-              Combined value: <span className="text-primary font-bold text-lg">$2,400/year</span> in coaching, community, and structure
+              <span className="text-primary font-bold">Founding Cohort</span> — Shape the Order from Day 1
             </p>
-            <p className="text-sm text-muted-foreground mt-1">You get it all free. No monetization. Ever.</p>
+            <p className="text-sm text-muted-foreground mt-1">100% Free. The only investment: your commitment.</p>
           </div>
         </div>
       </section>
 
-      {/* FOUNDING COHORT - HORMOZI: HONEST NO-PROOF STRATEGY */}
+      {/* FOUNDING COHORT - HORMOZI: Zero members = founding frame */}
       <section className="py-16 md:py-20 px-4 relative">
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            Be Among The First
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+            The First 100 Don't Just Join.
           </h2>
+          <p className="text-center text-muted-foreground mb-8">They Found.</p>
 
-          <div className="glass-card p-8 md:p-10 text-center">
+          <div className="glass-card p-8 md:p-10">
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <Users className="h-8 w-8 text-primary" />
             </div>
-            
-            <h3 className="text-xl font-bold mb-4">Join the Founding Cohort</h3>
-            
-            <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-              We're building The Argent Order together. No fake testimonials. 
-              Just men committed to the forge—accountability, structure, and formation.
-            </p>
 
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
+            <div className="space-y-6 max-w-lg mx-auto">
               {[
-                { icon: Shield, title: "Shape the System", desc: "Your feedback shapes how we build" },
-                { icon: CheckCircle, title: "Founding Member", desc: "Permanent founding cohort status" },
-                { icon: Users, title: "Early Access", desc: "Direct access to founders" },
+                { icon: Shield, title: "Your name in the charter—forever", desc: "When future men join, they'll see you were there from the beginning. That's permanent." },
+                { icon: Users, title: "Direct line to founders", desc: "Private Discord access. Your voice shapes how we build." },
+                { icon: CheckCircle, title: "Founding member badge", desc: "Even when we scale to thousands, you keep your founding status." },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={i} className="text-center">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-2">
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <Icon className="h-5 w-5 text-primary" />
                     </div>
-                    <p className="font-bold text-sm">{item.title}</p>
-                    <p className="text-xs text-muted-foreground">{item.desc}</p>
+                    <div>
+                      <p className="font-bold">{item.title}</p>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </div>
                   </div>
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* THE 90-DAY JOURNEY - HORMOZI: Show the structure */}
+      <section className="py-16 md:py-20 px-4 bg-card/50 relative">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Your First 90 Days
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-4">
+            {[
+              { days: "Days 1-7", title: "Orientation", tasks: "Rule of Life. Constitution. First Check-In." },
+              { days: "Days 8-30", title: "Foundation", tasks: "Daily Prayer. Scripture. First Campaign." },
+              { days: "Days 31-60", title: "Consistency", tasks: "Pod Meetings. Weekly Reviews. Formation." },
+              { days: "Days 61-90", title: "Integration", tasks: "Complete Campaign. Build Relationships." },
+            ].map((phase, i) => (
+              <div key={i} className="glass-card p-5">
+                <div className="text-xs text-primary font-medium mb-2">{phase.days}</div>
+                <h3 className="font-bold mb-2">{phase.title}</h3>
+                <p className="text-sm text-muted-foreground">{phase.tasks}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -356,16 +309,16 @@ export default function HomePage() {
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 This is for men who...
               </h3>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-3 text-sm">
                 {[
                   "Want brotherhood, not another group chat",
                   "Are tired of potential",
                   "Will show up even when they don't feel like it",
                   "Want to build something that matters",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
+                  <li key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm">{item}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -376,25 +329,33 @@ export default function HomePage() {
                 <AlertTriangle className="h-5 w-5 text-red-500" />
                 This is NOT for men who...
               </h3>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-3 text-sm">
                 {[
                   "Want a casual community to kill time",
                   "Aren't willing to be held accountable",
                   "Think faith and discipline don't mix",
                   "Want results without putting in work",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
+                  <li key={i} className="flex items-start gap-3">
                     <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm">{item}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+
+          {/* HORMOZI: Soft CTA for qualified leads */}
+          <p className="text-center mt-6 text-sm text-muted-foreground">
+            Still reading? You're probably the right fit.{' '}
+            <Link href="/join" className="text-primary hover:underline font-medium">
+              Enter the forge →
+            </Link>
+          </p>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* FINAL CTA - HORMOZI: Single action */}
       <section className="py-16 md:py-24 px-4 relative">
         <div className="max-w-xl mx-auto relative z-10">
           <div className="glass-card p-8 md:p-10 text-center overflow-hidden relative">
@@ -404,14 +365,14 @@ export default function HomePage() {
                 Ready to Begin?
               </h2>
               <p className="text-muted-foreground mb-8">
-                Enter your email. Get instant access to Discord + Portal.
+                Get instant access to Discord + Portal.
                 <br />
                 <span className="text-primary font-medium">100% Free. No monetization.</span>
               </p>
               <Link href="/join">
                 <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg">
-                  <Play className="h-5 w-5" />
-                  Join Free
+                  <Zap className="h-5 w-5" />
+                  Enter The Forge
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
@@ -436,7 +397,12 @@ export default function HomePage() {
             <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
           </div>
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Sign in →
+            </Link>
+            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()}</p>
+          </div>
         </div>
       </footer>
     </main>

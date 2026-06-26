@@ -10,9 +10,7 @@ import {
   Zap,
   Loader2,
   Shield,
-  Play,
   ThumbsUp,
-  User,
 } from "lucide-react";
 
 export default function JoinPage() {
@@ -114,12 +112,15 @@ export default function JoinPage() {
         <div className="ambient-orb w-[500px] h-[500px] bg-primary/3 bottom-1/3 right-0" style={{ animationDelay: '-5s' }} />
       </div>
 
-      {/* HERO - ONE headline, ONE outcome promise */}
+      {/* HERO - HORMOZI: Strong headline, one outcome */}
       <section className="relative pt-20 md:pt-32 pb-16 md:pb-24 px-4" aria-labelledby="join-heading">
         <div className="max-w-2xl mx-auto relative z-10 text-center">
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-sm mb-8">
-            <span className="text-green-400 font-medium">Free. Forever. No monetization.</span>
+          {/* HORMOZI: Founding frame */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-sm mb-8">
+            <span className="text-primary font-medium">
+              Founding Cohort — Be Part of the Foundation
+            </span>
           </div>
 
           <h1 id="join-heading" className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -129,69 +130,60 @@ export default function JoinPage() {
           </h1>
           
           <p className="text-xl text-muted-foreground mb-4 max-w-lg mx-auto">
-            In 90 days, you'll have a Rule of Life, 5 accountability partners, and completed projects.
+            Not a community where you talk about change. A forge where you become the man you were meant to be.
           </p>
           
-          <p className="text-sm text-muted-foreground mb-6">
-            Catholic men. Forged in discipline.
+          <p className="text-lg text-primary font-medium mb-6">
+            In 90 days: A Rule of Life. 5 Accountability Partners. Projects Shipped.
           </p>
 
+          {/* HORMOZI: Scroll to form */}
           <a
             href="#apply"
             className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 mb-4"
           >
-            <Play className="h-6 w-6" />
-            Join the Order
+            <Zap className="h-6 w-6" />
+            Enter The Forge
             <ArrowRight className="h-6 w-6" />
           </a>
 
           <div className="mt-4">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="text-muted-foreground h-9 px-4 gap-2">
-                <User className="h-4 w-4" />
-                Already a member? Sign In
-              </Button>
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Already a member? Sign in →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* FOUNDING COHORT - Honest no-proof strategy */}
-      <section className="py-12 px-4 bg-card/50 relative">
-        <div className="max-w-xl mx-auto relative z-10">
-          <div className="glass-card p-8 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-              <Users className="h-7 w-7 text-primary" />
-            </div>
-            
-            <h2 className="text-xl font-bold mb-3">Be Among The First</h2>
-            
-            <p className="text-muted-foreground mb-6">
-              We're building The Argent Order together. Join the founding cohort—shape the system, get early access, and become a permanent founding member.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="text-center">
-                <Shield className="h-5 w-5 text-primary mx-auto mb-2" />
-                <p className="font-bold text-sm">Shape It</p>
-                <p className="text-xs text-muted-foreground">Your feedback builds the system</p>
-              </div>
-              <div className="text-center">
-                <CheckCircle className="h-5 w-5 text-primary mx-auto mb-2" />
-                <p className="font-bold text-sm">Founding Member</p>
-                <p className="text-xs text-muted-foreground">Permanent status</p>
-              </div>
-              <div className="text-center">
-                <Zap className="h-5 w-5 text-primary mx-auto mb-2" />
-                <p className="font-bold text-sm">Early Access</p>
-                <p className="text-xs text-muted-foreground">Direct to founders</p>
-              </div>
-            </div>
+      {/* WHAT YOU GET - Quick wins before form */}
+      <section className="py-12 px-4 relative">
+        <div className="max-w-2xl mx-auto relative z-10">
+          <h2 className="text-xl font-bold mb-6 text-center">What happens when you join:</h2>
+          
+          <div className="space-y-4">
+            {[
+              { icon: Users, title: "Instant Discord Access", desc: "Join the brotherhood immediately" },
+              { icon: Shield, title: "Get Assigned to 5 Men", desc: "A pod who holds you accountable daily" },
+              { icon: Zap, title: "Start Your First Campaign", desc: "Structured 90-day challenges" },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={i} className="glass-card p-4 flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-bold">{item.title}</p>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA - Minimal, focused */}
+      {/* CTA - The conversion point */}
       <section id="apply" className="py-16 md:py-24 px-4 relative scroll-mt-20">
         <div className="max-w-md mx-auto relative z-10">
           <div className="glass-card p-8 text-center overflow-hidden relative">
@@ -199,13 +191,13 @@ export default function JoinPage() {
             
             <div className="relative">
               <h2 className="text-2xl font-bold mb-3">
-                Get Instant Access
+                Enter The Forge
               </h2>
               
               <p className="text-muted-foreground mb-6">
-                Enter your email. Get Discord + Portal access.
+                Get instant access to Discord + Portal.
                 <br />
-                <span className="text-primary font-medium">100% Free. No monetization.</span>
+                <span className="text-primary font-medium">100% Free. The only investment: your commitment.</span>
               </p>
               
               <form onSubmit={handleSubmit} className="space-y-3">
@@ -220,16 +212,16 @@ export default function JoinPage() {
                 <Button 
                   type="submit" 
                   disabled={loading} 
-                  className="w-full h-14 text-lg font-bold"
+                  className="w-full h-14 text-lg font-bold btn-elegant"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="h-5 w-5 animate-spin" />
-                      Joining...
+                      Entering...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Join Free <ArrowRight className="h-5 w-5" />
+                      Enter The Forge <ArrowRight className="h-5 w-5" />
                     </span>
                   )}
                 </Button>
@@ -239,7 +231,42 @@ export default function JoinPage() {
         </div>
       </section>
 
-      {/* FOOTER - Minimal */}
+      {/* FOUNDING COHORT - Bottom, soft persuasion */}
+      <section className="py-12 px-4 bg-card/50 relative">
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="glass-card p-6 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <Users className="h-6 w-6 text-primary" />
+            </div>
+            
+            <h2 className="text-lg font-bold mb-2">Founding Cohort Benefits</h2>
+            
+            <p className="text-muted-foreground text-sm mb-4">
+              The first 100 don't just join. They found.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-4 text-left">
+              <div className="text-center">
+                <Shield className="h-5 w-5 text-primary mx-auto mb-2" />
+                <p className="font-bold text-sm">Name in charter</p>
+                <p className="text-xs text-muted-foreground">Forever</p>
+              </div>
+              <div className="text-center">
+                <Users className="h-5 w-5 text-primary mx-auto mb-2" />
+                <p className="font-bold text-sm">Direct to founders</p>
+                <p className="text-xs text-muted-foreground">Private access</p>
+              </div>
+              <div className="text-center">
+                <CheckCircle className="h-5 w-5 text-primary mx-auto mb-2" />
+                <p className="font-bold text-sm">Permanent badge</p>
+                <p className="text-xs text-muted-foreground">Always</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
       <footer className="py-6 px-4 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
