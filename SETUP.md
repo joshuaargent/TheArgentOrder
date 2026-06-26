@@ -131,40 +131,52 @@ Beehiiv automations handle the 7-day sequence from the docs.
 1. Go to **https://discord.com/developers/applications**
 2. Click **"New Application"**
 3. Name it `The Argent Order`
-4. Go to **OAuth2** → **URL Generator**
-5. Check these scopes:
+
+### 3a: Get OAuth Credentials
+
+1. Go to **General Information** section
+2. Copy **Application ID** → `DISCORD_CLIENT_ID`
+3. Copy **Client Secret** → `DISCORD_CLIENT_SECRET`
+
+### 3b: Configure OAuth2
+
+1. Go to **OAuth2** → **OAuth2 Settings**
+2. In **Redirects**, click **Add Redirect**:
+   - For local dev: `http://localhost:3000/api/auth/discord/callback`
+   - For production: `https://your-domain.com/api/auth/discord/callback`
+
+### 3c: Get Bot Token
+
+1. Go to **Bot** section (in left sidebar)
+2. Click **Reset Token** to get `DISCORD_TOKEN`
+3. Copy the token (you won't see it again!)
+4. Under **Privileged Gateway Intents**, enable:
+   - ✅ Presence Intent
+   - ✅ Server Members Intent
+   - ✅ Message Content Intent
+
+### 3d: Generate OAuth URL for Bot Installation
+
+1. Go to **OAuth2** → **URL Generator**
+2. Check these scopes:
    - ✅ `bot`
    - ✅ `applications.commands`
    - ✅ `identify` (for OAuth - to get user info)
    - ✅ `email` (for OAuth - to get user email)
-6. In **Bot** section:
-   - Click **"Reset Token"** to get `DISCORD_TOKEN`
-   - Copy the token (you won't see it again!)
-7. Copy the **Application ID** as `DISCORD_CLIENT_ID`
-8. In **General Information** section:
-   - Copy the **Client Secret** as `DISCORD_CLIENT_SECRET`
-9. In **OAuth2 Settings**:
-   - Add redirect URL: `https://your-portal-url.com/api/auth/discord/callback`
-   - (Replace with your actual portal URL)
-
----
-
-## Step 4: Add Discord Bot to Server
-
-1. In Discord Developer Portal, go to your app → **OAuth2** → **URL Generator**
-2. Check scope: `bot`
 3. Under **Bot Permissions**, check:
-   - ✅ Send Messages
-   - ✅ Use Slash Commands
-   - ✅ Embed Links
-   - ✅ Manage Roles
-   - ✅ Administrator (for setup command)
-4. Copy the generated URL and open it in browser
-5. Select your Discord server and authorize
+   - ✅ Administrator (or specific permissions below)
+   - Or individually: Send Messages, Use Slash Commands, Embed Links, Manage Roles
+
+### 3e: Add Bot to Server
+
+1. Copy the generated OAuth URL from step 3d
+2. Open in browser
+3. Select your Discord server
+4. Authorize the bot
 
 ---
 
-## Step 5: Setup Local Environment
+## Step 4: Setup Local Environment
 
 ```bash
 # Clone the repo
@@ -175,12 +187,12 @@ cd TheArgentOrder
 npm install
 
 # Copy env file
-cp .env.example .env.local
+cp apps/web/.env.example apps/web/.env.local
 ```
 
 ---
 
-## Step 6: Fill in .env.local
+## Step 5: Fill in .env.local
 
 ```env
 # Supabase (from Step 2)
@@ -188,18 +200,42 @@ NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...your-service-role-key
 
+# Discord OAuth (from Step 3)
+DISCORD_CLIENT_ID=123456789012345678
+DISCORD_CLIENT_SECRET=your-client-secret-here
+NEXT_PUBLIC_DISCORD_CLIENT_ID=123456789012345678
+
 # Discord Bot (from Step 3)
 DISCORD_TOKEN=MTIz...your-bot-token
-DISCORD_CLIENT_ID=123456789012345678
+
+# App URLs (set to your deployment URL)
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 # Beehiiv Newsletter (from Step 0)
 BEEHIIV_API_KEY=your-beehiiv-api-key
 NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID=pub_xxxxxxxxxxxx
 ```
 
+### Environment Variables Explained
+
+| Variable | Required For | Public? | Description |
+|----------|-------------|---------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Web App | Yes | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Web App | Yes | Supabase anonymous key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only | No | Supabase admin key (never expose to client) |
+| `DISCORD_CLIENT_ID` | OAuth Server | No | Discord application ID |
+| `DISCORD_CLIENT_SECRET` | OAuth Server | No | Discord OAuth secret |
+| `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Login Button | Yes | Public Discord client ID for login button |
+| `DISCORD_TOKEN` | Discord Bot | No | Bot token for slash commands |
+| `BEEHIIV_API_KEY` | Newsletter API | No | Beehiiv private API key |
+| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Join Form | Yes | Beehiiv publication ID |
+| `NEXT_PUBLIC_APP_URL` | OAuth Redirect | Yes | Full URL of your app (for redirect URIs) |
+| `NEXT_PUBLIC_SITE_URL` | Meta Tags | Yes | Canonical URL for SEO |
+
 ---
 
-## Step 7: Push Database to Supabase
+## Step 6: Push Database to Supabase
 
 ```bash
 # Install Supabase CLI
@@ -219,7 +255,7 @@ supabase db push
 
 ---
 
-## Step 8: Configure Supabase Auth
+## Step 7: Configure Supabase Auth
 
 1. In Supabase Dashboard → **Authentication** → **URL Configuration**
 2. Set:
@@ -230,7 +266,7 @@ supabase db push
 
 ---
 
-## Step 9: Run It!
+## Step 8: Run It!
 
 ```bash
 # Start web app (in one terminal)
@@ -244,7 +280,7 @@ Visit **http://localhost:3000**
 
 ---
 
-## Step 10: Deploy to Vercel
+## Step 9: Deploy to Vercel
 
 ### Web App Deployment
 
@@ -252,20 +288,30 @@ Visit **http://localhost:3000**
 2. Click **"Add New..."** → **Project**
 3. Import your GitHub repo: `joshuaargent/TheArgentOrder`
 4. **Important**: Set **Root Directory** to `apps/web`
-5. Add Environment Variables:
+5. Add Environment Variables (mark as "Secret" for private ones):
 
-| Variable | Value |
-|----------|-------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
-| `BEEHIIV_API_KEY` | Your Beehiiv API key (private) |
-| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Your Beehiiv publication ID |
+| Variable | Public? | Description |
+|----------|---------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Your Supabase anon key |
+| `DISCORD_CLIENT_ID` | Secret | Discord application ID |
+| `DISCORD_CLIENT_SECRET` | Secret | Discord OAuth secret |
+| `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Yes | Public Discord client ID |
+| `NEXT_PUBLIC_APP_URL` | Yes | Full URL of deployed app (e.g., `https://your-app.vercel.app`) |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical URL for SEO |
+| `BEEHIIV_API_KEY` | Secret | Beehiiv API key |
+| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Yes | Beehiiv publication ID |
 
 6. Click **Deploy**
 
-After deployment, update Supabase Auth:
-- Set **Site URL** to your Vercel URL (e.g., `https://your-app.vercel.app`)
-- Add redirect URLs for Vercel
+### After Deployment - Update Redirect URIs
+
+1. **Supabase Auth**: Go to Authentication → URL Configuration
+   - Set **Site URL** to your Vercel URL
+   - Add **Redirect URLs**: `https://your-app.vercel.app/**`
+
+2. **Discord Developer Portal**: Go to your app → OAuth2 Settings
+   - Add redirect URL: `https://your-app.vercel.app/api/auth/discord/callback`
 
 ### Discord Bot - Vercel Serverless (Alternative to Linux PC)
 
@@ -409,15 +455,28 @@ Once the bot is running, use these slash commands in Discord:
 
 ## Quick Reference
 
-| Service | Key | Location |
-|---------|-----|----------|
-| Supabase URL | `NEXT_PUBLIC_SUPABASE_URL` | Settings → API → Project URL |
-| Supabase Anon | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Settings → API → anon public |
-| Supabase Service | `SUPABASE_SERVICE_ROLE_KEY` | Settings → API → service_role |
-| Discord Token | `DISCORD_TOKEN` | Bot → Token |
-| Discord App ID | `DISCORD_CLIENT_ID` | General → Application ID |
-| Beehiiv API Key | `BEEHIIV_API_KEY` | Settings → API Keys |
-| Beehiiv Pub ID | `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Settings → Publication |
+### Environment Variables
+
+| Variable | Where to Find |
+|----------|---------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Settings → API → Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Settings → API → anon public |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → service_role |
+| `DISCORD_CLIENT_ID` | Discord Developer → General → Application ID |
+| `DISCORD_CLIENT_SECRET` | Discord Developer → General → Client Secret |
+| `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Same as DISCORD_CLIENT_ID |
+| `DISCORD_TOKEN` | Discord Developer → Bot → Token (Reset Token) |
+| `BEEHIIV_API_KEY` | Beehiiv → Settings → API Keys |
+| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Beehiiv → Settings → Publication → Publication ID |
+| `NEXT_PUBLIC_APP_URL` | Your deployed app URL |
+| `NEXT_PUBLIC_SITE_URL` | Your deployed app URL |
+
+### OAuth Redirect URLs to Configure
+
+| Service | Redirect URL |
+|---------|--------------|
+| Supabase Auth | `http://localhost:3000/**` (dev), `https://your-app.vercel.app/**` (prod) |
+| Discord OAuth | `http://localhost:3000/api/auth/discord/callback` (dev), `https://your-app.vercel.app/api/auth/discord/callback` (prod) |
 
 ---
 
@@ -435,6 +494,10 @@ Once the bot is running, use these slash commands in Discord:
 | Newsletter not working | Verify BEEHIIV_API_KEY and NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID are set |
 | Email capture fails silently | The app gracefully falls back - check Beehiiv dashboard for subscriber count |
 | Lead magnet not sending | Check Beehiiv automations are active and connected to recommendation |
+| Discord OAuth not working | Verify NEXT_PUBLIC_APP_URL matches your deployment URL exactly |
+| Discord login button missing | Check NEXT_PUBLIC_DISCORD_CLIENT_ID is set |
+| "invalid redirect_uri" error | Add callback URL to Discord OAuth2 settings in Developer Portal |
+| Discord callback fails | Ensure DISCORD_CLIENT_ID and DISCORD_CLIENT_SECRET match Discord app settings |
 
 ---
 
