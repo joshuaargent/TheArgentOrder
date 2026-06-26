@@ -192,16 +192,24 @@ We respond to all legitimate inquiries within a reasonable timeframe.`
         </div>
 
         {/* Footer */}
-        <footer className="mt-8 md:mt-12 text-center" role="contentinfo">
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-muted-foreground mb-4" aria-label="Footer navigation">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
-            <Link href="/join" className="hover:text-foreground transition-colors">Join</Link>
-            <Link href="/login" className="hover:text-foreground transition-colors">Sign in</Link>
-          </nav>
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} The Argent Order
-          </p>
+        <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-3">
+              <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
+                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+              </svg>
+              <span className="font-bold text-sm">The Argent Order</span>
+            </div>
+            <div className="flex gap-6 text-xs text-muted-foreground">
+              <Link href="/join" className="hover:text-foreground">Join</Link>
+              <Link href="/mission" className="hover:text-foreground">Mission</Link>
+              <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
+              <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+              <Link href="/login" className="hover:text-foreground">Sign in</Link>
+            </div>
+            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
+          </div>
         </footer>
       </div>
     </main>
