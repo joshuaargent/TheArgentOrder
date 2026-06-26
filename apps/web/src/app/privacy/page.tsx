@@ -28,7 +28,7 @@ export default function PrivacyPage() {
               <h3 className="font-bold mb-2">Your Privacy Matters</h3>
               <p className="text-sm text-muted-foreground">
                 We collect only what is necessary for your formation. We never sell your data. 
-                We protect your information as we protect our brotherhood-with honor.
+                We protect your information as we protect our brotherhood—with honor.
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@ Your continued use of The Argent Order after changes constitutes acceptance of t
               icon: Mail,
               content: `For privacy-related questions or concerns:
 
-Email: privacy@theargentorder.com
+Email: theargentorder@gmail.com
 
 We take privacy seriously and welcome your questions and feedback.`
             }

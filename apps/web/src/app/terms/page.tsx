@@ -165,7 +165,7 @@ Continued membership after changes constitutes acceptance of the updated terms.`
               icon: Shield,
               content: `For questions about these Terms of Service:
 
-Email: legal@theargentorder.com
+Email: theargentorder@gmail.com
 
 We respond to all legitimate inquiries within a reasonable timeframe.`
             }
