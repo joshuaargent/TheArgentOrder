@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Shield, BookOpen, Scale, Users, Cross } from "lucide-react";
 
 export default function ConstitutionPage() {
