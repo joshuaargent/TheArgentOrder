@@ -124,17 +124,17 @@ export default function JoinPage() {
           </div>
 
           {/* HORMOZI: Punchy headline */}
-          <h1 id="join-heading" className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight">
+          <h1 id="join-heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
             Not a community.
             <br />
             <span className="text-primary">A forge.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4">
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4">
             Catholic men who execute. Ship. Lead.
           </p>
           
-          <p className="text-lg text-primary font-medium mb-8">
+          <p className="text-base md:text-lg text-primary font-medium mb-8">
             90 days. 5 accountability partners. Real transformation.
           </p>
 
@@ -174,17 +174,17 @@ export default function JoinPage() {
           </p>
 
           {/* What you get */}
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div className="glass-card p-5">
-              <Cross className="h-7 w-7 text-primary mx-auto mb-2" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+            <div className="glass-card p-4">
+              <Cross className="h-6 w-6 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">Rule of Life</p>
             </div>
-            <div className="glass-card p-5">
-              <Users className="h-7 w-7 text-primary mx-auto mb-2" />
+            <div className="glass-card p-4">
+              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">5 Brothers</p>
             </div>
-            <div className="glass-card p-5">
-              <Hammer className="h-7 w-7 text-primary mx-auto mb-2" />
+            <div className="glass-card p-4">
+              <Hammer className="h-6 w-6 text-primary mx-auto mb-2" />
               <p className="font-bold text-sm">Ship Projects</p>
             </div>
           </div>

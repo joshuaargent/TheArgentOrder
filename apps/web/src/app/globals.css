@@ -214,6 +214,16 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
 }
 
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Container */
 .container {
   width: 100%;

@@ -52,9 +52,9 @@ export default function HomePage() {
       <section className="relative pt-16 md:pt-24 pb-16 md:pb-24 px-4" aria-labelledby="hero-heading">
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           {/* Logo */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 md:mb-8">
             <div className="relative">
-              <svg className="h-20 w-20 animate-float" viewBox="0 0 48 48" fill="none">
+              <svg className="h-16 w-16 sm:h-20 sm:w-20 animate-float" viewBox="0 0 48 48" fill="none">
                 <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
                 <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
               </svg>
@@ -129,9 +129,9 @@ export default function HomePage() {
           </h2>
           <p className="text-center text-muted-foreground mb-8">What you actually get</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="flex overflow-x-auto pb-4 -mx-4 px-4 gap-4 snap-x snap-mandatory scrollbar-hide">
             {pillars.map((pillar) => (
-              <div key={pillar.id} className="glass-card p-5 text-center">
+              <div key={pillar.id} className="glass-card p-5 text-center min-w-[160px] md:min-w-0 snap-start">
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${pillar.color}15` }}
@@ -280,13 +280,13 @@ export default function HomePage() {
       {/* FOR WHO */}
       <section className="py-16 md:py-20 px-4 bg-card/50 relative">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="glass-card p-6 border-green-500/20">
-              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="glass-card p-5 md:p-6 border-green-500/20">
+              <h3 className="font-bold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 This is for men who...
               </h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 md:space-y-3 text-sm">
                 {[
                   "Want brotherhood, not another group chat",
                   "Are tired of potential",
@@ -301,12 +301,12 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="glass-card p-6 border-primary/20">
-              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+            <div className="glass-card p-5 md:p-6 border-primary/20">
+              <h3 className="font-bold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-primary" />
                 This is NOT for men who...
               </h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 md:space-y-3 text-sm">
                 {[
                   "Want a casual community to kill time",
                   "Aren't willing to be held accountable",
