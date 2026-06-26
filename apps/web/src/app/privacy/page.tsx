@@ -158,7 +158,6 @@ We take privacy seriously and welcome your questions and feedback.`
               <Link href="/mission" className="hover:text-foreground">Mission</Link>
               <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
               <Link href="/terms" className="hover:text-foreground">Terms</Link>
-              <Link href="/login" className="hover:text-foreground">Sign in</Link>
             </div>
             <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
           </div>

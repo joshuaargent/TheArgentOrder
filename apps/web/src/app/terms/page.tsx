@@ -206,7 +206,6 @@ We respond to all legitimate inquiries within a reasonable timeframe.`
               <Link href="/mission" className="hover:text-foreground">Mission</Link>
               <Link href="/constitution" className="hover:text-foreground">Constitution</Link>
               <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
-              <Link href="/login" className="hover:text-foreground">Sign in</Link>
             </div>
             <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
           </div>
