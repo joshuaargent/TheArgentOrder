@@ -346,7 +346,6 @@ export default function HomePage() {
                 <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg">
                   <Zap className="h-5 w-5" />
                   Enter The Forge
-                  <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
             </div>
