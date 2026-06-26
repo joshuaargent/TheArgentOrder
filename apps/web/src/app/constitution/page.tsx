@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Shield, BookOpen, Scale, Users, Cross } from "lucide-react";
 
 export default function ConstitutionPage() {
@@ -197,12 +198,11 @@ export default function ConstitutionPage() {
           <p className="text-muted-foreground mb-6 md:mb-8 text-sm md:text-base">
             Begin your formation journey today.
           </p>
-          <a 
-            href="/join" 
-            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all min-h-[48px] text-base md:text-lg"
-          >
-            Get Started Free
-          </a>
+          <Link href="/join">
+            <Button className="px-8 h-14 text-lg btn-elegant">
+              Enter The Forge
+            </Button>
+          </Link>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Shield, Cross, Dumbbell, Handshake, Hammer, GraduationCap } from "lucide-react";
 
 export default function MissionPage() {
@@ -29,11 +30,10 @@ export default function MissionPage() {
             Execute. Build. Lead.
           </p>
 
-          <Link 
-            href="/join" 
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all text-lg"
-          >
-            Enter The Forge
+          <Link href="/join">
+            <Button className="px-8 h-14 text-lg btn-elegant">
+              Enter The Forge
+            </Button>
           </Link>
         </div>
       </section>
@@ -109,11 +109,10 @@ export default function MissionPage() {
             <p className="text-muted-foreground mb-6">
               Five pillars. 90-day campaigns. Real accountability.
             </p>
-            <Link 
-              href="/join" 
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all text-lg"
-            >
-              Enter The Forge
+            <Link href="/join">
+              <Button className="px-8 h-14 text-lg btn-elegant">
+                Enter The Forge
+              </Button>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               <Link href="/constitution" className="hover:text-foreground">
