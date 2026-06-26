@@ -354,27 +354,22 @@ export default function HomePage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-12 px-4 border-t border-border/50 bg-card/50 relative z-10">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
               <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
               <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
             </svg>
-            <span className="font-bold text-lg">The Argent Order</span>
+            <span className="font-bold text-sm">The Argent Order</span>
           </div>
-          <div className="flex gap-8 text-sm text-muted-foreground">
-            <Link href="/mission" className="hover:text-foreground transition-colors">Mission</Link>
-            <Link href="/constitution" className="hover:text-foreground transition-colors">Constitution</Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <Link href="/mission" className="hover:text-foreground">Mission</Link>
+            <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground">Terms</Link>
+            <Link href="/login" className="hover:text-foreground">Sign in</Link>
           </div>
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Sign in
-            </Link>
-            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
-          </div>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} The Argent Order</p>
         </div>
       </footer>
     </main>

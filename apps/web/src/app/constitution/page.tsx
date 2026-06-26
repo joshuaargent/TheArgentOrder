@@ -217,7 +217,6 @@ export default function ConstitutionPage() {
             <span className="font-bold text-sm">The Argent Order</span>
           </div>
           <div className="flex gap-6 text-xs text-muted-foreground">
-            <Link href="/join" className="hover:text-foreground">Join</Link>
             <Link href="/mission" className="hover:text-foreground">Mission</Link>
             <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="hover:text-foreground">Terms</Link>
