@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://argentorder.com'),
   title: {
-    default: "The Argent Order | Catholic Formation System for Men",
+    default: "The Argent Order",
     template: "%s | The Argent Order",
   },
   description: "Catholic men forged in discipline. Build. Ship. Lead. Not a community. A forge. Five pillars: Faith, Discipline, Brotherhood, Building, Truth.",

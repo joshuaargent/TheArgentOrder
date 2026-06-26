@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Shield, Lock, Eye, Database, Mail, AlertTriangle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | The Argent Order",
+  title: "Privacy Policy",
   description: "Privacy policy for The Argent Order. We protect your data and are committed to transparency about how we collect and use information.",
 };
 
