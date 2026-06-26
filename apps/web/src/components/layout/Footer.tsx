@@ -9,25 +9,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="h-8 w-8" viewBox="0 0 48 48" fill="none">
-                <defs>
-                  <linearGradient id="footerCrossVert" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#525252"/>
-                    <stop offset="50%" stop-color="#d4d4d4"/>
-                    <stop offset="100%" stop-color="#525252"/>
-                  </linearGradient>
-                  <linearGradient id="footerCrossHoriz" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#f5f5f5"/>
-                    <stop offset="50%" stop-color="#a3a3a3"/>
-                    <stop offset="100%" stop-color="#525252"/>
-                  </linearGradient>
-                </defs>
-                <rect x="20" y="6" width="8" height="36" rx="1" fill="#27272a" opacity="0.3"/>
-                <rect x="8" y="14" width="32" height="8" rx="1" fill="#27272a" opacity="0.3"/>
-                <rect x="19" y="4" width="10" height="38" rx="2" fill="url(#footerCrossVert)"/>
-                <rect x="6" y="12" width="36" height="10" rx="2" fill="url(#footerCrossHoriz)"/>
-                <rect x="6" y="12" width="36" height="3" rx="1" fill="#ffffff" opacity="0.4"/>
-                <rect x="19" y="4" width="3" height="38" rx="1" fill="#ffffff" opacity="0.25"/>
+              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
+                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
