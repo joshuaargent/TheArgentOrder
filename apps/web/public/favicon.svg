@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
-  <rect x="15" y="4" width="6" height="28" rx="1" fill="#a1a1aa"/>
-  <rect x="6" y="12" width="24" height="6" rx="1" fill="#a1a1aa"/>
-  <path d="M18 28L16 34H20L18 28Z" fill="#a1a1aa" opacity="0.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Blade -->
+  <path d="M24 4L28 36H20L24 4Z" fill="#71717a"/>
+  <!-- Crossguard -->
+  <rect x="12" y="32" width="24" height="4" rx="1" fill="#71717a"/>
+  <!-- Handle -->
+  <rect x="22" y="36" width="4" height="8" rx="1" fill="#71717a"/>
 </svg>
