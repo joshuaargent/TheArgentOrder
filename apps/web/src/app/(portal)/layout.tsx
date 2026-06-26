@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Portal | The Argent Order",
+  description: "Your personal formation dashboard. Track your progress in faith, discipline, brotherhood, building, and truth.",
+  robots: { index: false, follow: false },
+};
 
 export default function PortalLayout({
   children,
