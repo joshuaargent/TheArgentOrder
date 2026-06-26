@@ -201,9 +201,21 @@ We respond to all legitimate inquiries within a reasonable timeframe.`
         <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
-                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+              <svg className="h-6 w-6" viewBox="0 0 48 48">
+                <defs>
+                  <linearGradient id="termsBlade" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#e5e5e5"/>
+                    <stop offset="50%" stop-color="#f5f5f5"/>
+                    <stop offset="100%" stop-color="#737373"/>
+                  </linearGradient>
+                  <linearGradient id="termsGuard" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#a3a3a3"/>
+                    <stop offset="100%" stop-color="#525252"/>
+                  </linearGradient>
+                </defs>
+                <path d="M24 3L27 33H21L24 3Z" fill="url(#termsBlade)"/>
+                <rect x="10" y="33" width="28" height="5" rx="1.5" fill="url(#termsGuard)"/>
+                <rect x="21" y="38" width="6" height="6" rx="1" fill="#3f3f46"/>
               </svg>
               <span className="font-bold text-sm">The Argent Order</span>
             </div>

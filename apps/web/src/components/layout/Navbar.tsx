@@ -125,10 +125,30 @@ export function Navbar() {
               className="text-foreground hover:text-primary transition-colors flex items-center gap-2.5 group"
             >
               <div className="relative">
-                <svg className="h-9 w-9 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 36 36" fill="none">
-                  <rect x="15" y="4" width="6" height="28" rx="1" className="fill-current text-primary"/>
-                  <rect x="6" y="12" width="24" height="6" rx="1" className="fill-current text-primary"/>
-                  <path d="M18 28L16 34H20L18 28Z" className="fill-current text-primary opacity-40"/>
+                <svg className="h-9 w-9 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 48 48">
+                  <defs>
+                    <linearGradient id="navBlade" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#e5e5e5"/>
+                      <stop offset="50%" stop-color="#f5f5f5"/>
+                      <stop offset="100%" stop-color="#737373"/>
+                    </linearGradient>
+                    <linearGradient id="navGuard" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#a3a3a3"/>
+                      <stop offset="100%" stop-color="#525252"/>
+                    </linearGradient>
+                    <linearGradient id="navHandle" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#3f3f46"/>
+                      <stop offset="100%" stop-color="#27272a"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M24 3L27 33H21L24 3Z" fill="url(#navBlade)"/>
+                  <path d="M24 6L24.5 28" stroke="#a1a1aa" stroke-width="1" stroke-linecap="round"/>
+                  <rect x="10" y="33" width="28" height="5" rx="1.5" fill="url(#navGuard)"/>
+                  <rect x="10" y="33" width="28" height="1.5" rx="0.75" fill="#e5e5e5" fill-opacity="0.4"/>
+                  <circle cx="12" cy="35.5" r="1.5" fill="#e5e5e5" fill-opacity="0.6"/>
+                  <circle cx="36" cy="35.5" r="1.5" fill="#e5e5e5" fill-opacity="0.6"/>
+                  <rect x="21" y="38" width="6" height="6" rx="1" fill="url(#navHandle)"/>
+                  <ellipse cx="24" cy="45" rx="4" ry="2.5" fill="url(#navGuard)"/>
                 </svg>
                 <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
