@@ -82,7 +82,7 @@ export default function MissionPage() {
           </h2>
           <p className="text-center text-muted-foreground mb-8">What you actually get</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {[
               { name: "Faith", icon: Cross, color: "#a855f7", outcome: "A prayer habit that sticks" },
               { name: "Discipline", icon: Dumbbell, color: "#ef4444", outcome: "Energy to lead your family" },
@@ -92,13 +92,13 @@ export default function MissionPage() {
             ].map((pillar, i) => (
               <article key={i} className="glass-card p-4 text-center">
                 <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${pillar.color}15` }}
                 >
-                  <pillar.icon className="h-6 w-6" style={{ color: pillar.color }} aria-hidden="true" />
+                  <pillar.icon className="h-5 w-5 md:h-6 md:w-6" style={{ color: pillar.color }} aria-hidden="true" />
                 </div>
-                <h3 className="font-bold text-sm">{pillar.name}</h3>
-                <p className="text-xs text-muted-foreground">{pillar.outcome}</p>
+                <h3 className="font-bold text-xs md:text-sm">{pillar.name}</h3>
+                <p className="text-[10px] md:text-xs text-muted-foreground">{pillar.outcome}</p>
               </article>
             ))}
           </div>

@@ -129,17 +129,17 @@ export default function HomePage() {
           </h2>
           <p className="text-center text-muted-foreground mb-8">What you actually get</p>
 
-          <div className="flex overflow-x-auto pb-4 -mx-4 px-4 gap-4 snap-x snap-mandatory scrollbar-hide">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {pillars.map((pillar) => (
-              <div key={pillar.id} className="glass-card p-5 text-center min-w-[160px] md:min-w-0 snap-start">
+              <div key={pillar.id} className="glass-card p-4 md:p-5 text-center">
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
                   style={{ backgroundColor: `${pillar.color}15` }}
                 >
-                  <PillarIcon id={pillar.id} className="h-6 w-6" style={{ color: pillar.color }} />
+                  <PillarIcon id={pillar.id} className="h-5 w-5 md:h-6 md:w-6" style={{ color: pillar.color }} />
                 </div>
-                <h3 className="font-bold text-sm mb-2">{pillar.name}</h3>
-                <p className="text-xs text-muted-foreground">{pillar.outcome}</p>
+                <h3 className="font-bold text-xs md:text-sm mb-1 md:mb-2">{pillar.name}</h3>
+                <p className="text-[10px] md:text-xs text-muted-foreground">{pillar.outcome}</p>
               </div>
             ))}
           </div>
