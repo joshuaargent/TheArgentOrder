@@ -196,8 +196,15 @@ export default function JoinPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
-              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+              <defs>
+                <linearGradient id="joinCrossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d4d4d4"/>
+                  <stop offset="50%" stop-color="#a1a1aa"/>
+                  <stop offset="100%" stop-color="#71717a"/>
+                </linearGradient>
+              </defs>
+              <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#joinCrossGrad)"/>
+              <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#joinCrossGrad)"/>
             </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>

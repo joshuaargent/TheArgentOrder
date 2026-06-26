@@ -9,9 +9,16 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="h-8 w-8 text-primary" viewBox="0 0 36 36" fill="none">
-                <rect x="15" y="4" width="6" height="28" rx="1" fill="currentColor"/>
-                <rect x="6" y="12" width="24" height="6" rx="1" fill="currentColor"/>
+              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
+                <defs>
+                  <linearGradient id="footerCrossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#d4d4d4"/>
+                    <stop offset="50%" stop-color="#a1a1aa"/>
+                    <stop offset="100%" stop-color="#71717a"/>
+                  </linearGradient>
+                </defs>
+                <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#footerCrossGrad)"/>
+                <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#footerCrossGrad)"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>

@@ -126,9 +126,15 @@ export function Navbar() {
             >
               <div className="relative">
                 <svg className="h-9 w-9 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 36 36" fill="none">
-                  <rect x="15" y="4" width="6" height="28" rx="1" className="fill-current text-primary"/>
-                  <rect x="6" y="12" width="24" height="6" rx="1" className="fill-current text-primary"/>
-                  <path d="M18 28L16 34H20L18 28Z" className="fill-current text-primary opacity-40"/>
+                  <defs>
+                    <linearGradient id="navCrossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#d4d4d4"/>
+                      <stop offset="50%" stop-color="#a1a1aa"/>
+                      <stop offset="100%" stop-color="#71717a"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="15" y="3" width="6" height="30" rx="1" fill="url(#navCrossGrad)"/>
+                  <rect x="5" y="11" width="26" height="6" rx="1" fill="url(#navCrossGrad)"/>
                 </svg>
                 <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
