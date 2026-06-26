@@ -12,27 +12,28 @@ export function Footer() {
               <svg className="h-8 w-8" viewBox="0 0 48 48">
                 <defs>
                   <linearGradient id="footerBlade" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#e5e5e5"/>
+                    <stop offset="0%" stop-color="#fafafa"/>
+                    <stop offset="15%" stop-color="#e5e5e5"/>
                     <stop offset="50%" stop-color="#f5f5f5"/>
-                    <stop offset="100%" stop-color="#737373"/>
+                    <stop offset="85%" stop-color="#71717a"/>
+                    <stop offset="100%" stop-color="#52525b"/>
                   </linearGradient>
                   <linearGradient id="footerGuard" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#a3a3a3"/>
+                    <stop offset="0%" stop-color="#e5e5e5"/>
+                    <stop offset="50%" stop-color="#a3a3a3"/>
                     <stop offset="100%" stop-color="#525252"/>
                   </linearGradient>
                   <linearGradient id="footerHandle" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#3f3f46"/>
+                    <stop offset="0%" stop-color="#52525b"/>
                     <stop offset="100%" stop-color="#27272a"/>
                   </linearGradient>
                 </defs>
-                <path d="M24 3L27 33H21L24 3Z" fill="url(#footerBlade)"/>
-                <path d="M24 6L24.5 28" stroke="#a1a1aa" stroke-width="1" stroke-linecap="round"/>
-                <rect x="10" y="33" width="28" height="5" rx="1.5" fill="url(#footerGuard)"/>
-                <rect x="10" y="33" width="28" height="1.5" rx="0.75" fill="#e5e5e5" fill-opacity="0.4"/>
-                <circle cx="12" cy="35.5" r="1.5" fill="#e5e5e5" fill-opacity="0.6"/>
-                <circle cx="36" cy="35.5" r="1.5" fill="#e5e5e5" fill-opacity="0.6"/>
-                <rect x="21" y="38" width="6" height="6" rx="1" fill="url(#footerHandle)"/>
-                <ellipse cx="24" cy="45" rx="4" ry="2.5" fill="url(#footerGuard)"/>
+                <path d="M24 2L28 36H20L24 2Z" fill="url(#footerBlade)"/>
+                <path d="M24 5L24.5 30" stroke="#71717a" stroke-width="1" stroke-linecap="round" stroke-opacity="0.6"/>
+                <rect x="8" y="36" width="32" height="5" rx="1" fill="url(#footerGuard)"/>
+                <rect x="8" y="36" width="32" height="1.5" rx="0.5" fill="#f5f5f5" fill-opacity="0.5"/>
+                <rect x="20" y="41" width="8" height="5" rx="1" fill="url(#footerHandle)"/>
+                <ellipse cx="24" cy="47" rx="5" ry="2" fill="url(#footerGuard)"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
