@@ -17,7 +17,7 @@ export default function PrivacyPage() {
             <Shield className="h-7 w-7 md:h-8 md:w-8 text-primary" aria-hidden="true" />
           </div>
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Privacy Policy</h1>
-          <p className="text-muted-foreground text-sm md:text-base">Last updated: June 2024</p>
+          <p className="text-muted-foreground text-sm md:text-base">Last updated: June 2026</p>
         </div>
 
         {/* Important Notice */}

@@ -102,15 +102,15 @@ export default function HomePage() {
               "Potential without execution is just an excuse.",
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-4 p-5 rounded-xl border border-border/50 glass-card">
-                <div className="w-2 h-2 rounded-full bg-red-500 mt-3 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-primary mt-3 flex-shrink-0" />
                 <p className="text-lg">{text}</p>
               </div>
             ))}
           </div>
 
           {/* HORMOZI: Agitation - pivot to solution */}
-          <div className="text-center mt-8 p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
-            <p className="text-lg font-medium text-red-400">
+          <div className="text-center mt-8 p-6 rounded-2xl bg-primary/10 border border-primary/20">
+            <p className="text-lg font-medium text-primary">
               The problem isn't your motivation.
             </p>
             <p className="text-lg font-medium mt-1">
@@ -300,9 +300,9 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="glass-card p-6 border-red-500/20">
+            <div className="glass-card p-6 border-primary/20">
               <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-red-500" />
+                <AlertTriangle className="h-5 w-5 text-primary" />
                 This is NOT for men who...
               </h3>
               <ul className="space-y-3 text-sm">
@@ -313,7 +313,7 @@ export default function HomePage() {
                   "Want results without putting in work",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <AlertTriangle className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}

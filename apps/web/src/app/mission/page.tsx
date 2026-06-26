@@ -21,8 +21,12 @@ export default function MissionPage() {
             Our Mission
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 px-4">
+          <p className="text-lg md:text-xl text-muted-foreground mb-4 px-4">
             To forge men of <span className="text-primary font-medium">Faith</span>, <span className="text-primary font-medium">Discipline</span>, <span className="text-primary font-medium">Brotherhood</span>, <span className="text-primary font-medium">Building</span>, and <span className="text-primary font-medium">Truth</span> through Catholic doctrine, structured formation, and relentless action.
+          </p>
+
+          <p className="text-primary font-bold text-xl mb-8">
+            Execute. Build. Lead.
           </p>
 
           <Link 
