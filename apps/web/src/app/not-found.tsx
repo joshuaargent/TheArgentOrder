@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Compass } from "lucide-react";
 
 export default function NotFound() {
@@ -13,11 +14,10 @@ export default function NotFound() {
         <p className="mt-4 text-muted-foreground">
           The page you're looking for doesn't exist or has been moved. Return to base and try again.
         </p>
-        <Link
-          href="/"
-          className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground hover:bg-primary/90 transition-all"
-        >
-          Return Home
+        <Link href="/" className="mt-6 inline-block">
+          <Button className="btn-elegant">
+            Return Home
+          </Button>
         </Link>
         <p className="text-xs text-muted-foreground mt-8">
           Execute. Build. Lead.
