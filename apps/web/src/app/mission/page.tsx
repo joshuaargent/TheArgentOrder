@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Shield, Cross, Dumbbell, Handshake, Hammer, GraduationCap } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Our Mission | The Argent Order",
+  description: "Catholic men forged in discipline. The Argent Order exists to help men build faith, discipline, brotherhood, projects, and truth. Execute. Build. Lead.",
+};
 
 export default function MissionPage() {
   return (

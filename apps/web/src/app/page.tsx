@@ -1,7 +1,12 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "The Argent Order | Catholic Formation for Men Who Execute",
+  description: "Not a community. A forge. Catholic men who execute, build, and lead. Five pillars: Faith, Discipline, Brotherhood, Building, Truth. 100% free.",
+};
+
 import {
   Cross,
   Dumbbell,

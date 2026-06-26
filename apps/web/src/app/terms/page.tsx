@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Shield, Scale, AlertTriangle, Users, BookOpen, Gavel } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | The Argent Order",
+  description: "Terms of service for The Argent Order. By joining, you commit to the formation journey and the obligations of Catholic brotherhood.",
+};
 
 export default function TermsPage() {
   return (

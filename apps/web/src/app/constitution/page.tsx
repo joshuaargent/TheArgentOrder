@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Shield, BookOpen, Scale, Users, Cross } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Constitution | The Argent Order",
+  description: "The founding principles and rules of The Argent Order. Catholic men committed to faith, discipline, brotherhood, building, and truth.",
+};
 
 export default function ConstitutionPage() {
   return (

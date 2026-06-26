@@ -1,5 +1,4 @@
-"use client";
-
+import type { Metadata } from "next";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -12,6 +11,11 @@ import {
   Hammer,
   Cross,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Join The Forge | The Argent Order",
+  description: "Join The Argent Order. Catholic men who execute, build, and lead. 90 days. 5 accountability partners. Real transformation. 100% free.",
+};
 
 export default function JoinPage() {
   const [email, setEmail] = useState("");
