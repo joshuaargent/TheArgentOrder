@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import {
-  ArrowRight,
   Cross,
   Dumbbell,
   Handshake,
@@ -72,10 +71,8 @@ export default function HomePage() {
           {/* HORMOZI CTAs: Clear action + secondary as text */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link href="/join">
-              <Button size="lg" className="btn-elegant gap-2 px-10 h-14 text-lg w-full sm:w-auto">
-                <Zap className="h-5 w-5" />
+              <Button size="lg" className="btn-elegant px-10 h-14 text-lg w-full sm:w-auto">
                 Enter The Forge
-                <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
           </div>

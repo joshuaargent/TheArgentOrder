@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { 
-  ArrowRight, 
   CheckCircle, 
   Users,
   Zap,
@@ -117,10 +116,22 @@ export default function JoinPage() {
       <section className="min-h-screen flex items-center justify-center px-6" aria-labelledby="join-heading">
         <div className="w-full max-w-lg mx-auto relative z-10 text-center">
           
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              <svg className="h-20 w-20 animate-float" viewBox="0 0 48 48" fill="none">
+                <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
+                <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
+                <path d="M24 38L20 48H28L24 38Z" className="fill-primary opacity-30"/>
+              </svg>
+              <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-50" />
+            </div>
+          </div>
+
           {/* Founding Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-sm mb-8">
             <span className="text-primary font-medium">
-              ⚡ Founding Cohort Open
+              Founding Cohort Open
             </span>
           </div>
 
@@ -153,7 +164,7 @@ export default function JoinPage() {
               type="submit" 
               disabled={loading} 
               size="lg"
-              className="w-full h-16 text-xl font-bold btn-elegant gap-3"
+              className="w-full h-16 text-xl font-bold btn-elegant"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -161,15 +172,15 @@ export default function JoinPage() {
                   Entering...
                 </span>
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  Enter The Forge <ArrowRight className="h-6 w-6" />
-                </span>
+                "Enter The Forge"
               )}
             </Button>
           </form>
 
-          <p className="text-sm text-muted-foreground mb-10">
-            <span className="text-primary font-medium">100% Free</span> &nbsp;&nbsp; No credit card &nbsp;&nbsp; Catholic men only
+          <p className="text-sm text-muted-foreground mb-10 flex items-center justify-center gap-2">
+            <span className="text-primary font-medium">100% Free</span>
+            <span>No credit card</span>
+            <span>Catholic men only</span>
           </p>
 
           {/* What you get */}
