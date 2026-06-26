@@ -195,9 +195,9 @@ export default function JoinPage() {
       <footer className="py-6 px-6 border-t border-border/50 bg-card/50 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <svg className="h-6 w-6" viewBox="0 0 36 36" fill="none">
-              <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-              <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+            <svg className="h-6 w-6" viewBox="0 0 48 48" fill="none">
+              <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
+              <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
             </svg>
             <span className="font-bold text-sm">The Argent Order</span>
           </div>

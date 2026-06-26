@@ -9,9 +9,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="h-8 w-8" viewBox="0 0 36 36" fill="none">
-                <rect x="15" y="4" width="6" height="28" rx="1" className="fill-primary"/>
-                <rect x="6" y="12" width="24" height="6" rx="1" className="fill-primary"/>
+              <svg className="h-8 w-8" viewBox="0 0 48 48" fill="none">
+                <rect x="21" y="4" width="6" height="40" rx="1" className="fill-primary"/>
+                <rect x="8" y="14" width="32" height="6" rx="1" className="fill-primary"/>
               </svg>
               <span className="font-bold text-lg">{siteConfig.name}</span>
             </Link>
