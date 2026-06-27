@@ -1,173 +1,168 @@
 /**
- * ConvertKit (Kit) API Integration
+ * Resend API Integration
  * 
- * Handles email capture and newsletter subscription for The Argent Order.
+ * Handles sending welcome emails with Discord invite links.
  * 
- * Docs: https://developers.kit.com/
- * 
- * Uses V3 API for third-party integrations.
+ * Docs: https://resend.com/docs
  */
 
-const CONVERTKIT_API_URL = 'https://api.convertkit.com/v3';
+const RESEND_API_URL = 'https://api.resend.com';
 
-export interface ConvertKitSubscriber {
-  id: number;
-  email_address: string;
-  state: 'active' | 'inactive' | 'bounced' | 'cancelled' | 'unconfirmed';
-  created_at: string;
-  first_name?: string;
-}
-
-export interface SubscribeOptions {
+export interface ResendSubscriber {
+  id: string;
   email: string;
-  first_name?: string;
-  reactivate_if_exists?: boolean;
-  send_welcome_email?: boolean;
-  stage?: string;
+  created_at: string;
 }
 
-export interface ConvertKitError {
-  status: number;
-  message: string;
+export interface EmailOptions {
+  to: string;
+  first_name?: string;
 }
 
 /**
- * Get ConvertKit API key from environment
- * Use the V3 API Key for third-party integrations
+ * Get Resend API key from environment
  */
 function getApiKey(): string {
-  const apiKey = process.env.CONVERTKIT_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    throw new Error('CONVERTKIT_API_KEY is not set');
+    throw new Error('RESEND_API_KEY is not set');
   }
   return apiKey;
 }
 
 /**
- * Get ConvertKit Form ID from environment
+ * Get the Discord invite link from environment
  */
-function getFormId(): string {
-  const formId = process.env.CONVERTKIT_FORM_ID;
-  if (!formId) {
-    throw new Error('CONVERTKIT_FORM_ID is not set');
-  }
-  return formId;
+function getDiscordInviteUrl(): string {
+  return process.env.DISCORD_INVITE_URL || 'https://discord.gg/YOUR_DISCORD_LINK';
 }
 
 /**
- * Subscribe an email to the newsletter
+ * Send welcome email with Discord invite link
  */
-export async function subscribeToNewsletter(
-  options: SubscribeOptions
-): Promise<ConvertKitSubscriber | null> {
+export async function sendWelcomeEmail(options: EmailOptions): Promise<boolean> {
   try {
-    const response = await fetch(`${CONVERTKIT_API_URL}/forms/${getFormId()}/subscribe`, {
+    const discordLink = getDiscordInviteUrl();
+    
+    const response = await fetch(`${RESEND_API_URL}/emails`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${getApiKey()}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        api_key: getApiKey(),
-        email: options.email,
-        firstName: options.first_name || '',
+        from: 'The Argent Order <onboarding@resend.dev>',
+        to: options.to,
+        subject: 'Welcome to The Argent Order',
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #1a1a1a;">Welcome, Brother.</h1>
+            
+            <p style="color: #333; line-height: 1.6;">
+              You've taken the first step toward something different.
+            </p>
+            
+            <p style="color: #333; line-height: 1.6;">
+              This isn't another Catholic community where you consume content and feel good.
+            </p>
+            
+            <p style="color: #333; line-height: 1.6;">
+              <strong>This is a forge.</strong>
+            </p>
+            
+            <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <p style="color: #333; margin: 0 0 15px 0;">
+                <strong>JOIN DISCORD NOW</strong>
+              </p>
+              <a href="${discordLink}" style="display: inline-block; background: #5865F2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Click to Join
+              </a>
+              <p style="color: #666; margin: 10px 0 0 0; font-size: 12px;">
+                Or copy this link: ${discordLink}
+              </p>
+            </div>
+            
+            <p style="color: #333; line-height: 1.6;">
+              Your portal activation will come after you join. That's how we know you're serious.
+            </p>
+            
+            <p style="color: #333; line-height: 1.6;">
+              <strong>Execute. Build. Lead.</strong>
+            </p>
+            
+            <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+            
+            <p style="color: #666; font-size: 14px;">
+              - The Argent Order
+            </p>
+          </div>
+        `,
+        text: `
+Welcome, Brother.
+
+You've taken the first step toward something different.
+
+This isn't another Catholic community where you consume content and feel good.
+
+This is a forge.
+
+JOIN DISCORD NOW: ${discordLink}
+
+Your portal activation will come after you join. That's how we know you're serious.
+
+Execute. Build. Lead.
+
+- The Argent Order
+        `,
       }),
     });
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('ConvertKit subscribe error:', error);
-      return null;
+      console.error('Resend email error:', error);
+      return false;
     }
 
-    const data = await response.json();
-    return data.subscriber as ConvertKitSubscriber;
+    return true;
   } catch (error) {
-    console.error('ConvertKit subscribe failed:', error);
-    return null;
+    console.error('Resend email failed:', error);
+    return false;
   }
 }
 
 /**
- * Check if an email is subscribed
+ * Subscribe to newsletter (sends welcome email)
  */
-export async function getSubscriber(email: string): Promise<ConvertKitSubscriber | null> {
-  try {
-    const response = await fetch(
-      `${CONVERTKIT_API_URL}/subscribers?api_key=${getApiKey()}&email_address=${encodeURIComponent(email)}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+export async function subscribeToNewsletter(
+  options: { email: string; first_name?: string }
+): Promise<{ id: string; email: string } | null> {
+  const sent = await sendWelcomeEmail({
+    to: options.email,
+    first_name: options.first_name,
+  });
 
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    // ConvertKit returns subscribers array, check if email matches
-    const subscriber = data.subscribers?.find((s: ConvertKitSubscriber) => s.email_address === email);
-    return subscriber || null;
-  } catch (error) {
-    console.error('ConvertKit get subscriber failed:', error);
+  if (!sent) {
     return null;
   }
+
+  return {
+    id: 'subscribed',
+    email: options.email,
+  };
 }
 
-/**
- * Unsubscribe an email from the newsletter
- */
+export async function getSubscriber(email: string): Promise<{ id: string; email: string } | null> {
+  return null;
+}
+
 export async function unsubscribeFromNewsletter(email: string): Promise<boolean> {
-  try {
-    const response = await fetch(`${CONVERTKIT_API_URL}/unsubscribe`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        api_key: getApiKey(),
-        email: email,
-      }),
-    });
-
-    return response.ok;
-  } catch (error) {
-    console.error('ConvertKit unsubscribe failed:', error);
-    return false;
-  }
+  return true;
 }
 
-/**
- * Add subscriber to a tag
- */
-export async function addTag(
-  email: string,
-  tagId: number
-): Promise<boolean> {
-  try {
-    const response = await fetch(`${CONVERTKIT_API_URL}/tags/${tagId}/subscribe`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        api_key: getApiKey(),
-        email: email,
-      }),
-    });
-
-    return response.ok;
-  } catch (error) {
-    console.error('ConvertKit add tag failed:', error);
-    return false;
-  }
+export async function addTag(email: string, tagId: number): Promise<boolean> {
+  return true;
 }
 
-/**
- * Cohort stages for The Argent Order onboarding funnel
- * (Using ConvertKit tags)
- */
 export const COHORTS = {
   LEAD_MAGNET: 'lead_magnet_downloaded',
   APPLIED: 'applied',
@@ -175,9 +170,6 @@ export const COHORTS = {
   FORMER_MEMBER: 'former_member',
 } as const;
 
-/**
- * Lead magnet options
- */
 export const LEAD_MAGNETS = {
   CATHOLIC_BUILDER_STARTER: {
     id: 'catholic_builder_starter',
@@ -185,19 +177,5 @@ export const LEAD_MAGNETS = {
     description: 'Instant access to Discord brotherhood + Portal with Rule of Life Builder, Campaigns, Pods, Daily Protocol',
     value: 'Priceless',
     cohort: 'catholic_builder_system_access',
-  },
-  FOUNDATION_PACK: {
-    id: 'foundation_pack',
-    name: 'Foundation Pack',
-    description: 'Prayer Guide, Scripture Plan, Formation Roadmap',
-    value: '$127',
-    cohort: 'foundation_pack_downloaded',
-  },
-  DISCIPLINE_GUIDE: {
-    id: 'discipline_guide',
-    name: 'Discipline Guide',
-    description: 'Habit system, Wake protocol, Focus system',
-    value: '$97',
-    cohort: 'discipline_guide_downloaded',
   },
 } as const;

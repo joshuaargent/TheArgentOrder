@@ -7,57 +7,60 @@
 - npm (comes with Node.js)
 - Supabase account
 - Discord developer account
-- ConvertKit account (for newsletter)
+- Resend account (for newsletter)
 
 ---
 
-## Step 0: Create ConvertKit Account (Newsletter)
+## Step 0: Create Resend Account (Welcome Emails)
 
-ConvertKit handles email capture, lead magnets, and the welcome email sequence.
+Resend handles sending instant welcome emails with Discord invite links.
 
-### 0.1: Sign Up for ConvertKit
+### 0.1: Sign Up for Resend
 
-1. Go to **https://kit.com**
-2. Click **"Get Started"**
-3. Sign up with Google or email
+1. Go to **https://resend.com**
+2. Click **"Sign up"**
+3. Sign up with GitHub or Google
 4. Complete onboarding wizard
 
 ### 0.2: Get Your API Key
 
-1. In ConvertKit dashboard, click **Settings** (bottom left)
-2. Click **Advanced** tab
-3. Click **API** section
-4. Copy the **API Key** → `CONVERTKIT_API_KEY`
+1. In Resend dashboard, click **"API Keys"** in the sidebar
+2. Click **"Create API Key"**
+3. Name it: `The Argent Order`
+4. Copy the key → `RESEND_API_KEY`
 
-### 0.3: Create a Form
+### 0.3: Verify Your Domain (Important!)
 
-1. Click **Forms** in the sidebar
-2. Click **Create New Form**
-3. Choose **Embedded Form** style
-4. Name it: `The Argent Order Signup`
-5. Customize as needed (or use defaults)
-6. Publish the form
-7. Copy the **Form ID** from the URL (e.g., `https://app.convertkit.com/forms/YOUR_FORM_ID/edit`) → `CONVERTKIT_FORM_ID`
+**For emails to actually arrive in inbox:**
 
-### 0.4: Configure Welcome Email
+1. Click **"Domains"** in the sidebar
+2. Click **"Add Domain"**
+3. Enter your domain (e.g., `theargentorder.com`) OR
+4. Use their free **"Resend.dev"** subdomain (easiest for testing)
 
-1. In your form settings, click **Email Settings**
-2. Enable **Send confirmation email** 
-3. Customize the welcome email content
-4. Add your **Discord invite link** in this email (IMMEDIATE access!)
+**For Resend.dev (no domain needed):**
+- Use the default `onboarding@resend.dev` sender (already configured in code)
+- Skip domain verification for now
 
-### 0.5: Create Your Lead Magnet (Optional)
+**For custom domain:**
+- Add DNS records as instructed by Resend
+- Wait for verification
 
-If you want to deliver a lead magnet:
+### 0.4: Get Your Discord Invite Link
 
-1. Go to **Landing Pages** or **Sequences**
-2. Create a sequence for your lead magnet
-3. In the welcome email, include the lead magnet download link
+1. Open Discord
+2. Right-click your server name
+3. Click **Invite People**
+4. Settings:
+   - **Max age**: Never
+   - **Max uses**: Unlimited
+5. Copy the link → `DISCORD_INVITE_URL`
 
-### 0.6: Get Your Discord Invite Link
+### 0.5: Test It (Optional)
 
-1. Create a Discord invite with **max age: never, max uses: unlimited**
-2. Include this link in your ConvertKit welcome email (SEND IMMEDIATELY!)
+The welcome email is already configured in the code. It sends:
+- Subject: "Welcome to The Argent Order"
+- Content: Welcome message + Discord join button
 
 ---
 
@@ -175,9 +178,9 @@ DISCORD_TOKEN=MTIz...your-bot-token
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# ConvertKit Newsletter (from Step 0)
-CONVERTKIT_API_KEY=your-convertkit-api-secret
-CONVERTKIT_FORM_ID=your-convertkit-form-id
+# Resend Email (from Step 0)
+RESEND_API_KEY=your-resend-api-key
+DISCORD_INVITE_URL=https://discord.gg/your-invite-link
 ```
 
 ### Environment Variables Explained
@@ -191,8 +194,8 @@ CONVERTKIT_FORM_ID=your-convertkit-form-id
 | `DISCORD_CLIENT_SECRET` | OAuth Server | No | Discord OAuth secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Login Button | Yes | Public Discord client ID for login button |
 | `DISCORD_TOKEN` | Discord Bot | No | Bot token for slash commands |
-| `CONVERTKIT_API_KEY` | Newsletter API | No | ConvertKit private API key |
-| `CONVERTKIT_FORM_ID` | Join Form | Yes | ConvertKit publication ID |
+| `RESEND_API_KEY` | Email API | No | Resend private API key |
+| `DISCORD_INVITE_URL` | Email | No | Your Discord invite link |
 | `NEXT_PUBLIC_APP_URL` | OAuth Redirect | Yes | Full URL of your app (for redirect URIs) |
 | `NEXT_PUBLIC_SITE_URL` | Meta Tags | Yes | Canonical URL for SEO |
 
@@ -262,8 +265,8 @@ Visit **http://localhost:3000**
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Yes | Public Discord client ID |
 | `NEXT_PUBLIC_APP_URL` | Yes | Full URL of deployed app (e.g., `https://your-app.vercel.app`) |
 | `NEXT_PUBLIC_SITE_URL` | Yes | Canonical URL for SEO |
-| `CONVERTKIT_API_KEY` | Secret | ConvertKit API key |
-| `CONVERTKIT_FORM_ID` | Yes | ConvertKit publication ID |
+| `RESEND_API_KEY` | Secret | Resend API key |
+| `DISCORD_INVITE_URL` | No | Discord invite link |
 
 6. Click **Deploy**
 
@@ -429,8 +432,8 @@ Once the bot is running, use these slash commands in Discord:
 | `DISCORD_CLIENT_SECRET` | Discord Developer → General → Client Secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Same as DISCORD_CLIENT_ID |
 | `DISCORD_TOKEN` | Discord Developer → Bot → Token (Reset Token) |
-| `CONVERTKIT_API_KEY` | ConvertKit → Settings → API Keys |
-| `CONVERTKIT_FORM_ID` | ConvertKit → Settings → Publication → Publication ID |
+| `RESEND_API_KEY` | Resend → API Keys |
+| `DISCORD_INVITE_URL` | Your Discord invite link |
 | `NEXT_PUBLIC_APP_URL` | Your deployed app URL |
 | `NEXT_PUBLIC_SITE_URL` | Your deployed app URL |
 
@@ -454,9 +457,8 @@ Once the bot is running, use these slash commands in Discord:
 | CORS error | Ensure Supabase allowed domains includes localhost |
 | Bot goes offline | Use tmux/PM2 to keep it running |
 | Bot won't start | Check .env.local has correct DISCORD_TOKEN |
-| Newsletter not working | Verify CONVERTKIT_API_KEY and CONVERTKIT_FORM_ID are set |
-| Email capture fails silently | The app gracefully falls back - check ConvertKit dashboard for subscriber count |
-| Lead magnet not sending | Check ConvertKit automations are active and connected to recommendation |
+| Newsletter not working | Verify RESEND_API_KEY and DISCORD_INVITE_URL are set |
+| Welcome email not sending | Check Resend API key is correct, verify domain if using custom |
 | Discord OAuth not working | Verify NEXT_PUBLIC_APP_URL matches your deployment URL exactly |
 | Discord login button missing | Check NEXT_PUBLIC_DISCORD_CLIENT_ID is set |
 | "invalid redirect_uri" error | Add callback URL to Discord OAuth2 settings in Developer Portal |
