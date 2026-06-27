@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       cohort = LEAD_MAGNETS[leadMagnet as keyof typeof LEAD_MAGNETS].cohort;
     }
 
-    // Subscribe to Beehiiv
+    // Subscribe to ConvertKit
     const subscriber = await subscribeToNewsletter({
       email,
       first_name: firstName,
@@ -38,9 +38,9 @@ export async function POST(request: NextRequest) {
     });
 
     if (!subscriber) {
-      // If Beehiiv fails, still return success to not block the user
+      // If ConvertKit fails, still return success to not block the user
       // We can sync later via webhook or manual process
-      console.warn('Beehiiv subscription failed, email captured locally');
+      console.warn('ConvertKit subscription failed, email captured locally');
       
       return NextResponse.json({
         success: true,
@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Successfully subscribed to newsletter',
       subscriber: {
-        email: subscriber.email,
-        status: subscriber.status,
+        email: subscriber.email_address,
+        status: subscriber.state,
       },
     });
   } catch (error) {
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: 'Newsletter subscription API',
+    message: 'Newsletter subscription API (ConvertKit)',
     endpoints: {
       POST: 'Subscribe to newsletter',
     },

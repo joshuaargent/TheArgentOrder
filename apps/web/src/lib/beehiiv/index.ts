@@ -1,19 +1,19 @@
 /**
- * Beehiiv API Integration
+ * ConvertKit (Kit) API Integration
  * 
  * Handles email capture and newsletter subscription for The Argent Order.
  * 
- * Docs: https://developers.beehiiv.com/
+ * Docs: https://developers.kit.com/
  */
 
-const BEEHIIV_API_URL = 'https://api.beehiiv.com/v2';
+const CONVERTKIT_API_URL = 'https://api.convertkit.com/v3';
 
-export interface BeehiivSubscriber {
-  id: string;
-  email: string;
-  status: 'active' | 'inactive' | 'bounced' | 'unsubscribed';
+export interface ConvertKitSubscriber {
+  id: number;
+  email_address: string;
+  state: 'active' | 'inactive' | 'bounced' | 'cancelled' | 'unconfirmed';
   created_at: string;
-  cohorts?: string[];
+  first_name?: string;
 }
 
 export interface SubscribeOptions {
@@ -24,31 +24,31 @@ export interface SubscribeOptions {
   stage?: string;
 }
 
-export interface BeehiivError {
+export interface ConvertKitError {
   status: number;
   message: string;
 }
 
 /**
- * Get Beehiiv API key from environment
+ * Get ConvertKit API secret from environment
  */
-function getApiKey(): string {
-  const apiKey = process.env.BEEHIIV_API_KEY;
-  if (!apiKey) {
-    throw new Error('BEEHIIV_API_KEY is not set');
+function getApiSecret(): string {
+  const apiSecret = process.env.CONVERTKIT_API_SECRET;
+  if (!apiSecret) {
+    throw new Error('CONVERTKIT_API_SECRET is not set');
   }
-  return apiKey;
+  return apiSecret;
 }
 
 /**
- * Get Beehiiv Publication ID from environment
+ * Get ConvertKit Form ID from environment
  */
-function getPublicationId(): string {
-  const pubId = process.env.NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID;
-  if (!pubId) {
-    throw new Error('NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID is not set');
+function getFormId(): string {
+  const formId = process.env.CONVERTKIT_FORM_ID;
+  if (!formId) {
+    throw new Error('CONVERTKIT_FORM_ID is not set');
   }
-  return pubId;
+  return formId;
 }
 
 /**
@@ -56,33 +56,30 @@ function getPublicationId(): string {
  */
 export async function subscribeToNewsletter(
   options: SubscribeOptions
-): Promise<BeehiivSubscriber | null> {
+): Promise<ConvertKitSubscriber | null> {
   try {
-    const response = await fetch(`${BEEHIIV_API_URL}/publications/${getPublicationId()}/subscriptions`, {
+    const response = await fetch(`${CONVERTKIT_API_URL}/forms/${getFormId()}/subscribe`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${getApiKey()}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        api_key: getApiSecret(),
         email: options.email,
-        reactivate_if_exists: options.reactivate_if_exists ?? true,
-        send_welcome_email: options.send_welcome_email ?? false,
-        ...(options.first_name && { first_name: options.first_name }),
-        ...(options.stage && { cohort_metadata: [{ stage: options.stage }] }),
+        firstName: options.first_name || '',
       }),
     });
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('Beehiiv subscribe error:', error);
+      console.error('ConvertKit subscribe error:', error);
       return null;
     }
 
     const data = await response.json();
-    return data.data as BeehiivSubscriber;
+    return data.subscriber as ConvertKitSubscriber;
   } catch (error) {
-    console.error('Beehiiv subscribe failed:', error);
+    console.error('ConvertKit subscribe failed:', error);
     return null;
   }
 }
@@ -90,29 +87,27 @@ export async function subscribeToNewsletter(
 /**
  * Check if an email is subscribed
  */
-export async function getSubscriber(email: string): Promise<BeehiivSubscriber | null> {
+export async function getSubscriber(email: string): Promise<ConvertKitSubscriber | null> {
   try {
     const response = await fetch(
-      `${BEEHIIV_API_URL}/publications/${getPublicationId()}/subscriptions/${encodeURIComponent(email)}`,
+      `${CONVERTKIT_API_URL}/subscribers?api_secret=${getApiSecret()}&email_address=${encodeURIComponent(email)}`,
       {
         headers: {
-          'Authorization': `Bearer ${getApiKey()}`,
+          'Content-Type': 'application/json',
         },
       }
     );
-
-    if (response.status === 404) {
-      return null;
-    }
 
     if (!response.ok) {
       return null;
     }
 
     const data = await response.json();
-    return data.data as BeehiivSubscriber;
+    // ConvertKit returns subscribers array, check if email matches
+    const subscriber = data.subscribers?.find((s: ConvertKitSubscriber) => s.email_address === email);
+    return subscriber || null;
   } catch (error) {
-    console.error('Beehiiv get subscriber failed:', error);
+    console.error('ConvertKit get subscriber failed:', error);
     return null;
   }
 }
@@ -122,52 +117,53 @@ export async function getSubscriber(email: string): Promise<BeehiivSubscriber | 
  */
 export async function unsubscribeFromNewsletter(email: string): Promise<boolean> {
   try {
-    const response = await fetch(
-      `${BEEHIIV_API_URL}/publications/${getPublicationId()}/subscriptions/${encodeURIComponent(email)}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${getApiKey()}`,
-        },
-      }
-    );
+    const response = await fetch(`${CONVERTKIT_API_URL}/unsubscribe`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        api_secret: getApiSecret(),
+        email: email,
+      }),
+    });
 
     return response.ok;
   } catch (error) {
-    console.error('Beehiiv unsubscribe failed:', error);
+    console.error('ConvertKit unsubscribe failed:', error);
     return false;
   }
 }
 
 /**
- * Add subscriber to a cohort (stage/tag)
+ * Add subscriber to a tag
  */
-export async function addToCohort(
+export async function addTag(
   email: string,
-  cohort: string
+  tagId: number
 ): Promise<boolean> {
   try {
-    const response = await fetch(
-      `${BEEHIIV_API_URL}/publications/${getPublicationId()}/subscriptions/${encodeURIComponent(email)}/cohorts`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${getApiKey()}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cohort }),
-      }
-    );
+    const response = await fetch(`${CONVERTKIT_API_URL}/tags/${tagId}/subscribe`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        api_key: getApiSecret(),
+        email: email,
+      }),
+    });
 
     return response.ok;
   } catch (error) {
-    console.error('Beehiiv add to cohort failed:', error);
+    console.error('ConvertKit add tag failed:', error);
     return false;
   }
 }
 
 /**
  * Cohort stages for The Argent Order onboarding funnel
+ * (Using ConvertKit tags)
  */
 export const COHORTS = {
   LEAD_MAGNET: 'lead_magnet_downloaded',

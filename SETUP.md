@@ -7,94 +7,57 @@
 - npm (comes with Node.js)
 - Supabase account
 - Discord developer account
-- Beehiiv account (for newsletter)
+- ConvertKit account (for newsletter)
 
 ---
 
-## Step 0: Create Beehiiv Account (Newsletter)
+## Step 0: Create ConvertKit Account (Newsletter)
 
-Beehiiv handles email capture, lead magnets, and the welcome email sequence.
+ConvertKit handles email capture, lead magnets, and the welcome email sequence.
 
-### 0.1: Sign Up for Beehiiv
+### 0.1: Sign Up for ConvertKit
 
-1. Go to **https://www.beehiiv.com**
-2. Click **"Start for free"**
+1. Go to **https://kit.com**
+2. Click **"Get Started"**
 3. Sign up with Google or email
 4. Complete onboarding wizard
 
-### 0.2: Create Your Publication
+### 0.2: Get Your API Secret
 
-1. In Beehiiv dashboard, click **"Create Publication"**
-2. Name it: `The Argent Order`
-3. Set your niche: `Catholic Formation for Men`
-4. Choose a template or skip
+1. In ConvertKit dashboard, click **Settings** (bottom left)
+2. Click **Advanced** tab
+3. Click **API** section
+4. Copy the **API Secret** → `CONVERTKIT_API_SECRET`
 
-### 0.3: Get Your Publication ID
+### 0.3: Create a Form
 
-1. Go to **Settings** (gear icon) → **Publication**
-2. Copy the **Publication ID** (starts with `pub_...`)
-3. This becomes: `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID`
+1. Click **Forms** in the sidebar
+2. Click **Create New Form**
+3. Choose **Embedded Form** style
+4. Name it: `The Argent Order Signup`
+5. Customize as needed (or use defaults)
+6. Publish the form
+7. Copy the **Form ID** from the URL (e.g., `https://app.convertkit.com/forms/YOUR_FORM_ID/edit`) → `CONVERTKIT_FORM_ID`
 
-### 0.4: Generate API Key
+### 0.4: Configure Welcome Email
 
-1. Go to **Settings** → **API Keys**
-2. Click **"Create new API key"**
-3. Name it: `The Argent Order App`
-4. Copy the key immediately (you won't see it again)
-5. This becomes: `BEEHIIV_API_KEY`
+1. In your form settings, click **Email Settings**
+2. Enable **Send confirmation email** 
+3. Customize the welcome email content
+4. Add your **Discord invite link** in this email (IMMEDIATE access!)
 
-### 0.5: Create Your Lead Magnet (The "Catholic Builder Starter Kit")
+### 0.5: Create Your Lead Magnet (Optional)
 
-Beehiiv handles delivering the lead magnet automatically.
+If you want to deliver a lead magnet:
 
-1. Go to **Audience** → **Drive Traffic** → **Recommendation**
-2. Click **"Create recommendation"**
-3. Set up your lead magnet:
+1. Go to **Landing Pages** or **Sequences**
+2. Create a sequence for your lead magnet
+3. In the welcome email, include the lead magnet download link
 
-| Field | Value |
-|-------|-------|
-| Name | Catholic Builder Starter Kit |
-| Description | Everything you need to start building a Rule of Life |
-| Delivery Method | Direct Download |
-
-4. Upload these files (create them yourself or use placeholders):
-   - Rule of Life Blueprint (PDF)
-   - 90-Day Campaign Planner (PDF)
-   - Morning Protocol Guide (PDF)
-   - Catholic Man's Oath (PDF)
-
-### 0.6: Create Your Welcome Email Sequence
-
-Beehiiv automations handle the 7-day sequence from the docs.
-
-1. Go to **Audience** → **Automations** → **Create Automation**
-2. Name it: `Welcome Sequence`
-3. Set trigger: **Subscribes to recommendation** → Select your lead magnet
-
-4. **Email 1** (Day 0 - Immediate):
-   - Subject: "Your Catholic Builder Starter Kit is ready"
-   - Include the recommendation embed
-
-5. **Email 2** (Day 1):
-   - Subject: "Why you're not where you should be"
-   - Identity content - call out the problem
-
-6. **Email 3** (Day 2):
-   - Subject: "The system that builds discipline"
-   - Introduce the 5 pillars
-
-7. **Email 4** (Day 4):
-   - Subject: "The brotherhood that doesn't let you quit"
-   - Brotherhood stories, then Discord invitation
-
-8. **Email 5** (Day 6):
-   - Subject: "Last step before you start"
-   - Commitment CTA - if serious, act now
-
-### 0.7: Get Your Discord Invite Link
+### 0.6: Get Your Discord Invite Link
 
 1. Create a Discord invite with **max age: never, max uses: unlimited**
-2. Include this link in Email 4 of your sequence
+2. Include this link in your ConvertKit welcome email (SEND IMMEDIATELY!)
 
 ---
 
@@ -212,9 +175,9 @@ DISCORD_TOKEN=MTIz...your-bot-token
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Beehiiv Newsletter (from Step 0)
-BEEHIIV_API_KEY=your-beehiiv-api-key
-NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID=pub_xxxxxxxxxxxx
+# ConvertKit Newsletter (from Step 0)
+CONVERTKIT_API_SECRET=your-convertkit-api-secret
+CONVERTKIT_FORM_ID=your-convertkit-form-id
 ```
 
 ### Environment Variables Explained
@@ -228,8 +191,8 @@ NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID=pub_xxxxxxxxxxxx
 | `DISCORD_CLIENT_SECRET` | OAuth Server | No | Discord OAuth secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Login Button | Yes | Public Discord client ID for login button |
 | `DISCORD_TOKEN` | Discord Bot | No | Bot token for slash commands |
-| `BEEHIIV_API_KEY` | Newsletter API | No | Beehiiv private API key |
-| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Join Form | Yes | Beehiiv publication ID |
+| `CONVERTKIT_API_SECRET` | Newsletter API | No | ConvertKit private API key |
+| `CONVERTKIT_FORM_ID` | Join Form | Yes | ConvertKit publication ID |
 | `NEXT_PUBLIC_APP_URL` | OAuth Redirect | Yes | Full URL of your app (for redirect URIs) |
 | `NEXT_PUBLIC_SITE_URL` | Meta Tags | Yes | Canonical URL for SEO |
 
@@ -299,8 +262,8 @@ Visit **http://localhost:3000**
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Yes | Public Discord client ID |
 | `NEXT_PUBLIC_APP_URL` | Yes | Full URL of deployed app (e.g., `https://your-app.vercel.app`) |
 | `NEXT_PUBLIC_SITE_URL` | Yes | Canonical URL for SEO |
-| `BEEHIIV_API_KEY` | Secret | Beehiiv API key |
-| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Yes | Beehiiv publication ID |
+| `CONVERTKIT_API_SECRET` | Secret | ConvertKit API key |
+| `CONVERTKIT_FORM_ID` | Yes | ConvertKit publication ID |
 
 6. Click **Deploy**
 
@@ -466,8 +429,8 @@ Once the bot is running, use these slash commands in Discord:
 | `DISCORD_CLIENT_SECRET` | Discord Developer → General → Client Secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Same as DISCORD_CLIENT_ID |
 | `DISCORD_TOKEN` | Discord Developer → Bot → Token (Reset Token) |
-| `BEEHIIV_API_KEY` | Beehiiv → Settings → API Keys |
-| `NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID` | Beehiiv → Settings → Publication → Publication ID |
+| `CONVERTKIT_API_SECRET` | ConvertKit → Settings → API Keys |
+| `CONVERTKIT_FORM_ID` | ConvertKit → Settings → Publication → Publication ID |
 | `NEXT_PUBLIC_APP_URL` | Your deployed app URL |
 | `NEXT_PUBLIC_SITE_URL` | Your deployed app URL |
 
@@ -491,9 +454,9 @@ Once the bot is running, use these slash commands in Discord:
 | CORS error | Ensure Supabase allowed domains includes localhost |
 | Bot goes offline | Use tmux/PM2 to keep it running |
 | Bot won't start | Check .env.local has correct DISCORD_TOKEN |
-| Newsletter not working | Verify BEEHIIV_API_KEY and NEXT_PUBLIC_BEEHIIV_PUBLICATION_ID are set |
-| Email capture fails silently | The app gracefully falls back - check Beehiiv dashboard for subscriber count |
-| Lead magnet not sending | Check Beehiiv automations are active and connected to recommendation |
+| Newsletter not working | Verify CONVERTKIT_API_SECRET and CONVERTKIT_FORM_ID are set |
+| Email capture fails silently | The app gracefully falls back - check ConvertKit dashboard for subscriber count |
+| Lead magnet not sending | Check ConvertKit automations are active and connected to recommendation |
 | Discord OAuth not working | Verify NEXT_PUBLIC_APP_URL matches your deployment URL exactly |
 | Discord login button missing | Check NEXT_PUBLIC_DISCORD_CLIENT_ID is set |
 | "invalid redirect_uri" error | Add callback URL to Discord OAuth2 settings in Developer Portal |
