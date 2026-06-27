@@ -22,12 +22,12 @@ ConvertKit handles email capture, lead magnets, and the welcome email sequence.
 3. Sign up with Google or email
 4. Complete onboarding wizard
 
-### 0.2: Get Your API Secret
+### 0.2: Get Your API Key
 
 1. In ConvertKit dashboard, click **Settings** (bottom left)
 2. Click **Advanced** tab
 3. Click **API** section
-4. Copy the **API Secret** → `CONVERTKIT_API_SECRET`
+4. Copy the **API Key** → `CONVERTKIT_API_KEY`
 
 ### 0.3: Create a Form
 
@@ -176,7 +176,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 # ConvertKit Newsletter (from Step 0)
-CONVERTKIT_API_SECRET=your-convertkit-api-secret
+CONVERTKIT_API_KEY=your-convertkit-api-secret
 CONVERTKIT_FORM_ID=your-convertkit-form-id
 ```
 
@@ -191,7 +191,7 @@ CONVERTKIT_FORM_ID=your-convertkit-form-id
 | `DISCORD_CLIENT_SECRET` | OAuth Server | No | Discord OAuth secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Login Button | Yes | Public Discord client ID for login button |
 | `DISCORD_TOKEN` | Discord Bot | No | Bot token for slash commands |
-| `CONVERTKIT_API_SECRET` | Newsletter API | No | ConvertKit private API key |
+| `CONVERTKIT_API_KEY` | Newsletter API | No | ConvertKit private API key |
 | `CONVERTKIT_FORM_ID` | Join Form | Yes | ConvertKit publication ID |
 | `NEXT_PUBLIC_APP_URL` | OAuth Redirect | Yes | Full URL of your app (for redirect URIs) |
 | `NEXT_PUBLIC_SITE_URL` | Meta Tags | Yes | Canonical URL for SEO |
@@ -262,7 +262,7 @@ Visit **http://localhost:3000**
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Yes | Public Discord client ID |
 | `NEXT_PUBLIC_APP_URL` | Yes | Full URL of deployed app (e.g., `https://your-app.vercel.app`) |
 | `NEXT_PUBLIC_SITE_URL` | Yes | Canonical URL for SEO |
-| `CONVERTKIT_API_SECRET` | Secret | ConvertKit API key |
+| `CONVERTKIT_API_KEY` | Secret | ConvertKit API key |
 | `CONVERTKIT_FORM_ID` | Yes | ConvertKit publication ID |
 
 6. Click **Deploy**
@@ -429,7 +429,7 @@ Once the bot is running, use these slash commands in Discord:
 | `DISCORD_CLIENT_SECRET` | Discord Developer → General → Client Secret |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Same as DISCORD_CLIENT_ID |
 | `DISCORD_TOKEN` | Discord Developer → Bot → Token (Reset Token) |
-| `CONVERTKIT_API_SECRET` | ConvertKit → Settings → API Keys |
+| `CONVERTKIT_API_KEY` | ConvertKit → Settings → API Keys |
 | `CONVERTKIT_FORM_ID` | ConvertKit → Settings → Publication → Publication ID |
 | `NEXT_PUBLIC_APP_URL` | Your deployed app URL |
 | `NEXT_PUBLIC_SITE_URL` | Your deployed app URL |
@@ -454,7 +454,7 @@ Once the bot is running, use these slash commands in Discord:
 | CORS error | Ensure Supabase allowed domains includes localhost |
 | Bot goes offline | Use tmux/PM2 to keep it running |
 | Bot won't start | Check .env.local has correct DISCORD_TOKEN |
-| Newsletter not working | Verify CONVERTKIT_API_SECRET and CONVERTKIT_FORM_ID are set |
+| Newsletter not working | Verify CONVERTKIT_API_KEY and CONVERTKIT_FORM_ID are set |
 | Email capture fails silently | The app gracefully falls back - check ConvertKit dashboard for subscriber count |
 | Lead magnet not sending | Check ConvertKit automations are active and connected to recommendation |
 | Discord OAuth not working | Verify NEXT_PUBLIC_APP_URL matches your deployment URL exactly |

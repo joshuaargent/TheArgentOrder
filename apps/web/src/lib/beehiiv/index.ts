@@ -4,6 +4,8 @@
  * Handles email capture and newsletter subscription for The Argent Order.
  * 
  * Docs: https://developers.kit.com/
+ * 
+ * Uses V3 API for third-party integrations.
  */
 
 const CONVERTKIT_API_URL = 'https://api.convertkit.com/v3';
@@ -30,14 +32,15 @@ export interface ConvertKitError {
 }
 
 /**
- * Get ConvertKit API secret from environment
+ * Get ConvertKit API key from environment
+ * Use the V3 API Key for third-party integrations
  */
-function getApiSecret(): string {
-  const apiSecret = process.env.CONVERTKIT_API_SECRET;
-  if (!apiSecret) {
-    throw new Error('CONVERTKIT_API_SECRET is not set');
+function getApiKey(): string {
+  const apiKey = process.env.CONVERTKIT_API_KEY;
+  if (!apiKey) {
+    throw new Error('CONVERTKIT_API_KEY is not set');
   }
-  return apiSecret;
+  return apiKey;
 }
 
 /**
@@ -64,7 +67,7 @@ export async function subscribeToNewsletter(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        api_key: getApiSecret(),
+        api_key: getApiKey(),
         email: options.email,
         firstName: options.first_name || '',
       }),
@@ -90,7 +93,7 @@ export async function subscribeToNewsletter(
 export async function getSubscriber(email: string): Promise<ConvertKitSubscriber | null> {
   try {
     const response = await fetch(
-      `${CONVERTKIT_API_URL}/subscribers?api_secret=${getApiSecret()}&email_address=${encodeURIComponent(email)}`,
+      `${CONVERTKIT_API_URL}/subscribers?api_key=${getApiKey()}&email_address=${encodeURIComponent(email)}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +126,7 @@ export async function unsubscribeFromNewsletter(email: string): Promise<boolean>
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        api_secret: getApiSecret(),
+        api_key: getApiKey(),
         email: email,
       }),
     });
@@ -149,7 +152,7 @@ export async function addTag(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        api_key: getApiSecret(),
+        api_key: getApiKey(),
         email: email,
       }),
     });
