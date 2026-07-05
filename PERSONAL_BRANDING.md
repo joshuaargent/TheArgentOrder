@@ -32,10 +32,25 @@ Execute. Build. Lead.
 
 **Channel Name:** Joshua Argent
 
-**Bio:**
+**Bio (5000 char limit - detailed):**
 ```
 ⚔️ Catholic men. Formed in discipline.
+
+I help Catholic men become men of action.
+
+The Argent Order is a formation ecosystem for builders who take their faith and discipline seriously.
+
+Weeks content:
+- Catholic formation and masculinity
+- Building habits that stick
+- Brotherhood and accountability
+- Launching projects and businesses
+
+Not a community. A forge.
+
 Execute. Build. Lead.
+
+→ theargentorder.vercel.app/join
 ```
 
 **Banner (1568x423):**
@@ -54,19 +69,25 @@ Catholic Men. Execute. Build. Lead.
 Founder | The Argent Order — Catholic Formation for Builders
 ```
 
-**About:**
+**About (optimized for professional context):**
 ```
 ⚔️ Catholic men. Formed in discipline.
 
 I help Catholic men become men of action who build lasting legacy.
 
-The Argent Order is not a community. It's a forge.
-Not motivation. Formation.
-Not excuses. Execution.
+The Argent Order is a Catholic formation ecosystem designed for builders—developers, entrepreneurs, professionals, and tradesmen who take their faith seriously.
+
+We don't do motivation. We do formation.
+
+What we offer:
+• Structured accountability through pods
+• Campaign-based habit building
+• Brotherhood that actually works
+• Tools to track spiritual and professional growth
 
 5 Pillars: Faith ⚡ Discipline ⚡ Brotherhood ⚡ Building ⚡ Truth
 
-👉 theargentorder.vercel.app/join
+Join the mission → theargentorder.vercel.app/join
 ```
 
 ---
@@ -78,7 +99,11 @@ Not excuses. Execution.
 **Description:**
 ```
 ⚔️ Catholic men. Formed in discipline.
-Execute. Build. Lead.
+
+Weekly formation directives for Catholic builders.
+Accountability. Brotherhood. Execution.
+
+Not a newsletter. A formation system.
 ```
 
 ---
