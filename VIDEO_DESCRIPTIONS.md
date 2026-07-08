@@ -4,36 +4,17 @@
 
 ---
 
-## THE TEMPLATE
+## VIDEO TEMPLATE
 
 ```
 ⚔️ Catholic men. Formed in discipline.
-Execute. Build. Lead.
 
-[Video topic/hook]
+[One-liner that hooks]
 
-Pods of 5-8 men. Weekly meetings. Daily roll-call.
+Pods. Execute. Transform.
 Not a community. A forge.
 
-→ theargentorder.vercel.app
-```
-
----
-
-## YOUTUBE (under video)
-
-```
-⚔️ Catholic men. Formed in discipline.
-Execute. Build. Lead.
-
-[Video topic/hook]
-
-Pods of 5-8 men. Weekly meetings. Daily roll-call.
-Not a community. A forge.
-
-→ theargentorder.vercel.app
-
-#Catholic #Masculinity #Formation
+→ theargentorder.vercel.app/join
 ```
 
 ---
@@ -43,7 +24,7 @@ Not a community. A forge.
 ```
 ⚔️ Catholic men. Formed in discipline.
 [One-liner hook]
-→ theargentorder.vercel.app
+→ theargentorder.vercel.app/join
 ```
 
 ---
@@ -52,21 +33,14 @@ Not a community. A forge.
 
 ```
 ⚔️ Catholic men. Formed in discipline.
-Execute. Build. Lead.
 
 In this episode: [Topic]
 
-[3-4 bullet points of what's covered]
+[3-4 bullet points]
 
-Pods. Roll-call. Execute.
+Pods. Execute. Transform.
 
-→ theargentorder.vercel.app
-
-Timestamps:
-[00:00] Intro
-[XX:XX] [Point 1]
-[XX:XX] [Point 2]
-[XX:XX] [Point 3]
+→ theargentorder.vercel.app/join
 ```
 
 ---
@@ -77,7 +51,7 @@ Timestamps:
 ```
 ⚔️ Catholic men. Formed in discipline.
 Execute. Build. Lead.
-→ theargentorder.vercel.app
+→ theargentorder.vercel.app/join
 ```
 
 **YouTube Channel:**
@@ -85,10 +59,10 @@ Execute. Build. Lead.
 ⚔️ Catholic men. Formed in discipline.
 Execute. Build. Lead.
 
-Pods. Roll-call. Execute.
+Pods. Execute. Transform.
 Not a community. A forge.
 
-→ theargentorder.vercel.app
+→ theargentorder.vercel.app/join
 ```
 
 **LinkedIn:**
@@ -98,20 +72,21 @@ Execute. Build. Lead.
 
 Founder | The Argent Order — Catholic Formation for Builders
 
-Pods. Roll-call. Execute.
+Pods. Execute. Transform.
 Not a community. A forge.
 
-→ theargentorder.vercel.app
+→ theargentorder.vercel.app/join
 ```
 
 ---
 
 ## KEY PHRASES
 
-- ⚔️ Catholic men. Formed in discipline. Execute. Build. Lead.
-- Pods. Roll-call. Execute.
+- ⚔️ Catholic men. Formed in discipline.
+- Execute. Build. Lead.
+- Pods. Execute. Transform.
 - Not a community. A forge.
-- → theargentorder.vercel.app
+- → theargentorder.vercel.app/join
 
 ---
 
