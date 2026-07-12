@@ -371,7 +371,7 @@ async function setupServer(guild: any) {
     if (!role) {
       role = await guild.roles.create({
         name: roleDef.name,
-        color: roleDef.color as any,
+        color: roleDef.color as any, // Note: discord.js expects hex number
         hoist: roleDef.hoist,
         position: roleDef.position,
       });
@@ -380,7 +380,7 @@ async function setupServer(guild: any) {
       // Update existing role
       if (role.color !== roleDef.color || role.hoist !== roleDef.hoist) {
         await role.edit({
-          color: roleDef.color as any,
+          color: roleDef.color as any, // Note: discord.js expects hex number
           hoist: roleDef.hoist,
         });
         rolesUpdated++;
@@ -430,13 +430,10 @@ async function setupServer(guild: any) {
       );
 
       if (!existingChannel) {
-        const channelType = chDef.type === "announcement" 
-          ? ChannelType.GuildAnnouncement 
-          : ChannelType.GuildText;
-        
+        // GuildAnnouncement (type 5) is deprecated - use GuildText (type 0) instead
         const channelOptions: any = {
           name: chDef.name,
-          type: channelType,
+          type: ChannelType.GuildText,
           parent: category.id,
           topic: chDef.description,
         };
