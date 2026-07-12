@@ -1,3 +1,10 @@
-# Supabase CLI config for remote project
-# Run: supabase link --project-ref bracuigjapiihjzsujvn
-# Then: supabase db push
+# Supabase CLI for remote management
+[project]
+project_id = "bracuigjapiihjzsujvn"
+
+[api]
+enabled = true
+
+[db]
+port = 5432
+major_version = 15
