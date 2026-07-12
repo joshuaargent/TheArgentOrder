@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { subscribeToNewsletter, LEAD_MAGNETS, COHORTS } from '@/lib/beehiiv';
+import { subscribeToNewsletter, LEAD_MAGNETS, COHORTS } from '@/lib/resend';
 
 export async function POST(request: NextRequest) {
   try {
