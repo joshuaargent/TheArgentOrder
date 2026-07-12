@@ -27,7 +27,8 @@ async function registerCommands() {
   const commandFiles = client.commands;
 
   for (const [name, command] of commandFiles) {
-    commands.push(command.data.toJSON());
+    const cmd = command as { data: { toJSON: () => unknown } };
+    commands.push(cmd.data.toJSON());
   }
 
   const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN!);
