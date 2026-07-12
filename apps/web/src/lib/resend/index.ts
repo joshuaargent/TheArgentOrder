@@ -31,6 +31,16 @@ function getApiKey(): string {
 }
 
 /**
+ * Get the configured from email address
+ * Must be your verified domain email OR your account email (for free tier)
+ */
+function getFromEmail(): string {
+  // Use environment variable if set, otherwise default to account email
+  // For Resend free tier, this must match your account email
+  return process.env.RESEND_FROM_EMAIL || 'argentjackjoshua@outlook.com';
+}
+
+/**
  * Get the Discord invite link from environment
  */
 function getDiscordInviteUrl(): string {
@@ -43,6 +53,7 @@ function getDiscordInviteUrl(): string {
 export async function sendWelcomeEmail(options: EmailOptions): Promise<boolean> {
   try {
     const discordLink = getDiscordInviteUrl();
+    const fromEmail = getFromEmail();
     
     const response = await fetch(`${RESEND_API_URL}/emails`, {
       method: 'POST',
@@ -51,7 +62,7 @@ export async function sendWelcomeEmail(options: EmailOptions): Promise<boolean> 
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'The Argent Order <onboarding@resend.dev>',
+        from: `The Argent Order <${fromEmail}>`,
         to: options.to,
         subject: 'Welcome to The Argent Order',
         html: `
