@@ -17,13 +17,13 @@ export default {
     try {
       await command.execute(interaction);
     } catch (error: any) {
-      console.error(`Command failed: ${interaction.commandName}:`, error);
-      
       // Check if error is "Unknown interaction" (interaction expired)
       if (error?.code === 10062) {
-        console.error(`Interaction ${interaction.id} expired before response.`);
-        return;
+        console.error(`Command ${interaction.commandName}: Interaction expired (${error.code})`);
+        return; // Don't try to respond - interaction is dead
       }
+      
+      console.error(`Command failed: ${interaction.commandName}:`, error);
       
       try {
         if (interaction.replied || interaction.deferred) {
@@ -38,7 +38,7 @@ export default {
           });
         }
       } catch (followUpError: any) {
-        // If even the followUp fails, interaction is likely expired
+        // If followUp fails, the interaction is likely expired
         if (followUpError?.code !== 10062) {
           console.error(`Failed to send error response:`, followUpError);
         }
