@@ -5,13 +5,13 @@ import type { BotClient } from "../index";
 export async function loadEvents(client: BotClient) {
   const eventsPath = join(__dirname, "../events");
   const eventFiles = readdirSync(eventsPath).filter((file) =>
-    file.endsWith(".ts")
+    file.endsWith(".js")
   );
 
   console.log(`Loading ${eventFiles.length} events...`);
 
   for (const file of eventFiles) {
-    const event = await import(join(eventsPath, file));
+    const event = require(join(eventsPath, file));
     const eventData = event.default;
 
     if (eventData?.name) {

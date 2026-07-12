@@ -5,13 +5,13 @@ import type { BotClient } from "../index";
 export async function loadCommands(client: BotClient) {
   const commandsPath = join(__dirname, "../commands");
   const commandFiles = readdirSync(commandsPath).filter((file) =>
-    file.endsWith(".ts")
+    file.endsWith(".js")
   );
 
   console.log(`Loading ${commandFiles.length} commands...`);
 
   for (const file of commandFiles) {
-    const command = await import(join(commandsPath, file));
+    const command = require(join(commandsPath, file));
     const commandData = command.default;
 
     if (commandData?.data?.name) {
