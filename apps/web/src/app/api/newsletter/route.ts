@@ -28,19 +28,14 @@ export async function POST(request: NextRequest) {
       cohort = LEAD_MAGNETS[leadMagnet as keyof typeof LEAD_MAGNETS].cohort;
     }
 
-    // Subscribe to ConvertKit
+    // Subscribe via Resend (sends welcome email with Discord link)
     const subscriber = await subscribeToNewsletter({
       email,
       first_name: firstName,
-      reactivate_if_exists: true,
-      send_welcome_email: true,
-      stage: cohort,
     });
 
     if (!subscriber) {
-      // If ConvertKit fails, still return success to not block the user
-      // We can sync later via webhook or manual process
-      console.warn('ConvertKit subscription failed, email captured locally');
+      console.warn('Newsletter subscription failed');
       
       return NextResponse.json({
         success: true,
@@ -53,8 +48,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Successfully subscribed to newsletter',
       subscriber: {
-        email: subscriber.email_address,
-        status: subscriber.state,
+        email: subscriber.email,
       },
     });
   } catch (error) {
@@ -68,7 +62,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: 'Newsletter subscription API (ConvertKit)',
+    message: 'Newsletter subscription API (Resend)',
     endpoints: {
       POST: 'Subscribe to newsletter',
     },
