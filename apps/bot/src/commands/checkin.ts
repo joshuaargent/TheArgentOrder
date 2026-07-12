@@ -8,13 +8,13 @@ import { supabase } from "../index";
 // Argent Order brand colors
 const ARGENT_SILVER = 0xa1a1aa;
 
-const ACTIVITY_POINTS: Record<string, number> = {
+const ACTIVITY_POINTS = {
   prayer: 10,
   workout: 10,
   deep_work: 15,
   scripture: 5,
   fellowship: 10,
-};
+} as const;
 
 const PILLAR_ICONS: Record<string, string> = {
   faith: "✝️",

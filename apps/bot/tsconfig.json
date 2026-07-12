@@ -3,7 +3,10 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "CommonJS",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {

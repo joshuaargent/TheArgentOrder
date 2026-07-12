@@ -441,7 +441,7 @@ async function setupServer(guild: any) {
         };
 
         // Set permissions for private channels
-        if (chDef.private || catDef.private) {
+        if ((chDef as any).private || (catDef as any).private) {
           const overwrites: any[] = [{ id: everyoneRole.id, deny: [PermissionFlagsBits.ViewChannel] }];
           for (const [name, role] of roleMap) {
             if (canViewPrivate(name)) {

@@ -82,7 +82,7 @@ async function showPodInfo(interaction: ChatInputCommandInteraction) {
     return;
   }
 
-  const pod = membership.pods;
+  const pod = membership.pods as any;
   const { data: meetings } = await supabase
     .from("pod_meetings")
     .select("*")

@@ -12,14 +12,6 @@ const MOD_RED = 0xef4444;
 const MOD_YELLOW = 0xf59e0b;
 const MOD_GREEN = 0x10b981;
 
-type ModAction = "warn" | "mute" | "kick" | "ban";
-
-interface ModConfig {
-  enabled: boolean;
-  duration?: number; // in minutes
-  reason?: string;
-}
-
 export default {
   data: new SlashCommandBuilder()
     .setName("admin")
@@ -231,7 +223,7 @@ export default {
 
     // Try to DM the user
     try {
-      const dm = await targetUser.send({
+      await targetUser.send({
         embeds: [
           new EmbedBuilder()
             .setTitle("⚠️ You've Received a Warning")
@@ -397,7 +389,7 @@ export default {
     const channel = interaction.options.getChannel("channel") || interaction.channel;
     const reason = interaction.options.getString("reason") || "Moderation lockdown";
 
-    if (!channel?.isTextBased()) {
+    if (!channel || !("send" in channel)) {
       await interaction.editReply({ content: "⚠️ Please select a text channel." });
       return;
     }
@@ -405,11 +397,13 @@ export default {
     try {
       if (action === "lock") {
         // Remove send messages permission from @everyone
-        await channel.permissionOverwrites.edit(
-          interaction.guild?.roles.everyone!,
-          { SendMessages: false },
-          { reason: reason }
-        );
+        if ("permissionOverwrites" in channel) {
+          await channel.permissionOverwrites.edit(
+            interaction.guild?.roles.everyone!,
+            { SendMessages: false },
+            { reason: reason }
+          );
+        }
 
         const embed = new EmbedBuilder()
           .setTitle("🔒 Channel Locked")
@@ -424,22 +418,26 @@ export default {
         await interaction.editReply({ embeds: [embed] });
 
         // Send confirmation in channel
-        await channel.send({
-          embeds: [
-            new EmbedBuilder()
-              .setTitle("🔒 Channel Locked")
-              .setDescription(reason)
-              .setColor(MOD_YELLOW)
-              .setTimestamp(),
-          ],
-        });
+        if ("send" in channel) {
+          await channel.send({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("🔒 Channel Locked")
+                .setDescription(reason)
+                .setColor(MOD_YELLOW)
+                .setTimestamp(),
+            ],
+          });
+        }
       } else {
         // Restore send messages permission
-        await channel.permissionOverwrites.edit(
-          interaction.guild?.roles.everyone!,
-          { SendMessages: null },
-          { reason: "Lockdown lifted" }
-        );
+        if ("permissionOverwrites" in channel) {
+          await channel.permissionOverwrites.edit(
+            interaction.guild?.roles.everyone!,
+            { SendMessages: null },
+            { reason: "Lockdown lifted" }
+          );
+        }
 
         const embed = new EmbedBuilder()
           .setTitle("🔓 Channel Unlocked")
@@ -454,15 +452,17 @@ export default {
         await interaction.editReply({ embeds: [embed] });
 
         // Send confirmation in channel
-        await channel.send({
-          embeds: [
-            new EmbedBuilder()
-              .setTitle("🔓 Channel Unlocked")
-              .setDescription("Normal operations have resumed.")
-              .setColor(MOD_GREEN)
-              .setTimestamp(),
-          ],
-        });
+        if ("send" in channel) {
+          await channel.send({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("🔓 Channel Unlocked")
+                .setDescription("Normal operations have resumed.")
+                .setColor(MOD_GREEN)
+                .setTimestamp(),
+            ],
+          });
+        }
       }
     } catch (error) {
       console.error("Failed to update channel permissions:", error);
@@ -482,7 +482,7 @@ export default {
       ? interaction.client.channels.cache.get(channelId)
       : interaction.guild?.channels.cache.find((ch) => ch.name === "announcements");
 
-    if (!targetChannel || !targetChannel.isTextBased()) {
+    if (!targetChannel || !("send" in targetChannel)) {
       await interaction.editReply({ content: "⚠️ Announcement channel not found." });
       return;
     }
@@ -495,7 +495,9 @@ export default {
       .setFooter({ text: `Announced by ${interaction.user.username}` });
 
     try {
-      await targetChannel.send({ embeds: [embed] });
+      if ("send" in targetChannel) {
+        await targetChannel.send({ embeds: [embed] });
+      }
       
       const replyEmbed = new EmbedBuilder()
         .setTitle("✅ Announcement Sent")

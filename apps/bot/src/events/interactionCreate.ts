@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, type ChatInputCommandInteraction } from "discord.js";
+import { type ChatInputCommandInteraction } from "discord.js";
 import type { BotClient } from "../index";
 
 export default {
@@ -7,7 +7,7 @@ export default {
   async execute(client: BotClient, interaction: ChatInputCommandInteraction) {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = client.commands.get(interaction.commandName);
+    const command = client.commands.get(interaction.commandName) as any;
 
     if (!command) {
       console.error(`No command matching ${interaction.commandName} was found.`);

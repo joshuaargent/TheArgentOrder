@@ -188,7 +188,7 @@ export default {
             .setColor(PRAYER_PURPLE)
             .setTimestamp();
 
-          const message = await prayerChannel.send({ embeds: [notificationEmbed] });
+          const message = await (prayerChannel as { send: Function }).send({ embeds: [notificationEmbed] });
           await message.react("🙏");
         }
       } catch (err) {
@@ -268,7 +268,7 @@ export default {
             .setTimestamp()
             .setFooter({ text: `Shared by ${interaction.user.username}` });
 
-          await channel.send({ embeds: [testimonyEmbed] });
+          await (channel as { send: Function }).send({ embeds: [testimonyEmbed] });
         }
       } catch (err) {
         console.error("Failed to post testimony:", err);

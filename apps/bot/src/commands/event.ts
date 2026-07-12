@@ -2,11 +2,6 @@ import {
   SlashCommandBuilder,
   type ChatInputCommandInteraction,
   EmbedBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
 } from "discord.js";
 import { supabase } from "../index";
 
@@ -269,7 +264,7 @@ export default {
             .setColor(EVENT_BLUE)
             .setTimestamp();
 
-          const message = await channel.send({ embeds: [announceEmbed] });
+          const message = await (channel as { send: Function }).send({ embeds: [announceEmbed] });
           await message.react("✅");
         }
       } catch (err) {

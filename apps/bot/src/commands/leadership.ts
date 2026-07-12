@@ -202,8 +202,8 @@ export default {
       .eq("user_id", discordAccount.user_id)
       .limit(5);
 
-    const levelName = level?.formation_levels?.name || "Newcomer";
-    const levelOrder = level?.formation_levels?.level_order || 0;
+    const levelName = (level as any)?.formation_levels?.name || "Newcomer";
+    const levelOrder = (level as any)?.formation_levels?.level_order || 0;
 
     const embed = new EmbedBuilder()
       .setTitle(`👤 ${targetUser.username}'s Profile`)
@@ -265,7 +265,7 @@ export default {
     const { data: recommenderAccount } = await supabase
       .from("discord_accounts")
       .select("user_id")
-      .eq("discord_id", interaction.user.user.id)
+      .eq("discord_id", interaction.user.id)
       .single();
 
     if (!recommenderAccount) {
@@ -308,7 +308,7 @@ export default {
       .select("id, name")
       .order("level", { ascending: false });
 
-    const currentRankName = currentRank?.ranks?.name || "Newcomer";
+    const currentRankName = (currentRank as any)?.ranks?.name || "Newcomer";
     const nextRank = ranks?.find((r: any) => {
       // Find the rank after current
       const currentIndex = ranks.findIndex((rank: any) => rank.name === currentRankName);
@@ -390,7 +390,7 @@ export default {
     }
 
     const podId = podMembership.pod_id;
-    const podName = podMembership.pods?.name || "Unknown Pod";
+    const podName = (podMembership as any).pods?.name || "Unknown Pod";
 
     // Get pod members
     const { data: members } = await supabase

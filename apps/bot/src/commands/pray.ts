@@ -8,14 +8,14 @@ import { supabase } from "../index";
 // Argent Order brand colors
 const ARGENT_SILVER = 0xa1a1aa;
 
-const PRAYER_TYPES: Record<string, { name: string; multiplier: number; icon: string }> = {
+const PRAYER_TYPES = {
   morning: { name: "Morning Prayer", multiplier: 1.2, icon: "🛐" },
   general: { name: "General Prayer", multiplier: 1.0, icon: "🙏" },
   scripture: { name: "Scripture Prayer", multiplier: 1.5, icon: "📖" },
   rosary: { name: "Rosary", multiplier: 2.0, icon: "🌹" },
   mass: { name: "Mass", multiplier: 3.0, icon: "💒" },
   examen: { name: "Examen", multiplier: 1.5, icon: "💭" },
-};
+} as const;
 
 export default {
   data: new SlashCommandBuilder()
@@ -69,7 +69,7 @@ export default {
 
     // Calculate points based on duration and type
     const basePoints = Math.floor(duration / 5) * 5;
-    const typeConfig = PRAYER_TYPES[prayerType] || PRAYER_TYPES.general;
+    const typeConfig = PRAYER_TYPES[prayerType as keyof typeof PRAYER_TYPES] ?? PRAYER_TYPES.general;
     const points = Math.floor(basePoints * typeConfig.multiplier);
 
     // Log the formation event

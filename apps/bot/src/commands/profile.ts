@@ -75,7 +75,7 @@ export default {
         .setTitle(`${profile?.display_name || targetUser.username}'s FORMATION PROFILE`)
         .setThumbnail(targetUser.displayAvatarURL())
         .addFields(
-          { name: "Rank", value: `**${userRank?.ranks?.name || "Initiate"}**`, inline: true },
+          { name: "Rank", value: `**${(userRank as any)?.ranks?.name || "Initiate"}**`, inline: true },
           { name: "Overall Score", value: `**${scores?.overall_score || 0}**`, inline: true }
         )
         .addFields(

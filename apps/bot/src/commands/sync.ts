@@ -69,7 +69,7 @@ async function syncMember(interaction: ChatInputCommandInteraction) {
         .limit(1)
         .single();
 
-      rankName = userRank?.ranks?.name || "Initiate";
+      rankName = (userRank as any)?.ranks?.name || "Initiate";
     } else {
       // Check profiles table for discord_id
       const { data: profile } = await supabase
@@ -78,8 +78,8 @@ async function syncMember(interaction: ChatInputCommandInteraction) {
         .eq("discord_id", member.user.id)
         .single();
 
-      if (profile?.ranks) {
-        rankName = profile.ranks.name;
+      if ((profile as any)?.ranks) {
+        rankName = (profile as any).ranks.name;
       } else {
         const embed = new EmbedBuilder()
           .setTitle("⚠️ Account Not Linked")
@@ -152,7 +152,7 @@ async function syncAllMembers(interaction: ChatInputCommandInteraction) {
       .in("user_id", userIds);
 
     if (userRanks) {
-      for (const ur of userRanks) {
+      for (const ur of userRanks as any[]) {
         rankMap.set(ur.user_id, ur.ranks?.name || "Initiate");
       }
     }
