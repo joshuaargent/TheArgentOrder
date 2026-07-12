@@ -1,5 +1,6 @@
 import { Events, type GuildMember } from "discord.js";
 import { EMBED_COLORS, GUILD_ID } from "../lib/constants";
+import { supabase } from "../index";
 import type { BotClient } from "../index";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 
       // Try to assign new member role
       await assignNewMemberRole(member);
+
+      // Auto-assign to pod if linked
+      await autoAssignPod(member);
 
     } catch (error) {
       console.error("Error in guildMemberAdd event:", error);
@@ -103,5 +107,104 @@ async function assignNewMemberRole(member: GuildMember) {
     }
   } catch (error) {
     console.error("Error assigning role:", error);
+  }
+}
+
+async function autoAssignPod(member: GuildMember) {
+  try {
+    // Check if user is already linked
+    const { data: discordAccount } = await supabase
+      .from("discord_accounts")
+      .select("user_id")
+      .eq("discord_id", member.id)
+      .single();
+
+    if (!discordAccount) {
+      console.log(`User ${member.user.tag} not linked yet - skipping pod assignment`);
+      return;
+    }
+
+    // Check if already in a pod
+    const { data: existingMembership } = await supabase
+      .from("pod_members")
+      .select("id")
+      .eq("user_id", discordAccount.user_id)
+      .single();
+
+    if (existingMembership) {
+      console.log(`User ${member.user.tag} already in a pod - skipping`);
+      return;
+    }
+
+    // Find a pod with available capacity (target: 5 members max)
+    const { data: pods } = await supabase
+      .from("pods")
+      .select("id, name")
+      .eq("active", true)
+      .order("created_at", { ascending: true });
+
+    if (!pods || pods.length === 0) {
+      console.log(`No active pods found - cannot auto-assign ${member.user.tag}`);
+      return;
+    }
+
+    // Find pod with least members
+    let selectedPod = null;
+    let minMembers = Infinity;
+
+    for (const pod of pods) {
+      const { count } = await supabase
+        .from("pod_members")
+        .select("*", { count: "exact", head: true })
+        .eq("pod_id", pod.id);
+
+      if (count !== null && count < 5 && count < minMembers) {
+        minMembers = count || 0;
+        selectedPod = pod;
+      }
+    }
+
+    // If all pods are full, use the one with fewest members
+    if (!selectedPod && pods.length > 0) {
+      let minCount = Infinity;
+      for (const pod of pods) {
+        const { count } = await supabase
+          .from("pod_members")
+          .select("*", { count: "exact", head: true })
+          .eq("pod_id", pod.id);
+        if ((count || 0) < minCount) {
+          minCount = count || 0;
+          selectedPod = pod;
+        }
+      }
+    }
+
+    if (!selectedPod) {
+      console.log(`Could not find available pod for ${member.user.tag}`);
+      return;
+    }
+
+    // Assign user to pod
+    await supabase.from("pod_members").insert({
+      pod_id: selectedPod.id,
+      user_id: discordAccount.user_id,
+      role: "member",
+    });
+
+    console.log(`Auto-assigned ${member.user.tag} to pod ${selectedPod.name}`);
+
+    // Try to DM user about pod assignment
+    try {
+      await member.send(
+        `🔥 You've been assigned to **${selectedPod.name}**!\n\n` +
+        `Your pod is your accountability unit. Execute together.\n\n` +
+        `Use /pod info to see your pod details.`
+      );
+    } catch {
+      // DM might fail if user has DMs disabled
+    }
+
+  } catch (error) {
+    console.error("Error auto-assigning pod:", error);
   }
 }

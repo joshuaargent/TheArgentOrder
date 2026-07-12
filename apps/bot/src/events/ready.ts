@@ -1,7 +1,7 @@
 import type { BotClient } from "../index";
 
 export default {
-  name: "ready",
+  name: "clientReady",
   once: true,
   async execute(client: BotClient) {
     console.log(`⚔️ The Argent Order Bot is online.`);
