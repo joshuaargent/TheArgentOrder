@@ -151,7 +151,7 @@ export async function subscribeToNewsletter(
   };
 }
 
-export async function getSubscriber(email: string): Promise<{ id: string; email: string } | null> {
+export async function getSubscriber(_email: string): Promise<{ id: string; email: string } | null> {
   return null;
 }
 
