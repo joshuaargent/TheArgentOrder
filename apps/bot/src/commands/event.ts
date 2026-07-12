@@ -44,16 +44,16 @@ export default {
         )
         .addStringOption((option) =>
           option
+            .setName("date")
+            .setDescription("Date and time (YYYY-MM-DD HH:MM)")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
             .setName("description")
             .setDescription("Event description")
             .setRequired(false)
             .setMaxLength(500)
-        )
-        .addStringOption((option) =>
-          option
-            .setName("date")
-            .setDescription("Date and time (YYYY-MM-DD HH:MM)")
-            .setRequired(true)
         )
         .addStringOption((option) =>
           option

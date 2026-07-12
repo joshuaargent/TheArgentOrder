@@ -45,15 +45,15 @@ export default {
         )
         .addStringOption((option) =>
           option
-            .setName("duration")
-            .setDescription("Duration in minutes (default: 30)")
-            .setRequired(false)
-        )
-        .addStringOption((option) =>
-          option
             .setName("reason")
             .setDescription("Reason for muting")
             .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("duration")
+            .setDescription("Duration in minutes (default: 30)")
+            .setRequired(false)
         )
     )
     .addSubcommand((subcommand) =>
