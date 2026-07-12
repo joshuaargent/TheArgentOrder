@@ -3,6 +3,7 @@ import {
   type ChatInputCommandInteraction,
   EmbedBuilder,
   GuildMember,
+  MessageFlags,
 } from "discord.js";
 import { supabase } from "../index";
 
@@ -24,7 +25,7 @@ export default {
     if (syncAll && !isAdmin) {
       await interaction.reply({
         content: "⚠️ Only administrators can sync all members.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -38,7 +39,7 @@ export default {
 };
 
 async function syncMember(interaction: ChatInputCommandInteraction) {
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   const member = interaction.member as GuildMember;
   
@@ -110,7 +111,7 @@ async function syncMember(interaction: ChatInputCommandInteraction) {
 }
 
 async function syncAllMembers(interaction: ChatInputCommandInteraction) {
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   const guild = interaction.guild;
   

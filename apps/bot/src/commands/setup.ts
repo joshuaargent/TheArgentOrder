@@ -4,6 +4,7 @@ import {
   EmbedBuilder,
   ChannelType,
   PermissionFlagsBits,
+  MessageFlags,
 } from "discord.js";
 import { supabase } from "../index";
 
@@ -313,7 +314,7 @@ export default {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
   async execute(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const guild = interaction.guild;
     

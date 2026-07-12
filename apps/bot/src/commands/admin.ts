@@ -3,6 +3,7 @@ import {
   type ChatInputCommandInteraction,
   EmbedBuilder,
   GuildMember,
+  MessageFlags,
 } from "discord.js";
 import { supabase } from "../index";
 
@@ -171,7 +172,7 @@ export default {
         .setDescription("This command is only available to administrators.")
         .setColor(0xf59e0b)
         .setTimestamp();
-      await interaction.reply({ embeds: [embed], ephemeral: true });
+      await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
       return;
     }
 
@@ -203,7 +204,7 @@ export default {
   },
 
   async handleWarn(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const targetUser = interaction.options.getUser("member", true);
     const reason = interaction.options.getString("reason", true);
@@ -241,7 +242,7 @@ export default {
   },
 
   async handleMute(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const targetMember = interaction.options.getMember("member") as GuildMember;
     const duration = interaction.options.getInteger("duration") || 30;
@@ -307,7 +308,7 @@ export default {
   },
 
   async handleKick(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const targetMember = interaction.options.getMember("member") as GuildMember;
     const reason = interaction.options.getString("reason", true);
@@ -348,7 +349,7 @@ export default {
   },
 
   async handleBan(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const targetUser = interaction.options.getUser("member", true);
     const reason = interaction.options.getString("reason") || "No reason provided";
@@ -513,7 +514,7 @@ export default {
   },
 
   async handleLogs(interaction: ChatInputCommandInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
     const limit = interaction.options.getInteger("limit") ?? 10;
 

@@ -2,6 +2,7 @@ import {
   SlashCommandBuilder,
   type ChatInputCommandInteraction,
   EmbedBuilder,
+  MessageFlags,
 } from "discord.js";
 import { supabase } from "../index";
 
@@ -67,7 +68,7 @@ export default {
         .setDescription("This command is only available to leaders.")
         .setColor(0xf59e0b)
         .setTimestamp();
-      await interaction.reply({ embeds: [embed], ephemeral: true });
+      await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
       return;
     }
 
