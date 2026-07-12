@@ -1,4 +1,4 @@
-import { type ChatInputCommandInteraction } from "discord.js";
+import { type ChatInputCommandInteraction, MessageFlags } from "discord.js";
 import type { BotClient } from "../index";
 
 export default {
@@ -16,19 +16,32 @@ export default {
 
     try {
       await command.execute(interaction);
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Command failed: ${interaction.commandName}:`, error);
       
-      if (interaction.replied || interaction.deferred) {
-        await interaction.followUp({
-          content: "⚠️ Command failed. Try again or contact an officer.",
-          ephemeral: true,
-        });
-      } else {
-        await interaction.reply({
-          content: "⚠️ Command failed. Try again or contact an officer.",
-          ephemeral: true,
-        });
+      // Check if error is "Unknown interaction" (interaction expired)
+      if (error?.code === 10062) {
+        console.error(`Interaction ${interaction.id} expired before response.`);
+        return;
+      }
+      
+      try {
+        if (interaction.replied || interaction.deferred) {
+          await interaction.followUp({
+            content: "⚠️ Command failed. Try again or contact an officer.",
+            flags: MessageFlags.Ephemeral,
+          });
+        } else {
+          await interaction.reply({
+            content: "⚠️ Command failed. Try again or contact an officer.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (followUpError: any) {
+        // If even the followUp fails, interaction is likely expired
+        if (followUpError?.code !== 10062) {
+          console.error(`Failed to send error response:`, followUpError);
+        }
       }
     }
   },
