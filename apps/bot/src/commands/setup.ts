@@ -110,25 +110,25 @@ const VOICE_CHANNELS = [
 // Roles based on docs/05_ROLES_AND_PERMISSIONS.md
 const ROLES = [
   // Core Rank Roles (formation progression)
-  { name: "Visitor", color: "Grey", hoist: false, position: 1, type: "rank" },
-  { name: "Initiate", color: "Blue", hoist: false, position: 2, type: "rank" },
-  { name: "Brother", color: "Green", hoist: true, position: 3, type: "rank" },
-  { name: "Veteran", color: "DarkGreen", hoist: true, position: 4, type: "rank" },
-  { name: "Captain", color: "Orange", hoist: true, position: 5, type: "rank" },
-  { name: "Officer", color: "Purple", hoist: true, position: 6, type: "rank" },
-  { name: "Mentor", color: "Gold", hoist: true, position: 7, type: "rank" },
-  { name: "Steward", color: "Red", hoist: true, position: 8, type: "rank" },
+  { name: "Visitor", color: 0x808080, hoist: false, position: 1, type: "rank" },
+  { name: "Initiate", color: 0x3498db, hoist: false, position: 2, type: "rank" },
+  { name: "Brother", color: 0x2ecc71, hoist: true, position: 3, type: "rank" },
+  { name: "Veteran", color: 0x27ae60, hoist: true, position: 4, type: "rank" },
+  { name: "Captain", color: 0xf39c12, hoist: true, position: 5, type: "rank" },
+  { name: "Officer", color: 0x9b59b6, hoist: true, position: 6, type: "rank" },
+  { name: "Mentor", color: 0xf1c40f, hoist: true, position: 7, type: "rank" },
+  { name: "Steward", color: 0xe74c3c, hoist: true, position: 8, type: "rank" },
   
   // Functional Roles
-  { name: "Pod Leader", color: "Cyan", hoist: true, type: "functional" },
-  { name: "Builder", color: "Yellow", hoist: false, type: "functional" },
-  { name: "Moderator", color: "DarkRed", hoist: true, type: "functional" },
+  { name: "Pod Leader", color: 0x00bcd4, hoist: true, type: "functional" },
+  { name: "Builder", color: 0xffeb3b, hoist: false, type: "functional" },
+  { name: "Moderator", color: 0x8b0000, hoist: true, type: "functional" },
   
   // Special/Achievement Roles
-  { name: "Verified Builder", color: "LuminousVividPink", hoist: false, type: "special" },
-  { name: "Top Contributor", color: "LightOrange", hoist: false, type: "special" },
-  { name: "Streak Holder", color: "Fuchsia", hoist: false, type: "special" },
-  { name: "Certified Mentor", color: "DarkGold", hoist: false, type: "special" },
+  { name: "Verified Builder", color: 0xff69b4, hoist: false, type: "special" },
+  { name: "Top Contributor", color: 0xffa500, hoist: false, type: "special" },
+  { name: "Streak Holder", color: 0xff00ff, hoist: false, type: "special" },
+  { name: "Certified Mentor", color: 0xb8860b, hoist: false, type: "special" },
 ];
 
 // Welcome messages for key channels - action-oriented, masculine
