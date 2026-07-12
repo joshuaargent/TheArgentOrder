@@ -11,128 +11,144 @@ import { supabase } from "../index";
 // Argent Order brand colors
 const ARGENT_SILVER = 0xa1a1aa;
 
-// Optimized server structure - Catholic + Andrew Tate + Alex Hormozi
-// 6 categories matching the FIVE PILLARS + coordination
-// Reduced from 13 categories to eliminate overwhelm
+// Track bot message IDs for channels where welcome messages should stay at bottom
+const botMessagesMap = new Map<string, string>();
+
+// Expected channel names (lowercase for comparison)
+const EXPECTED_CHANNELS = new Set([
+  // WELCOME category
+  "welcome", "mission", "constitution", "introductions", "faq",
+  // FORGE category
+  "roll-call", "daily-wins", "daily-failures", "fitness",
+  // CHAPEL category
+  "gospel", "prayer-requests", "mass-attendance", "rosary",
+  // PODS category
+  "my-pod", "pod-wins", "accountability",
+  // WORKSHOP category
+  "ship-log", "projects", "build-help",
+  // FORUM category
+  "books", "debates", "catechism",
+  // COMMAND category
+  "announcements", "campaigns", "events", "newsletter",
+  // OPS category
+  "officer-room", "mod-log", "planning",
+]);
+
+// Expected role names
+const EXPECTED_ROLES = new Set([
+  "Visitor", "Initiate", "Brother", "Veteran", "Captain", "Officer", "Mentor", "Steward",
+  "Pod Leader", "Builder", "Moderator",
+  "Verified Builder", "Top Contributor", "Streak Holder", "Certified Mentor",
+]);
+
+// Category definitions with access levels
 const CATEGORIES = [
-  // 1. FORGE - The daily heart (Discipline pillar)
-  // This is where habits are built. Every brother reports here daily.
-  { 
-    name: "⚡ FORGE", 
+  {
+    name: "👋 WELCOME",
+    access: "all", // All roles can view
     channels: [
-      { name: "roll-call", type: "text", description: "Daily check-in - REQUIRED. Report: Prayer ✅ Workout ✅ Work ✅", pinned: true },
-      { name: "daily-wins", type: "text", description: "Victories of the day. No matter how small." },
-      { name: "daily-failures", type: "text", description: "Honest accountability. What did you fail? Own it." },
-      { name: "fitness", type: "text", description: "Training, discipline, physical excellence" },
+      { name: "welcome", description: "Start here. Read the rules." },
+      { name: "mission", description: "Why we exist" },
+      { name: "constitution", description: "Community expectations" },
+      { name: "introductions", description: "Introduce yourself - REQUIRED" },
+      { name: "faq", description: "Common questions" },
     ]
   },
-  // 2. CHAPEL - Faith foundation (Faith pillar)
-  // Spiritual formation. The most important category.
-  { 
-    name: "🙏 CHAPEL", 
+  {
+    name: "⚡ FORGE",
+    access: "member", // Initiate+
     channels: [
-      { name: "gospel", type: "text", description: "Daily Gospel readings. Bot-posted each morning.", pinned: true },
-      { name: "prayer-requests", type: "text", description: "Lift up intentions. Brothers pray." },
-      { name: "mass-attendance", type: "text", description: "Weekly Mass attendance confirmation" },
-      { name: "rosary", type: "text", description: "Rosary intentions and challenges" },
+      { name: "roll-call", description: "Daily check-in - REQUIRED. Prayer ✅ Workout ✅ Work ✅" },
+      { name: "daily-wins", description: "Victories of the day." },
+      { name: "daily-failures", description: "Honest accountability. Own your failures." },
+      { name: "fitness", description: "Training, discipline, physical excellence" },
     ]
   },
-  // 3. PODS - Brotherhood & accountability (Brotherhood pillar)
-  // Where men hold each other accountable
-  { 
-    name: "🔥 PODS", 
+  {
+    name: "🙏 CHAPEL",
+    access: "member",
     channels: [
-      { name: "my-pod", type: "text", description: "Your pod channel - assigned automatically" },
-      { name: "pod-wins", type: "text", description: "Pod victories. Brothers building together." },
-      { name: "accountability", type: "text", description: "Call each other up. No excuses." },
+      { name: "gospel", description: "Daily Gospel readings." },
+      { name: "prayer-requests", description: "Lift up intentions. Brothers pray." },
+      { name: "mass-attendance", description: "Weekly Mass attendance" },
+      { name: "rosary", description: "Rosary intentions and challenges" },
     ]
   },
-  // 4. WORKSHOP - Building & shipping (Building pillar)
-  // What are you building? Ship or be shipped.
-  { 
-    name: "🛠️ WORKSHOP", 
+  {
+    name: "🔥 PODS",
+    access: "member",
     channels: [
-      { name: "ship-log", type: "text", description: "Weekly output. What did you ship? REQUIRED.", pinned: true },
-      { name: "projects", type: "text", description: "Show your work. Apps, businesses, content." },
-      { name: "build-help", type: "text", description: "Technical questions. Get answers." },
+      { name: "my-pod", description: "Your pod channel - assigned automatically" },
+      { name: "pod-wins", description: "Pod victories. Brothers building together." },
+      { name: "accountability", description: "Call each other up. No excuses." },
     ]
   },
-  // 5. FORUM - Truth & intellectual formation (Truth pillar)
-  // Catholic intellectual tradition. Think clearly.
-  { 
-    name: "📖 FORUM", 
+  {
+    name: "🛠️ WORKSHOP",
+    access: "member",
     channels: [
-      { name: "books", type: "text", description: "What are you reading? Share insights." },
-      { name: "debates", type: "text", description: "Structured discussion. Attack ideas, not people." },
-      { name: "catechism", type: "text", description: "Catholic teaching. Questions and answers." },
+      { name: "ship-log", description: "Weekly output. What did you ship? REQUIRED." },
+      { name: "projects", description: "Show your work. Apps, businesses, content." },
+      { name: "build-help", description: "Technical questions. Get answers." },
     ]
   },
-  // 6. COMMAND - Leadership coordination
-  // Announcements and campaigns. Don't miss these.
-  { 
-    name: "🎯 COMMAND", 
+  {
+    name: "📖 FORUM",
+    access: "member",
     channels: [
-      { name: "announcements", type: "announcement", description: "Major updates. Read these.", pinned: true },
-      { name: "campaigns", type: "text", description: "Active campaigns. Join one. Execute." },
-      { name: "events", type: "text", description: "Upcoming events. Pod meetings, workshops." },
-      { name: "newsletter", type: "text", description: "Archive of past newsletters", readOnly: true },
+      { name: "books", description: "What are you reading? Share insights." },
+      { name: "debates", description: "Structured discussion. Attack ideas, not people." },
+      { name: "catechism", description: "Catholic teaching. Questions and answers." },
     ]
   },
-  // 7. Welcome - Entry point (static info)
-  { 
-    name: "👋 WELCOME", 
+  {
+    name: "🎯 COMMAND",
+    access: "member",
     channels: [
-      { name: "welcome", type: "text", description: "Start here. Read the rules.", pinned: true },
-      { name: "mission", type: "text", description: "Why we exist", readOnly: true },
-      { name: "constitution", type: "text", description: "Community expectations", readOnly: true },
-      { name: "introductions", type: "text", description: "Introduce yourself - REQUIRED" },
-      { name: "faq", type: "text", description: "Common questions", readOnly: true },
+      { name: "announcements", description: "Major updates. Read these." },
+      { name: "campaigns", description: "Active campaigns. Join one. Execute." },
+      { name: "events", description: "Upcoming events. Pod meetings, workshops." },
+      { name: "newsletter", description: "Archive of past newsletters" },
     ]
   },
-  // 8. OPS - Private leadership channels (Officer+ only)
-  { 
-    name: "🔒 OPS", 
+  {
+    name: "🔒 OPS",
+    access: "leadership", // Officer+
     channels: [
-      { name: "officer-room", type: "text", description: "Leadership discussion", private: true },
-      { name: "mod-log", type: "text", description: "Moderation records", private: true },
-      { name: "planning", type: "text", description: "Campaign planning, content calendar", private: true },
+      { name: "officer-room", description: "Leadership discussion" },
+      { name: "mod-log", description: "Moderation records" },
+      { name: "planning", description: "Campaign planning, content calendar" },
     ],
     private: true
   },
 ];
 
-// Voice channels - keep minimal, add more as needed
 const VOICE_CHANNELS = [
-  { name: "☀️ Morning Prayer", description: "Daily prayer - 6:30 AM" },
-  { name: "🔥 Pod Meeting", description: "Weekly pod accountability call" },
-  { name: "💪 Deep Work", description: "Silent work - mics muted" },
+  { name: "☀️ Morning Prayer" },
+  { name: "🔥 Pod Meeting" },
+  { name: "💪 Deep Work" },
 ];
 
-// Roles based on docs/05_ROLES_AND_PERMISSIONS.md
+// Role definitions
 const ROLES = [
-  // Core Rank Roles (formation progression)
-  { name: "Visitor", color: 0x808080, hoist: false, position: 1, type: "rank" },
-  { name: "Initiate", color: 0x3498db, hoist: false, position: 2, type: "rank" },
-  { name: "Brother", color: 0x2ecc71, hoist: true, position: 3, type: "rank" },
-  { name: "Veteran", color: 0x27ae60, hoist: true, position: 4, type: "rank" },
-  { name: "Captain", color: 0xf39c12, hoist: true, position: 5, type: "rank" },
-  { name: "Officer", color: 0x9b59b6, hoist: true, position: 6, type: "rank" },
-  { name: "Mentor", color: 0xf1c40f, hoist: true, position: 7, type: "rank" },
-  { name: "Steward", color: 0xe74c3c, hoist: true, position: 8, type: "rank" },
-  
-  // Functional Roles
-  { name: "Pod Leader", color: 0x00bcd4, hoist: true, type: "functional" },
-  { name: "Builder", color: 0xffeb3b, hoist: false, type: "functional" },
-  { name: "Moderator", color: 0x8b0000, hoist: true, type: "functional" },
-  
-  // Special/Achievement Roles
-  { name: "Verified Builder", color: 0xff69b4, hoist: false, type: "special" },
-  { name: "Top Contributor", color: 0xffa500, hoist: false, type: "special" },
-  { name: "Streak Holder", color: 0xff00ff, hoist: false, type: "special" },
-  { name: "Certified Mentor", color: 0xb8860b, hoist: false, type: "special" },
+  { name: "Visitor", color: 0x808080, hoist: false, position: 1 },
+  { name: "Initiate", color: 0x3498db, hoist: false, position: 2 },
+  { name: "Brother", color: 0x2ecc71, hoist: true, position: 3 },
+  { name: "Veteran", color: 0x27ae60, hoist: true, position: 4 },
+  { name: "Captain", color: 0xf39c12, hoist: true, position: 5 },
+  { name: "Officer", color: 0x9b59b6, hoist: true, position: 6 },
+  { name: "Mentor", color: 0xf1c40f, hoist: true, position: 7 },
+  { name: "Steward", color: 0xe74c3c, hoist: true, position: 8 },
+  { name: "Pod Leader", color: 0x00bcd4, hoist: true },
+  { name: "Builder", color: 0xffeb3b, hoist: false },
+  { name: "Moderator", color: 0x8b0000, hoist: true },
+  { name: "Verified Builder", color: 0xff69b4, hoist: false },
+  { name: "Top Contributor", color: 0xffa500, hoist: false },
+  { name: "Streak Holder", color: 0xff00ff, hoist: false },
+  { name: "Certified Mentor", color: 0xb8860b, hoist: false },
 ];
 
-// Welcome messages for key channels - action-oriented, masculine
+// Welcome messages for key channels
 const WELCOME_MESSAGES: Record<string, { title: string; content: string }> = {
   "welcome": {
     title: "⚔️ THE ARGENT ORDER",
@@ -147,9 +163,6 @@ You're now part of a brotherhood of men who refuse to be average.
 • 🛠️ Building - Create or be consumed
 • 📖 Truth - Think clearly
 
-**What we do here:**
-Every day. No excuses. No spectators.
-
 **Start here:**
 1. Read #mission and #constitution
 2. Introduce yourself in #introductions
@@ -158,7 +171,7 @@ Every day. No excuses. No spectators.
 
 **The standard is high. The brotherhood is real.**
 
-No mediocre men. Only brothers.`
+Execute. Build. Lead.`
   },
   "roll-call": {
     title: "📋 DAILY ROLL CALL - REQUIRED",
@@ -174,13 +187,8 @@ Work: What you did today
 
 **This is non-negotiable.**
 
-Miss 3 days without reason = flagged
-Miss 7 days = removal from the Order
-
-**Example:**
-> Prayer: ✅
-> Workout: ✅
-> Work: Shipped landing page v2
+Miss 3 days = flagged
+Miss 7 days = removal
 
 No excuses. Own your day.`
   },
@@ -188,124 +196,90 @@ No excuses. Own your day.`
     title: "🎯 OUR MISSION",
     content: `**We form men who:**
 
-**1. Execute**
-Daily habits. No excuses. Ship or die.
+**1. Execute** - Daily habits. No excuses.
+**2. Build** - Projects. Businesses. Skills.
+**3. Hold Each Other Accountable** - Pods. Check-ins.
+**4. Grow in Faith** - Prayer. Sacraments. Scripture.
 
-**2. Build**
-Projects. Businesses. Content. Skills.
-Leave something behind.
-
-**3. Hold Each Other Accountable**
-Pods. Check-ins. No man left behind.
-
-**4. Think Clearly**
-Catholic tradition. Intellectual rigor.
-Not snowflakes. Not lukewarm.
-
-**The Goal:**
-Not community. Transformation.
-Not discussion. Execution.
-Not comfort. Forging.
-
-*"In sterling we trust."*`
+**Execute. Build. Lead.**
+This is not a hobby. This is a forge.`
   },
   "constitution": {
-    title: "📜 THE CONSTITUTION",
-    content: `**Core Principles**
+    title: "📜 CONSTITUTION",
+    content: `**Article I: Purpose**
+We form Catholic men through the Five Pillars.
 
-**Execute or leave.**
-No spectators. No passengers.
+**Article II: Standards**
+• Daily execution is non-negotiable
+• Brotherhood means accountability
+• Building is first-class
+• No spectators. Only brothers.
 
-**Accountability over comfort.**
-We push each other. We don't enable excuses.
+**Article III: Leadership**
+Earned through: Character, Competence, Contribution, Consistency, Trust.
 
-**Ship or be shipped.**
-Build something. Create value. Leave a legacy.
+**Article IV: Removal**
+Members may be removed for:
+• Neglect of formation
+• Harm to the brotherhood
+• Violation of Catholic teaching
 
-**Truth over diplomacy.**
-Speak clearly. Challenge ideas. No snowflakes.
-
-**Catholic. Orthodox. Uncompromising.**
-We hold to the faith. This is not negotiable.
-
-**The Order removes:**
-• Chronic disengagement
-• Distraction culture
-• Heresy or false teaching
-• Pornography or degeneracy
-• Disruption of formation
-
-**This is not a social club.**
-This is a forge.`
-  },
-  "introductions": {
-    title: "📝 INTRODUCE YOURSELF - REQUIRED",
-    content: `**Tell us who you are.**
-
-Format:
-\`\`\`
-Name:
-Age:
-Vocation (single/married/priest):
-Location:
-What you're building:
-Why you joined:
-\`\`\`
-
-**Example:**
-> Name: Mike
-> Age: 32
-> Married with 2 kids
-> Austin, TX
-> Building: SaaS startup
-> Joined: Need accountability to execute
-
-Be real. We're brothers here.`
+Execute. Build. Lead.`
   },
   "ship-log": {
-    title: "📦 WEEKLY SHIP LOG - REQUIRED",
-    content: `**Every Sunday. What did you ship?**
+    title: "📦 WEEKLY SHIP LOG",
+    content: `**What did you build this week?**
 
-Format:
-\`\`\`
-Week of [date]:
-- [Project]: What you did
-- [Skill]: What you learned
-- [Content]: What you published
-\`\`\`
+Post every Sunday:
+- What you shipped
+- What you learned
+- What's next
 
-**This is how we measure growth.**
+**Ship or be shipped.**`
+  },
+  "introductions": {
+    title: "👋 INTRODUCE YOURSELF",
+    content: `**Required within 24 hours.**
 
-Ship something or explain why you didn't.
-No week passes without output.
+Post:
+1. Name / What to call you
+2. Where you're from
+3. What you're building
+4. One goal for 90 days
 
-**Example:**
-> Week of Jan 15:
-> - Argent Portal: Set up auth system
-> - Marketing: Read "100M Offers"
-> - Newsletter: Published issue #3`
+**No lurkers. Only brothers.**`
   },
   "faq": {
-    title: "❓ QUESTIONS",
-    content: `**Q: I'm not very religious.**
-A: You will be. Faith is a pillar here.
+    title: "❓ FREQUENTLY ASKED",
+    content: `**Q: How do I get promoted?**
+A: Execute daily. Contribute. Build projects.
 
-**Q: I don't have a project.**
-A: Start one. Building is non-negotiable.
+**Q: What's a pod?**
+A: Your accountability unit. 5 brothers.
 
-**Q: Can I lurk?**
-A: No. Roll call is required. We track participation.
+**Q: Check-ins per week?**
+A: Minimum 5. Daily is standard.
 
-**Q: What if I fail?**
-A: Own it. We celebrate honesty over performance.
+**Q: What counts as "shipped"?**
+A: Anything you created.
 
-**Q: Married with kids?**
-A: Good. Formation serves your vocation.
+**Execute. Build. Lead.**`
+  },
+  "gospel": {
+    title: "✝️ DAILY GOSPEL",
+    content: `**Posted daily by bot.**
 
-**Q: How much time?**
-A: 30-60 min daily minimum. This is serious.`
-  }
+Read. Reflect. Pray.
+
+**Sunday:** Mass is mandatory.
+
+*Prayer:*
+"Into my heart, O Lord, pour your word and your wisdom."`
+  },
 };
+
+// Export for message handler
+export { botMessagesMap, WELCOME_MESSAGES, EXPECTED_CHANNELS };
 
 export default {
   data: new SlashCommandBuilder()
@@ -319,35 +293,33 @@ export default {
     const guild = interaction.guild;
     
     if (!guild) {
-      await interaction.editReply({
-        content: "❌ This command can only be used in a server.",
-      });
+      await interaction.editReply({ content: "❌ This command can only be used in a server." });
       return;
     }
 
     if (!interaction.memberPermissions?.has(PermissionFlagsBits.Administrator)) {
-      await interaction.editReply({
-        content: "❌ Only administrators can run this command.",
-      });
+      await interaction.editReply({ content: "❌ Only administrators can run this command." });
       return;
     }
 
     try {
-      await interaction.editReply({
-        content: "⚔️ Setting up The Argent Order server structure...\n\nThis may take a moment.",
-      });
-
-      const { categoriesCreated, channelsCreated, rolesCreated, rolesUpdated } = await setupServer(guild);
+      const results = await setupServer(guild);
       
-      await interaction.editReply({
-        content: `⚔️ **Server Setup Complete!**\n\n📁 ${categoriesCreated} categories created\n💬 ${channelsCreated} channels created\n👔 ${rolesCreated} roles created/updated\n\nRun **/sync all** to sync member roles.`,
-      });
+      const embed = new EmbedBuilder()
+        .setTitle("✅ Server Setup Complete")
+        .setColor(0x00ff00)
+        .addFields(
+          { name: "Roles", value: `${results.rolesCreated} created, ${results.rolesUpdated} updated, ${results.rolesDeleted} deleted`, inline: true },
+          { name: "Categories", value: `${results.categoriesCreated} created`, inline: true },
+          { name: "Channels", value: `${results.channelsCreated} created, ${results.channelsDeleted} deleted`, inline: true },
+        )
+        .setTimestamp()
+        .setFooter({ text: "Execute. Build. Lead." });
 
-    } catch (error) {
-      console.error("Setup failed:", error);
-      await interaction.editReply({
-        content: `❌ Setup failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-      });
+      await interaction.editReply({ embeds: [embed] });
+    } catch (error: any) {
+      console.error("Setup error:", error);
+      await interaction.editReply({ content: `❌ Setup failed: ${error.message}` });
     }
   },
 };
@@ -355,51 +327,49 @@ export default {
 async function setupServer(guild: any) {
   let categoriesCreated = 0;
   let channelsCreated = 0;
+  let channelsDeleted = 0;
   let rolesCreated = 0;
   let rolesUpdated = 0;
+  let rolesDeleted = 0;
 
-  // First, get existing channels and roles to avoid duplicates
   const existingChannels = guild.channels.cache;
   const existingRoles = guild.roles.cache;
 
-  // Create or find roles first (needed for permissions)
+  // Get role references
   const roleMap = new Map<string, any>();
-  
+  const everyoneRole = guild.roles.everyone;
+
+  // ============ ROLES ============
+  // Create or update expected roles
   for (const roleDef of ROLES) {
     let role = existingRoles.find((r: any) => r.name === roleDef.name);
     
     if (!role) {
       role = await guild.roles.create({
         name: roleDef.name,
-        color: roleDef.color as any, // Note: discord.js expects hex number
+        color: roleDef.color,
         hoist: roleDef.hoist,
-        position: roleDef.position,
       });
       rolesCreated++;
-    } else {
-      // Update existing role
-      if (role.color !== roleDef.color || role.hoist !== roleDef.hoist) {
-        await role.edit({
-          color: roleDef.color as any, // Note: discord.js expects hex number
-          hoist: roleDef.hoist,
-        });
-        rolesUpdated++;
-      }
+    } else if (role.color !== roleDef.color || role.hoist !== roleDef.hoist) {
+      await role.edit({ color: roleDef.color, hoist: roleDef.hoist });
+      rolesUpdated++;
     }
     roleMap.set(roleDef.name, role);
   }
 
-  // Get the @everyone role
-  const everyoneRole = guild.roles.everyone;
+  // Delete unexpected roles
+  for (const role of existingRoles.values()) {
+    if (role.id === everyoneRole.id) continue;
+    if (!EXPECTED_ROLES.has(role.name)) {
+      await role.delete("Removing unexpected role");
+      rolesDeleted++;
+    }
+  }
 
-  // Helper to check if a role can view private channels
-  const canViewPrivate = (roleName: string): boolean => {
-    return ["Officer", "Mentor", "Steward", "Captain"].includes(roleName);
-  };
-
-  // Create categories and channels
+  // ============ CATEGORIES & CHANNELS ============
   for (const catDef of CATEGORIES) {
-    // Check if category already exists
+    // Check if category exists
     let category = existingChannels.find(
       (c: any) => c.type === ChannelType.GuildCategory && c.name === catDef.name
     );
@@ -412,62 +382,38 @@ async function setupServer(guild: any) {
       categoriesCreated++;
     }
 
-    // Set category-level permissions for private categories
-    if (catDef.private) {
-      const overwrites: any[] = [{ id: everyoneRole.id, deny: [PermissionFlagsBits.ViewChannel] }];
-      for (const [name, role] of roleMap) {
-        if (canViewPrivate(name)) {
-          overwrites.push({ id: role.id, allow: [PermissionFlagsBits.ViewChannel] });
-        }
-      }
-      await category.edit({ permissionOverwrites: overwrites });
-    }
+    // Set category permissions based on access level
+    await setCategoryPermissions(category, catDef, roleMap, everyoneRole);
 
+    // Create or update channels
     for (const chDef of catDef.channels) {
-      // Check if channel already exists (by name within category)
-      const existingChannel = existingChannels.find(
+      let channel = existingChannels.find(
         (c: any) => c.name === chDef.name && c.parentId === category.id
       );
 
-      if (!existingChannel) {
-        // GuildAnnouncement (type 5) is deprecated - use GuildText (type 0) instead
-        const channelOptions: any = {
+      if (!channel) {
+        channel = await guild.channels.create({
           name: chDef.name,
           type: ChannelType.GuildText,
           parent: category.id,
           topic: chDef.description,
-        };
-
-        // Set permissions for private channels
-        if ((chDef as any).private || (catDef as any).private) {
-          const overwrites: any[] = [{ id: everyoneRole.id, deny: [PermissionFlagsBits.ViewChannel] }];
-          for (const [name, role] of roleMap) {
-            if (canViewPrivate(name)) {
-              overwrites.push({ id: role.id, allow: [PermissionFlagsBits.ViewChannel] });
-            }
-          }
-          channelOptions.permissionOverwrites = overwrites;
-        }
-
-        const channel = await guild.channels.create(channelOptions);
+        });
         channelsCreated++;
-
-        // Send welcome message if defined
-        const welcomeInfo = WELCOME_MESSAGES[chDef.name];
-        if (welcomeInfo) {
-          const welcomeEmbed = new EmbedBuilder()
-            .setTitle(welcomeInfo.title)
-            .setDescription(welcomeInfo.content)
-            .setColor(ARGENT_SILVER)
-            .setTimestamp();
-
-          await channel.send({ embeds: [welcomeEmbed] });
+      } else {
+        // Update topic if changed
+        if (channel.topic !== chDef.description) {
+          await channel.edit({ topic: chDef.description });
         }
+      }
+
+      // Send/update welcome message for key channels
+      if (WELCOME_MESSAGES[chDef.name]) {
+        await updateWelcomeMessage(channel);
       }
     }
   }
 
-  // Create voice channels category
+  // Create voice channels
   let voiceCategory = existingChannels.find(
     (c: any) => c.type === ChannelType.GuildCategory && c.name === "🔊 VOICE"
   );
@@ -495,5 +441,126 @@ async function setupServer(guild: any) {
     }
   }
 
-  return { categoriesCreated, channelsCreated, rolesCreated, rolesUpdated };
+  // ============ DELETE EXTRA CHANNELS ============
+  for (const channel of existingChannels.values()) {
+    if (channel.type === ChannelType.GuildCategory) {
+      // Check if it's a recognized category
+      const isRecognized = CATEGORIES.some(c => c.name === channel.name) || 
+                          channel.name === "🔊 VOICE";
+      if (!isRecognized) {
+        // Delete all channels in this category first
+        const childChannels = existingChannels.filter(
+          (c: any) => c.parentId === channel.id
+        );
+        for (const child of childChannels.values()) {
+          await child.delete("Removing extra channel");
+          channelsDeleted++;
+        }
+        await channel.delete("Removing extra category");
+        channelsDeleted++;
+      }
+    } else if (channel.type === ChannelType.GuildText || channel.type === ChannelType.GuildVoice) {
+      // Check if channel name is in expected list
+      if (!EXPECTED_CHANNELS.has(channel.name.toLowerCase())) {
+        await channel.delete("Removing extra channel");
+        channelsDeleted++;
+      }
+    }
+  }
+
+  return { categoriesCreated, channelsCreated, channelsDeleted, rolesCreated, rolesUpdated, rolesDeleted };
+}
+
+async function setCategoryPermissions(category: any, catDef: any, roleMap: Map<string, any>, everyoneRole: any) {
+  const overwrites: any[] = [];
+  
+  if (catDef.access === "all") {
+    // Everyone can view - no overwrites needed (use defaults)
+    return;
+  }
+  
+  if (catDef.access === "member") {
+    // Members (Initiate+) can view, Visitor cannot
+    const visitorRole = roleMap.get("Visitor");
+    if (visitorRole) {
+      overwrites.push({
+        id: visitorRole.id,
+        deny: [PermissionFlagsBits.ViewChannel],
+      });
+    }
+    // Everyone else (Initiate+) can view - implicit allow
+    return;
+  }
+  
+  if (catDef.access === "leadership" || catDef.private) {
+    // Only leadership (Officer+) can view
+    overwrites.push({
+      id: everyoneRole.id,
+      deny: [PermissionFlagsBits.ViewChannel],
+    });
+    
+    const leadershipRoles = ["Officer", "Mentor", "Steward"];
+    for (const roleName of leadershipRoles) {
+      const role = roleMap.get(roleName);
+      if (role) {
+        overwrites.push({
+          id: role.id,
+          allow: [PermissionFlagsBits.ViewChannel],
+        });
+      }
+    }
+  }
+  
+  if (overwrites.length > 0) {
+    await category.edit({ permissionOverwrites: overwrites });
+  }
+}
+
+async function updateWelcomeMessage(channel: any) {
+  const welcomeInfo = WELCOME_MESSAGES[channel.name];
+  if (!welcomeInfo) return;
+
+  // Find existing bot messages
+  const messages = await channel.messages.fetch({ limit: 10 });
+  const existingBotMsg = messages.find(
+    (m: any) => m.author.id === channel.client.user?.id && 
+               m.embeds.length > 0 && 
+               m.embeds[0].title === welcomeInfo.title
+  );
+
+  if (existingBotMsg) {
+    // Already exists - check if it's at the bottom
+    const lastMsg = messages.first();
+    if (lastMsg?.id !== existingBotMsg.id) {
+      // Not at bottom - delete old and post new
+      await existingBotMsg.delete();
+      await sendWelcomeEmbed(channel, welcomeInfo);
+    }
+  } else {
+    // No existing message - check if there are user messages
+    const hasUserMessages = messages.some((m: any) => m.author.id !== channel.client.user?.id);
+    
+    if (hasUserMessages) {
+      // Delete old bot messages if any, then post at bottom
+      for (const msg of messages.values()) {
+        if (msg.author.id === channel.client.user?.id) {
+          await msg.delete();
+        }
+      }
+      await sendWelcomeEmbed(channel, welcomeInfo);
+    } else {
+      // Empty channel - just send
+      await sendWelcomeEmbed(channel, welcomeInfo);
+    }
+  }
+}
+
+async function sendWelcomeEmbed(channel: any, welcomeInfo: { title: string; content: string }) {
+  const embed = new EmbedBuilder()
+    .setTitle(welcomeInfo.title)
+    .setDescription(welcomeInfo.content)
+    .setColor(ARGENT_SILVER)
+    .setTimestamp();
+
+  await channel.send({ embeds: [embed] });
 }
