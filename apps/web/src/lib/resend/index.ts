@@ -155,11 +155,11 @@ export async function getSubscriber(_email: string): Promise<{ id: string; email
   return null;
 }
 
-export async function unsubscribeFromNewsletter(email: string): Promise<boolean> {
+export async function unsubscribeFromNewsletter(_email: string): Promise<boolean> {
   return true;
 }
 
-export async function addTag(email: string, tagId: number): Promise<boolean> {
+export async function addTag(_email: string, _tagId: number): Promise<boolean> {
   return true;
 }
 
