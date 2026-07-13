@@ -364,8 +364,7 @@ CREATE INDEX idx_formation_scores_leaderboard
 -- Index for recent activity
 DROP INDEX IF EXISTS idx_formation_events_recent_user;
 CREATE INDEX idx_formation_events_recent_user
-  ON formation_events(user_id, created_at DESC)
-  WHERE created_at > now() - interval '30 days';
+  ON formation_events(user_id, created_at DESC);
 
 -- Index for daily streak calculations
 DROP INDEX IF EXISTS idx_formation_events_daily;
