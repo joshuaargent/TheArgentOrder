@@ -1,6 +1,4 @@
 # Supabase CLI for remote management
-[project]
-project_id = "bracuigjapiihjzsujvn"
 
 [api]
 enabled = true
