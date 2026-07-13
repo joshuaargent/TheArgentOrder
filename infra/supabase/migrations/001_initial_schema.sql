@@ -268,7 +268,7 @@ create table rule_logs (
   completed boolean default true,
   logged_at timestamp with time zone default now(),
   
-  unique(user_id, rule_item_id, logged_at date)
+  unique(user_id, rule_item_id, logged_at)
 );
 
 -- Indexes for streak calculations
@@ -276,7 +276,7 @@ create index idx_rule_logs_user_date on rule_logs(user_id, logged_at);
 create index idx_rule_logs_user_rule on rule_logs(user_id, rule_item_id);
 
 -- Index for rule logs
-create index idx_rule_logs_today on rule_logs(logged_at date, user_id);
+create index idx_rule_logs_today on rule_logs(logged_at, user_id);
 
 ----------------------------------------------------
 -- CAMPAIGN DOMAIN
