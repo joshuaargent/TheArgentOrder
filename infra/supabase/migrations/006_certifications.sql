@@ -229,12 +229,12 @@ create trigger on_campaign_complete_check_cert
   when (NEW.status = 'completed')
   execute function trigger_check_certifications();
 
--- Check certifications when project is updated
+-- Check certifications when project is launched or scaled
 drop trigger if exists on_project_complete_check_cert on projects;
 create trigger on_project_complete_check_cert
   after update of status on projects
   for each row
-  when (NEW.status = 'completed')
+  when (NEW.status = 'launched' OR NEW.status = 'scaled')
   execute function trigger_check_certifications();
 
 -- Check certifications on formation event (for streak checks)
