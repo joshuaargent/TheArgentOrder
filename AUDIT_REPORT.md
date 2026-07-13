@@ -406,3 +406,381 @@ All API routes exist under `/api/`:
 
 *Public Pages Audit completed: June 26, 2026*
 *Verified against: docs/00_VISION.md, docs/01_CONSTITUTION.md, docs/02_PHILOSOPHY.md, docs/24_ONBOARDING_SYSTEM.md, PERSONAL_BRANDING.md*
+
+---
+
+# DATABASE & SECURITY AUDIT (July 13, 2025)
+
+## Executive Summary
+
+Comprehensive audit of the Supabase database schema, migrations, RLS policies, and API patterns. Found several categories of issues ranging from critical security concerns to performance optimizations.
+
+**Overall Health:** Good foundation with targeted improvements needed
+
+---
+
+## 🔴 CRITICAL ISSUES (Fix Immediately)
+
+### 1. Formation Events Are Publicly Viewable
+
+**File:** `002_rls_policies.sql` (Line 157-158)
+
+```sql
+create policy "Formation events are viewable by all members"
+  on formation_events for select using (true);
+```
+
+**Problem:** Any authenticated user can view ALL formation events from ALL users. This includes private activities, prayer logs, and spiritual reflections.
+
+**Risk:** Privacy violation, competitive intelligence leak (formation scores reveal member activity patterns)
+
+**Recommendation:** Restrict to user's own events, or events from pod members only.
+
+---
+
+### 2. Profiles Are Publicly Viewable
+
+**File:** `002_rls_policies.sql` (Line 126-129)
+
+```sql
+create policy "Public profiles are viewable by everyone"
+  on profiles for select using (true);
+```
+
+**Problem:** All user profiles (including bio, timezone, country) are visible to everyone.
+
+**Risk:** While less critical, combined with formation events, this creates a privacy concern.
+
+**Recommendation:** Consider making bio/private fields restricted, or at minimum, allow users to control visibility.
+
+---
+
+### 3. No Rate Limiting on API Routes
+
+**Files:** All API routes (`apps/web/src/app/api/*`)
+
+**Problem:** No rate limiting on formation event creation, rule completion, or any write operations.
+
+**Risk:** Bot/Script abuse, formation score manipulation
+
+**Recommendation:** Implement Supabase rate limiting via pg_plpgsql hooks or middleware.
+
+---
+
+### 4. Formation Score Calculation on Every Insert
+
+**File:** `001_initial_schema.sql` (Lines 954-965)
+
+```sql
+create trigger on_formation_event_insert
+  after insert on formation_events
+  for each row execute function trigger_calculate_formation_scores();
+```
+
+**Problem:** `calculate_formation_scores()` performs a full SUM over 90 days on EVERY formation event insert.
+
+**Risk:** Performance degradation as users accumulate events. At 100 events/user/year, this becomes expensive.
+
+**Recommendation:** 
+1. Make this async (queue-based)
+2. Calculate incrementally instead of full recalculation
+3. Use a materialized view refreshed periodically
+
+---
+
+## 🟡 MEDIUM PRIORITY ISSUES
+
+### 5. Missing Indexes for Common Queries
+
+**Found in:** Various API routes
+
+| Query Pattern | Missing Index |
+|--------------|---------------|
+| `rule_logs` by user + today | Partial index for current day |
+| `formation_events` by pillar + user + recent | Composite index exists, but consider partial |
+| `notifications` unread by user | Partial index for `read = false` |
+| `journal_entries` by user + recent | Index exists but consider ordering |
+
+**Recommendation:** Add partial indexes for commonly filtered boolean columns.
+
+---
+
+### 6. Inconsistent Naming Conventions
+
+**Issue:** Mix of snake_case and inconsistencies across tables
+
+Examples:
+- `campaign_status` enum uses `'not_started'`
+- `project_status` enum uses `'idea'`
+- Some tables have `created_at`, some have `created_at timestamp with time zone`
+
+**Recommendation:** Standardize:
+- All timestamps should be `timestamp with time zone`
+- All status enums should use consistent naming (`in_progress` not `not_started`)
+
+---
+
+### 7. No Soft Delete Pattern
+
+**Tables Affected:** All user content tables
+
+**Issue:** No soft delete (deleted_at) column on tables like:
+- `journal_entries`
+- `examens`
+- `gratitude_entries`
+- `reviews`
+- `projects`
+
+**Risk:** Data loss, no recovery option, audit trail incomplete
+
+**Recommendation:** Add `deleted_at timestamp` column to all user content tables.
+
+---
+
+### 8. Missing Audit Columns
+
+**Issue:** Several tables lack proper audit trails:
+
+| Table | Missing |
+|-------|---------|
+| `formation_events` | No `updated_at` (acceptable - immutable) |
+| `rule_logs` | No `source` (Discord vs Portal) |
+| `campaign_enrollments` | No `enrolled_by` (self vs invite) |
+| `user_ranks` | Has `assigned_by` ✅ |
+
+**Recommendation:** Add `source` column to track origin of data for analytics.
+
+---
+
+### 9. RLS Policy Helper Functions Performance
+
+**File:** `002_rls_policies.sql` (Lines 67-120)
+
+Functions like `is_in_users_pod()` and `is_mentor_of()` do subqueries that could be expensive in policy evaluation.
+
+**Risk:** Slow queries when evaluating RLS on large tables
+
+**Recommendation:** Convert to `security_invoker_functions` or use `security definer` with caching.
+
+---
+
+## 🟢 OPTIMIZATION OPPORTUNITIES
+
+### 10. Materialized Views for Leaderboards
+
+**Current:** Leaderboard query calculates from `formation_scores` table
+
+**Issue:** `formation_scores` is derived data (90-day window), so leaderboard could be stale or need recalculation.
+
+**Recommendation:** Create materialized view for leaderboard with periodic refresh:
+
+```sql
+create materialized view formation_leaderboard as
+select 
+  user_id,
+  overall_score,
+  row_number() over (order by overall_score desc) as rank
+from formation_scores
+with data;
+
+-- Refresh daily via cron or trigger
+```
+
+---
+
+### 11. Incremental Score Updates
+
+**Current:** `calculate_formation_scores()` does full 90-day SUM on every insert
+
+**Recommendation:** Update incrementally:
+
+```sql
+create or replace function increment_formation_scores()
+returns trigger as $$
+begin
+  update formation_scores
+  set 
+    faith_score = faith_score + case when new.pillar = 'faith' then new.points else 0 end,
+    -- ... other pillars
+    updated_at = now()
+  where user_id = new.user_id;
+  
+  -- Handle 90-day window via scheduled job that subtracts old events
+  return new;
+end;
+```
+
+---
+
+### 12. Missing Composite Indexes
+
+**Opportunity 1:** Rule streak calculation
+```sql
+create index idx_rule_logs_streak 
+  on rule_logs(user_id, rule_item_id, logged_at desc);
+```
+
+**Opportunity 2:** Formation events for weekly/monthly reports
+```sql
+create index idx_formation_weekly 
+  on formation_events(user_id, date_trunc('week', created_at), pillar);
+```
+
+---
+
+### 13. Connection Pool Configuration
+
+**Issue:** No explicit pool settings for Supabase client
+
+**Recommendation:** In `supabase/server.ts`, add connection pool settings:
+
+```typescript
+// Consider adding for high-traffic endpoints
+// Supabase handles this by default, but worth monitoring
+```
+
+---
+
+## 📋 TABLES WITH POTENTIAL ISSUES
+
+### Missing RLS Policies
+
+| Table | Issue |
+|-------|-------|
+| `formation_milestones` | No policies defined |
+| `user_formation_milestones` | No policies defined |
+| `rule_categories` | No policies defined |
+| `quarterly_reviews` | No policies defined |
+| `annual_reviews` | No policies defined |
+| `articles` | No policies defined |
+| `newsletters` | No policies defined |
+| `xp_events` | Insert policy missing |
+| `user_levels` | Insert policy missing |
+
+---
+
+### Tables Without Proper Foreign Keys
+
+| Table | Missing FK |
+|-------|-----------|
+| `user_ranks` | Should reference `profiles(user_id)` not `profiles(user_id)` column |
+| `user_formation_levels` | Same issue |
+
+---
+
+## 🔧 IMMEDIATE FIXES RECOMMENDED
+
+### Fix 1: Restrict Formation Events Visibility
+
+```sql
+-- In 002_rls_policies.sql, replace:
+drop policy "Formation events are viewable by all members" on formation_events;
+create policy "Users can view own formation events"
+  on formation_events for select
+  using (auth.uid() = user_id);
+```
+
+### Fix 2: Restrict Profile Visibility
+
+```sql
+-- Allow users to view own + pod members for brotherhood
+drop policy "Public profiles are viewable by everyone" on profiles;
+create policy "Profiles viewable by members"
+  on profiles for select
+  using (
+    auth.uid() = user_id 
+    or exists (select 1 from pod_members pm where pm.user_id = auth.uid())
+  );
+```
+
+### Fix 3: Add Soft Delete Columns
+
+```sql
+-- Add to journal_entries, examens, gratitude_entries, reviews
+alter table journal_entries add column if not exists deleted_at timestamp with time zone;
+```
+
+### Fix 4: Make Score Calculation Async
+
+Consider moving score calculation to a background job triggered by Supabase Edge Functions or database hooks.
+
+---
+
+## 📊 SCHEMA QUALITY SCORE
+
+| Category | Score | Notes |
+|----------|-------|-------|
+| Data Integrity | 85% | Missing FKs, no soft deletes |
+| Security | 70% | RLS policies too permissive |
+| Performance | 75% | Expensive triggers, missing indexes |
+| Consistency | 80% | Naming conventions vary |
+| Auditability | 70% | Limited audit columns |
+| **Overall** | **76%** | Good foundation, needs targeted fixes |
+
+---
+
+## 🚀 FUTURE SCALABILITY CONSIDERATIONS
+
+### Phase 1: Performance (1-3 months)
+
+1. Implement incremental score calculation
+2. Add partial indexes for common filters
+3. Create materialized views for reports
+4. Add connection pooling monitoring
+
+### Phase 2: Security (1-2 months)
+
+1. Tighten RLS policies
+2. Add rate limiting
+3. Implement API authentication improvements
+4. Add audit logging
+
+### Phase 3: Scale (3-6 months)
+
+1. Implement caching layer (Redis)
+2. Add read replicas for analytics
+3. Implement event sourcing for formation events
+4. Consider time-series database for analytics
+
+---
+
+## ✅ QUICK WINS (Can Fix in <1 Hour)
+
+1. **Add partial index for unread notifications:**
+```sql
+create index idx_notifications_unread on notifications(user_id) where read = false;
+```
+
+2. **Add soft delete to journal_entries:**
+```sql
+alter table journal_entries add column if not exists deleted_at timestamp with time zone;
+```
+
+3. **Restrict formation events to own data:**
+```sql
+drop policy "Formation events are viewable by all members" on formation_events;
+create policy "Users can view own formation events" on formation_events for select using (auth.uid() = user_id);
+```
+
+---
+
+## 📝 SUMMARY
+
+The database schema is well-designed with good foundational concepts (event-driven formation, proper enums, reasonable indexes). The main issues are:
+
+1. **Security:** RLS policies too permissive
+2. **Performance:** Expensive triggers on high-frequency operations
+3. **Maintainability:** Inconsistent naming, missing soft deletes
+4. **Observability:** Limited audit trails
+
+**Priority Action Items:**
+1. Fix formation events privacy (Critical)
+2. Optimize score calculation (High)
+3. Add missing RLS policies (Medium)
+4. Implement soft deletes (Medium)
+5. Add audit columns (Low)
+
+---
+
+*Database Audit completed: July 13, 2025*
+*Verified against: infra/supabase/migrations/*, apps/web/src/app/api/*
