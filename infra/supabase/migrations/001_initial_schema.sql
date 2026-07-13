@@ -191,9 +191,8 @@ create index idx_formation_events_user_created on formation_events(user_id, crea
 create index idx_formation_events_pillar_created on formation_events(pillar, created_at desc);
 create index idx_formation_events_user_pillar_created on formation_events(user_id, pillar, created_at desc);
 
--- Partial index for recent events (last 30 days)
-create index idx_formation_events_recent on formation_events(created_at desc) 
-  where created_at > now() - interval '30 days';
+-- Index for recent events (no partial predicate - now() is not immutable)
+create index idx_formation_events_recent on formation_events(created_at desc);
 
 ----------------------------------------------------
 -- FORMATION SCORES (DENORMALIZED FOR PERFORMANCE)
@@ -276,9 +275,8 @@ create table rule_logs (
 create index idx_rule_logs_user_date on rule_logs(user_id, logged_at);
 create index idx_rule_logs_user_rule on rule_logs(user_id, rule_item_id);
 
--- Index for today's log check
-create index idx_rule_logs_today on rule_logs(logged_at date, user_id) 
-  where logged_at > now() - interval '7 days';
+-- Index for rule logs
+create index idx_rule_logs_today on rule_logs(logged_at date, user_id);
 
 ----------------------------------------------------
 -- CAMPAIGN DOMAIN
@@ -420,8 +418,7 @@ create table pod_meetings (
 );
 
 create index idx_pod_meetings_pod on pod_meetings(pod_id);
-create index idx_pod_meetings_upcoming on pod_meetings(scheduled_at) 
-  where scheduled_at > now();
+create index idx_pod_meetings_upcoming on pod_meetings(scheduled_at);
 
 create table pod_attendance (
   id uuid primary key default uuid_generate_v4(),
