@@ -41,8 +41,25 @@ EXCEPTION
   WHEN duplicate_column THEN NULL;
 END$$;
 
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS active boolean default true;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS icon text;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
+DO $$BEGIN
+  ALTER TABLE certifications ADD COLUMN IF NOT EXISTS color text;
+EXCEPTION
+  WHEN duplicate_column THEN NULL;
+END$$;
+
 create index idx_certifications_category on certifications(category);
-create index idx_certifications_active on certifications(active) where active = true;
 
 ----------------------------------------------------
 -- USER CERTIFICATION EARNINGS
