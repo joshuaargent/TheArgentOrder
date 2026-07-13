@@ -61,7 +61,8 @@ export default {
       pillar: "faith",
       points: points,
       reason: "Mass Attendance",
-      metadata: { type: "mass" },
+      source: "discord",
+      metadata: {},
     });
 
     if (error) {

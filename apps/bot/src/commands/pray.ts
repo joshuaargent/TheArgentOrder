@@ -78,6 +78,7 @@ export default {
       pillar: "faith",
       points: points,
       reason: `${typeConfig.name} (${duration} min)`,
+      source: "discord",
       metadata: {
         prayer_type: prayerType,
         duration_minutes: duration,

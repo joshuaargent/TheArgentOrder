@@ -111,6 +111,7 @@ export default {
         pillar: a.pillar,
         points: a.points,
         reason: `Daily check-in: ${a.name}`,
+        source: "discord",
       }));
 
       await supabase.from("formation_events").insert(events);

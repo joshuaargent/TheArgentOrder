@@ -99,8 +99,8 @@ export default {
     // Get top formation scores
     const { data: scores, error } = await supabase
       .from("formation_scores")
-      .select("user_id, total_score, faith_score, discipline_score, building_score, community_score")
-      .order("total_score", { ascending: false })
+      .select("user_id, overall_score, faith_score, discipline_score, building_score, brotherhood_score")
+      .order("overall_score", { ascending: false })
       .limit(10);
 
     if (error) {
@@ -136,7 +136,7 @@ export default {
     const leaderboard = scores.map((score, index) => {
       const username = usernameMap.get(score.user_id) || "Unknown";
       const medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}.`;
-      return `${medal} **${username}** - ${score.total_score} pts`;
+      return `${medal} **${username}** - ${score.overall_score} pts`;
     }).join("\n");
 
     const embed = new EmbedBuilder()
@@ -184,7 +184,7 @@ export default {
     // Get formation level
     const { data: level } = await supabase
       .from("user_formation_levels")
-      .select("formation_levels(name, level_order)")
+      .select("formation_levels(name, order_index)")
       .eq("user_id", discordAccount.user_id)
       .single();
 
@@ -204,7 +204,7 @@ export default {
       .limit(5);
 
     const levelName = (level as any)?.formation_levels?.name || "Newcomer";
-    const levelOrder = (level as any)?.formation_levels?.level_order || 0;
+    const levelOrder = (level as any)?.formation_levels?.order_index || 0;
 
     const embed = new EmbedBuilder()
       .setTitle(`👤 ${targetUser.username}'s Profile`)
@@ -227,12 +227,12 @@ export default {
         },
         {
           name: "🤝 Community",
-          value: String(scores?.community_score || 0),
+          value: String(scores?.brotherhood_score || 0),
           inline: true,
         },
         {
           name: "📊 Total Score",
-          value: `**${scores?.total_score || 0}**`,
+          value: `**${scores?.overall_score || 0}**`,
           inline: true,
         }
       )
@@ -417,7 +417,7 @@ export default {
     // Get formation scores for pod members
     const { data: scores } = await supabase
       .from("formation_scores")
-      .select("user_id, total_score")
+      .select("user_id, overall_score")
       .in("user_id", memberIds);
 
     // Get recent activity
@@ -433,7 +433,7 @@ export default {
     // Calculate health metrics
     const activeMembers = new Set(recentActivity?.map((a) => a.user_id) || []);
     const avgScore = scores?.length
-      ? Math.round(scores.reduce((sum, s) => sum + (s.total_score || 0), 0) / scores.length)
+      ? Math.round(scores.reduce((sum, s) => sum + (s.overall_score || 0), 0) / scores.length)
       : 0;
     const participationRate = scores?.length
       ? Math.round((activeMembers.size / scores.length) * 100)
@@ -492,7 +492,7 @@ export default {
     // Get formation scores
     const { data: allScores } = await supabase
       .from("formation_scores")
-      .select("total_score");
+      .select("overall_score");
 
     // Get recent activity (last 7 days)
     const weekAgo = new Date();
@@ -513,7 +513,7 @@ export default {
       : 0;
 
     const avgScore = allScores?.length
-      ? Math.round(allScores.reduce((sum, s) => sum + (s.total_score || 0), 0) / allScores.length)
+      ? Math.round(allScores.reduce((sum, s) => sum + (s.overall_score || 0), 0) / allScores.length)
       : 0;
 
     // Pillar breakdown

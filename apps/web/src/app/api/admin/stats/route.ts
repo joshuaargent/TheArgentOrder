@@ -5,16 +5,44 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const supabase = await createClient();
 
-  // Check if user is admin (for now, skip auth check in this example)
-  // In production, add admin role check here
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Check if user is admin (Officer, Mentor, or Steward)
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .single();
+
+  if (!profile) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Try to use RPC function for admin stats
+  const { data: stats, error: rpcError } = await supabase.rpc("get_admin_stats");
+
+  if (!rpcError && stats) {
+    return NextResponse.json(stats);
+  }
+
+  // Fallback to direct queries if RPC fails
+  console.error("RPC error, falling back to direct queries:", rpcError);
+
+  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
   // Get total members
   const { count: totalMembers } = await supabase
     .from("profiles")
     .select("*", { count: "exact", head: true });
 
-  // Get active members (unique users with activity in last 30 days)
-  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  // Get active members
   const { data: activeUserData } = await supabase
     .from("formation_events")
     .select("user_id")
@@ -32,20 +60,13 @@ export async function GET() {
     .select("*", { count: "exact", head: true })
     .eq("active", true);
 
-  // Get certifications stats
-  const { count: totalCertifications } = await supabase
-    .from("certifications")
-    .select("*", { count: "exact", head: true })
-    .eq("active", true);
-
   // Get formations this week
-  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
   const { count: formationsThisWeek } = await supabase
     .from("formation_events")
     .select("*", { count: "exact", head: true })
     .gte("created_at", weekAgo);
 
-  // Get formations by pillar this week
+  // Get formations by pillar
   const { data: formationsByPillar } = await supabase
     .from("formation_events")
     .select("pillar, points")
@@ -66,11 +87,11 @@ export async function GET() {
   return NextResponse.json({
     totalMembers: totalMembers || 0,
     activeMembers: uniqueActiveUsers,
+    active30Days: uniqueActiveUsers,
     totalCampaigns: totalCampaigns || 0,
     activeCampaigns: activeCampaigns || 0,
-    totalCertifications: totalCertifications || 0,
     formationsThisWeek: formationsThisWeek || 0,
-    pillarStats,
+    pillarBreakdown: pillarStats,
     recentActivity: recentActivity || [],
   });
 }

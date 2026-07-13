@@ -51,7 +51,8 @@ export default {
       pillar: "faith",
       points: points,
       reason: `Scripture Reading (${chapters} chapter${chapters > 1 ? "s" : ""})`,
-      metadata: { chapters },
+      source: "discord",
+      metadata: {},
     });
 
     if (error) {

@@ -139,6 +139,7 @@ async function updateProject(interaction: ChatInputCommandInteraction) {
     pillar: "building",
     points: points,
     reason: `Project update: ${project.title}`,
+    source: "discord",
     metadata: { project_id: project.id },
   });
 

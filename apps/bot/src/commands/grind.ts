@@ -61,6 +61,7 @@ export default {
       pillar: "building",
       points: points,
       reason: project ? `Deep work: ${project}` : `Deep work (${hours}h)`,
+      source: "discord",
       metadata: {
         hours: hours,
         project: project,
