@@ -611,6 +611,19 @@ create table monthly_snapshots (
 );
 
 ----------------------------------------------------
+-- NEWSLETTER SUBSCRIBERS
+----------------------------------------------------
+
+create table newsletter_subscribers (
+  id uuid primary key default uuid_generate_v4(),
+  email text unique not null,
+  subscribed_at timestamp default now(),
+  confirmed boolean default false,
+  unsubscribed_at timestamp,
+  metadata jsonb
+);
+
+----------------------------------------------------
 -- INDEXES
 ----------------------------------------------------
 
@@ -619,6 +632,7 @@ create index idx_campaign_enrollments_user on campaign_enrollments(user_id);
 create index idx_pod_members_user on pod_members(user_id);
 create index idx_projects_user on projects(user_id);
 create index idx_analytics_user on analytics_events(user_id);
+create index idx_newsletter_subscribers_email on newsletter_subscribers(email);
 
 ----------------------------------------------------
 -- FINAL DESIGN RULE

@@ -10,8 +10,6 @@ import {
   ThumbsUp,
   Hammer,
   Cross,
-  ExternalLink,
-  MessageSquare,
 } from "lucide-react";
 
 export default function JoinPage() {
@@ -58,81 +56,65 @@ export default function JoinPage() {
           <div className="ambient-orb w-[800px] h-[800px] bg-green-500/5 -top-48 -left-48" />
           <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 bottom-0 right-0" />
         </div>
-        
-        <div className="w-full max-w-lg mx-auto px-6 text-center relative z-10">
+
+        <div className="w-full max-w-md mx-auto px-6 text-center relative z-10">
           <div className="w-24 h-24 rounded-3xl bg-green-500/10 flex items-center justify-center mx-auto mb-8 animate-bounce-slow">
             <CheckCircle className="h-12 w-12 text-green-500" />
           </div>
-          
+
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-6">
             <ThumbsUp className="h-4 w-4" />
             Welcome to The Order
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            You're in, Brother.
+            Check your email.
           </h1>
-          
+
           <p className="text-lg text-muted-foreground mb-8">
-            Join Discord now. This is where the forge begins.
+            Your access links are on the way.
           </p>
-          
-          {/* Discord CTA */}
-          <a 
-            href={discordLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full glass-card p-6 mb-6 hover:bg-primary/5 transition-all group"
-          >
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <MessageSquare className="h-8 w-8 text-[#5865F2]" />
-              <span className="text-2xl font-bold">Join Our Discord</span>
-              <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Click to join the brotherhood. Read #welcome and #mission first.
-            </p>
-          </a>
-          
+
           <div className="glass-card p-6 space-y-4 text-left">
-            <div className="flex gap-4">
+            <a 
+              href={discordLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-4 hover:bg-primary/5 -m-2 p-2 rounded-xl transition-colors"
+            >
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Users className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold">Read #welcome</h3>
-                <p className="text-sm text-muted-foreground">Start here. Learn the standards.</p>
+                <h3 className="font-bold">Join Discord</h3>
+                <p className="text-sm text-muted-foreground">Click the link to join the brotherhood</p>
               </div>
-            </div>
-            
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Cross className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold">Read #mission</h3>
-                <p className="text-sm text-muted-foreground">Understand why we exist.</p>
-              </div>
-            </div>
-            
+            </a>
+
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Hammer className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold">Complete #roll-call</h3>
-                <p className="text-sm text-muted-foreground">Daily. Non-negotiable.</p>
+                <h3 className="font-bold">Access Portal</h3>
+                <p className="text-sm text-muted-foreground">Your account is ready</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Cross className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-bold">Read our Mission</h3>
+                <p className="text-sm text-muted-foreground">Understand why we exist</p>
               </div>
             </div>
           </div>
-          
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+
+          <div className="mt-8">
             <Link href="/mission" className="text-primary hover:underline text-sm">
               Read our Mission
-            </Link>
-            <span className="hidden sm:block text-muted-foreground">|</span>
-            <Link href="/constitution" className="text-primary hover:underline text-sm">
-              Read our Constitution
             </Link>
           </div>
         </div>

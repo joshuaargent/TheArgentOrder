@@ -62,8 +62,8 @@ Infrastructure
 
 Email
 
-- Beehiiv
-- Resend (future)
+- Beehiiv (for email campaigns)
+- Supabase (for subscriber storage)
 
 Discord
 

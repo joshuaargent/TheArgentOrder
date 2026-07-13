@@ -503,6 +503,25 @@ without rewriting policies.
 */
 
 ----------------------------------------------------
+-- NEWSLETTER SUBSCRIBERS POLICIES
+----------------------------------------------------
+
+-- Anyone can subscribe (public signup)
+alter table newsletter_subscribers enable row level security;
+
+create policy "Anyone can subscribe to newsletter"
+  on newsletter_subscribers for insert
+  with check (true);
+
+create policy "Only service role can view all subscribers"
+  on newsletter_subscribers for select
+  using (auth.role() = 'service_role');
+
+create policy "Only service role can delete subscribers"
+  on newsletter_subscribers for delete
+  using (auth.role() = 'service_role');
+
+----------------------------------------------------
 -- FINAL SECURITY PRINCIPLE
 ----------------------------------------------------
 
