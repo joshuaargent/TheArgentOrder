@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from 'next/server';
 
-const DISCORD_INVITE_URL = process.env.DISCORD_INVITE_URL || 'https://discord.gg/YOUR_DISCORD_LINK';
+const DISCORD_INVITE_URL = process.env.DISCORD_INVITE_LINK || 'https://discord.gg/YOUR_DISCORD_LINK';
 
 export async function POST(request: NextRequest) {
   try {

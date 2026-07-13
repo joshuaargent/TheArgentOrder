@@ -68,39 +68,45 @@ export default function JoinPage() {
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Check your email.
+            You're in, Brother.
           </h1>
 
           <p className="text-lg text-muted-foreground mb-8">
-            Your access links are on the way.
+            Click below to join Discord and access your account.
           </p>
 
-          <div className="glass-card p-6 space-y-4 text-left">
-            <a 
-              href={discordLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex gap-4 hover:bg-primary/5 -m-2 p-2 rounded-xl transition-colors"
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Users className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold">Join Discord</h3>
-                <p className="text-sm text-muted-foreground">Click the link to join the brotherhood</p>
-              </div>
-            </a>
-
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Hammer className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold">Access Portal</h3>
-                <p className="text-sm text-muted-foreground">Your account is ready</p>
-              </div>
+          {/* Join Discord - Prominent */}
+          <a 
+            href={discordLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full glass-card p-6 mb-4 hover:bg-primary/10 transition-all group"
+          >
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Users className="h-6 w-6 text-[#5865F2]" />
+              <span className="text-xl font-bold">Join Discord</span>
             </div>
+            <p className="text-sm text-muted-foreground">
+              Click here to join the brotherhood
+            </p>
+          </a>
 
+          {/* Access Portal - Prominent */}
+          <a 
+            href="/login"
+            className="block w-full glass-card p-6 mb-4 hover:bg-primary/10 transition-all group"
+          >
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Hammer className="h-6 w-6 text-primary" />
+              <span className="text-xl font-bold">Access Portal</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Your account is ready
+            </p>
+          </a>
+
+          {/* Read our Mission */}
+          <div className="glass-card p-4 text-left">
             <div className="flex gap-4">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Cross className="h-5 w-5 text-primary" />
@@ -110,12 +116,6 @@ export default function JoinPage() {
                 <p className="text-sm text-muted-foreground">Understand why we exist</p>
               </div>
             </div>
-          </div>
-
-          <div className="mt-8">
-            <Link href="/mission" className="text-primary hover:underline text-sm">
-              Read our Mission
-            </Link>
           </div>
         </div>
       </main>
