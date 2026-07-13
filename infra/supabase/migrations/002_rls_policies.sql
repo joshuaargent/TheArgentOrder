@@ -196,7 +196,7 @@ create policy "Users can log own rule completions"
 -- Everyone can view active campaigns
 create policy "Active campaigns are viewable"
   on campaigns for select
-  using (active = true or auth.uid() = user_id);
+  using (active = true);
 
 -- Users can manage their own enrollments
 create policy "Users can manage own campaign enrollments"
