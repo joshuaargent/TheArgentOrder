@@ -23,19 +23,15 @@ Design Philosophy:
 create extension if not exists "uuid-ossp";
 create extension if not exists "pgcrypto";
 
--- Create uuid_generate_v4 alias using pgcrypto if it doesn't exist
--- This handles cases where uuid-ossp extension doesn't provide the function
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'uuid_generate_v4') THEN
-    CREATE OR REPLACE FUNCTION uuid_generate_v4()
-    RETURNS uuid AS $$
-    BEGIN
-      RETURN gen_random_uuid();
-    END;
-    $$ LANGUAGE plpgsql VOLATILE;
-  END IF;
-END;
+-- Create uuid_generate_v4 function using pgcrypto
+create or replace function uuid_generate_v4()
+returns uuid
+language plpgsql
+volatile
+as $$
+begin
+  return gen_random_uuid();
+end;
 $$;
 
 ----------------------------------------------------
