@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { 
   CheckCircle, 
   Users,
-  Zap,
   Loader2,
   ThumbsUp,
   Hammer,
