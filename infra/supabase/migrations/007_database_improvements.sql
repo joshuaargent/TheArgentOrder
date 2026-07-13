@@ -369,7 +369,7 @@ CREATE INDEX idx_formation_events_recent_user
 -- Index for daily streak calculations
 DROP INDEX IF EXISTS idx_formation_events_daily;
 CREATE INDEX idx_formation_events_daily
-  ON formation_events(DATE(created_at), user_id, pillar);
+  ON formation_events(created_at, user_id, pillar);
 
 -- Index for campaign task lookups
 DROP INDEX IF EXISTS idx_campaign_tasks_campaign;
