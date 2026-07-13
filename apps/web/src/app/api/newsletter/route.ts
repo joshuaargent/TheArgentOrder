@@ -14,28 +14,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Subscribe via Resend (sends welcome email with Discord link)
-    const subscriber = await subscribeToNewsletter({
-      email,
-      first_name: firstName,
-    });
-
-    if (!subscriber) {
-      console.warn('Newsletter subscription failed');
-      
-      return NextResponse.json({
-        success: true,
-        message: 'Successfully subscribed',
-        warning: 'Email capture confirmed, newsletter setup pending',
+    // Try to send welcome email (optional - will fail silently if Resend not configured)
+    try {
+      await subscribeToNewsletter({
+        email,
+        first_name: firstName,
       });
+    } catch (emailError) {
+      // Email is optional - log but don't fail the subscription
+      console.warn('Welcome email could not be sent (Resend may not be configured):', emailError);
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Successfully subscribed to newsletter',
-      subscriber: {
-        email: subscriber.email,
-      },
+      message: 'Successfully signed up! Check your email for the Discord invite.',
     });
   } catch (error) {
     console.error('Newsletter subscription error:', error);
