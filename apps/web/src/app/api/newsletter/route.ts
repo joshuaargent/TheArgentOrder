@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { subscribeToNewsletter } from '@/lib/resend';
+
+const DISCORD_INVITE_URL = process.env.DISCORD_INVITE_URL || 'https://discord.gg/YOUR_DISCORD_LINK';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, firstName } = body;
+    const { email } = body;
 
     // Validate email
     if (!email || !email.includes('@')) {
@@ -14,20 +15,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Try to send welcome email (optional - will fail silently if Resend not configured)
-    try {
-      await subscribeToNewsletter({
-        email,
-        first_name: firstName,
-      });
-    } catch (emailError) {
-      // Email is optional - log but don't fail the subscription
-      console.warn('Welcome email could not be sent (Resend may not be configured):', emailError);
-    }
-
     return NextResponse.json({
       success: true,
-      message: 'Successfully signed up! Check your email for the Discord invite.',
+      message: 'Successfully signed up!',
+      discordLink: DISCORD_INVITE_URL,
     });
   } catch (error) {
     console.error('Newsletter subscription error:', error);
@@ -40,7 +31,8 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: 'Newsletter subscription API (Resend)',
+    message: 'Newsletter signup API',
+    discordLink: DISCORD_INVITE_URL,
     endpoints: {
       POST: 'Subscribe to newsletter',
     },
