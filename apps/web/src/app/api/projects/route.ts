@@ -82,6 +82,7 @@ export async function POST(request: Request) {
     pillar: "building",
     points: 25,
     reason: "New Project Created",
+    source: "web",
     metadata: { project_id: project.id, title },
   });
 

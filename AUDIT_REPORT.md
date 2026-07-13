@@ -50,6 +50,165 @@ This is consistent across:
 
 ---
 
+## FEATURE AUDIT - July 13, 2026
+
+### Discord Bot Commands (17 total)
+
+| Command | File | Status | Source Field | Notes |
+|---------|------|--------|--------------|-------|
+| /admin | admin.ts | ✅ OK | N/A | Moderation only |
+| /campaign | campaign.ts | ✅ Fixed | ✅ Added | |
+| /checkin | checkin.ts | ✅ Fixed | ✅ Added | |
+| /event | event.ts | ✅ Fixed | ✅ Added | |
+| /grind | grind.ts | ✅ Fixed | ✅ Added | |
+| /leaderboard | leadership.ts | ✅ Fixed | N/A | Uses query only |
+| /link | link.ts | ✅ OK | N/A | Backup linking |
+| /mass | mass.ts | ✅ Fixed | ✅ Added | |
+| /pod | pod.ts | ✅ Fixed | ✅ Added | Leave/remove added |
+| /pray | pray.ts | ✅ Fixed | ✅ Added | |
+| /prayer | prayer.ts | ✅ OK | N/A | Uses prayer_requests |
+| /profile | profile.ts | ✅ OK | N/A | Profile display only |
+| /project | project.ts | ✅ Fixed | ✅ Added | |
+| /scripture | scripture.ts | ✅ Fixed | ✅ Added | |
+| /setup | setup.ts | ✅ OK | N/A | Admin command |
+| /streak | streak.ts | ✅ OK | N/A | Stats display |
+| /sync | sync.ts | ✅ OK | N/A | Role sync only |
+
+### Bot Events
+
+| Event | File | Status | Notes |
+|-------|------|--------|-------|
+| GuildMemberAdd | guildMemberAdd.ts | ✅ Fixed | Welcome, pod assignment, reminders |
+| GuildMemberRemove | guildMemberRemove.ts | ✅ Added | Track departures, notify captain |
+
+### Web App Pages (20+ pages)
+
+| Page | Route | Status | Notes |
+|------|-------|--------|-------|
+| Landing | / | ✅ OK | Hero + CTA |
+| Join | /join | ✅ OK | Email capture |
+| Login | /login | ✅ OK | Auth flow |
+| Dashboard | /dashboard | 🔍 Review | Main hub |
+| Formation | /formation | 🔍 Review | Score tracking |
+| Leaderboard | /leaderboard | 🔍 Review | Rankings |
+| Profile | /profile | 🔍 Review | User profile |
+| Pods | /pods | 🔍 Review | Pod management |
+| Campaigns | /campaigns | 🔍 Review | Campaign list |
+| Projects | /projects | 🔍 Review | Project tracking |
+| Journal | /journal | 🔍 Review | Daily journal |
+| Rule of Life | /rule-of-life | 🔍 Review | Spiritual disciplines |
+| Achievements | /achievements | 🔍 Review | Badges/certs |
+| Certifications | /certifications | 🔍 Review | Rank certifications |
+| Brotherhood | /brotherhood | 🔍 Review | Brotherhood features |
+| Examen | /examen | 🔍 Review | Daily examen |
+| Reviews | /reviews | 🔍 Review | Monthly/quarterly reviews |
+| Mentorship | /mentorship | 🔍 Review | Mentorship matching |
+| Workshop | /workshop | 🔍 Review | Resources |
+| Notifications | /notifications | 🔍 Review | Alert system |
+| Admin | /admin | 🔍 Review | Admin panel |
+| Settings | /settings | 🔍 Review | User settings |
+
+### Web API Routes (28 endpoints)
+
+| Endpoint | Methods | Status | Source Field | Auth |
+|----------|---------|--------|--------------|------|
+| /api/achievements | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/admin/members | GET, POST | ✅ Fixed | N/A | ✅ |
+| /api/admin/pods | GET, POST | ✅ Added | N/A | ✅ |
+| /api/admin/stats | GET | ✅ Fixed | N/A | ✅ |
+| /api/auth/discord | GET | ✅ OK | N/A | OAuth |
+| /api/campaigns | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/campaigns/[slug]/join | POST | 🔍 Review | N/A | ✅ |
+| /api/campaigns/[slug]/leave | POST | 🔍 Review | N/A | ✅ |
+| /api/campaigns/task/complete | POST | 🔍 Review | N/A | ✅ |
+| /api/certifications | GET | 🔍 Review | N/A | ✅ |
+| /api/discord/link | POST | 🔍 Review | N/A | ✅ |
+| /api/examen | POST | ✅ Fixed | ✅ Added | ✅ |
+| /api/formation | GET | 🔍 Review | N/A | ✅ |
+| /api/journal | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/leaderboard | GET | 🔍 Review | N/A | ✅ |
+| /api/mentorship | GET, POST | ✅ Fixed | ✅ Added | ✅ |
+| /api/newsletter | POST | ✅ OK | N/A | Public |
+| /api/notifications | GET | 🔍 Review | N/A | ✅ |
+| /api/pods | GET, POST | ✅ Fixed | N/A | ✅ |
+| /api/profile | GET, PUT | 🔍 Review | N/A | ✅ |
+| /api/projects | GET, POST | ✅ Fixed | ✅ Added | ✅ |
+| /api/reviews | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/reviews/weekly | POST | 🔍 Review | N/A | ✅ |
+| /api/reviews/monthly | POST | 🔍 Review | N/A | ✅ |
+| /api/reviews/quarterly | POST | 🔍 Review | N/A | ✅ |
+| /api/rule-of-life | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/rule-of-life/items | GET, POST | 🔍 Review | N/A | ✅ |
+| /api/rule-of-life/complete | POST | 🔍 Review | N/A | ✅ |
+
+### Database Migrations (15 total)
+
+| Migration | Purpose | Status | Deployed |
+|----------|---------|--------|----------|
+| 001 | Initial schema | ✅ | ✅ |
+| 002 | RLS policies | ✅ | ✅ |
+| 003 | Seed data | ✅ | ✅ |
+| 004 | Discord link codes | ✅ | ✅ |
+| 005 | Missing tables | ✅ | ✅ |
+| 006 | Certifications | ✅ | ✅ |
+| 007 | Database improvements | ✅ | ✅ |
+| 008 | Newsletter subscribers | ✅ | ✅ |
+| 009 | Security fixes | ✅ | ❌ Pending |
+| 010 | Performance & integrity | ✅ | ❌ Pending |
+| 011 | Pod management | ✅ | ❌ Pending |
+| 012 | Code fixes | ✅ | ❌ Pending |
+| 013 | Admin API support | ✅ | ❌ Pending |
+| 014 | Auto pod assignment | ✅ | ❌ Pending |
+| 015 | Onboarding & lifecycle | ✅ | ❌ Pending |
+
+---
+
+## FINDINGS SUMMARY
+
+### ✅ Completed Fixes (This Session)
+
+1. **Source field added** to all formation_events inserts:
+   - Bot: campaign, checkin, event, grind, mass, pod, pray, project, scripture
+   - Web: examen, mentorship, projects
+
+2. **Auth checks added** to admin endpoints:
+   - /api/admin/members
+   - /api/admin/stats
+
+3. **Pod functionality enhanced**:
+   - Leave action added to /api/pods
+   - /pod leave command added to bot
+   - /pod remove command added to bot
+   - /pod meeting command added
+   - /pod attendance command added
+
+4. **Onboarding improvements**:
+   - guildMemberAdd event enhanced
+   - guildMemberRemove event added
+   - Welcome channel fallback added
+   - 24-hour reminder for unlinked users
+
+5. **Rejoin logic**:
+   - 30-day cooldown for voluntary departures
+   - Disciplinary blocks prevent rejoin
+   - Prefers returning to original pod
+
+### ❌ Pending Before Production
+
+1. **Apply migrations 009-015** to production database
+2. **Test onboarding flow** end-to-end
+3. **Set up cron jobs** for daily resets
+4. **Implement Discord webhook** for channel sync
+
+### 🔍 Review Needed
+
+1. Dashboard page functionality
+2. Formation score display
+3. Review system implementation
+4. Admin panel functionality
+
+---
+
 ## 2. DISCORD BOT AUDIT
 
 ### ✅ ALL COMMANDS IMPLEMENTED

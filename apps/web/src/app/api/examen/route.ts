@@ -111,6 +111,7 @@ export async function POST(request: Request) {
     pillar: "faith",
     points: 15,
     reason: "Daily Examen",
+    source: "web",
     metadata: { type: "examen" },
   });
 

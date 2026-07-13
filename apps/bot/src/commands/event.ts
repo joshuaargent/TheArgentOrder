@@ -200,6 +200,7 @@ export default {
         pillar: eventType,
         reason: title,
         points: 0,
+        source: "discord",
         metadata: {
           type: "event",
           event_type: eventType,

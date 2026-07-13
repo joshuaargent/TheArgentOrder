@@ -83,6 +83,7 @@ export async function POST(request: Request) {
     pillar: "brotherhood",
     points: 25,
     reason: "Started mentorship",
+    source: "web",
     metadata: { mentorship_id: mentorship.id },
   });
 
