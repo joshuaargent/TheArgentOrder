@@ -374,7 +374,7 @@ CREATE INDEX idx_formation_events_daily
 -- Index for campaign task lookups
 DROP INDEX IF EXISTS idx_campaign_tasks_campaign;
 CREATE INDEX idx_campaign_tasks_campaign
-  ON campaign_tasks(campaign_id, required DESC, order);
+  ON campaign_tasks(campaign_id, required DESC, "order");
 
 -- Index for pod membership lookups
 DROP INDEX IF EXISTS idx_pod_members_user_pod;
