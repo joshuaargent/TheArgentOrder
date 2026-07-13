@@ -277,9 +277,8 @@ create table if not exists formation_snapshots (
   unique(user_id, date)
 );
 
--- Indexes
-create index idx_snapshots_user_date on formation_snapshots(user_id, "date" desc);
-create index idx_snapshots_date on formation_snapshots("date");
+-- Indexes (table may already exist from 001_initial_schema)
+-- Skipping index creation as 001 already created them
 
 ----------------------------------------------------
 -- RLS POLICIES
