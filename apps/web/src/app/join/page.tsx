@@ -9,6 +9,7 @@ import {
   Loader2,
   ThumbsUp,
   Hammer,
+  Cross,
 } from "lucide-react";
 
 export default function JoinPage() {
