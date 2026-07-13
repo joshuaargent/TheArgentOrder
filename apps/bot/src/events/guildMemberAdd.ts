@@ -1,5 +1,5 @@
-import { Events, type GuildMember } from "discord.js";
-import { EMBED_COLORS, GUILD_ID } from "../lib/constants";
+import { Events, type GuildMember, TextChannel } from "discord.js";
+import { EMBED_COLORS, GUILD_ID, WELCOME_CHANNEL_ID } from "../lib/constants";
 import { supabase } from "../index";
 import type { BotClient } from "../index";
 
@@ -14,14 +14,24 @@ export default {
     console.log(`New member joined: ${member.user.tag}`);
 
     try {
-      // Send welcome DM
-      await sendWelcomeDM(member);
+      // Send welcome DM (with fallback to channel)
+      const dmSent = await sendWelcomeDM(member);
 
       // Try to assign new member role
       await assignNewMemberRole(member);
 
       // Auto-assign to pod if linked
-      await autoAssignPod(member);
+      const podAssigned = await autoAssignPod(member);
+
+      // If DM failed and pod assigned, post to welcome channel
+      if (!dmSent && podAssigned) {
+        await sendWelcomeChannelMessage(client, member, podAssigned);
+      }
+
+      // If not linked, send reminder after delay
+      if (!podAssigned) {
+        await scheduleLinkReminder(member);
+      }
 
     } catch (error) {
       console.error("Error in guildMemberAdd event:", error);
@@ -29,7 +39,7 @@ export default {
   },
 };
 
-async function sendWelcomeDM(member: GuildMember) {
+async function sendWelcomeDM(member: GuildMember): Promise<boolean> {
   const portalUrl = process.env.PORTAL_URL || "https://portal.theargentorder.com";
 
   // Check if already linked via OAuth (they have Initiate role)
@@ -43,8 +53,8 @@ async function sendWelcomeDM(member: GuildMember) {
       {
         title: "⚔️ WELCOME TO THE ARGENT ORDER",
         description: hasInitiateRole
-          ? "**You are now an Initiate.**\n\nThis is not a community. This is a forge.\n\n**Your first 72 hours:**\n\n1. Read #welcome and #mission\n2. Introduce yourself in #introductions\n3. Complete /checkin TODAY\n4. Join a campaign: /campaign list\n5. Ship your first output in #ship-log\n\n**Execute. Build. Lead.**\n\nYour portal: " + portalUrl + "/dashboard"
-          : "**You've entered the Order.**\n\nNow prove you belong here.\n\n**Your activation:**\n" + portalUrl + "\n\nUse /link to connect your Discord account.\n\nOnce linked:\n• Read #welcome and #mission\n• Introduce yourself in #introductions\n• Complete /checkin TODAY\n• Join a campaign\n\n**No spectators. Only brothers.**",
+          ? "**You are now an Initiate.**\n\nThis is not a community. This is a forge.\n\n**Your first 72 hours:**\n\n1. Read #welcome and #mission\n2. Introduce yourself in #introductions\n3. Complete **/checkin** TODAY\n4. Join a campaign: **/campaign list**\n5. Use **/pod info** to meet your accountability brothers\n\n**Execute. Build. Lead.**\n\nYour portal: " + portalUrl + "/dashboard"
+          : "**You've entered the Order.**\n\nNow prove you belong here.\n\n**Your activation:**\n" + portalUrl + "\n\nUse **/link** to connect your Discord account.\n\nOnce linked:\n• Read #welcome and #mission\n• Introduce yourself in #introductions\n• Complete **/checkin** TODAY\n• Join a campaign\n• Get assigned to your accountability pod\n\n**No spectators. Only brothers.**",
         color: EMBED_COLORS.PRIMARY,
         footer: {
           text: "⚔️ Execute. Build. Lead.",
@@ -75,9 +85,48 @@ async function sendWelcomeDM(member: GuildMember) {
   try {
     await member.send(welcomeMessage);
     console.log(`Welcome DM sent to ${member.user.tag}`);
+    return true;
   } catch (error) {
-    // User might have DMs disabled
-    console.log(`Could not send DM to ${member.user.tag}:`, error);
+    // User might have DMs disabled - not an error
+    console.log(`Could not send DM to ${member.user.tag} (DMs disabled)`);
+    return false;
+  }
+}
+
+async function sendWelcomeChannelMessage(client: BotClient, member: GuildMember, podInfo: { name: string } | null) {
+  try {
+    const channel = member.guild.channels.cache.find(
+      (ch) => ch.name === "welcome" || ch.id === WELCOME_CHANNEL_ID
+    ) as TextChannel;
+
+    if (!channel) {
+      console.log("No welcome channel found");
+      return;
+    }
+
+    const portalUrl = process.env.PORTAL_URL || "https://portal.theargentorder.com";
+
+    await channel.send({
+      content: `<@${member.id}>`,
+      embeds: [
+        {
+          title: "🔥 NEW BROTHER JOINED",
+          description: `Welcome <@${member.id}> to the Order!\n\n` +
+            (podInfo ? `Assigned to pod: **${podInfo.name}**\n` : "") +
+            `\nMake them feel welcome, brothers.\n\n` +
+            `Use **/pod info** to see your accountability group.`,
+          color: EMBED_COLORS.PRIMARY,
+          footer: {
+            text: "Execute. Build. Lead.",
+          },
+          timestamp: new Date().toISOString(),
+        },
+      ],
+    });
+
+    console.log(`Welcome channel message sent for ${member.user.tag}`);
+  } catch (error) {
+    console.error("Error sending welcome channel message:", error);
   }
 }
 
@@ -110,7 +159,7 @@ async function assignNewMemberRole(member: GuildMember) {
   }
 }
 
-async function autoAssignPod(member: GuildMember) {
+async function autoAssignPod(member: GuildMember): Promise<{ name: string } | null> {
   try {
     // Check if user is already linked
     const { data: discordAccount } = await supabase
@@ -121,90 +170,97 @@ async function autoAssignPod(member: GuildMember) {
 
     if (!discordAccount) {
       console.log(`User ${member.user.tag} not linked yet - skipping pod assignment`);
-      return;
+      return null;
     }
 
-    // Check if already in a pod
-    const { data: existingMembership } = await supabase
-      .from("pod_members")
-      .select("id")
-      .eq("user_id", discordAccount.user_id)
-      .single();
-
-    if (existingMembership) {
-      console.log(`User ${member.user.tag} already in a pod - skipping`);
-      return;
-    }
-
-    // Find a pod with available capacity (target: 5 members max)
-    const { data: pods } = await supabase
-      .from("pods")
-      .select("id, name")
-      .eq("active", true)
-      .order("created_at", { ascending: true });
-
-    if (!pods || pods.length === 0) {
-      console.log(`No active pods found - cannot auto-assign ${member.user.tag}`);
-      return;
-    }
-
-    // Find pod with least members
-    let selectedPod = null;
-    let minMembers = Infinity;
-
-    for (const pod of pods) {
-      const { count } = await supabase
-        .from("pod_members")
-        .select("*", { count: "exact", head: true })
-        .eq("pod_id", pod.id);
-
-      if (count !== null && count < 5 && count < minMembers) {
-        minMembers = count || 0;
-        selectedPod = pod;
-      }
-    }
-
-    // If all pods are full, use the one with fewest members
-    if (!selectedPod && pods.length > 0) {
-      let minCount = Infinity;
-      for (const pod of pods) {
-        const { count } = await supabase
-          .from("pod_members")
-          .select("*", { count: "exact", head: true })
-          .eq("pod_id", pod.id);
-        if ((count || 0) < minCount) {
-          minCount = count || 0;
-          selectedPod = pod;
-        }
-      }
-    }
-
-    if (!selectedPod) {
-      console.log(`Could not find available pod for ${member.user.tag}`);
-      return;
-    }
-
-    // Assign user to pod
-    await supabase.from("pod_members").insert({
-      pod_id: selectedPod.id,
-      user_id: discordAccount.user_id,
-      role: "member",
+    // Use the database function for pod assignment (handles rejoins properly)
+    const { data: podId, error } = await supabase.rpc("auto_assign_user_to_pod", {
+      p_user_id: discordAccount.user_id,
     });
 
-    console.log(`Auto-assigned ${member.user.tag} to pod ${selectedPod.name}`);
+    if (error || !podId) {
+      console.log(`Could not assign pod for ${member.user.tag}:`, error);
+      return null;
+    }
+
+    // Get pod name for notification
+    const { data: pod } = await supabase
+      .from("pods")
+      .select("name")
+      .eq("id", podId)
+      .single();
 
     // Try to DM user about pod assignment
     try {
       await member.send(
-        `🔥 You've been assigned to **${selectedPod.name}**!\n\n` +
+        `🔥 You've been assigned to **${pod?.name || "a pod"}**!\n\n` +
         `Your pod is your accountability unit. Execute together.\n\n` +
-        `Use /pod info to see your pod details.`
+        `Use **/pod info** to see your pod details and meet your brothers.`
       );
     } catch {
-      // DM might fail if user has DMs disabled
+      // DM might fail if user has DMs disabled - that's ok
     }
+
+    console.log(`Auto-assigned ${member.user.tag} to pod ${pod?.name}`);
+    return pod ? { name: pod.name } : null;
 
   } catch (error) {
     console.error("Error auto-assigning pod:", error);
+    return null;
+  }
+}
+
+async function scheduleLinkReminder(member: GuildMember) {
+  // For unlinked users, we'll store a reminder in the database
+  // A background job (or scheduled function) can process these
+  try {
+    const portalUrl = process.env.PORTAL_URL || "https://portal.theargentorder.com";
+    
+    // Store reminder (will be picked up by a scheduled job or next bot startup)
+    await supabase.from("discord_link_codes").insert({
+      discord_id: member.id,
+      code: "PENDING_LINK",
+      expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days
+    });
+
+    console.log(`Link reminder scheduled for ${member.user.tag}`);
+
+    // Send follow-up DM after a delay (simulated - in production use a job queue)
+    setTimeout(async () => {
+      try {
+        // Check if still not linked
+        const { data } = await supabase
+          .from("discord_accounts")
+          .select("user_id")
+          .eq("discord_id", member.id)
+          .single();
+
+        if (!data) {
+          await member.send({
+            embeds: [
+              {
+                title: "⏰ Reminder: Link Your Account",
+                description: `Hey brother, you haven't linked your account yet.\n\n` +
+                  `Link your account to:\n` +
+                  `• Get assigned to your accountability pod\n` +
+                  `• Track your formation progress\n` +
+                  `• Access all features\n\n` +
+                  `Use **/link** or visit: ${portalUrl}/link`,
+                color: EMBED_COLORS.WARNING || 0xf59e0b,
+                footer: {
+                  text: "Execute. Build. Lead.",
+                },
+                timestamp: new Date().toISOString(),
+              },
+            ],
+          });
+        }
+      } catch {
+        // Member might have left or DMs disabled
+      }
+    }, 24 * 60 * 60 * 1000); // 24 hours later
+
+  } catch (error) {
+    console.error("Error scheduling link reminder:", error);
   }
 }

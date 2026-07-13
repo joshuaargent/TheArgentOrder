@@ -9,6 +9,7 @@ export const EMBED_COLORS = {
 
 // Server configuration
 export const GUILD_ID = process.env.DISCORD_GUILD_ID || "";
+export const WELCOME_CHANNEL_ID = process.env.WELCOME_CHANNEL_ID || "";
 
 // Role names
 export const ROLES = {
