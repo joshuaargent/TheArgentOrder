@@ -9,7 +9,6 @@ import {
   Loader2,
   ThumbsUp,
   Hammer,
-  Cross,
 } from "lucide-react";
 
 export default function JoinPage() {
@@ -51,7 +50,7 @@ export default function JoinPage() {
 
   if (submitted) {
     return (
-      <main className="min-h-screen mesh-gradient flex items-center justify-center relative overflow-hidden">
+      <main className="min-h-screen mesh-gradient flex items-center justify-center relative overflow-hidden pt-20">
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
           <div className="ambient-orb w-[800px] h-[800px] bg-green-500/5 -top-48 -left-48" />
           <div className="ambient-orb w-[600px] h-[600px] bg-primary/5 bottom-0 right-0" />
@@ -104,19 +103,6 @@ export default function JoinPage() {
               Your account is ready
             </p>
           </a>
-
-          {/* Read our Mission */}
-          <div className="glass-card p-4 text-left">
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Cross className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-bold">Read our Mission</h3>
-                <p className="text-sm text-muted-foreground">Understand why we exist</p>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     );
