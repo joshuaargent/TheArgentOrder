@@ -784,3 +784,611 @@ The database schema is well-designed with good foundational concepts (event-driv
 
 *Database Audit completed: July 13, 2025*
 *Verified against: infra/supabase/migrations/*, apps/web/src/app/api/*
+
+---
+
+# BOT & WEB APP CODE REVIEW (July 13, 2025)
+
+## Executive Summary
+
+Comprehensive end-to-end code review of Discord bot commands and Next.js web API routes. Found critical gaps in pod management, missing "leave" functionality, and security issues.
+
+---
+
+## 🔴 CRITICAL GAPS
+
+### 1. No "Leave Pod" Functionality
+
+**Files:** `apps/bot/src/commands/pod.ts`, `apps/web/src/app/api/pods/route.ts`
+
+**Issue:** No way for users to gracefully leave a pod. This is critical for the pod lifecycle management.
+
+**Fix:** Add `leave` subcommand/endpoint:
+
+```typescript
+// Bot: apps/bot/src/commands/pod.ts
+.addSubcommand((subcommand) =>
+  subcommand
+    .setName("leave")
+    .setDescription("Leave your current pod")
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for leaving")
+        .setRequired(false)
+    )
+)
+```
+
+```typescript
+// Web: apps/web/src/app/api/pods/route.ts
+if (action === "leave") {
+  // Call database function
+  const { error } = await supabase.rpc("handle_member_graceful_departure", {
+    p_user_id: user.id,
+    p_pod_id: pod_id,
+    p_departure_type: "voluntary",
+    p_reason: reason
+  });
+  
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+  
+  return NextResponse.json({ success: true });
+}
+```
+
+---
+
+### 2. No "Remove Member" for Captains
+
+**File:** `apps/bot/src/commands/pod.ts`
+
+**Issue:** Captains cannot remove inactive or problematic members from their pod.
+
+**Fix:** Add `remove` subcommand (captains only):
+
+```typescript
+.addSubcommand((subcommand) =>
+  subcommand
+    .setName("remove")
+    .setDescription("Remove a member from your pod (captains only)")
+    .addUserOption((option) =>
+      option
+        .setName("member")
+        .setName("Member to remove")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for removal")
+        .setRequired(true)
+    )
+)
+```
+
+---
+
+### 3. Admin Stats Route Has No Auth Check
+
+**File:** `apps/web/src/app/api/admin/stats/route.ts` (Lines 7-9)
+
+```typescript
+// BUG: No auth check!
+export async function GET() {
+  // ...
+  // Check if user is admin (for now, skip auth check in this example)
+  // In production, add admin role check here
+```
+
+**Issue:** Anyone can access admin stats without authentication.
+
+**Fix:**
+
+```typescript
+export async function GET() {
+  const supabase = await createClient();
+  
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  
+  // Check admin role
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("user_ranks(ranks(name))")
+    .eq("user_id", user.id)
+    .single();
+  
+  // Verify user is Officer or above
+  // ... admin check logic
+}
+```
+
+---
+
+### 4. No Pod Dissolution for Admins
+
+**Issue:** No way to dissolve a pod (merge or archive).
+
+**Fix:** Add `/admin pod dissolve` command:
+
+```typescript
+.addSubcommand((subcommand) =>
+  subcommand
+    .setName("dissolve")
+    .setDescription("Dissolve a pod")
+    .addStringOption((option) =>
+      option
+        .setName("pod_id")
+        .setDescription("Pod ID to dissolve")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for dissolution")
+        .setRequired(true)
+    )
+)
+```
+
+---
+
+## 🟡 MISSING FUNCTIONALITY
+
+### 5. No Mentor Assignment/Removal
+
+**Files:** `apps/bot/src/commands/pod.ts`, `apps/web/src/app/api/pods/route.ts`
+
+**Issue:** No way to assign or remove mentors from pods.
+
+**Fix:** Add mentor management commands.
+
+---
+
+### 6. No Inactivity Warnings
+
+**Issue:** No automated system to warn inactive pod members.
+
+**Fix:** Create cron job / Supabase scheduled function:
+
+```sql
+-- Create in migration 011 (already added)
+select mark_inactive_members();
+```
+
+---
+
+### 7. No Pod Merge Functionality
+
+**Issue:** No way to merge small pods.
+
+**Fix:** Add to admin commands.
+
+---
+
+### 8. No Member Reassignment Between Pods
+
+**Issue:** Can't move members between pods gracefully.
+
+**Fix:** Already in database function `reassign_pod_member()` - just needs API/bot exposure.
+
+---
+
+## 🟢 CODE QUALITY ISSUES
+
+### 9. Column Name Mismatches in Bot
+
+**File:** `apps/bot/src/commands/leadership.ts` (Lines 100-104)
+
+```typescript
+// BUG: Column names don't match schema
+const { data: scores } = await supabase
+  .from("formation_scores")
+  .select("user_id, total_score, faith_score, discipline_score, building_score, community_score")
+  // Schema has: overall_score, not total_score
+  // Schema has: brotherhood_score, not community_score
+```
+
+**Schema has:** `overall_score`, `faith_score`, `discipline_score`, `brotherhood_score`, `building_score`, `truth_score`
+
+**Fix:**
+
+```typescript
+const { data: scores } = await supabase
+  .from("formation_scores")
+  .select("user_id, overall_score, faith_score, discipline_score, brotherhood_score, building_score, truth_score")
+```
+
+---
+
+### 10. Leadership Command Uses `community_score`
+
+**File:** `apps/bot/src/commands/leadership.ts` (Line 228)
+
+```typescript
+// BUG: 'community_score' doesn't exist
+{ name: "🤝 Community", value: String(scores?.community_score || 0) }
+```
+
+**Fix:** Use `brotherhood_score` instead.
+
+---
+
+### 11. Leadership Command Uses `total_score`
+
+**File:** `apps/bot/src/commands/leadership.ts` (Lines 139, 235)
+
+```typescript
+// BUG: 'total_score' should be 'overall_score'
+return `${medal} **${username}** - ${score.total_score} pts`;
+value: `**${scores?.total_score || 0}**`,
+```
+
+**Fix:** Change to `overall_score`.
+
+---
+
+### 12. Formation Levels Query Wrong
+
+**File:** `apps/bot/src/commands/leadership.ts` (Line 187)
+
+```typescript
+// BUG: Schema uses 'order_index', not 'level_order'
+.select("formation_levels(name, level_order)")
+```
+
+**Fix:**
+
+```typescript
+.select("formation_levels(name, order_index)")
+```
+
+---
+
+### 13. Pod Members Query Shows All (Including Left)
+
+**File:** `apps/bot/src/commands/pod.ts` (Lines 143-146)
+
+```typescript
+// BUG: Doesn't filter out left members
+const { data: members } = await supabase
+  .from("pod_members")
+  .select("user_id, joined_at")
+  .eq("pod_id", membership.pod_id);  // Missing: .is("left_at", null)
+```
+
+**Fix:**
+
+```typescript
+const { data: members } = await supabase
+  .from("pod_members")
+  .select("user_id, joined_at")
+  .eq("pod_id", membership.pod_id)
+  .is("left_at", null);  // Only active members
+```
+
+---
+
+### 14. Pod Info Doesn't Check for Left At
+
+**File:** `apps/bot/src/commands/pod.ts` (Lines 70-74)
+
+```typescript
+// BUG: Gets membership even if left
+const { data: membership } = await supabase
+  .from("pod_members")
+  .select("pod_id, pods(*")  
+  .eq("user_id", discordAccount.user_id)
+  .single();  // Should filter: .is("left_at", null)
+```
+
+**Fix:**
+
+```typescript
+const { data: membership } = await supabase
+  .from("pod_members")
+  .select("pod_id, pods(*)")  
+  .eq("user_id", discordAccount.user_id)
+  .is("left_at", null)  // Only active membership
+  .single();
+```
+
+---
+
+### 15. No Error Handling in Formation Event Insert
+
+**File:** `apps/bot/src/commands/pod.ts` (Lines 183-190)
+
+```typescript
+// BUG: No error handling
+await supabase.from("formation_events").insert({
+  user_id: discordAccount.user_id,
+  pillar: "brotherhood",
+  points: 5,
+  reason: "Shared a win with pod",
+  metadata: { message },
+});
+// Should check for error and handle it
+```
+
+---
+
+### 16. Missing Soft Delete in API Routes
+
+**File:** `apps/web/src/app/api/journal/route.ts` (and other routes)
+
+**Issue:** Delete operations hard-delete instead of soft-delete.
+
+**Fix:**
+
+```typescript
+// Instead of:
+await supabase.from("journal_entries").delete().eq("id", id);
+
+// Use:
+await supabase.from("journal_entries").update({ 
+  deleted_at: new Date().toISOString() 
+}).eq("id", id);
+```
+
+---
+
+### 17. Profile API Returns Internal Fields
+
+**File:** `apps/web/src/app/api/profile/route.ts`
+
+**Issue:** Profile API exposes internal fields. Consider filtering.
+
+```typescript
+// Current: Returns full profile including email
+const { data: profile } = await supabase
+  .from("profiles")
+  .select("*")  // Exposes too much?
+  .eq("user_id", user.id)
+  .single();
+```
+
+---
+
+## 📋 MISSING API ROUTES
+
+### 18. No `/api/pods/leave` Endpoint
+
+**Issue:** Web app cannot handle pod departure.
+
+**Fix:** Add leave action in `apps/web/src/app/api/pods/route.ts` or create `/api/pods/[id]/leave` route.
+
+---
+
+### 19. No `/api/pods/[id]/members` Endpoint
+
+**Issue:** Can't get specific pod's members.
+
+**Fix:** Add route for captains to view their pod's members.
+
+---
+
+### 20. No `/api/admin/members` Endpoint
+
+**Issue:** Admins can't list/manage members.
+
+**Fix:** Add admin member management endpoints.
+
+---
+
+### 21. No `/api/admin/pods` Endpoint
+
+**Issue:** Admins can't manage pods (dissolve, merge, reassign).
+
+**Fix:** Add pod administration endpoints.
+
+---
+
+### 22. No `/api/admin/moderation` Endpoint
+
+**Issue:** Web app has no moderation actions.
+
+**Fix:** Add web-based moderation (warn, mute, kick, ban).
+
+---
+
+## 🔒 SECURITY CONSIDERATIONS
+
+### 23. Bot Admin Commands Check Discord Roles Only
+
+**File:** `apps/bot/src/commands/admin.ts` (Lines 164-167)
+
+```typescript
+// Only checks Discord roles, not database leadership_level
+const isAdmin = member?.roles.cache.some((role) =>
+  ["Admin", "Officer", "Moderator"].includes(role.name)
+);
+```
+
+**Issue:** Could allow Discord admins who aren't Order leaders.
+
+**Consider:** Also check `get_user_leadership_level()` from database.
+
+---
+
+### 24. No Rate Limiting in Bot
+
+**Issue:** Users could spam commands.
+
+**Consider:** Implement rate limiting via database (already added infrastructure).
+
+---
+
+### 25. Formation Events Source Not Set
+
+**Files:** All bot commands that create formation events
+
+**Issue:** `source` column not being set (defaults to 'portal').
+
+**Fix:** Set `source: 'discord'` or `source: 'bot'` when inserting from bot:
+
+```typescript
+await supabase.from("formation_events").insert({
+  user_id: discordAccount.user_id,
+  pillar: "brotherhood",
+  points: 5,
+  reason: "Shared a win with pod",
+  metadata: { message },
+  source: "discord"  // Add this
+});
+```
+
+---
+
+## 📊 COVERAGE ANALYSIS
+
+### Bot Commands Coverage
+
+| Command | Status | Issues |
+|---------|--------|--------|
+| `/link` | ✅ Complete | |
+| `/sync` | ✅ Complete | |
+| `/profile` | ✅ Complete | |
+| `/checkin` | ✅ Complete | |
+| `/grind` | ✅ Complete | |
+| `/pray` / `/prayer` | ✅ Complete | |
+| `/mass` | ✅ Complete | |
+| `/streak` | ✅ Complete | |
+| `/scripture` | ✅ Complete | |
+| `/campaign` | ✅ Complete | |
+| `/pod info` | ✅ Complete | 🔸 Filter left_at |
+| `/pod members` | ✅ Complete | 🔸 Filter left_at |
+| `/pod wins` | ✅ Complete | 🔸 Error handling |
+| `/pod leave` | ❌ Missing | 🔴 Add |
+| `/pod remove` | ❌ Missing | 🔴 Add (captains) |
+| `/pod merge` | ❌ Missing | 🔴 Add (admins) |
+| `/project` | ✅ Complete | |
+| `/leadership leaderboard` | ✅ Complete | 🔸 Column names |
+| `/leadership review` | ✅ Complete | 🔸 Column names |
+| `/leadership promote` | ✅ Complete | |
+| `/leadership pod-health` | ✅ Complete | |
+| `/leadership community-health` | ✅ Complete | |
+| `/admin warn` | ✅ Complete | |
+| `/admin mute` | ✅ Complete | |
+| `/admin kick` | ✅ Complete | |
+| `/admin ban` | ✅ Complete | |
+| `/admin lockdown` | ✅ Complete | |
+| `/admin announce` | ✅ Complete | |
+| `/admin logs` | ✅ Complete | |
+| `/admin pod dissolve` | ❌ Missing | 🔴 Add |
+| `/event` | ✅ Complete | |
+
+---
+
+### Web API Coverage
+
+| Endpoint | Status | Issues |
+|---------|--------|--------|
+| `/api/formation` | ✅ Complete | |
+| `/api/campaigns` | ✅ Complete | |
+| `/api/campaigns/[slug]/join` | ✅ Complete | |
+| `/api/campaigns/[slug]/leave` | ✅ Complete | |
+| `/api/campaigns/task/complete` | ✅ Complete | |
+| `/api/profile` | ✅ Complete | |
+| `/api/pods` | ⚠️ Partial | 🔸 Missing leave, member management |
+| `/api/projects` | ✅ Complete | |
+| `/api/journal` | ✅ Complete | 🔸 Missing soft delete |
+| `/api/examen` | ✅ Complete | 🔸 Missing soft delete |
+| `/api/rule-of-life` | ✅ Complete | |
+| `/api/rule-of-life/items` | ✅ Complete | |
+| `/api/rule-of-life/complete` | ✅ Complete | |
+| `/api/reviews/weekly` | ✅ Complete | 🔸 Missing soft delete |
+| `/api/reviews/monthly` | ✅ Complete | 🔸 Missing soft delete |
+| `/api/reviews/quarterly` | ✅ Complete | 🔸 Missing soft delete |
+| `/api/achievements` | ✅ Complete | |
+| `/api/certifications` | ✅ Complete | |
+| `/api/mentorship` | ✅ Complete | |
+| `/api/notifications` | ✅ Complete | |
+| `/api/leaderboard` | ✅ Complete | |
+| `/api/newsletter` | ✅ Complete | |
+| `/api/discord/link` | ✅ Complete | |
+| `/api/admin/stats` | 🔴 BROKEN | 🔸 No auth check |
+| `/api/admin/members` | ❌ Missing | 🔴 Add |
+| `/api/admin/pods` | ❌ Missing | 🔴 Add |
+| `/api/admin/moderation` | ❌ Missing | 🔴 Add |
+
+---
+
+## ✅ RECOMMENDED FIXES (Priority Order)
+
+### P0 - Critical (Fix This Week)
+
+1. **Add auth check to admin stats route** - Security hole
+2. **Add pod leave functionality (bot + web)** - User flow broken
+3. **Fix column name mismatches in leadership command** - Data corruption risk
+4. **Add left_at filter to pod queries** - Shows inactive members
+
+### P1 - High (Fix This Month)
+
+5. **Add pod member removal (captains only)** - Moderation gap
+6. **Add pod dissolution (admins)** - Pod management gap
+7. **Add admin moderation endpoints** - Web moderation gap
+8. **Add source field to bot inserts** - Audit trail incomplete
+9. **Add soft delete to delete operations** - Data recovery risk
+
+### P2 - Medium (Next Quarter)
+
+10. **Add mentor assignment/removal** - Mentorship gap
+11. **Add pod merge functionality** - Pod optimization
+12. **Add inactivity warning system** - Retention risk
+13. **Add member reassignment between pods** - Pod management
+14. **Create comprehensive admin dashboard API** - Admin tooling
+
+---
+
+## 📁 FILES TO CREATE/MODIFY
+
+### New Files
+
+1. `infra/supabase/migrations/012_bot_fixes.sql` - Fix column names, add missing functions
+2. `infra/supabase/migrations/013_web_fixes.sql` - Add missing endpoints as RPC functions
+3. `apps/bot/src/commands/pod-leave.ts` - OR add to existing pod.ts
+4. `apps/web/src/app/api/admin/members/route.ts` - Admin member management
+5. `apps/web/src/app/api/admin/pods/route.ts` - Admin pod management
+6. `apps/web/src/app/api/admin/moderation/route.ts` - Admin moderation
+
+### Files to Modify
+
+1. `apps/bot/src/commands/leadership.ts` - Fix column names
+2. `apps/bot/src/commands/pod.ts` - Add leave, remove; fix queries
+3. `apps/bot/src/commands/admin.ts` - Add pod dissolution
+4. `apps/web/src/app/api/admin/stats/route.ts` - Add auth check
+5. `apps/web/src/app/api/pods/route.ts` - Add leave action
+6. All `*/route.ts` files with delete operations - Add soft delete
+7. All bot commands that insert formation_events - Add source field
+
+---
+
+## 📈 ESTIMATED EFFORT
+
+| Task | Effort | Priority |
+|------|--------|----------|
+| Fix admin stats auth | 30 min | P0 |
+| Add pod leave (bot + web) | 2 hours | P0 |
+| Fix leadership column names | 1 hour | P0 |
+| Fix pod queries (left_at) | 1 hour | P0 |
+| Add pod member removal | 2 hours | P1 |
+| Add pod dissolution | 2 hours | P1 |
+| Add web moderation | 3 hours | P1 |
+| Add source field to bot | 2 hours | P1 |
+| Add soft deletes | 4 hours | P1 |
+| Mentor assignment | 3 hours | P2 |
+| Pod merge | 3 hours | P2 |
+| Inactivity warnings | 4 hours | P2 |
+
+**Total: ~25-30 hours**
+
+---
+
+*Bot & Web App Code Review completed: July 13, 2025*
+*Verified against: apps/bot/src/commands/*, apps/web/src/app/api/*
