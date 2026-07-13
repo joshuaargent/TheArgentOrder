@@ -278,8 +278,8 @@ create table if not exists formation_snapshots (
 );
 
 -- Indexes
-create index idx_snapshots_user_date on formation_snapshots(user_id, date desc);
-create index idx_snapshots_date on formation_snapshots(date);
+create index idx_snapshots_user_date on formation_snapshots(user_id, "date" desc);
+create index idx_snapshots_date on formation_snapshots("date");
 
 ----------------------------------------------------
 -- RLS POLICIES
