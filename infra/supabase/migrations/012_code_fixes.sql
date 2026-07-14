@@ -21,7 +21,8 @@ The bot code uses:
 ----------------------------------------------------
 
 -- Add compatibility columns to formation_scores
-alter table formation_scores add column if not exists total_score int generated always as (overall_score) stored;
+-- Note: Can't reference generated columns, so use base column expressions
+alter table formation_scores add column if not exists total_score int generated always as (faith_score + discipline_score + brotherhood_score + building_score + truth_score) stored;
 alter table formation_scores add column if not exists community_score int generated always as (brotherhood_score) stored;
 
 -- Note: We use generated columns to maintain consistency
