@@ -320,28 +320,8 @@ create policy "Users can update own discord account"
 -- PHASE 9: LEADERBOARD & PUBLIC SCORES
 ----------------------------------------------------
 
--- Create a view for public leaderboard (aggregate scores only, no individual events)
-drop view if exists public_leaderboard;
-create view public_leaderboard as
-select 
-  fs.user_id,
-  fs.overall_score,
-  fs.faith_score,
-  fs.discipline_score,
-  fs.brotherhood_score,
-  fs.building_score,
-  fs.truth_score,
-  p.display_name,
-  p.avatar_url,
-  row_number() over (order by fs.overall_score desc) as rank
-from formation_scores fs
-join profiles p on fs.user_id = p.user_id;
-
--- Grant public read on leaderboard view
-drop policy if exists "Leaderboard is viewable by all" on public_leaderboard;
-create policy "Leaderboard is viewable by all"
-  on public_leaderboard for select
-  using (true);
+-- Note: public_leaderboard view and policy moved to migration 010
+-- to avoid view creation issues
 
 ----------------------------------------------------
 -- MIGRATION COMPLETE

@@ -301,6 +301,31 @@ delete from user_formation_levels
 where user_id not in (select user_id from profiles);
 
 ----------------------------------------------------
+-- LEADERBOARD VIEW
+----------------------------------------------------
+
+-- Create a view for public leaderboard (aggregate scores only)
+-- This is separate from migration 009 due to policy syntax issues with views
+drop view if exists public_leaderboard cascade;
+create view public_leaderboard as
+select 
+  fs.user_id,
+  fs.overall_score,
+  fs.faith_score,
+  fs.discipline_score,
+  fs.brotherhood_score,
+  fs.building_score,
+  fs.truth_score,
+  p.display_name,
+  p.avatar_url,
+  row_number() over (order by fs.overall_score desc) as rank
+from formation_scores fs
+join profiles p on fs.user_id = p.user_id;
+
+-- For views, we use security barrier for additional protection
+alter view public_leaderboard set (security_barrier = true);
+
+----------------------------------------------------
 -- MIGRATION COMPLETE
 ----------------------------------------------------
 
