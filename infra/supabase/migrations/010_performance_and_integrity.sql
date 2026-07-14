@@ -88,9 +88,8 @@ create index if not exists idx_user_formation_levels_current
   on user_formation_levels(user_id, assigned_at desc);
 
 -- Campaign progress for completion tracking
-create index if not exists idx_campaign_progress_enrollment_task 
-  on campaign_progress(enrollment_id, task_id) 
-  unique;
+create unique index if not exists idx_campaign_progress_enrollment_task 
+  on campaign_progress(enrollment_id, task_id);
 
 -- Project updates for recent activity
 create index if not exists idx_project_updates_recent 
