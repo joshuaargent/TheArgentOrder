@@ -55,7 +55,7 @@ select
   pm.pod_id,
   pm.user_id,
   pm.joined_at,
-  pm.pod_role,
+  pm.role,
   p.name as pod_name,
   p.captain_id,
   pr.display_name,

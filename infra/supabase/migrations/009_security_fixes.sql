@@ -65,7 +65,7 @@ create policy "Captains can view pod members profiles"
       select 1 from pods
       where id in (
         select pod_id from pod_members where user_id = auth.uid()
-        and pod_role = 'captain'
+        and role = 'captain'
       )
       and id in (
         select pod_id from pod_members where user_id = profiles.user_id

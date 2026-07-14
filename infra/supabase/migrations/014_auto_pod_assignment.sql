@@ -68,7 +68,7 @@ begin
   end if;
   
   -- Add user to pod
-  insert into pod_members (user_id, pod_id, pod_role, joined_at, enrolled_by)
+  insert into pod_members (user_id, pod_id, role, joined_at, enrolled_by)
   values (p_user_id, v_pod_id, 'member', now(), v_captain_id)
   on conflict (user_id, pod_id) do nothing;
   
@@ -258,7 +258,7 @@ begin
   end if;
   
   -- Add to new pod
-  insert into pod_members (user_id, pod_id, pod_role, joined_at, enrolled_by)
+  insert into pod_members (user_id, pod_id, role, joined_at, enrolled_by)
   values (p_user_id, p_pod_id, p_role, now(), p_admin_id);
   
   -- Update pod captain if needed

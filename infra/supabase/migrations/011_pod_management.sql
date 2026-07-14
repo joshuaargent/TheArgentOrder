@@ -70,12 +70,12 @@ begin
   end if;
   
   -- If captain leaving, handle succession
-  if v_member_record.pod_role = 'captain' then
+  if v_member_record.role = 'captain' then
     -- Find a veteran to promote
     select user_id into v_new_captain_id
     from pod_members
     where pod_id = p_pod_id 
-      and pod_role = 'member'
+      and role = 'member'
       and left_at is null
     order by joined_at asc
     limit 1;
@@ -94,7 +94,7 @@ begin
     -- Update new captain
     if v_new_captain_id is not null then
       update pod_members
-      set pod_role = 'captain'
+      set role = 'captain'
       where user_id = v_new_captain_id and pod_id = p_pod_id;
       
       update pods
@@ -113,7 +113,7 @@ begin
   end if;
   
   -- If mentor leaving, reassign mentees
-  if v_member_record.pod_role = 'mentor' then
+  if v_member_record.role = 'mentor' then
     select mentor_id into v_mentor_id
     from pods
     where id = p_pod_id;
@@ -156,7 +156,7 @@ begin
       'pod_id', p_pod_id,
       'departure_type', p_departure_type,
       'reason', p_reason,
-      'role', v_member_record.pod_role
+      'role', v_member_record.role
     )
   );
   
@@ -219,7 +219,7 @@ begin
   where user_id = p_user_id and pod_id = p_from_pod_id;
   
   -- Add to new pod
-  insert into pod_members (user_id, pod_id, pod_role, joined_at, enrolled_by)
+  insert into pod_members (user_id, pod_id, role, joined_at, enrolled_by)
   values (
     p_user_id,
     p_to_pod_id,

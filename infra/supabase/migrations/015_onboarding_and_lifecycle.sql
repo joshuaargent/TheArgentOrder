@@ -161,10 +161,10 @@ begin
   end if;
   
   -- Add user to pod
-  insert into pod_members (user_id, pod_id, pod_role, joined_at, enrolled_by)
+  insert into pod_members (user_id, pod_id, role, joined_at, enrolled_by)
   values (p_user_id, v_pod_id, case when v_captain_id is null then 'captain' else 'member' end, now(), v_captain_id)
   on conflict (user_id, pod_id) do update
-  set left_at = null, pod_role = 'member';
+  set left_at = null, role = 'member';
   
   -- Update pods captain_id if needed
   if v_captain_id is null then
@@ -349,7 +349,7 @@ begin
       where pm.user_id = p_user_id and pm.left_at is null
     ),
     'role', (
-      select pod_role from pod_members 
+      select role from pod_members 
       where user_id = p_user_id and left_at is null
     ),
     'members', (
@@ -357,7 +357,7 @@ begin
         'user_id', pm.user_id,
         'display_name', pr.display_name,
         'avatar_url', pr.avatar_url,
-        'role', pm.pod_role,
+        'role', pm.role,
         'joined_at', pm.joined_at
       ))
       from pod_members pm

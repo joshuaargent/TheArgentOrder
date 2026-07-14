@@ -153,7 +153,7 @@ begin
     'pod_history', (
       select jsonb_agg(jsonb_build_object(
         'pod_name', p.name,
-        'role', pod_role,
+        'role', role,
         'joined_at', joined_at,
         'left_at', left_at,
         'departure_reason', departure_reason
