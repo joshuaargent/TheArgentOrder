@@ -224,11 +224,11 @@ select
   p.captain_id,
   count(distinct pm.user_id) as member_count,
   count(distinct pa.user_id) as attendees_last_30_days,
-  count(distinct pm2.meeting_id) as meetings_last_30_days,
+  count(distinct pm3.id) as meetings_last_30_days,
   coalesce(avg(fs.overall_score), 0) as avg_formation_score
 from pods p
 left join pod_members pm on p.id = pm.pod_id and pm.left_at is null
-left join pod_members pm2 on p.id = pm2.pod_id
+
 left join pod_meetings pm3 on p.id = pm3.pod_id and pm3.scheduled_at > now() - interval '30 days'
 left join pod_attendance pa on pm3.id = pa.meeting_id
 left join formation_scores fs on pm.user_id = fs.user_id
