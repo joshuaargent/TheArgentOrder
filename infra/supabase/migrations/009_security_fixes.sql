@@ -321,7 +321,8 @@ create policy "Users can update own discord account"
 ----------------------------------------------------
 
 -- Create a view for public leaderboard (aggregate scores only, no individual events)
-create or replace view public_leaderboard as
+drop view if exists public_leaderboard;
+create view public_leaderboard as
 select 
   fs.user_id,
   fs.overall_score,
