@@ -35,14 +35,14 @@ export default function JoinPage() {
       const data = await response.json();
       
       if (data.success || data.warning) {
-        setDiscordLink(data.discordLink || 'https://discord.gg/YOUR_DISCORD_LINK');
+        setDiscordLink(data.discordLink || 'https://discord.gg/JzjtyeW7hS');
         setSubmitted(true);
       } else {
         throw new Error(data.error || 'Subscription failed');
       }
     } catch (error) {
       console.error('Newsletter subscription failed:', error);
-      setDiscordLink('https://discord.gg/YOUR_DISCORD_LINK');
+      setDiscordLink('https://discord.gg/JzjtyeW7hS');
       setSubmitted(true);
     } finally {
       setLoading(false);
